@@ -12,6 +12,7 @@ Per gli utenti abbiamo bisogno:
   - Nome sul citofono
   - Password (restrizioni sulle password?)
   - Aggiunegrei anche un checkbox nella registrazione in stile "email spam"
+  - Orario di consegna(Fra)
 
 E' necessario controllare che l'email ed il numero di telefono siano unici (dovrebbe essere assicurato dalla primary key nella tabella)
 
@@ -20,6 +21,7 @@ Per i ristoranti:
   - Cognome titolare
   - Indirizzo fisico
   - Menu
+  - Costo Menu(Fra)
   - Costo consegna
   - Numero di telefono ed indirizzo email
   - Password (restrizioni sulle password?)
@@ -63,6 +65,7 @@ Bisogna creare una qualche forma di pagina web per richiedere l'eliminazione all
 
 ## Dinamizzazione del sito
 Il sito deve essere vagamente dinamico. Bisogna fare una buona ricerca per trovare delle immagini da scaricare ed usare, e bisogna usare oppurtunamente i CSS per fare un minimo di animazioni decenti!. Poi vediamo come farlo
+Si può pensare di fare un sito che scorre verso il basso(Fra)
 
 ## Possibile organizzazione delle tabelle
 
