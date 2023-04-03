@@ -41,19 +41,19 @@ es:
 
 Bisogna salvare le password degli utenti in modo che siano hashed, ed attraverso una qualche forma di sale. Nel caso ci sia una breccia *NON* vogliamo che le password siano salvate in chiaro, e *NON* vogliamo che le stesse password siano visibili all'interno del database. Potremmo salvare le password in questo modo:
 
-  **utente:salt:hashedpassword**
+**`user:salt:hashedpassword`**
 
 Bisogna quindi generate un sale causale ed utilizzare un algoritmo (meglio se noto) di hashing per la password
-Io userei crc32, cosi' abbiamo 32 bit di hash, 4 byte totali di risultato. Non e' male
-Altrimenti md5, poi vediamo meglio
+Io userei SHA-256 al posto di md5. Md5 ha ormai una certa eta' ed e' un po' datato.
 
 Invece di salvare l'utente in chiaro (tramite email) potremmo usare una qualche forma di identificativo per evitare che si abbiano gli indirizzi email in modo relativamente veloce. Potremmo, per esempio, ad ogni utente un identificativo unico da usare all'interno del database. Potremmo quindi usare questo identificativo salvato all'interno delle informazioni dell'utente in chiaro, in modo da collegare una certa email ad una password. Questo puo' essere utile se dovessero rubare solo uno dei database. Si ritroverebbero con poca roba in mano.
 
 ### Assicurare privacy agli utenti
 Sarebbe ideale evitare che l'indirizzo fisco ed altre informazioni venissero scritte in chiaro da qualche parte. Vogliamo quindi criptare (simmetricamente) queste informazioni, e mandarle decriptate all'utente solo se si riescono ad autenticare. Se imponiamo delle condizioni decenti per le password potremmo utilizzare un seed per creare una chiave AES256, dove il seed e' definito come:
-  **email + password + numero di telefono**
+ 
+ **email + password + numero di telefono**
 
-Altre informazioni sulla generazione di una chiave AES256:
+Altre informazioni sulla generazione di una chiave AES256: <br>
 https://stackoverflow.com/questions/861679/generate-aes-key-with-seed-value
 
 Potrebbe risultare particolarmente comodo dato che, per quanto la password potrebbe essere uguale (ma in modo molto improbabile con le giuste restrizioni), email e numero di telefono devono obbligatoriamente essere diversi!
@@ -64,16 +64,15 @@ Bisogna creare una qualche forma di pagina web per richiedere l'eliminazione all
 ## Dinamizzazione del sito
 Il sito deve essere vagamente dinamico. Bisogna fare una buona ricerca per trovare delle immagini da scaricare ed usare, e bisogna usare oppurtunamente i CSS per fare un minimo di animazioni decenti!. Poi vediamo come farlo
 
-
 ## Possibile organizzazione delle tabelle
 
-Utente:
-  email -> primary key
-  codice -> unique
+Utente: <br>
+  * email :arrow_right: primary key
+  * codice :arrow_right: unique
 
 ChiaveAES:
-  email -> primary key
-  chiave AES
+  * email :arrow_right: primary key
+  * chiave AES
 
 **Attenzione! La tabella ChiaveAES deve avere i permessi in modo che NESSUNO puo' accedervi se non il server stesso!**
 Quando mandiamo le informazioni all'utente possiamo farlo in plain-text, tanto ci pensa https a renderle sicure. Bisogna quindi fare in modo che solo il server ottenga una singola volta la chiave per ottentere i dati all'interno della tabella "Informazioni utente".
@@ -81,31 +80,36 @@ Bisogna inoltre controllare che non ci siano richieste di tutte le chiavi! Nel c
 Ho inoltre inserito *email* come chiave primaria di ChiaveAES, in quanto i codici potrebbero essere meno sicuro o seguire una qualche forma di pattern che l'attaccante potrebbe sfruttare andando a provare diversi codici. Mettendo una email, richiediamo uno step ulteriore nella trasformazione da email a codice per ottenere le informazioni all'interno della tabella "Informazioni utente"
 
 Informazioni utente:
-  codice -> primary key
-
-  -> Tutto questo deve essere criptato con l'agoritmo AES-256
-  indirizzo
-  telefono
-  carta di credito
-  ....
+  + codice :arrow_right: primary key
+  + :arrow_right: Tutte le informazioni seguenti devono essere criptate con l'agoritmo AES-256
+  + indirizzo
+  + telefono
+  + carta di credito
+  + ....
 
 Password:
-  codice -> primary key
-  hashed password *Questo serve per controllare che l'utente sia effettivamente lui*
+  - codice :arrow_right: primary key
+  - hashed password *Questo serve per controllare che l'utente sia effettivamente lui*
 
 Le tabelle per i ristoranti dovrebbero essere relativamente simili. L'unica differenza starebbe nella creazione di una nuova tabella "Informazioni ristorante", che e' diversa da informazioni utente. Potremmo usare dei codici generati con delle differenze in modo riconoscere se si tratta di un utente "comprante" o di un ristorante; per esempio:
 
 ### Codici per le tabelle
 
 Ristorante:
-  r_cod0-1
-  r_cod0-2
-  ...
-  r_cod0-20
-L'elemento che cambia e' il numero 1. Potremmo farlo o casuale o con una qualche forma di incremento, oppure applicando delle regole matematiche (per esempio deve essere divisibile per 3 o per 7) Il numero prima del trattino conta le centinaia (e quindi per il numero 2'347, duemilatrecentoquarantasette: r_cod23-47)
+  * r_cod0-1
+  * r_cod0-2
+  * ...
+  * r_cod0-20
+
+L'elemento che cambia e' il numero 1. Potremmo farlo:
+  - casuale
+  - con una forma di incremento
+
+Potremmo applicare regole matematiche ulteriormente restrittive (per esempio  il codice deve essere divisibile per 3 o per 7, o entrambi). Il numero prima del trattino conta le centinaia (e quindi per il numero 2'347, duemilatrecentoquarantasette risulta: r_cod23-47)
 
 Utenti:
-  u_cod0-1
+  - u_cod0-1
+ 
 Dove valgono le stesse ipotesi per i numeri scritte qui sopra.
 
 In questo modo, data la prima lettera del codice, sappiamo in quale tabella dobbiamo guardare
