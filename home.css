@@ -1,11 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap');
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  background-color: black;
-}
+@import "./css/base.css";
 
 li, a, button {
   font-family: "Montserrat", sans-serif;
@@ -36,7 +29,7 @@ header {
 }
 
 .nav_links li a:hover{
-  color: blue;
+  color: rgba(0, 136, 169, 1);
 }
 
 button {

@@ -2,24 +2,10 @@
 <html>
   <head>
     <title> Login </title>
-    <link rel="stylesheet" href="./images/logostyle.css">
+    <link rel="stylesheet" href="./logo/logostyle.css">
+    <link rel="stylesheet" href="./css/login.css">
 
     <style>
-      .center {
-        text-align: center;
-      }
-
-      .loginpage {
-        width: 30vw;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .circledlogo {
-        margin-top: 2vh;
-        margin-bottom: 2vh;
-      }
-
       .loginform {
         display: inline-grid;
         padding-left: min(2vh, 2vw);
@@ -27,11 +13,12 @@
         padding-top: min(2vh, 2vw);
         padding-bottom: min(2vh, 2vw);
 
-        width: 50vw;
+        width: 55vw;
+        height: 15vh;
         min-width: 200px;
-        background-color: lightblue;
+        background-color: white;
         gap: 0.2vh;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr) [col-start]);
         align-items: center;
 
         border-radius: min(5vh, 5vw);
@@ -43,20 +30,41 @@
         text-align: center;
         font-size: medium;
       }
+
+      .redirect {
+        transition: all 0.2s ease 0s;
+        cursor: pointer;
+        color: lightgreen;
+        text-decoration: underline;
+      }
+
+      .redirect:hover{
+        color: green;
+      }
     </style>
 
   </head>
   <body class="body">
-    <div class="center"> <img src="./images/logo.png" class="logo circledlogo" alt=""> </div>
-    <div class="center loginpage">
-      <form class="loginform">
+    <div style="text-align: center; margin-top: 2vh; margin-bottom: 2vh;"> <img src="./logo/logo.png" class="logo" alt=""> </div>
+    <div style="text-align: center;">
+      <form class="loginform" style="text-align: center;">
         <span class="formelements"> email: </span>
         <input type="email" name="email">
         <span class="formelements"> password: </span>
         <input type="password" name="password">
-        <button type="button" name="login" class="formelements"> Login </button>
-        <button type="button" name="signup" class="formelements"> SignUp </button>
+        <button style="grid-column-start: 0; grid-column-end: span 2;" type="button" name="login" class="formelements"> Login </button>
+        <input type="checkbox" class="formelements">
+        <span class="formelements"> Ricordami su questo computer</span>
       </form>
     </div>
+
+    <p>
+      Non hai ancora un account su BiteBuddies?
+      <a class="redirect" href="./signup.html"> Crealo qui </a>
+      <br>
+      Per creare un account per un ristorante, clicca 
+      <a class="redirect" href="./ris_signup.html"> qui</a>
+      <br> <br>
+    </p>
   </body>
 </html>
