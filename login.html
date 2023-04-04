@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Login </title>
+    <link rel="stylesheet" href="./images/logostyle.css">
+
+    <style>
+      .center {
+        text-align: center;
+      }
+
+      .loginpage {
+        width: 30vw;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .circledlogo {
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+      }
+
+      .loginform {
+        display: inline-grid;
+        padding-left: min(2vh, 2vw);
+        padding-right: min(2vh, 2vw);
+        padding-top: min(2vh, 2vw);
+        padding-bottom: min(2vh, 2vw);
+
+        width: 50vw;
+        min-width: 200px;
+        background-color: lightblue;
+        gap: 0.2vh;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: center;
+
+        border-radius: min(5vh, 5vw);
+        border-style: dashed;
+        border-color: gray;
+      }
+
+      .formelements {
+        text-align: center;
+        font-size: medium;
+      }
+    </style>
+
+  </head>
+  <body class="body">
+    <div class="center"> <img src="./images/logo.png" class="logo circledlogo" alt=""> </div>
+    <div class="center loginpage">
+      <form class="loginform">
+        <span class="formelements"> email: </span>
+        <input type="email" name="email">
+        <span class="formelements"> password: </span>
+        <input type="password" name="password">
+        <button type="button" name="login" class="formelements"> Login </button>
+        <button type="button" name="signup" class="formelements"> SignUp </button>
+      </form>
+    </div>
+  </body>
+</html>
