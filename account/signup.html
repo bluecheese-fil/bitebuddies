@@ -1,35 +1,90 @@
 <!DOCTYPE html>
 <html>
-
-  <script>
-    function addElements(){
-      saved_email = sessionStorage.getItem("saved_email");
-      if(saved_email == null) return ;
-
-      document.getElementById("email_1").value = saved_email;
-      sessionStorage.setItem("saved_email", null)
-
-      saved_passwd = sessionStorage.getItem("saved_password");
-      if(saved_email == null) return ;
-
-      document.getElementById("password_1").value = saved_passwd;
-      sessionStorage.setItem("saved_password", null)
-    }
-  </script>
-
   <head>
+    <link rel="stylesheet" href="/css/signup.css">
 
+    <!-- external javascript functions -->
+    <script src="/js/signup.js"></script>
   </head>
-  <body onload="addElements()">
-    <form method="get">
-      email:
-      <input type="email" id="email_1">
-      Please repeat:
-      <input type="email" id="email_2">
-      password:
-      <input type="password" id="password_1">
-      PLease repeat:
-      <input type="password" id="password_2">
-    </form>
+
+  <style>
+    input {
+      height: 21px;
+      border-radius: 10px;
+    }
+
+    .logosize {
+      height: 80px;
+      width: 80px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    .logodiv {
+      background-color: rgb(0, 45, 60);
+      border-radius: 200px;
+      text-align: center;
+    }
+
+    .formposition {
+      padding-top: 10px;   position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    input {
+      width: 260px;
+      margin-bottom: 5px;
+    }
+
+    button {
+      padding: 9px 25px;
+      background-color: rgba(0, 136, 169, 1);
+      color: black;
+      border: none;
+      cursor: pointer;
+      transition-duration: 0.4s;
+      width: 269px;
+      border-radius: 25px;
+    }
+
+    button:hover{
+      transition-duration: 0.4s;
+      background-color: rgba(0, 136, 169, 0.8);
+    }
+
+  </style>
+
+  <body onload="loadLoginIntoSignup()">
+    <div class="logodiv">
+      <img src="/logo/logo.png" class="logosize" alt="">
+    </div>
+    <div class="formposition">
+      <form>
+        Nome: <br>
+        <input type="text" id="nome" onclick="checkText(this.id)">
+        <div id="errorenome" hidden> Errore! </div>
+        <br> Cognome: <br>
+        <input type="text" id="cognome" onclick="checkText(this.id)">
+        <div id="errorecognome" hidden> Errore! </div>
+        <br> Email: <br>
+        <input type="email" id="email_1">
+        <br> Repeat email: <br>
+        <input type="text" id="email_2" autocomplete="off" readonly onfocus="this.readOnly = false">
+        <br> Password: <br>
+        <input type="password" id="password_1">
+        <br> Repeat password: <br>
+        <input type="password" id="password_2">
+        <br> Telefono: <br>
+        <input type="tel">
+        <br> Indirizzo: <br>
+        <input type="text" id = "Indirizzo">
+        <br> Coice postale: <br>
+        <input type="text" id = "cap">
+        <br>
+        <button> Crea account </button>
+      </form>
+    </div>
   </body>
 </html>
