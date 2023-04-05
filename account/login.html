@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Login </title>
+    <link rel="stylesheet" href="/logo/logostyle.css">
+    <link rel="stylesheet" href="/css/login.css">
+
+    <!-- external javascript functions -->
+    <script src="/js/login.js"></script>
+
+    <style>
+      .loginform {
+        display: inline-grid;
+        padding-left: min(2vh, 2vw);
+        padding-right: min(2vh, 2vw);
+        padding-top: min(2vh, 2vw);
+        padding-bottom: min(2vh, 2vw);
+
+        width: 55vw;
+        height: 1vh;
+        min-width: 300px;
+        min-height: 100px;
+
+        background-color: white;
+        gap: 0.2vh;
+        grid-template-columns: repeat(2, minmax(0, 1fr) [col-start]);
+        align-items: center;
+
+        border-radius: min(5vh, 5vw);
+        border-style: dashed;
+        border-color: rgb(0, 191, 255);
+      }
+
+      .redirect {
+        transition: all 0.2s ease 0s;
+        cursor: pointer;
+        color: rgb(140, 238, 140);
+        text-decoration: underline;
+      }
+
+      .redirect:hover{
+        color: rgb(80, 255, 80);
+      }
+
+      .errorclass{
+        grid-column-start: 0;
+        grid-column-end: span 2;
+
+        background-color: rgba(99, 179, 213, 0.8);
+        border: 2px;
+        border-color: rgba(99, 179, 213, 1);
+        border-style: solid;
+      }
+
+      .nuovapassword {
+        transition: all 0.2s ease 0s;
+        cursor: pointer;
+        color: rgb(25, 25, 200);
+        text-decoration: underline;
+
+        /*I will prevent people to select this text*/
+        -webkit-touch-callout: none;  /* iOS Safari */
+        -webkit-user-select: none;    /* Safari */
+        -khtml-user-select: none;     /* Konqueror HTML */
+        -moz-user-select: none;       /* Old versions of Firefox */
+        -ms-user-select: none;        /* Internet Explorer/Edge */
+        user-select: none;            /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+      }
+
+      .nuovapassword:hover{
+        transition: all 0.2s ease 0s;
+        cursor: pointer;
+        color: rgb(0, 0, 255);
+        text-decoration: underline;
+      }
+
+    </style>
+
+  </head>
+  <body class="body">
+    <div style="text-align: center; margin-top: 2vh; margin-bottom: 2vh;"> <img src="/logo/logo.png" class="logo" alt=""> </div>
+    <div style="text-align: center;">
+      <form class="loginform" style="text-align: center;">
+        <span> email: </span>
+        <input type="email" id="email">
+        <span> password: </span>
+        <input type="password" id="password">
+        <button style="grid-column-start: 0; grid-column-end: span 2;" type="button" name="login" onclick="tryLogin()"> Login </button>
+        <input type="checkbox">
+        <span class="formelements"> Ricordami su questo computer </span>
+
+        <!-- Sto unendo due span diversi all'interno di uno solo per far si che entrambi siano sulla stessa riga-->
+        <span class="errorclass" id="errore" hidden>
+          <span> Accesso falitto. Controlla che i dati siano corretti o </span>
+          <br>
+          <a class="nuovapassword" id="nuovapasswd" href="/account/reset_password.html"> imposta una nuova password </a>
+        </span>
+      </form>
+    </div>
+
+    <p>
+      Non hai ancora un account su BiteBuddies?
+      <a class="redirect" onclick="accountCreation()" href="/account/signup.html"> Crealo qui </a>
+      <br>
+      Per creare un account per un ristorante, clicca 
+      <a class="redirect" href="/account/ris_signup.html"> qui</a>
+      <br> <br>
+    </p>
+  </body>
+</html>

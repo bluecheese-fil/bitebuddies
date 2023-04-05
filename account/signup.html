@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+  <script>
+    function addElements(){
+      saved_email = sessionStorage.getItem("saved_email");
+      if(saved_email == null) return ;
+
+      document.getElementById("email_1").value = saved_email;
+      sessionStorage.setItem("saved_email", null)
+
+      saved_passwd = sessionStorage.getItem("saved_password");
+      if(saved_email == null) return ;
+
+      document.getElementById("password_1").value = saved_passwd;
+      sessionStorage.setItem("saved_password", null)
+    }
+  </script>
+
+  <head>
+
+  </head>
+  <body onload="addElements()">
+    <form method="get">
+      email:
+      <input type="email" id="email_1">
+      Please repeat:
+      <input type="email" id="email_2">
+      password:
+      <input type="password" id="password_1">
+      PLease repeat:
+      <input type="password" id="password_2">
+    </form>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-@import "./css/base.css";
+@import "/css/base.css";
 
 li, a, button {
   font-family: "Montserrat", sans-serif;
