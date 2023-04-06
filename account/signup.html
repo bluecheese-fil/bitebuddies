@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/css/signup.css">
+    <link rel="stylesheet" href="/css/mybuttons.css">
+
+    <!-- external javascript functions -->
+    <script src="/js/signup.js"></script>
+  </head>
+
+  <style>
+    input {
+      height: 21px;
+      border-radius: 10px;
+    }
+
+    .logosize {
+      height: 80px;
+      width: 80px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    .logodiv {
+      background-color: rgb(0, 45, 60);
+      border-radius: 200px;
+      text-align: center;
+    }
+
+    .formposition {
+      padding-top: 20px;
+      margin: auto;
+      width: 50%;
+    }
+
+    input {
+      width: 260px;
+      margin-bottom: 5px;
+    }
+    
+    button {
+      transition-duration: 0.4s;
+      width: 269px;
+      border-radius: 25px;
+    }
+
+    button:hover{
+      transition-duration: 0.4s;
+    }
+
+    .errore {
+      color: red;
+    }
+
+  </style>
+
+  <body onload="loadLoginIntoSignup()">
+    <div class="logodiv">
+      <img src="/logo/logo.png" class="logosize" alt="">
+    </div>
+    <div class="formposition" id="transformeddiv">
+      <form>
+        Nome: <a style="color: red;">*</a> <br>
+        <input type="text" id="nome" onblur="checkText(this.id)" oninput="checkText(this.id)"> <br>
+        <div class="errore" id="errorenome" hidden> Errore! </div>
+        Cognome: <br>
+        <input type="text" id="cognome" onblur="checkText(this.id)" oninput="checkText(this.id)"> <br>
+        <div class="errore" id="errorecognome" hidden> Errore! </div>
+        Email: <br>
+        <input type="email" id="email_1" onblur="checkText(this.id)" oninput="checkText(this.id)"> <br>
+        <div class="errore" id="erroreemail_1" hidden> Errore! </div>
+        Repeat email: <br>
+        <input type="text" id="email_2" autocomplete="off" readonly onfocus="this.readOnly = false" oninput="checkText(this.id)" onblur="this.readOnly = true; checkText(this.id)"> <br>
+        <div class="errore" id="erroreemail_2" hidden> Errore! </div>
+        Password: <br>
+        <input type="password" id="password_1" onblur="checkText(this.id)" oninput="checkText(this.id)"> <br>
+        <div class="errore" id="errorepassword_1" hidden> Errore! </div>
+        Repeat password: <br>
+        <input type="password" id="password_2" onblur="checkText(this.id)" oninput="checkText(this.id)"> <br>
+        <div class="errore" id="errorepassword_2" hidden> Errore! </div>
+        Telefono: <br>
+        <input type="tel" id="tel" onblur="checkText(this.id)" oninput="checkText(this.id)"> <br>
+        <div class="errore" id="erroretel" hidden> Errore! </div>
+        Indirizzo: <br>
+        <input type="text" id="indirizzo" onblur="checkText(this.id)" oninput="checkText(this.id)"> <br>
+        <div class="errore" id="erroreindirizzo" hidden> Errore! </div>
+        Coice postale: <br>
+        <input type="text" id = "cap" onblur="checkText(this.id)" oninput="checkText(this.id)"> <br>
+        <div class="errore" id="errorecap" hidden> Errore! </div>
+        <button> Crea account </button>
+      </form>
+    </div>
+
+    <div style="padding-top: 20px;">
+      I campi segnati con
+      <a style="color: red;"> * </a>
+      sono obbligatori.
+    </div> 
+  </body>
+</html>
