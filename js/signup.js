@@ -15,9 +15,8 @@ function loadLoginIntoSignup(){
 // I'm using custom function to mark a particular item as "touched". When that happens, I can say for certain that, if it's still empty, then something must be written there
 function checkText(elem){
 
-  var lastClickedId = sessionStorage.getItem('lastClicked')
-  if(lastClickedId != null){
-    if(document.getElementById(lastClickedId).value == "") document.getElementById("errore" + lastClickedId).setAttribute('hidden', false)
+  var formText = document.getElementById(elem).value
+  if(formText == ""){
+    document.getElementById("errore" + elem).removeAttribute('hidden')
   }
-  sessionStorage.setItem('lastClicked', elem)
 }
