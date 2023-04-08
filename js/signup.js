@@ -24,9 +24,7 @@ function loadSignup(){
         document.getElementById("errorcognome").removeAttribute("hidden");
       } else if(errortype[0] == "username"){
         if(errtype[1] == "blank"){
-  
-        } else if(errortype[1] == "notequal"){
-  
+
         } else if(errortype[1] == "invalid"){
   
         } else if(errortype[1] == "taken"){
@@ -41,7 +39,7 @@ function loadSignup(){
         } else if(errortype[1] == "invalid"){
           document.getElementById("invalidaemail").removeAttribute("hidden");
         } else if(errortype[1] == "taken"){
-          // for now it's not implemented
+          document.getElementById("emailtaken").removeAttribute("hidden");
         }
       } else if(errortype[0] == "password"){
         if(errtype[1] == "blank"){
@@ -67,24 +65,41 @@ function loadSignup(){
 
 // I'm using custom function to mark a particular item as "touched". When that happens, I can say for certain that, if it's still empty, then something must be written there
 function checkText(elem){
-
-  htmlElem = document.getElementById(elem)
-  if(htmlElem.value == "") document.getElementById("errore" + elem).removeAttribute('hidden')
-  else document.getElementById("errore" + elem).setAttribute('hidden', true)
+  htmlElem = document.getElementById(elem);
+  if(htmlElem.value == "") document.getElementById("errore" + elem).removeAttribute('hidden');
+  else document.getElementById("errore" + elem).setAttribute('hidden', true);
 
   if(elem == "password_2"){
     otherHTMLElem = document.getElementById("password_1")
-    if(htmlElem.value != otherHTMLElem.value && htmlElem.value != "" && otherHTMLElem.value != "") document.getElementById("diversapassword").removeAttribute('hidden')
-    else document.getElementById("diversapassword").setAttribute('hidden', true)
+    if(htmlElem.value != otherHTMLElem.value && htmlElem.value != "" && otherHTMLElem.value != "") document.getElementById("diversapassword").removeAttribute('hidden');
+    else document.getElementById("diversapassword").setAttribute('hidden', true);
   } else if(elem == "password_1"){
     otherHTMLElem = document.getElementById("password_2")
-    if(htmlElem.value != otherHTMLElem.value && htmlElem.value != "" && otherHTMLElem.value != "") document.getElementById("diversapassword").removeAttribute('hidden')
-    else document.getElementById("diversapassword").setAttribute('hidden', true)
+    if(htmlElem.value != otherHTMLElem.value && htmlElem.value != "" && otherHTMLElem.value != "") document.getElementById("diversapassword").removeAttribute('hidden');
+    else document.getElementById("diversapassword").setAttribute('hidden', true);
+
+    // I now must check if password is valid
+    if(passwd.length < 8){
+      document.getElementById("passwordinvalid").removeAttribute('hidden');
+    } else {
+      passwd = htmlElem.value;
+      uppercase = 0; lowercase = 0; special = 0; numbers = 0;
+      for(let i = 0; i<passwd.length; i++){
+        // need to use ascii table here
+      }
+    }
   }
+
+  // as soon as the username is changed, I must remove the taken error
+  if(elem == "username") document.getElementById("usertaken").setAttribute('hidden', true);
+
 
   if(elem == "email_1"){
     const re = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
     otherHTMLElem = document.getElementById("email_2")
+
+    // As soon as the first email has been changed, I can remove the "taken" error
+    document.getElementById("emailtaken").setAttribute('hidden', true);
 
     if(htmlElem.value != "" && !re.test(htmlElem.value)) document.getElementById("invalidaemail").removeAttribute('hidden')
     else if(htmlElem.value != otherHTMLElem.value && htmlElem.value != "" && otherHTMLElem.value != ""){

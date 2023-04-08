@@ -60,15 +60,37 @@
         else $errors = $errors.",tel|invalid";
       }
 
-      if($errors != "" && false){
+      /*  The ones I've made are basic error checking.
+          This where checked before the connection to the database */
+      if($errors != ""){
         header("Location: /account/signup.html?errors=[{$errors}]");
         die();
       }
 
       $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
+      $username_exists = "select username from utenti where username = '{$username}'";
+
+      $result = pg_query($username_exists) or die('Query failed:'.pg_last_error());
+      if(pg_num_rows($result) != 0) $errors = "username|taken";
+      pg_free_result($result);
+
+      $email_exists = "select email from utenti where email = '{$email1}'";
+      $result = pg_query($email_exists) or die('Query failed:'.pg_last_error());
+      if(pg_num_rows($result) != 0){
+        if($errors == "") $errors = "email|taken";
+        else $errors = $errors.",email|taken";
+      }
+      pg_free_result($result);
+
+      if($errors != ""){
+        pg_close($db); //closing connection before the redirect
+        header("Location: /account/signup.html?errors=[{$errors}]");
+        die();
+      }
+
+      // once all of this have worked, I can finally add this informations to the database
       
-      echo $email1."\n";
-      echo $email2;
+      // adding to the first relation
     ?>
   </body>
 </html>
