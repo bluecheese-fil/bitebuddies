@@ -1,12 +1,66 @@
-function loadLoginIntoSignup(){
+function loadSignup(){
+  // In case this redirect is coming from the "login" page. This will be discarded in case
+  // it's coming from the php page with errors
   saved_email = sessionStorage.getItem("signupemail");
   saved_passwd = sessionStorage.getItem("signuppasswd");
+  sessionStorage.removeItem("signupemail");
+  sessionStorage.removeItem("signuppasswd");
+
+  url = new URL(window.location.href);
+  errorparameter = url.searchParams.get('errors');
+
+  // this is the case where 
+  if(errorparameter != null){
+    errorparameter = errorparameter.substring(1, errorparameter.length - 1);
+    errors = errorparameter.split(',');
+
+    for(let i = 0; i<errors.length; i++){
+      errortype = errors.split('|');
+      if(errortype[0] == "nome"){
+        // there is only a blank error, for now
+        document.getElementById("errornome").removeAttribute("hidden");
+      } else if(errortype[0] == "cognome"){
+        // there is only a blank error, for now
+        document.getElementById("errorcognome").removeAttribute("hidden");
+      } else if(errortype[0] == "username"){
+        if(errtype[1] == "blank"){
   
-  sessionStorage.removeItem("signupemail")
-  sessionStorage.removeItem("signuppasswd")
+        } else if(errortype[1] == "notequal"){
+  
+        } else if(errortype[1] == "invalid"){
+  
+        } else if(errortype[1] == "taken"){
+          
+        }
+      } else if(errortype[0] == "email"){
+        if(errtype[1] == "blank"){
+          document.getElementById("erroreemail_1").removeAttribute("hidden");
+          document.getElementById("erroreemail_2").removeAttribute("hidden");
+        } else if(errortype[1] == "notequal"){
+          document.getElementById("diversaemail").removeAttribute("hidden");
+        } else if(errortype[1] == "invalid"){
+          document.getElementById("invalidaemail").removeAttribute("hidden");
+        } else if(errortype[1] == "taken"){
+          // for now it's not implemented
+        }
+      } else if(errortype[0] == "password"){
+        if(errtype[1] == "blank"){
+          document.getElementById("errorepassword_1").removeAttribute("hidden");
+          document.getElementById("errorepassword_2").removeAttribute("hidden");
+        } else if(errortype[1] == "notequal"){
+          document.getElementById("diversapassword").removeAttribute("hidden");
+        } else if(errortype[1] == "invalid"){
+          // for now it's not implemented
+        }
+      } else if(errortype[0] == "tel"){
+        if(errtype[1] == "blank") document.getElementById("erroretel").removeAttribute("hidden");
+        else if(errortype[1] == "invalid") document.getElementById("telinvalido").removeAttribute("hidden");
+      }
+      return false;
+    }
+  }
   
   if(saved_email == null || saved_passwd == null) return false;
-
   document.getElementById("email_1").value = saved_email;
   document.getElementById("password_1").value = saved_passwd;
 }
@@ -101,10 +155,10 @@ function verifyForm(){
   // ... and for the phone number too
   if(!document.getElementById("telinvalido").hasAttribute('hidden')) isOk = false;
 
-
   if(isOk){
-    // send to server -> database
+    // If it's "ok" (client side), I can submit the form and pass it to the server
+    document.getElementById("signupform").submit()
   }
 
-  return false;
+  return isOk;
 }

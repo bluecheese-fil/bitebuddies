@@ -116,3 +116,23 @@ Utenti:
 Dove valgono le stesse ipotesi per i numeri scritte qui sopra.
 
 In questo modo, data la prima lettera del codice, sappiamo in quale tabella dobbiamo guardare
+
+# Database
+Il database si trova all'interno della nuova cartella "database"
+
+Per accedervi:
+- utente      bitebuddies
+- password  bites1!
+
+
+## Definizioni delle tabelle:
+Utenti:
+  - email :arrow_right: primarykey
+  - username :arrow_right: unique not null
+  - Passwd :arrow_right: not null
+
+Persone:
+  - username primarykey
+  - Nome not null
+  - Cognome not null
+  - Telefono not null
