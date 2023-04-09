@@ -22,14 +22,6 @@ function loadSignup(){
       } else if(errortype[0] == "cognome"){
         // there is only a blank error, for now
         document.getElementById("errorcognome").removeAttribute("hidden");
-      } else if(errortype[0] == "username"){
-        if(errtype[1] == "blank"){
-
-        } else if(errortype[1] == "invalid"){
-  
-        } else if(errortype[1] == "taken"){
-          
-        }
       } else if(errortype[0] == "email"){
         if(errtype[1] == "blank"){
           document.getElementById("erroreemail_1").removeAttribute("hidden");
@@ -48,7 +40,7 @@ function loadSignup(){
         } else if(errortype[1] == "notequal"){
           document.getElementById("diversapassword").removeAttribute("hidden");
         } else if(errortype[1] == "invalid"){
-          // for now it's not implemented
+          document.getElementById("passwordinvalida").setAttribute('hidden', true);
         }
       } else if(errortype[0] == "tel"){
         if(errtype[1] == "blank") document.getElementById("erroretel").removeAttribute("hidden");
@@ -77,21 +69,39 @@ function checkText(elem){
     otherHTMLElem = document.getElementById("password_2")
     if(htmlElem.value != otherHTMLElem.value && htmlElem.value != "" && otherHTMLElem.value != "") document.getElementById("diversapassword").removeAttribute('hidden');
     else document.getElementById("diversapassword").setAttribute('hidden', true);
+    
+    // se tutto va senza problemi tutti i caratteri sono supportati!
+    document.getElementById('charunsupported').setAttribute('hidden', true);
 
-    // I now must check if password is valid
-    if(passwd.length < 8){
-      document.getElementById("passwordinvalid").removeAttribute('hidden');
+    passwd = htmlElem.value;
+    // if it's empty, passwd will have a len of 0
+    if(passwd.length == 0){
+      document.getElementById("passwordinvalida").setAttribute('hidden', true);
+      document.getElementById('charunsupported').setAttribute('hidden', true);
+    } else if(passwd.length < 8){   // checking if it's valid
+      document.getElementById("passwordinvalida").removeAttribute('hidden');
     } else {
-      passwd = htmlElem.value;
       uppercase = 0; lowercase = 0; special = 0; numbers = 0;
       for(let i = 0; i<passwd.length; i++){
-        // need to use ascii table here
+
+        charnumber = passwd[i].charCodeAt(0);
+
+        if((charnumber >= 33 && charnumber <= 47) || (charnumber >= 58 && charnumber <= 64) || (charnumber >= 91 && charnumber <= 96) || (charnumber >= 123 && charnumber <= 126)) special++;
+        else if(charnumber >= 97 && charnumber <= 122) lowercase++;
+        else if(charnumber >= 65 && charnumber <= 90) uppercase++;
+        else if(charnumber >= 48 && charnumber <= 57) numbers++;
+        else {
+          document.getElementById('charunsupported').innerHTML = ("'" + passwd[i] + "' non supportato");
+          document.getElementById('charunsupported').removeAttribute('hidden');
+          break;
+        }
+      }
+
+      if(uppercase >= 2 && lowercase >= 2 && special >= 2 && numbers >= 2){
+        document.getElementById("passwordinvalida").setAttribute('hidden', true);
       }
     }
   }
-
-  // as soon as the username is changed, I must remove the taken error
-  if(elem == "username") document.getElementById("usertaken").setAttribute('hidden', true);
 
 
   if(elem == "email_1"){
@@ -159,8 +169,13 @@ function verifyForm(){
     isOk = false;
   }
 
+  // if email is taken, I can just check if the error is visible again
+  if(!document.getElementById("emailtaken").hasAttribute('hidden')) isOk = false;
+
   // The same reasoning can go into the password ...
-  if(!document.getElementById("diversapassword")) isOk = false;
+  if(!document.getElementById("diversapassword").hasAttribute('hidden')) isOk = false;
+  if(!document.getElementById("passwordinvalida").hasAttribute('hidden')) isOk = false;
+  if(!document.getElementById("charunsupported").hasAttribute('hidden')) isOk = false;
   
   if(document.getElementById("tel").value == ""){
     document.getElementById("erroretel").removeAttribute('hidden');

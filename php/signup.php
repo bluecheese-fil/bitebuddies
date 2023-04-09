@@ -6,7 +6,6 @@
       // getting all the arguments
       $nome = $_POST["nome"];
       $cognome = $_POST["cognome"];
-      $username = $_POST["username"];
       $email1 = $_POST["email_1"];
       $email2 = $_POST["email_2"];
       $password1 = $_POST["password_1"];
@@ -22,11 +21,6 @@
       if($cognome == ""){
         if($errors == "") $errors = "cognome|blank";
         else $errors = $errors.",cognome|blank";
-      }
-
-      if($username == ""){
-        if($errors == "") $errors = "username|blank";
-        else $errors = $errors.",username|blank";
       }
 
       $email_exp = "/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/";
@@ -47,7 +41,27 @@
       } else if($password1 != $password2){
         if($errors == "") $errors = "password|notequal";
         else $errors = $errors.",password|notequal";
-      } // else here i have to setup basic requirements for password
+      } else {
+        if(strlen($password1) < 8){
+          if($errors == "") $errors = "password|invalid";
+          else $errors = $errors.",password|invalid";
+        } else {
+          $ucase = 0; $lcase = 0; $special = 0; $num = 0;
+          for($i = 0; $i < strlen($password1); $i++){
+            $charcode = ord(substr($password1, $i, 1));
+
+            if(($charcode >= 33 && $charcode <= 47) || ($charcode >= 58 && $charcode <= 64) || ($charcode >= 91 && $charcode <= 96) || ($charcode >= 123 && $charcode <= 126)) $special++;
+            else if($charcode >= 97 && $charcode <= 122) $lcase++;
+            else if($charcode >= 65 && $charcode <= 90) $ucase++;
+            else if($charcode >= 48 && $charcode <= 57) $num++;
+          }
+
+          if($ucase < 2 || $lcase < 2 || $special < 2 || $num < 2){
+            if($errors == "") $errors = "password|invalid";
+            else $errors = $errors.",password|invalid";
+          }
+        }
+      }
 
       $tel_exp = "/^([+]39|0039)?[0-9]{10}$/";
       $telcpy = $tel;
@@ -68,11 +82,6 @@
       }
 
       $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
-      $username_exists = "select username from utenti where username = '{$username}'";
-
-      $result = pg_query($username_exists) or die('Query failed:'.pg_last_error());
-      if(pg_num_rows($result) != 0) $errors = "username|taken";
-      pg_free_result($result);
 
       $email_exists = "select email from utenti where email = '{$email1}'";
       $result = pg_query($email_exists) or die('Query failed:'.pg_last_error());
@@ -88,9 +97,38 @@
         die();
       }
 
+      // hashing the password, I also rehash it in case password verify doesn't work
+      $loopcounter = 0;
+      do {
+        if($loopcounter > 15) die(); // the password cannot be hashed
+
+        $hashedpasswd = password_hash($password1, PASSWORD_DEFAULT);
+        $loopcounter++;
+      } while(!password_verify($password1, $hashedpasswd));
+
       // once all of this have worked, I can finally add this informations to the database
-      
-      // adding to the first relation
+      /*  I'm using a transaction since user_id is a serial! It will have the same value in both
+          utenti and persone as long as they're added togheter and at the same time! Since transaction
+          assures atomicity, it's going to work perfectly!" */
+
+      // TODO, finish the transaciton
+      $insert_transaction = "
+      begin transaction;
+      insert into utenti(email, passwd) values ({$email1}, {$hashedpasswd});
+      insert into persone(nome, cognome) values ({}, {});
+
+
+      !! I NEED TO GET THE SERIAL CREATED WITH A QUERY
+
+
+      insert into telefono() values ({}, {});
+      end transaction
+      ";
+
+      //$result = pg_query($insert_transaction) or die('Query failed:'.pg_last_error());
+      //pg_free_result($result);
+
+      // I then need a redirect in case everything goes perfectly! :)
     ?>
   </body>
 </html>

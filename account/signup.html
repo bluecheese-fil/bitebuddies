@@ -68,10 +68,6 @@
         Cognome: <span class="errore">*</span> <br>
         <input type="text" name="cognome" id="cognome" onblur="checkText(this.id)" oninput="checkText(this.id)" required> <br>
         <div class="errore" id="errorecognome" hidden> Campo obbligatorio </div>
-        Username: <span class="errore">*</span> <br>
-        <input type="text" name="username" id="username" onblur="checkText(this.id)" oninput="checkText(this.id)" required> <br>
-        <div class="errore" id="usererror" hidden> Campo obbligatorio </div>
-        <div class="errore" id="usertaken" hidden> Username preso</div>
         Email: <span class="errore">*</span> <br>
         <input type="email" name="email_1" id="email_1" onblur="checkText(this.id)" oninput="checkText(this.id)" required> <br>
         <div class="errore" id="erroreemail_1" hidden> Campo obbligatorio </div>
@@ -85,6 +81,7 @@
         <input type="password" name="password_1" id="password_1" onblur="checkText(this.id)" oninput="checkText(this.id)" required> <br>
         <div class="errore" id="errorepassword_1" hidden> Campo obbligatorio </div>
         <div class="errore" id="passwordinvalida" hidden> La password deve essere di almeno 8 caratteri, di cui almeno 2 lettere maiuscole, 2 minuscole, 2 caratteri speciali e 2 numeri</div>
+        <div class="errore" id="charunsupported" hidden> Autofilled by js </div>
         Ripeti password: <span class="errore">*</span> <br>
         <input type="password" name="password_2" id="password_2" onblur="checkText(this.id)" oninput="checkText(this.id)" required> <br>
         <div class="errore" id="errorepassword_2" hidden> Campo obbligatorio </div>

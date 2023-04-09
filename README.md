@@ -127,12 +127,23 @@ Per accedervi:
 
 ## Definizioni delle tabelle:
 Utenti:
-  - email :arrow_right: primarykey
-  - username :arrow_right: unique not null
+  - user_id :arrow_right: primarykey
+  - email :arrow_right: unqiue not null
   - Passwd :arrow_right: not null
 
 Persone:
-  - username primarykey
-  - Nome not null
-  - Cognome not null
-  - Telefono not null
+  - user_id :arrow_right: primarykey
+  - Nome :arrow_right: not null
+  - Cognome :arrow_right: not null
+
+Indirizzi:
+  - user_id :arrow_right: not null (fk on user_id in persone)
+  - indirizzo :arrow_right: not null
+
+  - (user_id, indirizzo) :arrow_right: primarykey (non si possono inserire piu' indirizzi per la stessa persona)
+
+Telefoni:
+  - user_id :arrow_right: not null (fk on user_id in persone)
+  - telefono :arrow_right: not null
+
+  - (user_id, telefono) :arrow_right: primarykey (non si possono inserire piu' telefoni per la stessa persona)
