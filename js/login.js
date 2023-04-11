@@ -1,60 +1,39 @@
 function accountCreation(){
   email = document.getElementById("email").value;
-  passwd = document.getElementById("password").value
-  sessionStorage.setItem("signupemail", email)
-  sessionStorage.setItem("signuppasswd", passwd)
+  passwd = document.getElementById("password").value;
+  sessionStorage.setItem("signupemail", email);
+  sessionStorage.setItem("signuppasswd", passwd);
 }
 
-function savedLogin(){
-  const loginForm = document.querySelector('.loginform');
+function load(){
+  url = new URL(window.location.href);
+  errorparameter = url.searchParams.get('error');
 
-  if(localStorage.getItem("user") != null && localStorage.getItem("user") != ""
-    && localStorage.getItem("password") != null && localStorage.getItem("password") != ""){
-    // make query request for login
-
-    if(false){ //login worked
-      window.location.replace("/homepage.html");
-    } else {
-      document.getElementById("passwordchanged").removeAttribute('hidden');
-      
-      loginForm.style.height = "23vh";
-      loginForm.style.minHeight = "180px";
-
-      localStorage.removeItem("email");
-      localStorage.removeItem("password")
-    }
-  }
-}
-
-function tryLogin(){
-  const loginForm = document.querySelector('.loginform');
-
-  document.getElementById("passwordchanged").setAttribute('hidden', true);
-  loginForm.style.height = "16vh"
-  loginForm.style.minHeight = "140px"
-
-  email = document.getElementById("email").value
-  passwd = document.getElementById("password").value
-  toRemember = document.getElementById("saveaccount").checked
-
-  // make query call to database
-
-  // if found
-  if(false){
+  // If php throws an error, then 
+  if(errorparameter != null){
+    // this will happen only if the login button has been pressed at least once! I can reuse the email
+    document.getElementById("email").value = sessionStorage.getItem("savedemail");
+    localStorage.removeItem("saveduser");
     
-    if(toRemember){
-      localStorage.setItem("user") = email;
-      localStorage.setItem("password") = passwd;
-    }
-
-    window.location.replace("/homepage.html");
-  } else {
-    // if either email is not found or password is not correct!
-    
+    const loginForm = document.querySelector('.loginform');
     document.getElementById("error").removeAttribute('hidden');
     document.getElementById("password").value = ""; 
-    
     loginForm.style.height = "26vh";
     loginForm.style.minHeight = "200px";
+  } else if(localStorage.getItem("saveduser") != null){
+    
+    // make query request for login
+    user = localStorage.getItem("saveduser");
+    items = JSON.parse(user);
+
+    document.getElementById("email").value = items["email"];
+    document.getElementById("password").value = items["password"];
+    document.getElementById("loginform").submit();
   }
+}
+
+function customSubmit(){
+  // I remember the used email in case of an error
+  sessionStorage.setItem("savedemail", document.getElementById("email").value);
+  document.getElementById("loginform").submit();
 }

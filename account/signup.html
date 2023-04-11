@@ -8,11 +8,6 @@
     <script src="/js/signup.js"></script>
 
     <style>
-      input {
-        height: 21px;
-        border-radius: 10px;
-      }
-
       .logosize {
         height: 80px;
         width: 80px;
@@ -36,6 +31,8 @@
       input {
         width: 260px;
         margin-bottom: 5px;
+        height: 21px;
+        border-radius: 10px;
       }
 
       button {
@@ -51,6 +48,10 @@
       .errore {
         color: red;
         font-size: small;
+      }
+
+      .littleinput{
+        width: 120px;
       }
 
     </style>
@@ -90,12 +91,21 @@
         <input type="tel" name="tel" id="tel" onblur="checkText(this.id)" oninput="checkText(this.id)" required pattern="([+]39|0039)?[0-9]{10}"> <br>
         <div class="errore" id="erroretel" hidden> Campo obbligatorio </div>
         <div class="errore" id="telinvalido" hidden> Numero di telefono non valido </div>
-        Indirizzo principale: <br>
-        <input type="text" name="indirizzo" id="indirizzo"> <br>
+        <hr>
+        Indirizzo: <br>
+        <input type="text" name="indirizzo" id="indirizzo" onblur="checkIndirizzo()" oninput="checkIndirizzo()"> <br>
+        <span> CAP: &nbsp; &emsp; &emsp; &emsp; &emsp; Citta:<br> </span>
+        <input class="littleinput" type="text" name="cap" id="cap" maxlength="5" minlength="5" onblur="checkIndirizzo()" oninput="checkIndirizzo()">
+        <input class="littleinput" type="text" name="citta" id="citta" onblur="checkIndirizzo()" oninput="checkIndirizzo()">
+        <div class="errore" id="errorindirizzo" hidden> Indirizzo non completo </div>
+        <div class="errore" id="capinvalida" hidden> Cap non corretto </div>
         <button type="button" onclick="verifyForm()"> Crea account </button>
 
-        <!-- Even if there's multiple errore types, I've calculated the size of this form with a single error for each item maximum
-        This is beacuse the errore will never coexists -->
+        <!-- Even if there's multiple errore types, I've calculated the size of this form with a single error for each item (max)
+        This is beacuse these errors will never coexists...
+        When multiple errors occurs, I'd rather not give multiple errors to the attacker! The js and hmtl are correct, therefore they
+        must have changed it to have such errors... I'd rather keep them waiting and wasting time than get useful information about the serveside script -->
+
       </form>
     </div>
 

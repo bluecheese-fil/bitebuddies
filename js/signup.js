@@ -12,10 +12,10 @@ function loadSignup(){
   // this is the case where 
   if(errorparameter != null){
     errorparameter = errorparameter.substring(1, errorparameter.length - 1);
-    errors = errorparameter.split(',');
+    errors = errorparameter.split(",");
 
     for(let i = 0; i<errors.length; i++){
-      errortype = errors.split('|');
+      errortype = errors[i].split("|");
       if(errortype[0] == "nome"){
         // there is only a blank error, for now
         document.getElementById("errornome").removeAttribute("hidden");
@@ -23,7 +23,7 @@ function loadSignup(){
         // there is only a blank error, for now
         document.getElementById("errorcognome").removeAttribute("hidden");
       } else if(errortype[0] == "email"){
-        if(errtype[1] == "blank"){
+        if(errortype[1] == "blank"){
           document.getElementById("erroreemail_1").removeAttribute("hidden");
           document.getElementById("erroreemail_2").removeAttribute("hidden");
         } else if(errortype[1] == "notequal"){
@@ -34,25 +34,50 @@ function loadSignup(){
           document.getElementById("emailtaken").removeAttribute("hidden");
         }
       } else if(errortype[0] == "password"){
-        if(errtype[1] == "blank"){
+        if(errortype[1] == "blank"){
           document.getElementById("errorepassword_1").removeAttribute("hidden");
           document.getElementById("errorepassword_2").removeAttribute("hidden");
         } else if(errortype[1] == "notequal"){
           document.getElementById("diversapassword").removeAttribute("hidden");
         } else if(errortype[1] == "invalid"){
-          document.getElementById("passwordinvalida").setAttribute('hidden', true);
+          document.getElementById("passwordinvalida").removeAttribute("hidden");
         }
       } else if(errortype[0] == "tel"){
-        if(errtype[1] == "blank") document.getElementById("erroretel").removeAttribute("hidden");
+        if(errortype[1] == "blank") document.getElementById("erroretel").removeAttribute("hidden");
         else if(errortype[1] == "invalid") document.getElementById("telinvalido").removeAttribute("hidden");
+      } else if(errortype[0] == "cap"){
+        document.getElementById("capinvalida").removeAttribute("hidden");
+      } else if(errortype[0] == "indirizzo"){
+        document.getElementById("errorindirizzo").removeAttribute("hidden");
       }
-      return false;
     }
+    return false;
   }
   
   if(saved_email == null || saved_passwd == null) return false;
   document.getElementById("email_1").value = saved_email;
   document.getElementById("password_1").value = saved_passwd;
+}
+
+function checkIndirizzo(){
+  document.getElementById("errorindirizzo").setAttribute("hidden", true);
+  document.getElementById("capinvalida").setAttribute("hidden", true);
+
+  // if some is not empty, then it's not valid
+  sum = (+ document.getElementById("indirizzo").value != "") + (+ document.getElementById("cap").value != "") + (+ document.getElementById("citta").value != "");
+  if(!(sum == 0 || sum == 3)) {
+    document.getElementById("errorindirizzo").removeAttribute("hidden");
+    return false;
+  }
+
+  if(sum == 0) return true;
+
+  cap = document.getElementById("cap").value;
+
+  if(cap.length != 5 || isNaN(cap)){
+    document.getElementById("capinvalida").removeAttribute("hidden");
+    return false;
+  }
 }
 
 // I'm using custom function to mark a particular item as "touched". When that happens, I can say for certain that, if it's still empty, then something must be written there
@@ -133,7 +158,7 @@ function checkText(elem){
 }
 
 function verifyForm(){
-  isOk = true
+  isOk = true;
 
   if(document.getElementById("nome").value == ""){
     document.getElementById("errorenome").removeAttribute('hidden')
@@ -184,6 +209,11 @@ function verifyForm(){
 
   // ... and for the phone number too
   if(!document.getElementById("telinvalido").hasAttribute('hidden')) isOk = false;
+
+  // and the address is valid, if given
+  if(!document.getElementById("errorindirizzo").hasAttribute("hidden")) isOk = false;
+  if(!document.getElementById("capinvalida").hasAttribute("hidden")) isOk = false;
+
 
   if(isOk){
     // If it's "ok" (client side), I can submit the form and pass it to the server

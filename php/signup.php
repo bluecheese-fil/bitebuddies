@@ -11,7 +11,7 @@
       $password1 = $_POST["password_1"];
       $password2 = $_POST["password_2"];
       $tel = $_POST["tel"];
-      $indirizzo = $_POST["indirizzo"];
+      $indirizzo = $_POST["indirizzo"].", ".$_POST["cap"].", ".$_POST["citta"];
 
       // I'm checking errors server side. In case anyone changed the javascript
       $errors = "";
@@ -21,6 +21,17 @@
       if($cognome == ""){
         if($errors == "") $errors = "cognome|blank";
         else $errors = $errors.",cognome|blank";
+      }
+
+      // checking if address is correct (if some parts are given, all must be given)
+      if(!(($_POST["indirizzo"] == "" && $_POST["cap"] == "" && $_POST["citta"] == "") || ($_POST["indirizzo"] != "" && $_POST["cap"] != "" && $_POST["citta"] != ""))){
+        if($errors == "") $errors = "indirizzo|incomplete";
+        else $errors = $errors.",indirizzo|incomplete";
+      }
+
+      if(strlen($_POST["cap"]) > 0 && (strlen($_POST["cap"]) != 5 || !is_numeric($_POST["cap"]))){
+        if($errors == "") $errors = "cap|invalid";
+        else $errors = $errors.",cap|invalid";
       }
 
       $email_exp = "/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/";
@@ -81,10 +92,17 @@
         die();
       }
 
+
+      $email1 = str_replace("'", "&#39", $email1);
+      $nome = str_replace("'", "&#39", $nome);
+      $cognome = str_replace("'", "&#39", $cognome);
+      $tel = str_replace("'", "&#39", $tel);
+      $indirizzo = str_replace("'", "&#39", $indirizzo);
+
       $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
 
       $email_exists = "select email from utenti where email = '{$email1}'";
-      $result = pg_query($email_exists) or die('Query failed:'.pg_last_error());
+      $result = pg_query($db, $email_exists) or die('Query failed:'.pg_last_error());
       if(pg_num_rows($result) != 0){
         if($errors == "") $errors = "email|taken";
         else $errors = $errors.",email|taken";
@@ -111,22 +129,34 @@
           utenti and persone as long as they're added togheter and at the same time! Since transaction
           assures atomicity, it's going to work perfectly!" */
 
-      // TODO, finish the transaciton
       $insert_transaction = "
-      begin transaction;
-      insert into utenti(email, passwd) values ({$email1}, {$hashedpasswd});
-      insert into persone(nome, cognome) values ({}, {});
+      begin;
+      insert into utenti(email, passwd) values('{$email1}', '{$hashedpasswd}');
+      insert into persone(nome, cognome) values('{$nome}', '{$cognome}');
+      do
+      $$
+      declare
+        usrid int;
+      begin
+        select user_id into usrid from utenti where  email='{$email1}';
+        if not found then
+          raise exception 'no row found';
+        else";
+      
+      if($indirizzo != ""){
+        $insert_transaction = $insert_transaction."\t\tinsert into indirizzi(user_id, indirizzo) values(usrid, '{$indirizzo}');";
+      }
 
+      $insert_transaction = $insert_transaction."
+          insert into telefoni(user_id, telefono) values(usrid, '{$tel}');
+        end if;
+      end;
+      $$;
+      commit;";
 
-      !! I NEED TO GET THE SERIAL CREATED WITH A QUERY
-
-
-      insert into telefono() values ({}, {});
-      end transaction
-      ";
-
-      //$result = pg_query($insert_transaction) or die('Query failed:'.pg_last_error());
-      //pg_free_result($result);
+      $result = pg_query($db, $insert_transaction) or die('Query failed:'.pg_last_error());
+      pg_free_result($result);
+      pg_close($db);
 
       // I then need a redirect in case everything goes perfectly! :)
     ?>

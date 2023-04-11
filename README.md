@@ -136,6 +136,8 @@ Persone:
   - Nome :arrow_right: not null
   - Cognome :arrow_right: not null
 
+  user_id :arrow_right: su utenti.user_id
+
 Indirizzi:
   - user_id :arrow_right: not null (fk on user_id in persone)
   - indirizzo :arrow_right: not null
@@ -147,3 +149,7 @@ Telefoni:
   - telefono :arrow_right: not null
 
   - (user_id, telefono) :arrow_right: primarykey (non si possono inserire piu' telefoni per la stessa persona)
+
+Tutte le foreign key definite qui sopra hanno "on delete cascade". Basta eliminare utenti per eliminare tutte le tracce di quell'utente dalle tabelle
+
+Tutte le apostrofi sono state sostituite con &#39, secondo lo standard html. Questo e' fatto per evitare errori negli inserimenti all'interno del database
