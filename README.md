@@ -116,3 +116,43 @@ Utenti:
 Dove valgono le stesse ipotesi per i numeri scritte qui sopra.
 
 In questo modo, data la prima lettera del codice, sappiamo in quale tabella dobbiamo guardare
+
+# Database
+Il database si trova all'interno della nuova cartella "database"
+
+Per accedervi:
+- utente      bitebuddies
+- password  bites1!
+
+
+## Definizioni delle tabelle:
+Utenti:
+  - user_id :arrow_right: primarykey
+  - email :arrow_right: unqiue not null
+  - Passwd :arrow_right: not null
+
+Persone:
+  - user_id :arrow_right: primarykey
+  - Nome :arrow_right: not null
+  - Cognome :arrow_right: not null
+
+  user_id :arrow_right: su utenti.user_id
+
+Indirizzi:
+  - user_id :arrow_right: not null (fk on user_id in persone)
+  - indirizzo :arrow_right: not null
+
+  - (user_id, indirizzo) :arrow_right: primarykey (non si possono inserire piu' indirizzi per la stessa persona)
+
+Telefoni:
+  - user_id :arrow_right: not null (fk on user_id in persone)
+  - telefono :arrow_right: not null
+
+  - (user_id, telefono) :arrow_right: primarykey (non si possono inserire piu' telefoni per la stessa persona)
+
+Tutte le foreign key definite qui sopra hanno "on delete cascade". Basta eliminare utenti per eliminare tutte le tracce di quell'utente dalle tabelle
+
+Tutte le apostrofi sono state sostituite con &#39, secondo lo standard html. Questo e' fatto per evitare errori negli inserimenti all'interno del database
+
+La password per la criptazione simmetrica e' la seguente:
+  "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&";
