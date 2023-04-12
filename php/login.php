@@ -61,8 +61,8 @@
           setcookie("iv", $iv, $expires_or_options=$ninetydays, $path="/");
         } else {
           // This cookie will expire after closing the session. This is used for user identification
-          setcookie("saveduser", $info, $path="/");
-          setcookie("iv", $iv, $path="/");
+          setcookie("saveduser", $info, $expires_or_options=0, $path="/");
+          setcookie("iv", $iv, $expires_or_options=0, $path="/");
         }
         
         // I then nee a redirect in case everything goes perfectly to the homepage! :)
