@@ -153,3 +153,6 @@ Telefoni:
 Tutte le foreign key definite qui sopra hanno "on delete cascade". Basta eliminare utenti per eliminare tutte le tracce di quell'utente dalle tabelle
 
 Tutte le apostrofi sono state sostituite con &#39, secondo lo standard html. Questo e' fatto per evitare errori negli inserimenti all'interno del database
+
+La password per la criptazione simmetrica e' la seguente:
+  "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&";

@@ -20,14 +20,8 @@ function load(){
     document.getElementById("password").value = ""; 
     loginForm.style.height = "26vh";
     loginForm.style.minHeight = "200px";
-  } else if(localStorage.getItem("saveduser") != null){
-    
-    // make query request for login
-    user = localStorage.getItem("saveduser");
-    items = JSON.parse(user);
-
-    document.getElementById("email").value = items["email"];
-    document.getElementById("password").value = items["password"];
+  } else if(document.cookie.search("saveduser") != -1){
+    // if the cookie is set, I don't need the user to submit any information
     document.getElementById("loginform").submit();
   }
 }
