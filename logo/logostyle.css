@@ -3,5 +3,8 @@
   height: min(15vw, 15vh);
   min-width: 100px;
   min-height: 100px;
+  max-height: 175px;
+  max-width: 175px;
+
   cursor: pointer;
 }
