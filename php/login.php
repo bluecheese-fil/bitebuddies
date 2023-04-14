@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-  <head></head>
+  <head>
+    <link rel="stylesheet" href="/css/homepage.css">
+  </head>
   <body onload>
     <?php
       // getting all the arguments
@@ -67,9 +69,15 @@
           setcookie("iv", $iv, $expires_or_options=0, $path="/");
         }
         
-        // I then nee a redirect in case everything goes perfectly to the homepage! :)
+        // I then need a redirect in case everything goes perfectly to the homepage! :)
+        echo "
+        <div>
+          Login successful! Please wait, you are being redirected right now
+        </div>
+        ";
+
+        sleep(5);
         header("Location: /homepage.php");
-        echo "<div> Here </div>";
         die();
       }
     ?>
