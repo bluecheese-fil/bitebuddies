@@ -2,6 +2,18 @@
 <html>
   <head>
     <link rel="stylesheet" href="/css/homepage.css">
+    <link rel="stylesheet" href="/css/mybuttons.css">
+
+    <style>
+
+      .verticaldiv {
+        float: left;
+        margin-left: 13vw;
+        padding-top: 10vh;
+      }
+
+    </style>
+
   </head>
   <body>
     <?php
@@ -38,24 +50,55 @@
 
       // This needs to be transformed with a for loop based on the number of the query
       echo "
-        <table>
+        <div class=\"verticaldiv\">
           <div> Indirizzo di default: </div>
           <div> {$default_address} </div>
-
-          <button> Add another address </button>
-
-          <div>
-            <div> Indirizzi: </div>
-            <button>  </button>
-            <button> Make default </button>
-            <br>
-
-            <div> Indirizzo 2: </div>
-            <button> </button>
-            <button> </button>
-        </table>
+          <hr> <br>
       ";
+      
+      //<button> Add another address </button>
+      if($addresses != false || true){
+        /*
+        $addr_len = count($addresses);
+        if($addr_len > 0) echo "
+            <div> Indirizzi: <\div>
+            <hr> <br>
+          ";
 
+        for($i = 0; $i < count($addresses); $i++){
+
+        }
+        */
+
+        // I need to take care of different size addresses
+        // I also need to make the spacing between the vertical tab dipendent of the size of the divs
+        // Right now it's not working great
+        echo "
+            <div>
+              <div> 
+                Via 2, 00156, Roma
+                <button> Make default </button>
+              </div>
+              <br>
+
+              <div>
+                Via 1, 00133, Roma
+                <button> Make default </button>
+              </div>
+              <br>
+            </div>
+        ";
+      }
+
+      echo "
+        </div>
+        <div class=\"verticaldiv\">
+          <form aggiungi_indirizzo>
+            Indirizzo:
+            <input type=\"text\">
+          </form>
+        </div>
+      ";
     ?>
   </body>
 </html>
