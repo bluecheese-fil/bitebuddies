@@ -24,25 +24,7 @@
       .formposition {
         padding-top: 20px;
         margin: auto;
-        width: 50%;
-        width: 270px;
-      }
-
-      input {
-        width: 260px;
-        margin-bottom: 5px;
-        height: 21px;
-        border-radius: 10px;
-      }
-
-      button {
-        transition-duration: 0.4s;
-        width: 269px;
-        border-radius: 25px;
-      }
-
-      button:hover{
-        transition-duration: 0.4s;
+        width: 50vw;
       }
 
       .errore {
@@ -51,7 +33,21 @@
       }
 
       .littleinput{
-        width: 120px;
+        width: 17.6em;
+      }
+
+      input {
+        width: 36em;
+        margin-bottom: 5px;
+
+        height: 25px;
+        border-radius: 10px;
+      }
+
+      button {
+        transition-duration: 0.4s;
+        width: 30.6em;
+        border-radius: 25px;
       }
 
     </style>
@@ -94,7 +90,7 @@
         <hr>
         Indirizzo: <br>
         <input type="text" name="indirizzo" id="indirizzo" onblur="checkIndirizzo()" oninput="checkIndirizzo()"> <br>
-        <span> CAP: &nbsp; &emsp; &emsp; &emsp; &emsp; Citta:<br> </span>
+        <span style="width: 15.5em; display: inline-block;"> CAP: </span> <span> Citta: </span> <br>
         <input class="littleinput" type="text" name="cap" id="cap" maxlength="5" minlength="5" onblur="checkIndirizzo()" oninput="checkIndirizzo()">
         <input class="littleinput" type="text" name="citta" id="citta" onblur="checkIndirizzo()" oninput="checkIndirizzo()">
         <div class="errore" id="errorindirizzo" hidden> Indirizzo non completo </div>
