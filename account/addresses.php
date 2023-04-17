@@ -13,11 +13,11 @@
       }
 
       .fullin {
-        width: 16.5em;
+        width: max(21.9vw, 16.9em);
       }
 
       .halfin {
-        width: 7.6em;
+        width: 10.3vw;
       }
 
       .verticaladdrcontainer {
@@ -42,7 +42,7 @@
       .verticaladdresses {
         float: left;
 
-        width: 66%;
+        width: 16vw;
 
         margin-left: 4%;
         height: min(45px, 5vmin);
@@ -55,9 +55,10 @@
 
       .verticalbuttons {
         float: right;
+        text-align: right;
 
-        width: 27%;
-        min-width: 160px;
+        width: 41.7%;
+        min-width: 276px;
 
         height: min(45px, 5vmin);
         margin-top: 15px;
@@ -75,7 +76,7 @@
 
       /* Custom version of "My Buttons"*/
       button {
-        height: min(45px, 5vmin);
+        height: min(45px, 4.4vmin);
         padding: 9px 25px;
         background-color: rgba(0, 136, 169, 1);
         border: none;
@@ -88,13 +89,42 @@
         transition-duration: 0.4s;
         background-color: rgba(0, 136, 169, 0.8);
       }
-
     </style>
+
+    <script>
+      // This function is a portion of the function defined in js/signup.js
+      function verifyAddr(){
+        isOk = true;
+        // and the address is valid, if given
+        if(!document.getElementById("errorindirizzo").hasAttribute("hidden")) isOk = false;
+        if(!document.getElementById("capinvalida").hasAttribute("hidden")) isOk = false;
+
+        if(isOk){
+          // If it's "ok" (client side), I can submit the form and pass it to the server
+          document.getElementById("signupform").submit()
+        }
+        return isOk;
+      }
+
+      function checkIndirizzo(){
+        // if some is not empty, then it's not valid
+        sum = (+ document.getElementById("indirizzo").value != "") + (+ document.getElementById("cap").value != "") + (+ document.getElementById("citta").value != "");
+        if(!(sum == 0 || sum == 3)) return false;
+        if(sum == 0) return true;
+
+        cap = document.getElementById("cap").value;
+
+        if(cap.length != 5 || isNaN(cap)) return false;
+
+        document.getElementById("addaddress").submit();
+      }
+    </script>
 
     <!-- I will create the php functions in here -->
     <?php
-      if(array_key_exists('makedefault', $_POST)) { makedefualt($_POST["makedefault"]); }
-      else if(array_key_exists('addaddress', $_POST)) { add_address($_POST['addaddress']); }
+      if(array_key_exists("mkdef", $_POST)) { makedefualt($_POST["mkdef"]); }
+      else if(array_key_exists("add", $_POST)) { add_address($_POST["add"]); }
+      else if(array_key_exists("del", $_POST)){ delete_address($_POST["del"]); }
 
 
       // I also need to think on how to get the userid
@@ -155,47 +185,30 @@
       ";
       
       //<button> Add another address </button>
-      if($addresses != false || true){
-        /*
-        $addr_len = count($addresses);
-        if($addr_len > 0) echo "
-            <div> Indirizzi: <\div>
-            <hr> <br>
-          ";
-
+      if($addresses != false && count($addresses) > 0){
         for($i = 0; $i < count($addresses); $i++){
-
-        }
-        */
-
-        // I need to take care of different size addresses
-        // I also need to make the spacing between the vertical tab dipendent of the size of the divs
-        // Right now it's not working great
-        echo "
-            <div class=\"verticaladdresses\"> Via 2, 00156, Roma </div>
-            <div class=\"verticalbuttons\">
-              <button> Rendi default </button>
-            </div>
-            <div class=\"verticaladdresses\"> Via 1, 00133, Roma  </div>
-            <div class=\"verticalbuttons\">
-              <button> Rendi default </button>
-            </div>
+          echo "
+          <div class=\"verticaladdresses\"> ".$addresses[0]."</div>
+          <div class=\"verticalbuttons\">
+            <button> Rendi default </button>
+            <button> Elimina </button>
           </div>
-        ";
+          ";
+        }
       }
 
       echo "
         </div>
         <div class=\"verticalform\">
-          <form style=\"padding-top: 10vh;\" id=\"addaddress\" action=\"\" method=\"post\">
+          <form style=\"padding-top: 10vh;\" id=\"addaddress\" method=\"post\" action=\"\">
             Indirizzo: <br>
             <input class=\"fullin\" type=\"text\" name=\"indirizzo\" id=\"indirizzo\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\"> <br>
-            <span style=\"width: 7.5em; display: inline-block;\"> CAP: </span> <span> Citta: </span> <br>
+            <span style=\"width: 49%; display: inline-block;\"> CAP: </span> <span> Citta: </span> <br>
             <input class=\"halfin\" type=\"text\" name=\"cap\" id=\"cap\" maxlength=\"5\" minlength=\"5\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\">
             <input class=\"halfin\" type=\"text\" name=\"citta\" id=\"citta\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\">
             <div class=\"errore\" id=\"errorindirizzo\" hidden> Indirizzo non completo </div>
             <div class=\"errore\" id=\"capinvalida\" hidden> Cap non corretto </div>
-            <button type=\"button\" onclick=\"verifyForm()\"> Aggiungi Indirizzo </button>
+            <button style=\"width: max(15em, 23vw); height: 40px\" type=\"button\" onclick=\"verifyForm()\"> Aggiungi Indirizzo </button>
           </form>
         </div>
       ";
