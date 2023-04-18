@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title> Login </title>
     <link rel="stylesheet" href="/logo/logostyle.css">
     <link rel="stylesheet" href="/css/login.css">
@@ -10,41 +12,13 @@
     <script src="/js/login.js"></script>
 
     <style>
-      .loginform {
-        display: inline-grid;
-        padding-left: min(2vh, 2vw);
-        padding-right: min(2vh, 2vw);
-        padding-top: min(2vh, 2vw);
-        padding-bottom: min(2vh, 2vw);
-
-        width: 40vw;
-        height: 16vh;
-        min-width: 310px;
-        min-height: 140px;
-
-        background-color: white;
-        gap: 0.2vh;
-        grid-template-columns: repeat(2, minmax(0, 1fr) [col-start]);
-        align-items: center;
-
-        border-radius: min(5vh, 5vw);
-        border-style: double;
-        border-color: rgb(0, 108, 145);
-
-        transition-duration: 80ms;
-      }
-
       .redirect {
-        transition: all 0.2s ease 0s;
         cursor: pointer;
         color: rgb(140, 238, 140);
         text-decoration: underline;
       }
 
-      .redirect:hover{
-        color: rgb(80, 255, 80);
-      }
-
+      .redirect:hover{color: rgb(80, 255, 80); transition: all 0.2s ease 0s;}
       .errorclass{
         grid-column-start: 0;
         grid-column-end: span 2;
@@ -56,7 +30,6 @@
       }
 
       .nuovapassword {
-        transition: all 0.2s ease 0s;
         cursor: pointer;
         color: rgb(25, 25, 200);
         text-decoration: underline;
@@ -77,6 +50,28 @@
         text-decoration: underline;
       }
 
+      .loginform {
+        display: inline-grid;
+        padding: 1.5vmin 2vmin 1.5vmin 2vmin;
+        width: 60vw;
+        height: 20vh;
+
+        background-color: white;
+        gap: 0.2vh;
+        grid-template-columns: repeat(2, minmax(0, 1fr) [col-start]);
+        align-items: center;
+
+        border-radius: min(5vh, 5vw);
+        border-style: double;
+        border-color: rgb(0, 108, 145);
+
+        transition-duration: 80ms;
+      }
+
+      @media (min-width: 760px) {
+        /* Mediaquery for tablet and desktops */
+        .loginform { width: 30vw;}
+      }
     </style>
 
   </head>

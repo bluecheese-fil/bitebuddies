@@ -18,7 +18,7 @@ function load(){
     const loginForm = document.querySelector('.loginform');
     document.getElementById("error").removeAttribute('hidden');
     document.getElementById("password").value = ""; 
-    loginForm.style.height = "26vh";
+    loginForm.style.height = loginForm.style.height + 2;
     loginForm.style.minHeight = "200px";
   } else if(document.cookie.search("saveduser") != -1){
     // if the cookie is set, I don't need the user to submit any information

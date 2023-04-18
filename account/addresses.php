@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/homepage.css">
     <style>
-
       input {
         margin-bottom: 5px;
         height: 21px;
@@ -12,71 +12,14 @@
         padding-left: 8px;
       }
 
-      .fullin {
-        width: max(21.9vw, 16.9em);
-      }
-
-      .halfin {
-        width: 10.3vw;
-      }
-
-      .verticaladdrcontainer {
-        float: left;
-        margin-right: 5%;
-        margin-left: 5%;
-        width: 60%;
-        padding-top: 12vh;
-      }
-
       .verticalform {
-        float: right;
-
-        padding-top: 12vh;
-
-        width: 25%;
-        margin-right: 3%;
-
-        height: 10vh;
+        margin: auto;
+        width: 50%;
       }
-
-      .verticaladdresses {
-        float: left;
-
-        width: 16vw;
-
-        margin-left: 4%;
-        height: min(45px, 5vmin);
-        line-height: min(45px, 5vmin); /* same as height! */
-
-        display: table-cell;
-        vertical-align: middle;
-        margin-top: 15px;
-      }
-
-      .verticalbuttons {
-        float: right;
-        text-align: right;
-
-        width: 41.7%;
-        min-width: 276px;
-
-        height: min(45px, 5vmin);
-        margin-top: 15px;
-      }
-
-      .errore {
-        color: red;
-        font-size: small;
-      }
-
-      .littleinput{
-        width: 46%;
-      }
-
 
       /* Custom version of "My Buttons"*/
       button {
-        height: min(45px, 4.4vmin);
+        height: 40px;
         padding: 9px 25px;
         background-color: rgba(0, 136, 169, 1);
         border: none;
@@ -88,6 +31,66 @@
         transition-delay: 0.1s;
         transition-duration: 0.4s;
         background-color: rgba(0, 136, 169, 0.8);
+      }
+
+      .errore { color: red; font-size: small; }
+      .fullin { width: 200px; }
+      .halfin { width: 18vw; }
+      .formstyle { padding-top: 10vh; }
+
+
+      @media (min-width: 1000px) {
+        /* For Desktop: */
+        .verticaladdrcontainer {
+          float: left;
+          margin-right: 5%;
+          margin-left: 5%;
+          width: 60%;
+          padding-top: 12vh;
+        }
+
+        .verticalform {
+          float: right;
+
+          padding-top: 12vh;
+
+          width: 25%;
+          margin-right: 3%;
+
+          height: 10vh;
+        }
+
+        .verticaladdresses {
+          float: left;
+
+          width: 16vw;
+
+          margin-left: 4%;
+          height: min(45px, 5vmin);
+          line-height: min(45px, 5vmin); /* same as height! */
+
+          display: table-cell;
+          vertical-align: middle;
+          margin-top: 15px;
+        }
+
+        .verticalbuttons {
+          float: right;
+          text-align: right;
+
+          width: 41.7%;
+          min-width: 276px;
+
+          height: min(45px, 5vmin);
+          margin-top: 15px;
+        }
+
+        /* Form elements */
+        .fullin { width: 92%; max-width: 330px; }
+        .halfin { width: 42.1%; max-width: 155px; }
+        .formbt { width: 99%; max-width: 340px; }
+        .formstyle { padding-left: 4vw; }
+
       }
     </style>
 
@@ -178,39 +181,41 @@
 
       // This needs to be transformed with a for loop based on the number of the query
       echo "
-        <div class=\"verticaladdrcontainer\">
-          <div> Indirizzo di default: </div>
-          <div> {$default_address} </div>
-          <hr>
+        <div>
+          <div class=\"verticaladdrcontainer\">
+            <div> Indirizzo di default: </div>
+            <div> {$default_address} </div>
+            <hr>
       ";
       
       //<button> Add another address </button>
       if($addresses != false && count($addresses) > 0){
         for($i = 0; $i < count($addresses); $i++){
           echo "
-          <div class=\"verticaladdresses\"> ".$addresses[0]."</div>
-          <div class=\"verticalbuttons\">
-            <button> Rendi default </button>
-            <button> Elimina </button>
-          </div>
+            <div class=\"verticaladdresses\"> ".$addresses[0]."</div>
+            <div class=\"verticalbuttons\">
+              <button> Rendi default </button>
+              <button> Elimina </button>
+            </div>
           ";
         }
       }
 
       echo "
-        </div>
-        <div class=\"verticalform\">
-          <form style=\"padding-top: 10vh;\" id=\"addaddress\" method=\"post\" action=\"\">
-            Indirizzo: <br>
-            <input class=\"fullin\" type=\"text\" name=\"indirizzo\" id=\"indirizzo\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\"> <br>
-            <span style=\"width: 49%; display: inline-block;\"> CAP: </span> <span> Citta: </span> <br>
-            <input class=\"halfin\" type=\"text\" name=\"cap\" id=\"cap\" maxlength=\"5\" minlength=\"5\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\">
-            <input class=\"halfin\" type=\"text\" name=\"citta\" id=\"citta\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\">
-            <div class=\"errore\" id=\"errorindirizzo\" hidden> Indirizzo non completo </div>
-            <div class=\"errore\" id=\"capinvalida\" hidden> Cap non corretto </div>
-            <button style=\"width: max(15em, 23vw); height: 40px\" type=\"button\" onclick=\"verifyForm()\"> Aggiungi Indirizzo </button>
-          </form>
-        </div>
+          </div>
+          <div class=\"verticalform\">
+            <form class=\"formstyle\" id=\"addaddress\" method=\"post\" action=\"\">
+              Indirizzo: <br>
+              <input class=\"fullin\" type=\"text\" name=\"indirizzo\" id=\"indirizzo\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\"> <br>
+              <span style=\"width: 49%; max-width: 180px; display: inline-block;\"> CAP: </span> <span> Citta: </span> <br>
+              <input class=\"halfin\" type=\"text\" name=\"cap\" id=\"cap\" maxlength=\"5\" minlength=\"5\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\">
+              <input class=\"halfin\" type=\"text\" name=\"citta\" id=\"citta\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\">
+              <div class=\"errore\" id=\"errorindirizzo\" hidden> Indirizzo non completo </div>
+              <div class=\"errore\" id=\"capinvalida\" hidden> Cap non corretto </div>
+              <button class=\"formbt\" type=\"button\" onclick=\"verifyForm()\"> Aggiungi Indirizzo </button>
+            </form>
+          </div>
+      </div>
       ";
     ?>
   </body>
