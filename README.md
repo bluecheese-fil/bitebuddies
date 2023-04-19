@@ -122,7 +122,7 @@ Il database si trova all'interno della nuova cartella "database"
 
 Per accedervi:
 - utente      bitebuddies
-- password  bites1!
+- password    bites1!
 
 
 ## Definizioni delle tabelle:
@@ -139,20 +139,20 @@ Persone:
   user_id :arrow_right: su utenti.user_id
 
 Indirizzi:
-  - user_id :arrow_right: not null (fk on user_id in persone)
+  - user_id :arrow_right: not null (fk on user_id in utenti)
   - indirizzo :arrow_right: not null
+  - def_indirizzo :arrow_right: not null (Indica l'indirizzo primario, ci puo' essere solo uno con true)
 
   - (user_id, indirizzo) :arrow_right: primarykey (non si possono inserire piu' indirizzi per la stessa persona)
 
 Telefoni:
-  - user_id :arrow_right: not null (fk on user_id in persone)
+  - user_id :arrow_right: not null (fk on user_id in utenti)
   - telefono :arrow_right: not null
+  - def_telefono :arrow_right: not null (Indica il telefono primario, ci puo' essere solo uno con true)
 
   - (user_id, telefono) :arrow_right: primarykey (non si possono inserire piu' telefoni per la stessa persona)
 
-Tutte le foreign key definite qui sopra hanno "on delete cascade". Basta eliminare utenti per eliminare tutte le tracce di quell'utente dalle tabelle
-
-Tutte le apostrofi sono state sostituite con &#39, secondo lo standard html. Questo e' fatto per evitare errori negli inserimenti all'interno del database
+Tutte le apostrofi sono state sostituite con &#39, secondo lo standard html. Questo e' fatto per evitare errori negli inserimenti all'interno del database, soprattutto per gli indirizzi
 
 La password per la criptazione simmetrica e' la seguente:
   "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&";

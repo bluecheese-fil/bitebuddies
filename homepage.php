@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="/css/mybuttons.css">
 
     <style>
-
       /* Header portion */
       /* My Dropdown */
       .mydropdown {

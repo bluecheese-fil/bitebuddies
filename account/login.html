@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title> Login </title>
     <link rel="stylesheet" href="/logo/logostyle.css">
     <link rel="stylesheet" href="/css/login.css">
@@ -53,8 +51,15 @@
       .loginform {
         display: inline-grid;
         padding: 1.5vmin 2vmin 1.5vmin 2vmin;
+        margin-bottom: 4vh;
+        
         width: 60vw;
+        min-width: 200px;
+        max-width: 500px;
+
         height: 20vh;
+        min-height: 150px;
+        max-height: 190px;
 
         background-color: white;
         gap: 0.2vh;
@@ -66,11 +71,6 @@
         border-color: rgb(0, 108, 145);
 
         transition-duration: 80ms;
-      }
-
-      @media (min-width: 760px) {
-        /* Mediaquery for tablet and desktops */
-        .loginform { width: 30vw;}
       }
     </style>
 
