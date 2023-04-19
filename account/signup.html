@@ -4,59 +4,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Signup </title>
 
-    <link rel="stylesheet" href="/css/signup.css">
     <link rel="stylesheet" href="/css/mybuttons.css">
+    <link rel="stylesheet" href="/css/signup.css">
 
     <!-- external javascript functions -->
     <script src="/js/signup.js"></script>
-
-    <style>
-      .logosize {
-        height: 80px;
-        width: 80px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-      }
-
-      .logodiv {
-        background-color: rgb(0, 45, 60);
-        border-radius: 200px;
-        text-align: center;
-      }
-
-      .formposition {
-        padding-top: 20px;
-        margin: auto;
-        width: 50vw;
-      }
-
-      .errore {
-        color: red;
-        font-size: small;
-      }
-
-      .littleinput{
-        width: 47.9%;
-      }
-
-      input {
-        width: 49.2vw;
-        margin-bottom: 5px;
-
-        height: 25px;
-        border-radius: 10px;
-      }
-
-      button {
-        width: 50vw;
-        border-radius: 25px;
-      }
-
-      button:hover{
-        transition-duration: 0.4s;
-      }
-
-    </style>
   </head>
 
   <body onload="loadSignup()">
@@ -96,9 +48,8 @@
         <hr>
         Indirizzo: <br>
         <input type="text" name="indirizzo" id="indirizzo" onblur="checkIndirizzo()" oninput="checkIndirizzo()"> <br>
-        <span style="width: 25vw; display: inline-block;"> CAP: </span> <span> Citta: </span> <br>
-        <input class="littleinput" type="text" name="cap" id="cap" maxlength="5" minlength="5" onblur="checkIndirizzo()" oninput="checkIndirizzo()">
-        <input class="littleinput" type="text" name="citta" id="citta" onblur="checkIndirizzo()" oninput="checkIndirizzo()">
+        <div class="leftline"> <span> CAP: </span> <input class="littleinput" type="text" name="cap" id="cap" maxlength="5" minlength="5" onblur="checkIndirizzo()" oninput="checkIndirizzo()"> </div>
+        <div class="rightline"> <span> Citta: </span> <input class="littleinput" type="text" name="citta" id="citta" onblur="checkIndirizzo()" oninput="checkIndirizzo()"> </div>
         <div class="errore" id="errorindirizzo" hidden> Indirizzo non completo </div>
         <div class="errore" id="capinvalida" hidden> Cap non corretto </div>
         <button type="button" onclick="verifyForm()"> Crea account </button>
@@ -107,14 +58,11 @@
         This is beacuse these errors will never coexists...
         When multiple errors occurs, I'd rather not give multiple errors to the attacker! The js and hmtl are correct, therefore they
         must have changed it to have such errors... I'd rather keep them waiting and wasting time than get useful information about the serveside script -->
-
       </form>
     </div>
 
-    <div style="padding-top: 20px;">
-      I campi segnati con
-      <span style="color: red;"> * </span>
-      sono obbligatori.
+    <div>
+      I campi segnati con <span class="errore"> * </span> sono obbligatori.
     </div> 
   </body>
 </html>

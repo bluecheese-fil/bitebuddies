@@ -156,3 +156,7 @@ Tutte le apostrofi sono state sostituite con &#39, secondo lo standard html. Que
 
 La password per la criptazione simmetrica e' la seguente:
   "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&";
+
+Login di account dato di default:
+email:  checcoz@zalon.org
+passwd: as123!@#ASD

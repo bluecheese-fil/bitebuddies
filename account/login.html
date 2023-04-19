@@ -3,76 +3,11 @@
   <head>
     <title> Login </title>
     <link rel="stylesheet" href="/logo/logostyle.css">
-    <link rel="stylesheet" href="/css/login.css">
     <link rel="stylesheet" href="/css/mybuttons.css">
+    <link rel="stylesheet" href="/css/login.css">
 
     <!-- external javascript functions -->
     <script src="/js/login.js"></script>
-
-    <style>
-      .redirect {
-        cursor: pointer;
-        color: rgb(140, 238, 140);
-        text-decoration: underline;
-      }
-
-      .redirect:hover{color: rgb(80, 255, 80); transition: all 0.2s ease 0s;}
-      .errorclass{
-        grid-column-start: 0;
-        grid-column-end: span 2;
-
-        background-color: rgba(99, 179, 213, 0.8);
-        border: 2px;
-        border-color: rgba(99, 179, 213, 1);
-        border-style: solid;
-      }
-
-      .nuovapassword {
-        cursor: pointer;
-        color: rgb(25, 25, 200);
-        text-decoration: underline;
-
-        /*I will prevent people to select this text*/
-        -webkit-touch-callout: none;  /* iOS Safari */
-        -webkit-user-select: none;    /* Safari */
-        -khtml-user-select: none;     /* Konqueror HTML */
-        -moz-user-select: none;       /* Old versions of Firefox */
-        -ms-user-select: none;        /* Internet Explorer/Edge */
-        user-select: none;            /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
-      }
-
-      .nuovapassword:hover{
-        transition: all 0.2s ease 0s;
-        cursor: pointer;
-        color: rgb(0, 0, 255);
-        text-decoration: underline;
-      }
-
-      .loginform {
-        display: inline-grid;
-        padding: 1.5vmin 2vmin 1.5vmin 2vmin;
-        margin-bottom: 4vh;
-        
-        width: 60vw;
-        min-width: 200px;
-        max-width: 500px;
-
-        height: 20vh;
-        min-height: 150px;
-        max-height: 190px;
-
-        background-color: white;
-        gap: 0.2vh;
-        grid-template-columns: repeat(2, minmax(0, 1fr) [col-start]);
-        align-items: center;
-
-        border-radius: min(5vh, 5vw);
-        border-style: double;
-        border-color: rgb(0, 108, 145);
-
-        transition-duration: 80ms;
-      }
-    </style>
 
   </head>
   <body class="body" onload="load()">
