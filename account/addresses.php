@@ -5,11 +5,14 @@
     <link rel="stylesheet" href="/css/homepage.css">
     <style>
       input {
-        margin-bottom: 5px;
-        height: 21px;
-        border-radius: 10px;
+        width: 95%;
+        height: 25px;
         text-align: left;
+        
+        margin-bottom: 5px;
         padding-left: 8px;
+
+        border-radius: 10px;
       }
 
       .verticalform {
@@ -19,8 +22,10 @@
 
       /* Custom version of "My Buttons"*/
       button {
+        width: 100%;
         height: 40px;
         padding: 9px 25px;
+
         background-color: rgba(0, 136, 169, 1);
         border: none;
         border-radius: 50px;
@@ -34,10 +39,12 @@
       }
 
       .errore { color: red; font-size: small; }
-      .fullin { width: 200px; }
-      .halfin { width: 18vw; }
-      .formstyle { padding-top: 10vh;}
+      .formstyle { padding-top: 10vh; min-width: 130px;}
       .verticaladdrcontainer { min-width: 300px; }
+
+      @media (max-width: 412px){
+        button {height: 60px;}
+      }
 
       @media (max-width: 500px){
        /* Mobiles */
@@ -94,11 +101,11 @@
         }
 
         /* Form elements */
-        .fullin { width: 92%; max-width: 330px; }
-        .halfin { width: 42.1%; max-width: 155px; }
+        input { width: 92%; max-width: 330px; }
         .formbt { width: 99%; max-width: 340px; }
         .formstyle { padding-left: 4vw; }
-
+        /* Adding width of span to prevent CAP/City and their input being on the same line */
+        .itemtext { padding-right: 150px;}
       }
     </style>
 
@@ -189,7 +196,6 @@
 
       // This needs to be transformed with a for loop based on the number of the query
       echo "
-        <div>
           <div class=\"verticaladdrcontainer\">
             <div> Indirizzo di default: </div>
             <div> {$default_address} </div>
@@ -210,19 +216,18 @@
       }
 
       echo "
-          </div>
-          <div class=\"verticalform\">
-            <form class=\"formstyle\" id=\"addaddress\" method=\"post\" action=\"\">
-              Indirizzo: <br>
-              <input class=\"fullin\" type=\"text\" name=\"indirizzo\" id=\"indirizzo\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\"> <br>
-              <div class=\"leftline\"> <span> CAP: </span> <input class=\"littleinput\" type=\"text\" name=\"cap\" id=\"cap\" maxlength=\"5\" minlength=\"5\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\"> </div>
-              <div class=\"rightline\"> <span> Citta: </span> <input class=\"littleinput\" type=\"text\" name=\"citta\" id=\"citta\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\"> </div>
-              <div class=\"errore\" id=\"errorindirizzo\" hidden> Indirizzo non completo </div>
-              <div class=\"errore\" id=\"capinvalida\" hidden> Cap non corretto </div>
-              <button class=\"formbt\" type=\"button\" onclick=\"verifyForm()\"> Aggiungi Indirizzo </button>
-            </form>
-          </div>
-      </div>
+        </div>
+        <div class=\"verticalform\">
+          <form class=\"formstyle\" id=\"addaddress\" method=\"post\" action=\"\">
+            Indirizzo: <br>
+            <input class=\"fullin\" type=\"text\" name=\"indirizzo\" id=\"indirizzo\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\"> <br>
+            <div class=\"leftline\"> <span class=\"itemtext\"> CAP: </span> <input class=\"littleinput\" type=\"text\" name=\"cap\" id=\"cap\" maxlength=\"5\" minlength=\"5\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\"> </div>
+            <div class=\"rightline\"> <span class=\"itemtext\"> Citta: </span> <input class=\"littleinput\" type=\"text\" name=\"citta\" id=\"citta\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\"> </div>
+            <div class=\"errore\" id=\"errorindirizzo\" hidden> Indirizzo non completo </div>
+            <div class=\"errore\" id=\"capinvalida\" hidden> Cap non corretto </div>
+            <button class=\"formbt\" type=\"button\" onclick=\"verifyForm()\"> Aggiungi Indirizzo </button>
+          </form>
+        </div>
       ";
     ?>
   </body>

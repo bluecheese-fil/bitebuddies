@@ -91,4 +91,7 @@ button:hover {
   /* Big Screens, used to fix cap and city overlapping */
   .leftline{ text-align: left;}
   .rightline { text-align: left;}
+
+  /* Adding width of span to prevent CAP/City and their input being on the same line */
+  .itemtext { padding-right: 150px;}
 }
