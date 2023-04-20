@@ -43,10 +43,8 @@ button {
 }
 
 button:hover {
-  transition-duration: 0.3s;
-  border-color: rgb(0, 45, 60);
-  border-style: ridge;
-  border-width: 6px;
+  transition-duration: 0.5s;
+  transition-delay: 0.1s;
 }
 
 .logosize {

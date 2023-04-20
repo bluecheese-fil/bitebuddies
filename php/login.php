@@ -77,7 +77,7 @@
         ";
 
 
-        header("refresh:5; url = /homepage.php");
+        header("refresh:3; url = /homepage.php");
         die();
       }
     ?>

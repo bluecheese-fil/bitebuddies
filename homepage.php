@@ -3,56 +3,21 @@
 <html>
   <head>
     <title> BiteBuddies Homepage </title>>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>  
-    <script src="/js/homepage.js"> </script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="/logo/logostyle.css">
     <link rel="stylesheet" href="/css/homepage.css">
     <link rel="stylesheet" href="/css/mybuttons.css">
 
+    <!-- Dropdown css -->
+    <link rel="stylesheet" href="/css/dropdown.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>  
+    <script src="/js/homepage.js"> </script>
+
     <style>
       /* Header portion */
-      /* My Dropdown */
-      .mydropdown {
-        background-color: rgba(0, 136, 169, 1);
-        border: none;
-        border-radius: 50px;
-        transition: all 0.3 ease 0s;
-        font-weight: 500;
-      }
-
-      .mydropdown:hover {
-        background-color: rgba(0, 136, 169, 0.8);
-      }
-
-      /* Dropdown background */
-      .dropdownbackground {
-        background-color: rgb(25, 70, 85);
-        font-weight: 500;
-      }
-
-      /* Dropdown item */
-      .dropdownitem {
-        color: white;
-        transition: 0.4s;
-        font-weight: 500;
-      }
-
-      .dropdownitem:hover{
-        background-color: rgba(5, 50, 55);
-        color: white;
-      }
-
-      .dropdown:hover>.dropdown-menu {
-        display: block;
-      }
-
-      .dropdown>.dropdown-toggle:active {
-        /*Without this, clicking will make it sticky*/
-        pointer-events: pointer;
-      }
 
       /* Research bar */
       .rbar {
@@ -100,7 +65,7 @@
   </head>
   <body>
     <span>
-      <header style="background-color: rgb(0, 45, 60);">
+      <header>
         <!-- logo header -->
         <img class="logo" src="/logo/logo.png" alt="logo">
 
@@ -121,11 +86,11 @@
           // Getting the name from the db
           $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
 
-          $username = "select nome from persone where user_id = '{$usrid}'";
-          $result = pg_query($db, $username) or die('Query failed:'.pg_last_error());
+          $name = "select nome from persone where user_id = '{$usrid}'";
+          $result = pg_query($db, $name) or die('Query failed:'.pg_last_error());
           $name = pg_fetch_array($result, null, PGSQL_NUM)[0]; //array with indexes a number
-
           pg_free_result($result);
+          pg_close($db);
           
           echo '
             <div class="dropdown">
@@ -137,7 +102,7 @@
                 </span>
               </button>
               <ul class="dropdown-menu dropdownbackground" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item dropdownitem" href="#"> Account </a></li>
+                <li><a class="dropdown-item dropdownitem" href="/account/account.php"> Account </a></li>
                 <li><a class="dropdown-item dropdownitem" href="#"> Ordini </a></li>
                 <li><a class="dropdown-item dropdownitem" href="#"> Metodi di pagamento </a></li>
                 <li><a class="dropdown-item dropdownitem" href="/account/addresses.php"> Indirizzi di consegna </a></li>

@@ -2,11 +2,20 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/homepage.css">
+    
+    <!-- css for logo -->
+    <link rel="stylesheet" href="/logo/logostyle.css">
+    
+    <!-- Dropdown css -->
+    <link rel="stylesheet" href="/css/dropdown.css">
     <link rel="stylesheet" href="/css/addresses.css">
 
     <!-- external javascript functions -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>  
     <script src="/js/addresses.js"> </script>
 
     <!-- This will prevent any resubmission in case of a refresh or back button -->
@@ -40,7 +49,7 @@
       }
 
       // usrid has been defined above, in the php called in the head section
-      // Getting the name from the db
+      // Getting from the db: -name, -default_address, - any other addresses
       $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
 
       $default_address = "select indirizzo from indirizzi where user_id = '{$usrid}' and def_indirizzo = 'true'";
@@ -52,9 +61,39 @@
       $result = pg_query($db, $addresses) or die('Query failed:'.pg_last_error());
       $addresses = pg_fetch_all($result, PGSQL_NUM); //array with addresses, indexed by a number
       pg_free_result($result);
+      
+      $name = "select nome from persone where user_id = '{$usrid}'";
+      $result = pg_query($db, $name) or die('Query failed:'.pg_last_error());
+      $name = pg_fetch_array($result, null, PGSQL_NUM)[0]; //array with indexes a number
+      pg_free_result($result);
       pg_close($db);
 
-      // This needs to be transformed with a for loop based on the number of the query
+      echo "
+      <header>
+        <!-- logo header -->
+        <img class=\"logo\" src=\"/logo/logo.png\" alt=\"logo\">
+
+        <div class=\"dropdown\">
+          <button class=\"btn btn-secondary dropdown-toggle mydropdown\" type=\"button\" id=\"dropdownMenuButton1\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
+            <span>
+              Ciao, ".$name."
+              <!-- img -->
+              <img height=\"28\" width=\"24\" src=\"https://cdn.jsdelivr.net/npm/remixicon@3.1.1/icons/User%20&%20Faces/user-3-line.svg\">
+            </span>
+          </button>
+          <ul class=\"dropdown-menu dropdownbackground\" aria-labelledby=\"dropdownMenuButton1\">
+            <li><a class=\"dropdown-item dropdownitem\" href=\"/account/account.php\"> Account </a></li>
+            <li><a class=\"dropdown-item dropdownitem\" href=\"#\"> Ordini </a></li>
+            <li><a class=\"dropdown-item dropdownitem\" href=\"#\"> Metodi di pagamento </a></li>
+            <li><a class=\"dropdown-item dropdownitem chosenlielement\"> Indirizzi di consegna </a></li>
+            <li><hr class=\"dropdown-divider\"></li>
+            <li><a class=\"dropdown-item dropdownitem\" href=\"#\" onclick=\"quitUser()\"> Esci </a></li>
+          </ul>
+        </div>
+      </header>
+      ";
+
+
       echo "
           <div class=\"verticaladdrcontainer\">
             <div> Indirizzo di default: </div>
