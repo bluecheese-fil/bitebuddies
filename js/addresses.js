@@ -32,8 +32,44 @@ function verifyAddr(){
   if(!document.getElementById("capinvalida").hasAttribute("hidden")) isOk = false;
   if(document.getElementById("indirizzo").value == "") isOk = false;
 
+  text = document.getElementById("indirizzo").textContent + ", " + document.getElementById("cap").textContent + ", " + document.getElementById("citta").textContent;
   // If it's "ok" (client side), I can submit the form and pass it to the server
-  if(isOk) document.getElementById("form_addadr").submit();
+  if(isOk){
+    $.ajax({
+      url:"/php/address_helper.php",   //the page containing php script
+      type: "post",                   //request type,
+      dataType: 'json',
+      data: {addadr: text},
+      success:function(){ console.log("Success"); location.reload();}
+    });
+  }
 
   return isOk;
+}
+
+function def_ind(ind_n) {
+  text = document.getElementById("indr" + ind_n).textContent;
+
+  $.ajax({
+    url:"/php/address_helper.php",   //the page containing php script
+    type: "post",                   //request type,
+    dataType: 'json',
+    data: {mkdef: text},
+    success:function(){ console.log("Success"); location.reload();}
+  });
+}
+
+function del_ind(ind_n){
+  text = document.getElementById("indr" + ind_n).textContent;
+  let confermed = confirm("Are you sure you want to delete the follwing address?\n" + text);
+
+  if(!confermed) return false;
+
+  $.ajax({
+    url:"/php/address_helper.php",   //the page containing php script
+    type: "post",                   //request type,
+    dataType: 'json',
+    data: {del: text},
+    success:function(){ console.log("Success"); location.reload();}
+  });
 }

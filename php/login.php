@@ -76,8 +76,8 @@
         </div>
         ";
 
-        sleep(5);
-        header("Location: /homepage.php");
+
+        header("refresh:5; url = /homepage.php");
         die();
       }
     ?>
