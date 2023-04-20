@@ -68,8 +68,8 @@
           echo "
             <div class=\"verticaladdresses\" id = \"indr{$i}\">".$addresses[$i][0]."</div>
             <div class=\"verticalbuttons\">
-              <button onclick=def_ind({$i}) > Rendi default </button>
-              <button onclick=del_ind({$i}) > Elimina </button>
+              <button class=\"littlebutton\" onclick=def_ind({$i})> Rendi default </button>
+              <button class=\"deletebutton\" onclick=del_ind({$i})> Elimina </button>
             </div>
           ";
         }

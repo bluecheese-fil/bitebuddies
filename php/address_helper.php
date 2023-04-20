@@ -55,7 +55,7 @@
 
   function add_address($usrid, $address) {
     $address = str_replace("'", "&#39", $address);
-    $ins_query = "insert into indirizzi(user_id, indirizzo, def_indirizzo) values('{$usrid}', '{$indirizzo}', false);";
+    $ins_query = "insert into indirizzi(user_id, indirizzo, def_indirizzo) values('{$usrid}', '{$address}', false);";
 
     $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
     // I need to call the querie to add the address

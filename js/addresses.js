@@ -32,7 +32,13 @@ function verifyAddr(){
   if(!document.getElementById("capinvalida").hasAttribute("hidden")) isOk = false;
   if(document.getElementById("indirizzo").value == "") isOk = false;
 
-  text = document.getElementById("indirizzo").textContent + ", " + document.getElementById("cap").textContent + ", " + document.getElementById("citta").textContent;
+  text = document.getElementById("indirizzo").value + ", " + document.getElementById("cap").value + ", " + document.getElementById("citta").value;
+
+  if(text == ", , ") {
+    alert("Non puoi aggiungere un indirizzo vuoto");
+    return false;
+  }
+
   // If it's "ok" (client side), I can submit the form and pass it to the server
   if(isOk){
     $.ajax({
