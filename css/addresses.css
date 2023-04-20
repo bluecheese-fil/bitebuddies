@@ -26,7 +26,7 @@
 }
 
 input {
-  width: 95%;
+  width: 100%;
   height: 25px;
   text-align: left;
   
@@ -109,7 +109,7 @@ button:hover {
   html { width: 302px; }
 }
 
-@media only screen and (max-width: 412px){
+@media only screen and (max-width: 415px){
   .formbt {height: 60px; min-width: 165px;}
 }
 
@@ -137,7 +137,7 @@ button:hover {
 }
 
 
-@media only screen and (min-width: 1010px) and (max-width: 1300px) {
+@media only screen and (min-width: 1010px) and (max-width: 1300px){
   /* For Desktop: */
   .verticaladdrcontainer {
     float: left;
@@ -170,7 +170,7 @@ button:hover {
 
 
   /* Form elements */
-  input { width: 92%; max-width: 330px; }
+  input { max-width: 330px; }
   .formbt { width: 99%; max-width: 340px; }
   .formstyle { padding-left: 4vw; }
   /* Adding width of span to prevent CAP/City and their input being on the same line */
@@ -187,23 +187,21 @@ button:hover {
 }
 
 @media only screen and (min-width: 1300px) {
-  /* For big desktops... The font must be a little bigger here */
+  /* For big desktops some items don't need to be resized! */
   .verticaladdrcontainer {
     float: left;
-    margin-right: 5%;
-    margin-left: 5%;
+
     width: 60%;
+    margin: 0% 5% 0% 5%;
     padding-top: 12vh;
   }
 
   .verticalform {
     float: right;
 
-    padding-top: 12vh;
-
     width: 25%;
-    margin-right: 3%;
-
     height: 10vh;
+    margin-right: 3%;
+    padding-top: 12vh;
   }
 }

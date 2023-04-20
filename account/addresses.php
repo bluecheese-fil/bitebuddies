@@ -36,7 +36,6 @@
   </head>
   <body>
     <?php
-      // db connection
       if(!isset($_COOKIE["saveduser"])){
         echo "
         <div>
@@ -48,6 +47,7 @@
         die();
       }
 
+      // db connection
       // usrid has been defined above, in the php called in the head section
       // Getting from the db: -name, -default_address, - any other addresses
       $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
