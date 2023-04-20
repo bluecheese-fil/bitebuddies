@@ -3,145 +3,22 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/homepage.css">
-    <style>
-      input {
-        width: 95%;
-        height: 25px;
-        text-align: left;
-        
-        margin-bottom: 5px;
-        padding-left: 8px;
+    <link rel="stylesheet" href="/css/addresses.css">
 
-        border-radius: 10px;
-      }
-
-      .verticalform {
-        margin: auto;
-        width: 50%;
-      }
-
-      /* Custom version of "My Buttons"*/
-      button {
-        width: 100%;
-        height: 40px;
-        padding: 9px 25px;
-
-        background-color: rgba(0, 136, 169, 1);
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-      }
-
-      button:hover{
-        transition-delay: 0.1s;
-        transition-duration: 0.4s;
-        background-color: rgba(0, 136, 169, 0.8);
-      }
-
-      .errore { color: red; font-size: small; }
-      .formstyle { padding-top: 10vh; min-width: 130px;}
-      .verticaladdrcontainer { min-width: 300px; }
-
-      @media (max-width: 412px){
-        button {height: 60px;}
-      }
-
-      @media (max-width: 500px){
-       /* Mobiles */
-       .leftline{ width: 45%; float: left; text-align: center;}
-       .rightline { width: 45%; float: right; text-align: center;}
-       .littleinput { width: 85%; }
-       button { width: 100% }
-      } 
-
-      @media (min-width: 1000px) {
-        /* For Desktop: */
-        .verticaladdrcontainer {
-          float: left;
-          margin-right: 5%;
-          margin-left: 5%;
-          width: 60%;
-          padding-top: 12vh;
-        }
-
-        .verticalform {
-          float: right;
-
-          padding-top: 12vh;
-
-          width: 25%;
-          margin-right: 3%;
-
-          height: 10vh;
-        }
-
-        .verticaladdresses {
-          float: left;
-
-          width: 16vw;
-
-          margin-left: 4%;
-          height: min(45px, 5vmin);
-          line-height: min(45px, 5vmin); /* same as height! */
-
-          display: table-cell;
-          vertical-align: middle;
-          margin-top: 15px;
-        }
-
-        .verticalbuttons {
-          float: right;
-          text-align: right;
-
-          width: 41.7%;
-          min-width: 276px;
-
-          height: min(45px, 5vmin);
-          margin-top: 15px;
-        }
-
-        /* Form elements */
-        input { width: 92%; max-width: 330px; }
-        .formbt { width: 99%; max-width: 340px; }
-        .formstyle { padding-left: 4vw; }
-        /* Adding width of span to prevent CAP/City and their input being on the same line */
-        .itemtext { padding-right: 150px;}
-      }
-    </style>
-
-    <script>
-      // This function is a portion of the function defined in js/signup.js
-      function verifyAddr(){
-        isOk = true;
-        // and the address is valid, if given
-        if(!document.getElementById("errorindirizzo").hasAttribute("hidden")) isOk = false;
-        if(!document.getElementById("capinvalida").hasAttribute("hidden")) isOk = false;
-
-        if(isOk){
-          // If it's "ok" (client side), I can submit the form and pass it to the server
-          document.getElementById("signupform").submit()
-        }
-        return isOk;
-      }
-
-      function checkIndirizzo(){
-        // if some is not empty, then it's not valid
-        sum = (+ document.getElementById("indirizzo").value != "") + (+ document.getElementById("cap").value != "") + (+ document.getElementById("citta").value != "");
-        if(!(sum == 0 || sum == 3)) return false;
-        if(sum == 0) return true;
-
-        cap = document.getElementById("cap").value;
-
-        if(cap.length != 5 || isNaN(cap)) return false;
-
-        document.getElementById("addaddress").submit();
-      }
-    </script>
+    <!-- external javascript functions -->
+    <script src="/js/addresses.js"> </script>
 
     <!-- I will create the php functions in here -->
     <?php
+      $delimiter = chr(007);
+      $iv = $_COOKIE["iv"];
+      $info = $_COOKIE["saveduser"];
+      $cipher = "aes-256-cbc";
+      $usrid = preg_split("/{$delimiter}/", openssl_decrypt($info, $cipher, "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv))[0];
+
+
       if(array_key_exists("mkdef", $_POST)) { makedefualt($_POST["mkdef"]); }
-      else if(array_key_exists("add", $_POST)) { add_address($_POST["add"]); }
+      else if(array_key_exists("addadr", $_POST)) { add_address($usrid, $_POST["indirizzo"].", ".$_POST["cap"].", ".$_POST["citta"]); }
       else if(array_key_exists("del", $_POST)){ delete_address($_POST["del"]); }
 
 
@@ -155,9 +32,17 @@
         pg_close($db);
       }
 
-      function add_address() {
-        echo "This is Button2 that is selected";
+      function add_address($usrid, $indirizzo) {
+        $indirizzo = str_replace("'", "&#39", $indirizzo);
+        $ins_query = "insert into indirizzi(user_id, indirizzo, def_indirizzo) values('{$usrid}', '{$indirizzo}', false);";
+
+        $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
+        // I need to call the querie to add the address
+        $result = pg_query($db, $ins_query) or die('Query failed:'.pg_last_error());
+        pg_free_result($result);
+        pg_close($db);
       }
+
     ?>
   </head>
   <body>
@@ -174,12 +59,7 @@
         die();
       }
 
-      $delimiter = chr(007);
-      $iv = $_COOKIE["iv"];
-      $info = $_COOKIE["saveduser"];
-      $cipher = "aes-256-cbc";
-      $usrid = preg_split("/{$delimiter}/", openssl_decrypt($info, $cipher, "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv))[0];
-      
+      // usrid has been defined above, in the php called in the head section
       // Getting the name from the db
       $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
 
@@ -218,14 +98,15 @@
       echo "
         </div>
         <div class=\"verticalform\">
-          <form class=\"formstyle\" id=\"addaddress\" method=\"post\" action=\"\">
+          <form class=\"formstyle\" id=\"form_addadr\" method=\"post\" action=\"/account/addresses.php\">
             Indirizzo: <br>
-            <input class=\"fullin\" type=\"text\" name=\"indirizzo\" id=\"indirizzo\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\"> <br>
-            <div class=\"leftline\"> <span class=\"itemtext\"> CAP: </span> <input class=\"littleinput\" type=\"text\" name=\"cap\" id=\"cap\" maxlength=\"5\" minlength=\"5\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\"> </div>
-            <div class=\"rightline\"> <span class=\"itemtext\"> Citta: </span> <input class=\"littleinput\" type=\"text\" name=\"citta\" id=\"citta\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\"> </div>
+            <input class=\"fullin\" type=\"text\" name=\"indirizzo\" id=\"indirizzo\" onblur=\"checkInd()\" oninput=\"checkInd()\"> <br>
+            <div class=\"leftline\"> <span class=\"itemtext\"> CAP: </span> <input class=\"littleinput\" type=\"text\" name=\"cap\" id=\"cap\" maxlength=\"5\" minlength=\"5\" onblur=\"checkInd()\" oninput=\"checkInd()\"> </div>
+            <div class=\"rightline\"> <span class=\"itemtext\"> Citta: </span> <input class=\"littleinput\" type=\"text\" name=\"citta\" id=\"citta\" onblur=\"checkInd()\" oninput=\"checkInd()\"> </div>
             <div class=\"errore\" id=\"errorindirizzo\" hidden> Indirizzo non completo </div>
             <div class=\"errore\" id=\"capinvalida\" hidden> Cap non corretto </div>
-            <button class=\"formbt\" type=\"button\" onclick=\"verifyForm()\"> Aggiungi Indirizzo </button>
+            <button class=\"formbt\" type=\"button\" onclick=\"verifyAddr()\"> Aggiungi Indirizzo </button>
+            <input type=\"text\" name=\"addadr\" id=\"addadr\" value=\"add\" hidden>
           </form>
         </div>
       ";

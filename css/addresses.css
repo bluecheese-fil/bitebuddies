@@ -1,0 +1,103 @@
+input {
+  width: 95%;
+  height: 25px;
+  text-align: left;
+  
+  margin-bottom: 5px;
+  padding-left: 8px;
+
+  border-radius: 10px;
+}
+
+.verticalform {
+  margin: auto;
+  width: 50%;
+}
+
+/* Custom version of "My Buttons"*/
+button {
+  width: 100%;
+  height: 40px;
+  padding: 9px 25px;
+
+  background-color: rgba(0, 136, 169, 1);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+button:hover{
+  transition-delay: 0.1s;
+  transition-duration: 0.4s;
+  background-color: rgba(0, 136, 169, 0.8);
+}
+
+.errore { color: red; font-size: small; padding-bottom: 5px;}
+.formstyle { padding-top: 10vh; min-width: 130px;}
+.verticaladdrcontainer { min-width: 300px; }
+
+@media (max-width: 412px){
+  button {height: 60px;}
+}
+
+@media (max-width: 500px){
+ /* Mobiles */
+ .leftline{ width: 45%; float: left; text-align: center;}
+ .rightline { width: 45%; float: right; text-align: center;}
+ .littleinput { width: 85%; }
+ button { width: 100% }
+} 
+
+@media (min-width: 1000px) {
+  /* For Desktop: */
+  .verticaladdrcontainer {
+    float: left;
+    margin-right: 5%;
+    margin-left: 5%;
+    width: 60%;
+    padding-top: 12vh;
+  }
+
+  .verticalform {
+    float: right;
+
+    padding-top: 12vh;
+
+    width: 25%;
+    margin-right: 3%;
+
+    height: 10vh;
+  }
+
+  .verticaladdresses {
+    float: left;
+
+    width: 16vw;
+
+    margin-left: 4%;
+    height: min(45px, 5vmin);
+    line-height: min(45px, 5vmin); /* same as height! */
+
+    display: table-cell;
+    vertical-align: middle;
+    margin-top: 15px;
+  }
+
+  .verticalbuttons {
+    float: right;
+    text-align: right;
+
+    width: 41.7%;
+    min-width: 276px;
+
+    height: min(45px, 5vmin);
+    margin-top: 15px;
+  }
+
+  /* Form elements */
+  input { width: 92%; max-width: 330px; }
+  .formbt { width: 99%; max-width: 340px; }
+  .formstyle { padding-left: 4vw; }
+  /* Adding width of span to prevent CAP/City and their input being on the same line */
+  .itemtext { padding-right: 150px;}
+}

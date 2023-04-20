@@ -64,7 +64,11 @@ function checkIndirizzo(){
   document.getElementById("capinvalida").setAttribute("hidden", true);
 
   // if some is not empty, then it's not valid
-  sum = (+ document.getElementById("indirizzo").value != "") + (+ document.getElementById("cap").value != "") + (+ document.getElementById("citta").value != "");
+  sum = 0;
+  if(document.getElementById("indirizzo").value != "") sum += 1;
+  if(document.getElementById("cap").value != "") sum += 1;
+  if(document.getElementById("citta").value != "") sum += 1;
+  
   if(!(sum == 0 || sum == 3)) {
     document.getElementById("errorindirizzo").removeAttribute("hidden");
     return false;
