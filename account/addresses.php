@@ -36,8 +36,16 @@
       .errore { color: red; font-size: small; }
       .fullin { width: 200px; }
       .halfin { width: 18vw; }
-      .formstyle { padding-top: 10vh; }
+      .formstyle { padding-top: 10vh;}
+      .verticaladdrcontainer { min-width: 300px; }
 
+      @media (max-width: 500px){
+       /* Mobiles */
+       .leftline{ width: 45%; float: left; text-align: center;}
+       .rightline { width: 45%; float: right; text-align: center;}
+       .littleinput { width: 85%; }
+       button { width: 100% }
+      } 
 
       @media (min-width: 1000px) {
         /* For Desktop: */
@@ -207,9 +215,8 @@
             <form class=\"formstyle\" id=\"addaddress\" method=\"post\" action=\"\">
               Indirizzo: <br>
               <input class=\"fullin\" type=\"text\" name=\"indirizzo\" id=\"indirizzo\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\"> <br>
-              <span style=\"width: 49%; max-width: 180px; display: inline-block;\"> CAP: </span> <span> Citta: </span> <br>
-              <input class=\"halfin\" type=\"text\" name=\"cap\" id=\"cap\" maxlength=\"5\" minlength=\"5\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\">
-              <input class=\"halfin\" type=\"text\" name=\"citta\" id=\"citta\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\">
+              <div class=\"leftline\"> <span> CAP: </span> <input class=\"littleinput\" type=\"text\" name=\"cap\" id=\"cap\" maxlength=\"5\" minlength=\"5\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\"> </div>
+              <div class=\"rightline\"> <span> Citta: </span> <input class=\"littleinput\" type=\"text\" name=\"citta\" id=\"citta\" onblur=\"checkIndirizzo()\" oninput=\"checkIndirizzo()\"> </div>
               <div class=\"errore\" id=\"errorindirizzo\" hidden> Indirizzo non completo </div>
               <div class=\"errore\" id=\"capinvalida\" hidden> Cap non corretto </div>
               <button class=\"formbt\" type=\"button\" onclick=\"verifyForm()\"> Aggiungi Indirizzo </button>

@@ -127,9 +127,9 @@ Per accedervi:
 
 ## Definizioni delle tabelle:
 Utenti:
-  - user_id :arrow_right: primarykey
-  - email :arrow_right: unqiue not null
-  - Passwd :arrow_right: not null
+  - user_id bigserial :arrow_right: primarykey
+  - email varchar(50):arrow_right: unqiue not null
+  - passwd varchar(255) :arrow_right: not null
 
 Persone:
   - user_id :arrow_right: primarykey

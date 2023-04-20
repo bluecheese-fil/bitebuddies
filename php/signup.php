@@ -108,9 +108,9 @@
         else $errors = $errors.",email|taken";
       }
       pg_free_result($result);
+      pg_close($db);
 
       if($errors != ""){
-        pg_close($db); //closing connection before the redirect
         header("Location: /account/signup.html?errors=[{$errors}]");
         die();
       }
@@ -129,6 +129,7 @@
           utenti and persone as long as they're added togheter and at the same time! Since transaction
           assures atomicity, it's going to work perfectly!" */
 
+      $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
       $insert_transaction = "
       begin;
       insert into utenti(email, passwd) values('{$email1}', '{$hashedpasswd}');
@@ -144,11 +145,11 @@
         else";
       
       if($indirizzo != ""){
-        $insert_transaction = $insert_transaction."\t\tinsert into indirizzi(user_id, indirizzo) values(usrid, '{$indirizzo}');";
+        $insert_transaction = $insert_transaction."\t\tinsert into indirizzi(user_id, indirizzo, def_indirizzo) values(usrid, '{$indirizzo}', true);";
       }
 
       $insert_transaction = $insert_transaction."
-          insert into telefoni(user_id, telefono) values(usrid, '{$tel}');
+          insert into telefoni(user_id, telefono, def_telefono) values(usrid, '{$tel}', true);
         end if;
       end;
       $$;
@@ -159,6 +160,14 @@
       pg_close($db);
 
       // I then need a redirect in case everything goes perfectly! :)
+      echo "
+        <div>
+          Signup successful. You are now being redirected to the login page... 
+        </div>
+      ";
+
+      header("refresh:3; url = /account/login.html");
+      die()
     ?>
   </body>
 </html>
