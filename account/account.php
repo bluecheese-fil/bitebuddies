@@ -9,49 +9,83 @@
 
     <link rel="stylesheet" href="/css/account.css">
 
+  
 
     <style>
       .right {
-        float: right;
         margin-top: 5vh; 
       }
 
       .redirects {
-        float: left;
         vertical-align: middle;
 
-        margin-top: 5vh; 
+        background-color: rgb(10, 145, 180);;
+        border-radius: 50px;
+        padding: 2vh 50px 2vh 50px;
+        border-style: dotted;
+      }
+
+      .change_item {
+        visibility: hidden;
+        opacity: 0;
+
+        background-color: red;
+        padding: 20px 20px 20px 20px;
+        border-radius: 20px;
+        transition: visibility 0s, opacity 0.5s linear;
+      }
+
+      .change_button {
+        margin-top: 20px;
+        width: 500px;
+        text-align: center;
+      }
+
+      input {
+        width: 100%;
+        height: 25px;
+        
+        text-align: left;
+        
+        margin-bottom: 5px;
+        padding-left: 8px;
+        border-radius: 10px;
       }
     </style>
+
+    <script src="/js/account.js"> </script>
 
   </head>
   <body>
     <header>
       <!-- logo header -->
       <img class="logo" src="/logo/logo.png" alt="logo">
-    </header>
 
-    <div>
       <div class="redirects">
         <a href="#"> Ordini </a> <br>
         <a href="/account/addresses.php"> Indirizzi </a> <br>
         <a href="#"> Pagamenti </a> <br>
       </div>
+    </header>
+
+    <div>
+
       <div class="right">
-        <span> Nome </span>
-        <span> Email </span>
-
         <div>
-          <span> Cambia email </span>
-          <input type="email1">
-          <input type="email2">
-          <button> </button>
-        </div>
+          <a> Nome </a> <br>
+          <a> Email </a> <br>
+        <div>
 
-        <span> Cambia password </span>
-        <input type="pswd1">
-        <input type="pswd2">
-        <button> </button>
+        <div class="change_button">
+          <a onclick="showChange(item, 0)"> Cambia email </a>
+          <a onclick="showChange(item, 1)"> Cambia password </a>
+
+          <div class="change_item" id="item">
+            <input type="email1">
+            <input type="email2">
+            <button> </button>
+          </div>
+        </div>
       </div>
     </div>
   </body>
