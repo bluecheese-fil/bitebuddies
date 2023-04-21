@@ -12,8 +12,9 @@
   
 
     <style>
-      .right {
-        margin-top: 5vh; 
+      .leftdiv {
+        float: left;
+        margin-top: 5vh;
       }
 
       .redirects {
@@ -35,12 +36,6 @@
         transition: visibility 0s, opacity 0.5s linear;
       }
 
-      .change_button {
-        margin-top: 20px;
-        width: 500px;
-        text-align: center;
-      }
-
       input {
         width: 100%;
         height: 25px;
@@ -55,8 +50,32 @@
 
     <script src="/js/account.js"> </script>
 
+    <?php
+      // getting name and email
+      $delimiter = chr(007);
+      $iv = $_COOKIE["iv"];
+      $info = $_COOKIE["saveduser"];
+      $cipher = "aes-256-cbc";
+      $usrid = preg_split("/{$delimiter}/", openssl_decrypt($info, $cipher, "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv))[0];
+
+
+      $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
+
+      $name = "select nome from persone where user_id = '{$usrid}'";
+      $result = pg_query($db, $name) or die('Query failed:'.pg_last_error());
+      $name = pg_fetch_array($result, null, PGSQL_NUM)[0]; //array with indexes a number
+      pg_free_result($result);
+
+      $email = "select email from utenti where user_id = '{$usrid}'";
+      $result = pg_query($db, $email) or die('Query failed:'.pg_last_error());
+      $email = pg_fetch_array($result, null, PGSQL_NUM)[0]; //array with addresses, indexed by a number
+      pg_free_result($result);
+
+      pg_close($db);
+    ?>
+
   </head>
-  <body>
+  <body onclick=removeChange(event)>
     <header>
       <!-- logo header -->
       <img class="logo" src="/logo/logo.png" alt="logo">
@@ -68,24 +87,21 @@
       </div>
     </header>
 
-    <div>
+    <div class="leftdiv">
+      <div> <a> Nome: </a> <a> <?php echo "{$name}"; ?> </a> </div>
+      <div> <a> Email: </a> <a> <?php echo "{$email}"; ?> </a> </div>
+    </div>
 
-      <div class="right">
-        <div>
-          <a> Nome </a> <br>
-          <a> Email </a> <br>
-        <div>
+    <div style="margin: auto; margin-top: 20vh; width: 50%; text-align: center;">
+      <div>
+        <a id="cambiaemail"> Cambia email </a>
+        <a id="cambiapassword"> Cambia password </a>
+      </div>
 
-        <div class="change_button">
-          <a onclick="showChange(item, 0)"> Cambia email </a>
-          <a onclick="showChange(item, 1)"> Cambia password </a>
-
-          <div class="change_item" id="item">
-            <input type="email1">
-            <input type="email2">
-            <button> </button>
-          </div>
-        </div>
+      <div class="change_item" id="form_container">
+        <input id="first_item">
+        <input id="second_item">
+        <button id="submit_item"> </button>
       </div>
     </div>
   </body>
