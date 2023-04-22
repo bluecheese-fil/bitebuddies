@@ -48,7 +48,9 @@
       }
     </style>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"> </script>
     <script src="/js/account.js"> </script>
+    <script src="/js/generalFunctions.js"> </script>
 
     <?php
       // getting name and email
@@ -80,6 +82,8 @@
         <a href="#"> Ordini </a> <br>
         <a href="/account/addresses.php"> Indirizzi </a> <br>
         <a href="#"> Pagamenti </a> <br>
+        <a href="#" onclick="exitEveryWhere()"> Rimuovi ogni dispositivo salvato </a> <br>
+        <a href="#" onclick="quitUser()"> Esci </a> <br>
       </div>
     </header>
 

@@ -67,7 +67,7 @@ function def_ind(ind_n) {
 
 function del_ind(ind_n){
   text = document.getElementById("indr" + ind_n).textContent;
-  let confermed = confirm("Are you sure you want to delete the follwing address?\n" + text);
+  let confermed = confirm("Sei sicuro di voler eliminare il seguente indirizzo?\n" + text);
 
   if(!confermed) return false;
 
@@ -78,11 +78,4 @@ function del_ind(ind_n){
     data: {del: text},
     success:function(){ console.log("Success"); location.reload();}
   });
-}
-
-function quitUser(){
-  document.cookie = "saveduser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-  document.cookie = "iv=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-  window.location.replace("/homepage.php");
 }

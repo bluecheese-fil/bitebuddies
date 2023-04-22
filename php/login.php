@@ -23,6 +23,12 @@
         $user_id = $items[0];
         $email = $items[1];
         $token = $items[2];
+
+        // This is used when updating the token or any other cookie data.
+        // It stores (only for the current session) that the user has chosen "remember me"
+        setcookie("accountexpiry", "true", $expires_or_options=0, $path="/");
+
+        // This has been set at the end of the file too
       }
 
       $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
@@ -66,10 +72,12 @@
             $ninetydays = time() + 3600*24*90;
             setcookie("saveduser", $info, $expires_or_options=$ninetydays, $path="/");
             setcookie("iv", $iv, $expires_or_options=$ninetydays, $path="/");
+            setcookie("accountexpiry", "true", $expires_or_options=0, $path="/");
           } else {
             // This cookie will expire after closing the session. This is used for user identification
             setcookie("saveduser", $info, $expires_or_options=0, $path="/");
             setcookie("iv", $iv, $expires_or_options=0, $path="/");
+            setcookie("accountexpiry", "false", $expires_or_options=0, $path="/");
           }
         }
       }
