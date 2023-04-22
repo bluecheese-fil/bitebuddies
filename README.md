@@ -128,27 +128,28 @@ Per accedervi:
 ## Definizioni delle tabelle:
 Utenti:
   - user_id bigserial :arrow_right: primarykey
-  - email varchar(50):arrow_right: unqiue not null
+  - email varchar(100):arrow_right: unqiue not null
   - passwd varchar(255) :arrow_right: not null
+  - token char(255) :arrow_right: not null
 
 Persone:
-  - user_id :arrow_right: primarykey
-  - Nome :arrow_right: not null
-  - Cognome :arrow_right: not null
+  - user_id bigint :arrow_right: primarykey
+  - Nome varchar(50) :arrow_right: not null
+  - Cognome varchar(50) :arrow_right: not null
 
   user_id :arrow_right: su utenti.user_id
 
 Indirizzi:
-  - user_id :arrow_right: not null (fk on user_id in utenti)
-  - indirizzo :arrow_right: not null
-  - def_indirizzo :arrow_right: not null (Indica l'indirizzo primario, ci puo' essere solo uno con true)
+  - user_id bigint :arrow_right: not null (fk on user_id in persone)
+  - indirizzo varchar(200) :arrow_right: not null
+  - def_indirizzo boolean :arrow_right: not null (Indica l'indirizzo primario, ci puo' essere solo uno con true)
 
   - (user_id, indirizzo) :arrow_right: primarykey (non si possono inserire piu' indirizzi per la stessa persona)
 
 Telefoni:
-  - user_id :arrow_right: not null (fk on user_id in utenti)
-  - telefono :arrow_right: not null
-  - def_telefono :arrow_right: not null (Indica il telefono primario, ci puo' essere solo uno con true)
+  - user_id bigint :arrow_right: not null (fk on user_id in persone)
+  - telefono varchar(15) :arrow_right: not null
+  - def_telefono boolean :arrow_right: not null (Indica il telefono primario, ci puo' essere solo uno con true)
 
   - (user_id, telefono) :arrow_right: primarykey (non si possono inserire piu' telefoni per la stessa persona)
 
@@ -156,6 +157,10 @@ Tutte le apostrofi sono state sostituite con &#39, secondo lo standard html. Que
 
 La password per la criptazione simmetrica e' la seguente:
   "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&";
+
+Il token serve per salvare la sessione di quell'utente. Sia il token che l'user_id vengono criptati. In questo modo non serve salvare la password nei cookie, anche se criptata
+
+Ogni foreign key ha: ONUPDATE e ONDELETE impostato a CASCADE. Basta cambiare una riga in utenti che tutte le informazioni di quell'utente vengono eliminate. Allo stesso modo, se viene cambiato l'user_id, viene aggiornato automaticamente su tutte le tabelle.
 
 Login di account dato di default:
 email:  checcoz@zalon.org

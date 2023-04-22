@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head></head>
+  <head>
+
+  <?php
+    function randomToken(){
+      $pieces = [];
+      for ($i = 0; $i < 255; ++ $i){
+        $rand = random_int(33, 126);
+        while($rand == 39) $rand = random_int(33, 126); // I don't want any ';', ':' or '''
+
+        $pieces[] = chr($rand);
+      }
+      return implode('', $pieces);
+    }
+  ?>
+
+  </head>
   <body>
     <?php
       // getting all the arguments
@@ -129,10 +144,13 @@
           utenti and persone as long as they're added togheter and at the same time! Since transaction
           assures atomicity, it's going to work perfectly!" */
 
+      // generating token
+      $token = randomToken();
+
       $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
       $insert_transaction = "
       begin;
-      insert into utenti(email, passwd) values('{$email1}', '{$hashedpasswd}');
+      insert into utenti(email, passwd, token) values('{$email1}', '{$hashedpasswd}', '{$token}');
       insert into persone(nome, cognome) values('{$nome}', '{$cognome}');
       do
       $$
@@ -171,4 +189,3 @@
     ?>
   </body>
 </html>
-

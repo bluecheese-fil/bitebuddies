@@ -13,8 +13,7 @@
       $cipher = "aes-256-cbc";
       $delimiter = chr(007); // bell (licence to kill)
 
-      // if email is set, (should happen only if javascript was modified)
-      // I'm using the given email and password, discarding the current cookie
+      // Email cannot be set unless the javascript was modified
       if(isset($_COOKIE["saveduser"]) && $email == ""){
         $iv = $_COOKIE["iv"];
         $info = $_COOKIE["saveduser"];
@@ -23,63 +22,66 @@
         $items = preg_split("/{$delimiter}/", $info);
         $user_id = $items[0];
         $email = $items[1];
-        $password = $items[2];
+        $token = $items[2];
       }
 
       $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
-      $password_query = "
-      select user_id, passwd
+      $login_query = "
+      select user_id, token, passwd
       from utenti
       where email = '{$email}'";
 
-      $result = pg_query($db, $password_query) or die('Query failed:'.pg_last_error());
+      $result = pg_query($db, $login_query) or die('Query failed:'.pg_last_error());
       $line = pg_fetch_array($result, null, PGSQL_NUM); //array with indexes a number
-      
-      $user_id = $line[0];
-      $hashedpasswd = $line[1];
       pg_free_result($result);
       pg_close($db);
 
-      $isCorrect = password_verify($password, $hashedpasswd);
-      // In case of an error, I send this back to the login with the error
-      if(!$isCorrect){
-        header("Location: /account/login.html?error=passwd_error");
-        die();
+      // In case the cookie was set, I just need to check the token and user
+      if(isset($_COOKIE["saveduser"])){
+        if(!$user_id == $line[0] || !$token == $line[1]){
+          // deleting cookie
+          setcookie("iv", "", time() - 3600);
+          setcookie("saveduser", "", time() - 3600);
+  
+          header("Location: /account/login.html?error=passwd_error");
+          die();
+        } // otherwise this will skip to the end, which results in a login
       } else {
-        // I'm going to set the cookie that remembers email and password
-
-        if(isset($_COOKIE["saveduser"])){
-          // If it was already saved, I just update the timer.
-          // This allows the saveduser cookie to be used as a token to identify the user itself accross the website
-          $ninetydays = time() + 3600*24*90;
-          setcookie("saveduser", $info, $expires_or_options=$ninetydays, $path="/");
-          setcookie("iv", $iv, $expires_or_options=$ninetydays, $path="/");
-        } else if($saveaccount){
+        // otherwise i need to check the password
+        if(!password_verify($password, $line[2])){ // they don't match
+          // deleting cookie
+          setcookie("iv", "", time() - 3600);
+          setcookie("saveduser", "", time() - 3600);
+            
+          header("Location: /account/login.html?error=passwd_error");
+          die();
+        } else {
           // encrypting the information
           $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($cipher));
-          $info = openssl_encrypt("{$user_id}{$delimiter}{$email}{$delimiter}{$password}", "aes-256-cbc", "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv);
+          //line[0] is the userid and line[1] is the token
+          $info = openssl_encrypt("{$line[0]}{$delimiter}{$email}{$delimiter}{$line[1]}", "aes-256-cbc", "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv);
 
-          // Expires in 90 days
-          $ninetydays = time() + 3600*24*90;
-          setcookie("saveduser", $info, $expires_or_options=$ninetydays, $path="/");
-          setcookie("iv", $iv, $expires_or_options=$ninetydays, $path="/");
-        } else {
-          // This cookie will expire after closing the session. This is used for user identification
-          setcookie("saveduser", $info, $expires_or_options=0, $path="/");
-          setcookie("iv", $iv, $expires_or_options=0, $path="/");
+          if($saveaccount){ //saving the token since "remember me has been selected
+            // Expires in 90 days
+            $ninetydays = time() + 3600*24*90;
+            setcookie("saveduser", $info, $expires_or_options=$ninetydays, $path="/");
+            setcookie("iv", $iv, $expires_or_options=$ninetydays, $path="/");
+          } else {
+            // This cookie will expire after closing the session. This is used for user identification
+            setcookie("saveduser", $info, $expires_or_options=0, $path="/");
+            setcookie("iv", $iv, $expires_or_options=0, $path="/");
+          }
         }
-        
-        // I then need a redirect in case everything goes perfectly to the homepage! :)
-        echo "
-        <div>
-          Login successful! Please wait, you are being redirected right now
-        </div>
-        ";
-
-
-        header("refresh:3; url = /homepage.php");
-        die();
       }
+        
+      // I then need a redirect in case everything goes perfectly to the homepage! :)
+      echo "
+      <div>
+        Login successful! Please wait, you are being redirected right now
+      </div>
+      ";
+      header("refresh:3; url = /homepage.php");
+      die();
     ?>
   </body>
 </html>

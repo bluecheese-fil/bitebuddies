@@ -56,19 +56,15 @@
       $iv = $_COOKIE["iv"];
       $info = $_COOKIE["saveduser"];
       $cipher = "aes-256-cbc";
-      $usrid = preg_split("/{$delimiter}/", openssl_decrypt($info, $cipher, "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv))[0];
-
+      $info = preg_split("/{$delimiter}/", openssl_decrypt($info, $cipher, "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv))[0];
+      $usrid = $info[0];
+      $email = $info[1];
 
       $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
 
       $name = "select nome from persone where user_id = '{$usrid}'";
       $result = pg_query($db, $name) or die('Query failed:'.pg_last_error());
       $name = pg_fetch_array($result, null, PGSQL_NUM)[0]; //array with indexes a number
-      pg_free_result($result);
-
-      $email = "select email from utenti where user_id = '{$usrid}'";
-      $result = pg_query($db, $email) or die('Query failed:'.pg_last_error());
-      $email = pg_fetch_array($result, null, PGSQL_NUM)[0]; //array with addresses, indexed by a number
       pg_free_result($result);
 
       pg_close($db);
