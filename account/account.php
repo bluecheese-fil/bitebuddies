@@ -12,17 +12,28 @@
   
 
     <style>
+      html, body { height: 100%; }
+
       .leftdiv {
-        float: left;
         margin-top: 5vh;
+        width: 250px;
+        height: 50px;
       }
 
       .redirects {
         vertical-align: middle;
 
-        background-color: rgb(10, 145, 180);;
+        background-color: rgb(10, 145, 180);
         border-radius: 50px;
         padding: 2vh 50px 2vh 50px;
+        border-style: dotted;
+      }
+
+      .remove {
+        padding: 5px 5px 5px 5px;
+        
+        background-color: rgb(10, 145, 180);
+        border-radius: 50px;
         border-style: dotted;
       }
 
@@ -34,6 +45,25 @@
         padding: 20px 20px 20px 20px;
         border-radius: 20px;
         transition: visibility 0s, opacity 0.5s linear;
+      }
+
+      .button {
+        width: 20px;
+        height: 20px;
+        float: left;
+
+        border-radius: 50px;
+        background-color: red;
+      }
+
+      .divgroup{
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+
+
+        min-width: 200px;
+        max-width: 300px;
       }
 
       input {
@@ -58,7 +88,7 @@
       $iv = $_COOKIE["iv"];
       $info = $_COOKIE["saveduser"];
       $cipher = "aes-256-cbc";
-      $info = preg_split("/{$delimiter}/", openssl_decrypt($info, $cipher, "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv))[0];
+      $info = preg_split("/{$delimiter}/", openssl_decrypt($info, $cipher, "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv));
       $usrid = $info[0];
       $email = $info[1];
 
@@ -82,20 +112,31 @@
         <a href="#"> Ordini </a> <br>
         <a href="/account/addresses.php"> Indirizzi </a> <br>
         <a href="#"> Pagamenti </a> <br>
-        <a href="#" onclick="exitEveryWhere()"> Rimuovi ogni dispositivo salvato </a> <br>
         <a href="#" onclick="quitUser()"> Esci </a> <br>
       </div>
     </header>
 
     <div class="leftdiv">
-      <div> <a> Nome: </a> <a> <?php echo "{$name}"; ?> </a> </div>
-      <div> <a> Email: </a> <a> <?php echo "{$email}"; ?> </a> </div>
+      <div style="float: left">
+        <a> Nome: <br> Email: </a>
+      </div>
+      <div style =" float: right">
+        <a> <?php echo $name; ?> <br> <?php echo $email; ?> </a>
+      </div>
     </div>
 
-    <div style="margin: auto; margin-top: 20vh; width: 50%; text-align: center;">
+    <a href="#" class = "remove" onclick="exitEveryWhere()" id="remove"> Rimuovi ogni dispositivo salvato </a>
+
+    <div style="margin: auto; margin-top: 7vh; width: 50%; min-width: 200px; max-width: 300px; text-align: center;">
       <div>
-        <a id="cambiaemail"> Cambia email </a>
-        <a id="cambiapassword"> Cambia password </a>
+        <div class="divgroup">
+          <div class="button"> </div>
+          <a id="cambiaemail"> Cambia email </a>
+        </div>
+        <div class="divgroup">
+          <div class="button"> </div>
+          <a id="cambiapassword"> Cambia password </a>
+        </div>
       </div>
 
       <div class="change_item" id="form_container">

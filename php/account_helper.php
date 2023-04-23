@@ -24,7 +24,7 @@
 
     // encrypting the information
     $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($cipher));
-    $ck = openssl_encrypt("{$items[0]}{$delimiter}{$email}{$delimiter}{$token}", "aes-256-cbc", "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv);
+    $ck = openssl_encrypt("{$items[0]}{$delimiter}{$items[1]}{$delimiter}{$token}", "aes-256-cbc", "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv);
     
     if($_COOKIE["accountexpiry"] == "true"){ //saving the token since "remember me has been selected
       // Expires in 90 days
@@ -36,5 +36,7 @@
       setcookie("saveduser", $info, $expires_or_options=0, $path="/");
       setcookie("iv", $iv, $expires_or_options=0, $path="/");
     }
+
+    echo json_encode(array("result"=>"successful"));
   }
 ?>

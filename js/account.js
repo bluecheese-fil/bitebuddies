@@ -23,6 +23,6 @@ function exitEveryWhere(){
     type: "post",                   //request type,
     dataType: 'json',
     data: {changeToken: "true"},
-    success: function(){ console.log("Success"); location.reload(); }
+    success: function(){ document.getElementById("remove").setAttribute("hidden", true); }
   });
 }

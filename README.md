@@ -165,3 +165,11 @@ Ogni foreign key ha: ONUPDATE e ONDELETE impostato a CASCADE. Basta cambiare una
 Login di account dato di default:
 email:  checcoz@zalon.org
 passwd: as123!@#ASD
+
+
+Email:
+noreply.bitebuddies@gmail.com
+@U!a7D$Fq38$%2FS3QzLgSJ@D
+
+bitebuddi3s@gmail.com
+A4p*o3f*^qG^%z587*K6HZJ7v
