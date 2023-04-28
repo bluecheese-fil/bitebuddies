@@ -105,7 +105,7 @@
                 <li><a class="dropdown-item dropdownitem" href="/account/account.php"> Account </a></li>
                 <li><a class="dropdown-item dropdownitem" href="#"> Ordini </a></li>
                 <li><a class="dropdown-item dropdownitem" href="#"> Metodi di pagamento </a></li>
-                <li><a class="dropdown-item dropdownitem" href="/account/addresses.php"> Indirizzi di consegna </a></li>
+                <li><a class="dropdown-item dropdownitem" href="/account/addresses.html"> Indirizzi di consegna </a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item dropdownitem" onclick="quitUser()"> Esci </a></li>
               </ul>

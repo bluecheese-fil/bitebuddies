@@ -39,14 +39,40 @@ function verifyAddr(){
     return false;
   }
 
+  let jsoncookie = {"addadr" : text};
+
+  let cookies = document.cookie.split("; ");
+  for(let i = 0; i<cookies.length; i++){
+    let point = cookies[i].split("=");
+    if(point[0] == "iv" || point[0] == "saveduser") jsoncookie[point[0]] = point[1];
+  }
+
   // If it's "ok" (client side), I can submit the form and pass it to the server
   if(isOk){
     $.ajax({
-      url:"/php/address_helper.php",   //the page containing php script
-      type: "post",                   //request type,
-      dataType: 'json',
-      data: {addadr: text},
-      success:function(){ console.log("Success"); location.reload();}
+      url:"/php/address.php",   //the page containing php script
+      type: "POST",                   //request type,
+      dataType: 'JSON',
+      data: (jsoncookie),
+      success:function(){
+        console.log("Server success");
+        nextNumber = document.getElementById("indirizziDinamici").childElementCount / 2;
+        // this is already "+1"
+
+        addressesHtml = `<div class=\"verticaladdresses\" id = \"indr${nextNumber}\">${text}</div>
+        <div class=\"verticalbuttons\" id=\"btnindr${nextNumber}\">
+          <button class=\"littlebutton\" onclick=def_ind(${nextNumber})> Rendi default </button>
+          <button class=\"deletebutton\" onclick=del_ind(${nextNumber})> Elimina </button>
+        </div>\n`;
+  
+        document.getElementById("indirizziDinamici").innerHTML += addressesHtml;
+
+        document.getElementById("indirizzo").value = "";
+        document.getElementById("cap").value = "";
+        document.getElementById("citta").value = "";
+
+        console.log("Local sucess");
+      }
     });
   }
 
@@ -56,12 +82,27 @@ function verifyAddr(){
 function def_ind(ind_n) {
   text = document.getElementById("indr" + ind_n).textContent;
 
+  let jsoncookie = {"mkdef" : text};
+
+  let cookies = document.cookie.split("; ");
+  for(let i = 0; i<cookies.length; i++){
+    let point = cookies[i].split("=");
+    if(point[0] == "iv" || point[0] == "saveduser") jsoncookie[point[0]] = point[1];
+  }
+  console.log(jsoncookie);
+
   $.ajax({
-    url:"/php/address_helper.php",   //the page containing php script
-    type: "post",                   //request type,
-    dataType: 'json',
-    data: {mkdef: text},
-    success:function(){ console.log("Success"); location.reload();}
+    url:"/php/address.php",   //the page containing php script
+    type: "POST",             //request type,
+    dataType: 'JSON',
+    data: (jsoncookie),
+    success:function(){
+      console.log("Server success");
+      def_address = document.getElementById("inddefualtdinamico").textContent;
+      document.getElementById("indr" + ind_n).textContent = def_address;
+      document.getElementById("inddefualtdinamico").textContent = text;
+      console.log("Local success");
+    }
   });
 }
 
@@ -71,11 +112,65 @@ function del_ind(ind_n){
 
   if(!confermed) return false;
 
+  let jsoncookie = {"del" : text};
+
+  let cookies = document.cookie.split("; ");
+  for(let i = 0; i<cookies.length; i++){
+    let point = cookies[i].split("=");
+    if(point[0] == "iv" || point[0] == "saveduser") jsoncookie[point[0]] = point[1];
+  }
+
   $.ajax({
-    url:"/php/address_helper.php",   //the page containing php script
-    type: "post",                   //request type,
-    dataType: 'json',
-    data: {del: text},
-    success:function(){ console.log("Success"); location.reload();}
+    url:"/php/address.php",   //the page containing php script
+    type: "POST",                   //request type,
+    dataType: 'JSON',
+    data: (jsoncookie),
+    success:function(){
+      console.log("Server success");
+      document.getElementById("indr" + ind_n).remove();
+      document.getElementById("btnindr" + ind_n).remove();
+      console.log("Local success");
+    }
   });
 }
+
+function getDinamic() {
+  let jsoncookie = {"dynamic" : "true"};
+
+  let cookies = document.cookie.split("; ");
+  for(let i = 0; i<cookies.length; i++){
+    let point = cookies[i].split("=");
+    if(point[0] == "iv" || point[0] == "saveduser") jsoncookie[point[0]] = point[1];
+  }
+
+  if(!jsoncookie.hasOwnProperty("saveduser") || !jsoncookie.hasOwnProperty("iv")) window.location.replace("/account/login.html");
+
+  $.ajax({
+    url: "/php/address.php",
+    type: "POST",
+    dataType: "JSON",
+    data: (jsoncookie),
+    success: function(response){
+      if(response["usrfound"] == 0) window.location.replace("/account/login.html");
+
+      document.getElementById("nomedinamico").textContent = response["nome"];
+      document.getElementById("inddefualtdinamico").innerHTML = response["indefault"];
+
+      addressesHtml = "";
+      for(let i = 0; i < response["indirizzi"].length; i++){
+        addressesHtml += `<div class=\"verticaladdresses\" id = \"indr${i}\">${response["indirizzi"][i]}</div>
+        <div class=\"verticalbuttons\" id=\"btnindr${i}\">
+          <button class=\"littlebutton\" onclick=def_ind(${i})> Rendi default </button>
+          <button class=\"deletebutton\" onclick=del_ind(${i})> Elimina </button>
+        </div>\n`;
+
+      }
+      document.getElementById("indirizziDinamici").innerHTML = addressesHtml;
+    }
+  });
+}
+
+/*
+function reloadAddresses(){
+
+}*/

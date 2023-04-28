@@ -26,7 +26,7 @@
     $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($cipher));
     $ck = openssl_encrypt("{$items[0]}{$delimiter}{$items[1]}{$delimiter}{$token}", "aes-256-cbc", "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv);
     
-    if($_COOKIE["accountexpiry"] == "true"){ //saving the token since "remember me has been selected
+    if($_COOKIE["temporary"] == "false"){ //saving the token since "remember me" has been selected
       // Expires in 90 days
       $ninetydays = time() + 3600*24*90;
       setcookie("saveduser", $ck, $expires_or_options=$ninetydays, $path="/");

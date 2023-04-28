@@ -26,7 +26,7 @@
 
         // This is used when updating the token or any other cookie data.
         // It stores (only for the current session) that the user has chosen "remember me"
-        setcookie("accountexpiry", "true", $expires_or_options=0, $path="/");
+        setcookie("temporary", "false", $expires_or_options=0, $path="/");
 
         // This has been set at the end of the file too
       }
@@ -70,14 +70,16 @@
           if($saveaccount){ //saving the token since "remember me has been selected
             // Expires in 90 days
             $ninetydays = time() + 3600*24*90;
+
+            // I am setting the cookie so that each backslash is saved as such in javascript
             setcookie("saveduser", $info, $expires_or_options=$ninetydays, $path="/");
             setcookie("iv", $iv, $expires_or_options=$ninetydays, $path="/");
-            setcookie("accountexpiry", "true", $expires_or_options=0, $path="/");
+            setcookie("temporary", "false", $expires_or_options=0, $path="/");
           } else {
             // This cookie will expire after closing the session. This is used for user identification
             setcookie("saveduser", $info, $expires_or_options=0, $path="/");
             setcookie("iv", $iv, $expires_or_options=0, $path="/");
-            setcookie("accountexpiry", "false", $expires_or_options=0, $path="/");
+            setcookie("temporary", "true", $expires_or_options=0, $path="/");
           }
         }
       }
