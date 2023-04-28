@@ -9,4 +9,14 @@
     }
     return implode('', $pieces);
   }
+
+  function hextocharCookie($hxcookie){
+    $cookie = "";
+    for ($i = 0; $i < strlen($hxcookie); $i++) {
+      if($hxcookie[$i] == "%") $cookie = $cookie.chr(hexdec($hxcookie[++$i].$hxcookie[++$i]));
+      else $cookie = $cookie.$hxcookie[$i];
+    }
+
+    return $cookie;
+  }
 ?>

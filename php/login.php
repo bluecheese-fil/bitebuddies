@@ -90,7 +90,7 @@
         Login successful! Please wait, you are being redirected right now
       </div>
       ";
-      header("refresh:3; url = /homepage.php");
+      header("refresh:3; url = /homepg.html");
       die();
     ?>
   </body>

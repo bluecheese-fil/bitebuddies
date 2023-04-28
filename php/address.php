@@ -1,25 +1,17 @@
 <?php
+  require "./cookie_helper.php";
+
   $delimiter = chr(007);
+  $cipher = "aes-256-cbc";
   $hexiv = $_POST["iv"];
   $hexinfo = $_POST["saveduser"];
 
   // The special characters in IV and INFO are rapresented by hex, like so %0F.
   // Those must be changed to prevent errors in the decrypt
-  $iv = "";
-  for ($i = 0; $i < strlen($hexiv); $i++) {
-    if($hexiv[$i] == "%") $iv = $iv.chr(hexdec($hexiv[++$i].$hexiv[++$i]));
-    else $iv = $iv.$hexiv[$i];
-  }
+  $iv = hextocharCookie($hexiv);
+  $info = hextocharCookie($hexinfo);
 
-  $info = "";
-  for ($i = 0; $i < strlen($hexinfo); $i++) {
-    if($hexinfo[$i] == "%") $info = $info.chr(hexdec($hexinfo[++$i].$hexinfo[++$i]));
-    else $info = $info.$hexinfo[$i];
-  }
-
-  $cipher = "aes-256-cbc";
   $usrid = preg_split("/{$delimiter}/", openssl_decrypt($info, $cipher, "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv))[0];
-
 
   if(array_key_exists("mkdef", $_POST)) { makedefault($usrid, $_POST["mkdef"]); }
   else if(array_key_exists("addadr", $_POST)) add_address($usrid, $_POST["addadr"]);

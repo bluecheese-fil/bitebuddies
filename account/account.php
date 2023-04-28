@@ -108,7 +108,7 @@
 
       <div class="redirects">
         <a href="#"> Ordini </a> <br>
-        <a href="/account/addresses.php"> Indirizzi </a> <br>
+        <a href="/account/addresses.html"> Indirizzi </a> <br>
         <a href="#"> Pagamenti </a> <br>
         <a href="#" onclick="quitUser()"> Esci </a> <br>
       </div>

@@ -169,8 +169,3 @@ function getDinamic() {
     }
   });
 }
-
-/*
-function reloadAddresses(){
-
-}*/
