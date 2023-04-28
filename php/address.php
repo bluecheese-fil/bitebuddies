@@ -55,9 +55,7 @@
     
     $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
     $result = pg_query($db, $query) or die('Query failed:'.pg_last_error());
-
-    $items = pg_fetch_array($result, null, PGSQL_NUM); //array with indexes a number
-    
+        
     pg_free_result($result);
     pg_close($db);
     echo json_encode(array('success' => 1));
