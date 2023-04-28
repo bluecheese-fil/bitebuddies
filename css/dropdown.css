@@ -1,0 +1,39 @@
+/* My Dropdown */
+.mydropdown {
+  background-color: rgba(0, 136, 169, 1);
+  border: none;
+  border-radius: 50px;
+  transition: all 0.3 ease 0s;
+  font-weight: 500;
+}
+
+.mydropdown:hover {
+  background-color: rgba(0, 136, 169, 0.8);
+}
+
+/* Dropdown background */
+.dropdownbackground {
+  background-color: rgb(25, 70, 85);
+  font-weight: 500;
+}
+
+/* Dropdown item */
+.dropdownitem {
+  color: white;
+  transition: 0.4s;
+  font-weight: 500;
+}
+
+.dropdownitem:hover{
+  background-color: rgba(5, 50, 55);
+  color: white;
+}
+
+.dropdown:hover>.dropdown-menu {
+  display: block;
+}
+
+.dropdown>.dropdown-toggle:active {
+  /*Without this, clicking will make it sticky*/
+  pointer-events: pointer;
+}
