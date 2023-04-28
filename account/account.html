@@ -80,26 +80,10 @@
     <script src="/js/account.js"> </script>
     <script src="/js/generalFunctions.js"> </script>
 
-    <?php
-      // getting name and email
-      $delimiter = chr(007);
-      $iv = $_COOKIE["iv"];
-      $info = $_COOKIE["saveduser"];
-      $cipher = "aes-256-cbc";
-      $info = preg_split("/{$delimiter}/", openssl_decrypt($info, $cipher, "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv));
-      $usrid = $info[0];
-      $email = $info[1];
-
-      $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
-
-      $name = "select nome from persone where user_id = '{$usrid}'";
-      $result = pg_query($db, $name) or die('Query failed:'.pg_last_error());
-      $name = pg_fetch_array($result, null, PGSQL_NUM)[0]; //array with indexes a number
-      pg_free_result($result);
-
-      pg_close($db);
-    ?>
-
+    <script>
+      // ajax call to get name and default address
+      $(document).ready(getDinamic());
+    </script>
   </head>
   <body onclick=removeChange(event)>
     <header>
@@ -119,7 +103,7 @@
         <a> Nome: <br> Email: </a>
       </div>
       <div style =" float: right">
-        <a> <?php echo $name; ?> <br> <?php echo $email; ?> </a>
+        <a id="nomeemaildinamico"> </a>
       </div>
     </div>
 
