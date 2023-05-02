@@ -1,5 +1,5 @@
 function loadDynamic(){
-  let jsoncookie = {"getOrders" : "true"};
+  let jsoncookie = {"getNameNOrders" : "true"};
 
   let cookies = document.cookie.split("; ");
   for(let i = 0; i<cookies.length; i++){
@@ -17,7 +17,7 @@ function loadDynamic(){
     success:function(response){
       if(response["usrfound"] == 0) window.location.replace("/account/login.html");
 
-      console.log(response);
+      document.getElementById("nomedinamico").textContent = response["name"];
 
       if(response["orders"] == "none") document.getElementById("orderdiv").remove();
       else {

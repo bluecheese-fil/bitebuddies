@@ -22,6 +22,7 @@ function load(){
     loginForm.style.minHeight = "200px";
   } else if(document.cookie.search("saveduser") != -1){
     // if the cookie is set, I don't need the user to submit any information
+    console.log("autologin");
 
     jsncookie = {"login":true}
     let cookies = document.cookie.split("; ");
