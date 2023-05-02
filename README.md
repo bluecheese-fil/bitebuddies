@@ -82,6 +82,7 @@ Ordini:
   - rest_id bigint :arrow_right: not null (fk on rest_id in ristoranti)
   - date date :arrow_right: not null
   - delivery time :arrow_right: not null
+  - indirizzo varchar(200) :arrow_right: not null, (fk con user_id in indirizzi)
 
 Contenuto:
   - order_id bigint :arrow_right: not null (fk on Ordini)
@@ -91,6 +92,10 @@ Contenuto:
 Ristoranti:
   - rest_id bigserial :arrow_right: primary key
   - nome varchar(250) :arrow_right: not null
+
+Menu:
+  - rest_id bigint :arrow_right: not null (fk on rest_id in ristoranti)
+  - oggetto varchar(50) :arrow_right: not null
 
 Login di account dato di default:
 email:  checcoz@zalon.org

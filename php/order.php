@@ -1,9 +1,9 @@
 <?php
   require "./cookie_helper.php";
 
-  if(array_key_exists("placeOrder", $_POST)) { placeOrder($_POST["saveduser"], $_POST["iv"], $_POST["restid"], $_POST["delivery"], $_POST["items"]); }
+  if(array_key_exists("placeOrder", $_POST)) { placeOrder($_POST["saveduser"], $_POST["iv"], $_POST["restid"], $_POST["addr"], $_POST["delivery"], $_POST["items"]); }
 
-  function placeOrder($hexinfo, $hexiv, $restid, $date, $delivery, $items){
+  function placeOrder($hexinfo, $hexiv, $restid, $addr, $date, $delivery, $items){
     $info = hextocharCookie($hexinfo);
     $iv = hextocharCookie($hexiv);
 
@@ -13,7 +13,7 @@
 
     $query = "
       begin;
-        insert into ordini(user_id, rest_id, date, delivery) values('{$usrid}', '{$restid}', '{$date}', '{$delivery}');
+        insert into ordini(user_id, rest_id, date, delivery, indirizzo) values('{$usrid}', '{$restid}', '{$date}', '{$delivery}', '{$addr}');
       do
       $$
       declare
@@ -40,7 +40,7 @@
 
 
     // getting the order_id
-    $orderid = "select order_id from ordini where user_id = '{$usrid}' and rest_id = '{$restid}' and date = '{$date}' and delivery = '{$delivery}'";
+    $orderid = "select order_id from ordini where user_id = '{$usrid}' and rest_id = '{$restid}' and date = '{$date}' and delivery = '{$delivery}' and indirizzo = '{$addr}'";
     $result = pg_query($db, $query) or die('Query failed:'.pg_last_error());
     $orderid = pg_fetch_array($result, null, PGSQL_NUM)[0];
     pg_free_result($result);
