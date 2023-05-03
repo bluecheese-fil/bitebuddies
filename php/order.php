@@ -13,13 +13,13 @@
 
     $query = "
       begin;
-        insert into ordini(user_id, rest_id, date, delivery, indirizzo) values('{$usrid}', '{$restid}', '{$date}', '{$delivery}', '{$addr}');
+        insert into ordini(user_id, rest_id, data, orario, indirizzo) values('{$usrid}', '{$restid}', '{$date}', '{$delivery}', '{$addr}');
       do
       $$
       declare
         orderid int;
       begin
-        select order_id into orderid from ordini where user_id = '{$usrid}' and rest_id = '{$restid}' and date = '{$date}' and delivery = '{$delivery}'
+        select order_id into orderid from ordini where user_id = '{$usrid}' and rest_id = '{$restid}' and data = '{$date}' and orario = '{$delivery}'
         if not found then
           raise exception 'no row found';
         else";
@@ -40,7 +40,7 @@
 
 
     // getting the order_id
-    $orderid = "select order_id from ordini where user_id = '{$usrid}' and rest_id = '{$restid}' and date = '{$date}' and delivery = '{$delivery}' and indirizzo = '{$addr}'";
+    $orderid = "select order_id from ordini where user_id = '{$usrid}' and rest_id = '{$restid}' and data = '{$date}' and orario = '{$delivery}' and indirizzo = '{$addr}'";
     $result = pg_query($db, $query) or die('Query failed:'.pg_last_error());
     $orderid = pg_fetch_array($result, null, PGSQL_NUM)[0];
     pg_free_result($result);

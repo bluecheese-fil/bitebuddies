@@ -1,82 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <link rel="stylesheet" href="/css/homepage.css">
-
-    <!-- css for logo -->
-    <link rel="stylesheet" href="/logo/logostyle.css">
-
+    <link rel="stylesheet" href="/logo/logostyle.css"> <!-- css for logo --> 
+    <link rel="stylesheet" href="/css/dropdown.css">
+    <link rel="stylesheet" href="/css/account.css">
+    <link rel="stylesheet" href="/css/mybuttons.css">
     <link rel="stylesheet" href="/css/account.css">
 
-    <style>
-      html, body { height: 100%; }
-
-      .leftdiv {
-        margin-top: 5vh;
-        width: 250px;
-        height: 50px;
-      }
-
-      .redirects {
-        vertical-align: middle;
-
-        background-color: rgb(10, 145, 180);
-        border-radius: 50px;
-        padding: 2vh 50px 2vh 50px;
-        border-style: dotted;
-      }
-
-      .remove {
-        padding: 5px 5px 5px 5px;
-        
-        background-color: rgb(10, 145, 180);
-        border-radius: 50px;
-        border-style: dotted;
-      }
-
-      .change_item {
-        visibility: hidden;
-        opacity: 0;
-
-        background-color: red;
-        padding: 20px 20px 20px 20px;
-        border-radius: 20px;
-        transition: visibility 0s, opacity 0.5s linear;
-      }
-
-      .button {
-        width: 20px;
-        height: 20px;
-        float: left;
-
-        border-radius: 50px;
-        background-color: red;
-      }
-
-      .divgroup{
-        width: 100%;
-        text-align: center;
-        margin-bottom: 10px;
-
-
-        min-width: 200px;
-        max-width: 300px;
-      }
-
-      input {
-        width: 100%;
-        height: 25px;
-        
-        text-align: left;
-        
-        margin-bottom: 5px;
-        padding-left: 8px;
-        border-radius: 10px;
-      }
-    </style>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/account.js"> </script>
     <script src="/js/generalFunctions.js"> </script>
 
@@ -84,46 +20,50 @@
       // ajax call to get name and default address
       $(document).ready(getDinamic());
     </script>
+
   </head>
   <body onclick=removeChange(event)>
     <header>
       <!-- logo header -->
       <img class="logo" src="/logo/logo.png" alt="logo">
 
-      <div class="redirects">
-        <a href="/account/orderhistory.html"> Ordini </a> <br>
-        <a href="/account/addresses.html"> Indirizzi </a> <br>
-        <a href="#" onclick="quitUser()"> Esci </a> <br>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle mydropdown" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <span id="nomedinamico"> </span>
+          <!-- img -->
+          <img height="28" width="24" src="https://cdn.jsdelivr.net/npm/remixicon@3.1.1/icons/User%20&%20Faces/user-3-line.svg">
+        </button>
+        <ul class="dropdown-menu dropdownbackground" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item dropdownitem chosenlielement"> Account </a></li>
+          <li><a class="dropdown-item dropdownitem" href="/account/orderhistory.html"> Ordini </a></li>
+          <li><a class="dropdown-item dropdownitem" href="/account/addresses.html"> Indirizzi di consegna </a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item dropdownitem" href="#" onclick="quitUser()"> Esci </a></li>
+        </ul>
       </div>
     </header>
 
-    <div class="leftdiv">
-      <div style="float: left">
-        <a> Nome: <br> Email: </a>
-      </div>
-      <div style =" float: right">
-        <a id="nomeemaildinamico"> </a>
+    <div class="leftdiv" id="leftdiv">
+      <div class="innerdiv" style="min-width: 307px;">
+        <div style="float: left"> <a> Nome: <br> Email: </a> </div>
+        <div style ="float: right"> <a id="nomeemaildinamico"> </a> </div>
       </div>
     </div>
-
-    <a href="#" class = "remove" onclick="exitEveryWhere()" id="remove"> Rimuovi ogni dispositivo salvato </a>
-
-    <div style="margin: auto; margin-top: 7vh; width: 50%; min-width: 200px; max-width: 300px; text-align: center;">
-      <div>
-        <div class="divgroup">
-          <div class="button"> </div>
-          <a id="cambiaemail"> Cambia email </a>
+    
+    <div class="rightdiv" id="rightdiv">
+      <div class="innerdiv" style="min-width: 265px;">
+        <a class = "remove" onclick="exitEveryWhere()" id="remove"> Rimuovi ogni dispositivo salvato </a>
+        <a class = "clickable" onclick="change(this.id)" id="chemail"> <br> <br> Cambia email </a> <br>
+        <a class = "clickable" onclick="change(this.id)" id="chpassword"> Cambia password <br> </a>
+        
+        <div class="formstyle" id="form_container">
+          <input class="fullin" type="text" id="firstinput"> <br> <!-- onblur="checkEquality()" oninput="checkEquality()" set by javascript-->
+          <input class="fullin" type="text" id="secondinput"> <br> <!-- onblur="checkEquality()" oninput="checkEquality()" set by javascript-->
+          <div class="errore" id="inputinvalido" hidden> </div>
+          <div class="errore" id="notequal" hidden> Gli elementi non combaciano </div>
+          <button class="formbt" id="changebutton" name="" onclick="askChange(this.name)"> Cambia </button>
+          <input type="text" name="addadr" id="addadr" value="add" hidden>
         </div>
-        <div class="divgroup">
-          <div class="button"> </div>
-          <a id="cambiapassword"> Cambia password </a>
-        </div>
-      </div>
-
-      <div class="change_item" id="form_container">
-        <input id="first_item">
-        <input id="second_item">
-        <button id="submit_item"> </button>
       </div>
     </div>
   </body>

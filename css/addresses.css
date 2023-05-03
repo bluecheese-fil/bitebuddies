@@ -8,23 +8,6 @@
   margin-right: 5px;
 }
 
-.chosenlielement {
-  /* Adding a background color and radius */
-  background-color: rgb(10, 145, 180);
-  border-radius: 25px;
-
-  /* Removing the hover action */
-  pointer-events: none;
-
-  /*I will prevent people to select this text*/
-  -webkit-touch-callout: none;  /* iOS Safari */
-  -webkit-user-select: none;    /* Safari */
-  -khtml-user-select: none;     /* Konqueror HTML */
-  -moz-user-select: none;       /* Old versions of Firefox */
-  -ms-user-select: none;        /* Internet Explorer/Edge */
-  user-select: none;            /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
-}
-
 input {
   width: 100%;
   height: 25px;

@@ -53,7 +53,7 @@ function loadSignup(){
     }
     return false;
   }
-  
+
   if(saved_email == null || saved_passwd == null) return false;
   document.getElementById("email_1").value = saved_email;
   document.getElementById("password_1").value = saved_passwd;
@@ -91,14 +91,14 @@ function checkText(elem){
   else document.getElementById("errore" + elem).setAttribute('hidden', true);
 
   if(elem == "password_2"){
-    otherHTMLElem = document.getElementById("password_1")
+    otherHTMLElem = document.getElementById("password_1");
     if(htmlElem.value != otherHTMLElem.value && htmlElem.value != "" && otherHTMLElem.value != "") document.getElementById("diversapassword").removeAttribute('hidden');
     else document.getElementById("diversapassword").setAttribute('hidden', true);
   } else if(elem == "password_1"){
-    otherHTMLElem = document.getElementById("password_2")
+    otherHTMLElem = document.getElementById("password_2");
     if(htmlElem.value != otherHTMLElem.value && htmlElem.value != "" && otherHTMLElem.value != "") document.getElementById("diversapassword").removeAttribute('hidden');
     else document.getElementById("diversapassword").setAttribute('hidden', true);
-    
+
     // se tutto va senza problemi tutti i caratteri sono supportati!
     document.getElementById('charunsupported').setAttribute('hidden', true);
 
@@ -126,38 +126,36 @@ function checkText(elem){
         }
       }
 
-      if(uppercase >= 2 && lowercase >= 2 && special >= 2 && numbers >= 2){
-        document.getElementById("passwordinvalida").setAttribute('hidden', true);
-      }
+      if(uppercase >= 2 && lowercase >= 2 && special >= 2 && numbers >= 2) document.getElementById("passwordinvalida").setAttribute('hidden', true);
     }
   }
 
 
   if(elem == "email_1"){
-    const re = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
-    otherHTMLElem = document.getElementById("email_2")
+    const re = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+    otherHTMLElem = document.getElementById("email_2");
 
     // As soon as the first email has been changed, I can remove the "taken" error
     document.getElementById("emailtaken").setAttribute('hidden', true);
 
-    if(htmlElem.value != "" && !re.test(htmlElem.value)) document.getElementById("invalidaemail").removeAttribute('hidden')
+    if(htmlElem.value != "" && !re.test(htmlElem.value)) document.getElementById("invalidaemail").removeAttribute('hidden');
     else if(htmlElem.value != otherHTMLElem.value && htmlElem.value != "" && otherHTMLElem.value != ""){
-      document.getElementById("invalidaemail").setAttribute('hidden', true)
-      document.getElementById("diversaemail").removeAttribute('hidden')
+      document.getElementById("invalidaemail").setAttribute('hidden', true);
+      document.getElementById("diversaemail").removeAttribute('hidden');
     } else {
-      document.getElementById("diversaemail").setAttribute('hidden', true)
-      document.getElementById("invalidaemail").setAttribute('hidden', true)
+      document.getElementById("diversaemail").setAttribute('hidden', true);
+      document.getElementById("invalidaemail").setAttribute('hidden', true);
     }
   } else if(elem == "email_2"){
-    otherHTMLElem = document.getElementById("email_1")
-    if(htmlElem.value != otherHTMLElem.value && htmlElem.value != "" && otherHTMLElem.value != "") document.getElementById("diversaemail").removeAttribute('hidden')
-    else document.getElementById("diversaemail").setAttribute('hidden', true)
+    otherHTMLElem = document.getElementById("email_1");
+    if(htmlElem.value != otherHTMLElem.value && htmlElem.value != "" && otherHTMLElem.value != "") document.getElementById("diversaemail").removeAttribute('hidden');
+    else document.getElementById("diversaemail").setAttribute('hidden', true);
   }
 
   if(elem == "tel"){
-    const re = /^([+]39|0039)?[0-9]{10}$/
-    if(htmlElem.value != "" && !re.test(htmlElem.value)) document.getElementById("telinvalido").removeAttribute('hidden')
-    else document.getElementById("telinvalido").setAttribute('hidden', true)
+    const re = /^([+]39|0039)?[0-9]{10}$/;
+    if(htmlElem.value != "" && !re.test(htmlElem.value)) document.getElementById("telinvalido").removeAttribute('hidden');
+    else document.getElementById("telinvalido").setAttribute('hidden', true);
   }
 }
 
@@ -165,34 +163,34 @@ function verifyForm(){
   isOk = true;
 
   if(document.getElementById("nome").value == ""){
-    document.getElementById("errorenome").removeAttribute('hidden')
+    document.getElementById("errorenome").removeAttribute('hidden');
     isOk = false;
   }
-  
+
   if(document.getElementById("cognome").value == ""){
-    document.getElementById("errorecognome").removeAttribute('hidden')
+    document.getElementById("errorecognome").removeAttribute('hidden');
     isOk = false;
   }
-  
+
   if(document.getElementById("email_1").value == ""){
-    document.getElementById("erroreemail_1").removeAttribute('hidden')
+    document.getElementById("erroreemail_1").removeAttribute('hidden');
     isOk = false;
   }
-  
+
   if(document.getElementById("email_2").value == ""){
-    document.getElementById("erroreemail_2").removeAttribute('hidden')
+    document.getElementById("erroreemail_2").removeAttribute('hidden');
     isOk = false;
   }
-  
+
   // For different email or invalid email, I can just check if those items are visible
   if(!document.getElementById("invalidaemail").hasAttribute('hidden') ||
   !document.getElementById("diversaemail").hasAttribute('hidden')) isOk = false;
-  
+
   if(document.getElementById("password_1").value == ""){
     document.getElementById("errorepassword_1").removeAttribute('hidden');
     isOk = false;
   }
-  
+
   if(document.getElementById("password_2").value == ""){
     document.getElementById("errorepassword_2").removeAttribute('hidden');
     isOk = false;
@@ -205,7 +203,7 @@ function verifyForm(){
   if(!document.getElementById("diversapassword").hasAttribute('hidden')) isOk = false;
   if(!document.getElementById("passwordinvalida").hasAttribute('hidden')) isOk = false;
   if(!document.getElementById("charunsupported").hasAttribute('hidden')) isOk = false;
-  
+
   if(document.getElementById("tel").value == ""){
     document.getElementById("erroretel").removeAttribute('hidden');
     isOk = false;
@@ -221,7 +219,7 @@ function verifyForm(){
 
   if(isOk){
     // If it's "ok" (client side), I can submit the form and pass it to the server
-    document.getElementById("signupform").submit()
+    document.getElementById("signupform").submit();
   }
 
   return isOk;

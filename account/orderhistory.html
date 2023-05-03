@@ -10,23 +10,6 @@
     <link rel="stylesheet" href="/css/mybuttons.css">
 
     <style>
-      .chosenlielement {
-        /* Adding a background color and radius */
-        background-color: rgb(10, 145, 180);
-        border-radius: 25px;
-
-        /* Removing the hover action */
-        pointer-events: none;
-
-        /*I will prevent people to select this text*/
-        -webkit-touch-callout: none;  /* iOS Safari */
-        -webkit-user-select: none;    /* Safari */
-        -khtml-user-select: none;     /* Konqueror HTML */
-        -moz-user-select: none;       /* Old versions of Firefox */
-        -ms-user-select: none;        /* Internet Explorer/Edge */
-        user-select: none;            /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
-      }
-
       .logo {
         width: 70px;
         height: 70px;
@@ -56,6 +39,10 @@
         transition: 0.5s;
 
         padding: 4vh 4vw 4vh 4vw;
+        
+        border: 3px;
+        border-color: black;
+        border-style: solid;
       }
 
       .leftorder_info {
@@ -73,11 +60,22 @@
         user-select: none; /* Standard syntax */
       }
 
-      .leftorder_element:hover{ cursor: pointer;}
-
       .leftorder_element {
         height: 20%;
         padding: 5px 5px 5px 5px;
+        border: 3px;
+        border-bottom-width: 0px;
+        border-color: black;
+        border-style: solid;
+        cursor: pointer;
+      }
+
+      .empty_element {
+        height: 20%;
+        border: 0px;
+        border-right-width: 3px;
+        border-color: black;
+        border-style: solid;
       }
 
       .little_image {
@@ -89,8 +87,8 @@
       .updown_button {
         text-align: center;
         vertical-align: middle;
-        line-height: 3%;
-        height: 3%;
+        line-height: 5%;
+        height: 5%;
       }
     </style>
 
@@ -145,10 +143,14 @@
         </div> <!-- Bottom button -->
       </div>
       <div id="currentorder" class="currentorder">
-        <div> <!-- Width must be num char * 9-->
-          <div id = "nomerist" style="border: 5px; border-color: black; border-style: solid; padding: 1px 3px 1px 3px; width: 216px"> Ristorante La Bella Luna </div>
-          <span id = "idspan"> Id: 6473921 </span>
-          <hr>
+        <div style="height: 50px;">
+          <div id = "nomerist" style="float: left; border: 5px; border-color: black; border-style: solid; padding: 2px 8px 2px 8px; width: fit-content">  </div>
+          <div id = "idspan" style="float: right">  </div>
+        </div>
+        <div id="consegna" style="text-align: center;"> Consegnato il ../../.... alle ...:... </div>
+        <hr style="color: black; size: 5px;">
+        <div id="items">
+
         </div>
       </div>
     </div>

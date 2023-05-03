@@ -80,13 +80,13 @@ Ordini:
   - order_id bigserial :arrow_right: primarykey
   - user_id bigint :arrow_right: not null (fk on user_id in persone)
   - rest_id bigint :arrow_right: not null (fk on rest_id in ristoranti)
-  - date date :arrow_right: not null
-  - delivery time :arrow_right: not null
+  - data date :arrow_right: not null
+  - orario time :arrow_right: not null
   - indirizzo varchar(200) :arrow_right: not null, (fk con user_id in indirizzi)
 
 Contenuto:
   - order_id bigint :arrow_right: not null (fk on Ordini)
-  - item varchar(250) :arrow_right: not null
+  - oggetto varchar(250) :arrow_right: not null
   - qt smallint :arrow_right: not null
 
 Ristoranti:
