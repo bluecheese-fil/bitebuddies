@@ -1,0 +1,81 @@
+.container#cucina {
+    position: relative;
+    width: 1300px;
+    height: 230px;
+    background-color: rgb(0, 45, 60);
+    border: 7px solid rgb(196, 199, 19);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .table1 {
+    position: absolute;
+    display: inline-table;
+    border-radius: 20px;
+    margin-right: 25px;
+    left: 100px;
+  }
+  .table1:hover {
+    transition-duration: 0.5s;
+    background-color: rgb(281, 90, 45);
+    border-radius: 20px;
+  }
+  #bottone_dx {
+    top: 50%;
+    left: 105%;
+    transform: translate(-50%, -50%);
+  }
+  #bottone_sx {
+    top: 50%;
+    left: -5%;
+    transform: translate(-50%, -50%);
+  }
+  #cucina_romana {
+    top: 50%;
+    left: 14%;
+    transform: translate(-50%, -50%);
+    z-index: 8;
+  }
+  #cucina_italiana {
+    top: 50%;
+    left: 38%;
+    transform: translate(-50%, -50%);
+    z-index: 7;
+  }
+  #cucina_americana {
+    top: 50%;
+    left: 62%;
+    transform: translate(-50%, -50%);
+    z-index: 6;
+  }
+  #cucina_cinese {
+    top: 50%;
+    left: 86%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+  }
+  #cucina_giapponese {
+    top: 50%;
+    left: 86%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+  }
+  #pizza {
+    top: 50%;
+    left: 86%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+  }
+  #kebab {
+    top: 50%;
+    left: 86%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+  #vegano {
+    top: 50%;
+    left: 86%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }

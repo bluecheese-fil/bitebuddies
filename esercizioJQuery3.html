@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="//code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<body>
+    <button id="1" name="./homepage/homepage.html">Primo</button>
+    <button id="2">Secondo</button>
+    <button id="3">Terzo</button>
+    <button id="4">Quarto</button>
+
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <div id="div3"></div>
+    <div id="div4"></div>
+
+    <script>
+        /*
+        $("#1").click(function() {
+           $("#div1").load("./homepage/homepage.html");
+        });
+        $("#2").click(function() {
+           $("#div2").load("./homepage/homepage.html");
+        });
+        $("#3").click(function() {
+           $("#div3").load("./homepage/homepage.html");
+        });
+        $("#4").click(function() {
+           $("#div4").load("./homepage/homepage.html");
+        });
+        */
+
+        $("#1").click(function() {
+           $("#div1").load(this.name,
+           function(responseTxT, statusTxt, xhr){
+            if(statusTxt=="error") alert("Errore" + xhr.status + ":" + xhr.statusText);
+           });
+        });
+    </script>
+</body>
+</html>

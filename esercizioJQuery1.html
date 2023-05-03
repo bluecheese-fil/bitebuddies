@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="//code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<body>
+    <div class="c1">Ciao</div>
+    <div class="c1">Come</div>
+    <div class="c1">Va?</div>
+
+    <span class="c2">Tutto</div>
+    <span class="c2">Bene</div>
+    <span class="c2">Tu?</div>
+
+    <script>
+        $(".c1").click(function() {
+           $(this).css("color", "blue"); 
+        });
+
+        $(".c1").dblclick(function() {
+           $(this).hide(); 
+        });
+
+        $(".c2").dblclick(function() {
+           $(".c1").hide(); 
+        });
+    </script>
+</body>
+</html>
