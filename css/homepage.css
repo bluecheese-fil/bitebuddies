@@ -1,24 +1,183 @@
 @import "/css/base.css";
 
-li, a, button {
+header {
+  position: relative;
+  height: 140px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.grid-container {
+  position: absolute;
+  left: 88.5%;
+  top: 3%;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  width: 150px;
+  height: 100px;
+  text-align: center;
+  border-style: solid;
+  border-radius: 20px;
+  background-color: rgba(197, 192, 192, 0.726);
+}
+.grid-item {
+  font-size: 20px;
+  text-align: center;
+  line-height: 45px;
+}
+#uno:hover {
+  background-color: rgba(112, 111, 111, 0.726);
+  border-radius: 15px 15px 0px 0px;
+}
+#due:hover {
+  background-color: rgba(112, 111, 111, 0.726);
+  border-radius: 0px 0px 15px 15px;
+}
+#login {
+  width: 150px;
+  position: absolute;
+  left: 68%;
+  top: 33%;
+  background-color: rgba(197, 192, 192, 0.726);
+  border-radius: 5px;
+  font-size: 20px;
+}
+#login:hover {
+  background-color: rgba(112, 111, 111, 0.726);
+}
+#registrati {
+  position: absolute;
+  left: 81%;
+  top: 33%;
+  background-color: rgba(197, 192, 192, 0.726);
+  border-radius: 5px;
+  font-size: 20px;
+}
+#registrati:hover {
+  background-color: rgba(112, 111, 111, 0.726);
+}
+#question {
+  position: absolute;
+  left: 94%;
+  background-color: unset;
+}
+.punto-int {
+  width: 50px;
+  height: 50px;
+}
+.punto-int:hover {
+  scale: 1.05;
+}
+body{
+  overflow-x:hidden;
+}
+.sfondo_iniziale {
+  filter: blur(5px);
+  position: relative;
+  right: 45px;
+}
+.testo-bite-buddies {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.contenitore {
+  position: relative;
+}
+.sezione-text {
+  position: absolute;
+  width: 800px;
+  height: 320px;
+  background-color: white;
+  border-radius: 20px;
+  filter: opacity(0.5);
+  left: 50%;
+  top: 38%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+#int-text {
+  position: absolute;
+  left: 50%;
+  top: 83%;
+  transform: translate(-50%, -50%);
+}
+.titolo {
+  z-index: 2;
+  position: absolute;
+  left: 50%;
+  top: 67%;
+  transform: translate(-50%, -50%);
+  color: black;
+}
+.area-text {
+  background-color: white;
+  height: 40px;
+  width: 550px;
+  line-height: 35px;
+  border-radius: 10px;
+  text-align: left;
+  font-size: 16px;
+  padding-left: 15px;
+  border-bottom: solid 2px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  overflow-y: hidden;
+}
+#phone {
+  position: absolute;
+  left: 30%;
+  top: 10%;
+  transform: translate(-50%, -0%);
+  z-index: 2;
+}
+#phone-call {
+  position: absolute;
+  left: 30%;
+  top: 17%;
+  transform: translate(-50%, -0%);
+  z-index: 2;
+}
+#motorbike {
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  transform: translate(-50%, -0%);
+  z-index: 2;
+}
+#foodbox {
+  position: absolute;
+  left: 70%;
+  top: 10%;
+  transform: translate(-50%, -0%);
+  z-index: 2;
+}
+#bottone_basso {
+  left: 50%;
+  top: 78%;
+  transform: translate(-50%, -15%);
+  background-color: unset;
+}
+.bottonebasso {
+  position: absolute;
+}
+li, a, button { 
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 16px;
   color: #e9ecec;
   text-decoration: none;
 }
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30px 10%;
-}
-
 .nav_links{
   list-style: none;
+  background-color: rgb(281, 90, 45);
+  border-radius: 200px;
+  height: 35px;
+  padding-left: 0px;
 }
-
 .nav_links li {
   display: inline-block;
   padding: 0px 20px;
@@ -30,4 +189,43 @@ header {
 
 .nav_links li a:hover{
   color: rgba(0, 136, 169, 1);
+}
+.login {
+  background-color: rgb(281, 90, 45);
+}
+.prova {
+  text-align: center;
+}
+.intestazione {
+  color: black;
+  text-align: center;
+}
+.bottone {
+  /*position: absolute;*/
+  background-color: rgba(197, 192, 192, 0.726);
+  padding: 0;
+}
+.bottone:hover {
+  background-color: rgba(112, 111, 111, 0.726);
+}
+img {
+  border-radius: 10px;
+}
+.testo1 {
+  background-color: rgb(281, 90, 45);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  color: white;
+  border-radius: 200px;
+  text-align: center;
+  margin: 30px;
+}
+.testo2 {
+  background-color: rgb(6, 131, 6);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  color: white;
+  border-radius: 200px;
+  text-align: center;
+  margin: 30px;
 }

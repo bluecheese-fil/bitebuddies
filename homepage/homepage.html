@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/css/cucina.css">
     <link rel="stylesheet" href="/css/catena.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="//code.jquery.com/jquery-3.6.0.js"></script>    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>    
 
   </head>
   <body>
@@ -24,15 +24,6 @@
       <button id="question">
         <img src="./immagini/question.png" class="punto-int">
       </button>
-
-      <!--<div class="int-text">
-        <nav>
-            <ul class="nav_links">
-              <li class="prova"><a href="/account/login.html"><h4>Login</h4></a></li>
-              <li><a href="/account/signup.html"><h4>SignUp</h4></a></li>
-            </ul>
-        </nav>
-      </div>-->
       
     </header>
 
@@ -40,19 +31,17 @@
       $(document).ready(function() {
 
         $("#grid").hide();
-        
-        $("#question").mouseenter(function() {
+
+        var timer;
+        $("#question").hover(function() {
           $("#grid").fadeIn();
+        }, function() {
+          timer=setTimeout(function() { $("#grid").fadeOut(); }, 1000);
         });
-        $("#question").off("mouseleave").on($("#grid").mouseenter(function() {
-          $("#grid").show();
-        }));
-        //da qui non funziona
-        $("#grid").off("mouseenter").on($("#grid").mouseleave(function() {
-          $("#grid").hide();
-        }));
-        $("#question").mouseleave(function() {
-          $("#grid").delay(1000).fadeOut();
+        $("#grid").hover(function() {
+          clearTimeout(timer);
+        }, function() {
+          $("#grid").fadeOut(300);
         });
 
         $(".table1:nth-child(7)").hide();
@@ -60,9 +49,9 @@
         $(".table1:nth-child(9)").hide();
         $(".table1:nth-child(10)").hide();
 
-        $(".table2:nth-child(7)").hide();
+        /*$(".table2:nth-child(7)").hide();
         $(".table2:nth-child(8)").hide();
-        $(".table2:nth-child(9)").hide();
+        $(".table2:nth-child(9)").hide();*/
 
         dx=0;
         $("#bottone_dx").click(function() {
@@ -249,6 +238,8 @@
           <a href="mcdonald's.html"><img width="250px" height="170px" src="./immagini/mcdonald's.jpg"></a>
         </td>
       </table>
+    
+      <div class="vertical-line" id="1"></div>
 
       <table width="250" height="170" cellpadding="0" class="table2" id="kfc">
         <tr>
@@ -276,10 +267,6 @@
           <a href="subway.html"><img width="250px" height="170px" src="./immagini/subway.jpg"></a>
         </td>
       </table>
-
-      <button class="bottone" name="scorri" type="button" id="bottone_dx2">
-        <img src="./immagini/freccia_dx.png" width="50px" height="50px">  
-      </button>
 
       <table width="250" height="170" cellpadding="0" class="table2" id="alice_pizza">
         <tr>
@@ -310,6 +297,10 @@
 
     </div>
 
+    <button class="bottone" name="scorri" type="button" id="bottone_dx2">
+      <img src="./immagini/freccia_dx.png" width="50px" height="50px">  
+    </button>
+
 
     <br>
     <br>
@@ -320,26 +311,5 @@
       </ul>
     </nav>
   </body>
-
-   <!--  
-      <nav class="navbar navbar-expand-md">
-        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="main-navigation">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="/account/login.html"> Login </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/account/signup.html"> SignUp </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    -->
 
 </html>
