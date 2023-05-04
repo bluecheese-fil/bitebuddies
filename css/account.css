@@ -20,23 +20,54 @@ button { width: 100%;}
   min-height: 80px;
 }
 
-@media only screen and (min-width: 750px){
+.leftdiv {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+
+  margin-top: 5vh;
+  transition: ease 20ms;
+}
+
+.rightdiv {
+  display: inline-flex;
+  justify-content: center;
+}
+
+@media only screen and (min-width: 1240px){
   .leftdiv {
     float: left;
-    display: inline-flex;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-
-    width: 60%;
-    margin-top: 5vh;
-    transition: ease 20ms;
+    width: 35%;
+    margin-left: 10%;
   }
 
   .rightdiv {
     float: right;
-    display: inline-flex;
-    justify-content: center;
+    width: 45%;
+    margin-top: 5vh;
+    margin-right: 10%;
+  }
+}
+
+@media only screen and (min-width: 750px) and (max-width: 1240px){
+  .leftdiv {
+    float: left;
+    width: 50%;
+  }
+
+  .rightdiv {
+    float: right;
+    width: 50%;
+    margin-top: 5vh;
+  }
+}
+
+@media only screen and (min-width: 750px) and (max-width: 1240px){
+  .leftdiv { float: left; width: 60%; }
+
+  .rightdiv {
+    float: right;
     width: 40%;
     margin-top: 5vh;
   }
@@ -44,19 +75,12 @@ button { width: 100%;}
 
 @media only screen and (max-width: 750px) {
   .leftdiv {
-    display: inline-flex;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
     width: 100%;
-
-    margin-top: 5vh;
-    transition: ease 20ms;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
   .rightdiv {
-    display: inline-flex;
-    justify-content: center;
     margin-top: 2vh;
     width: 100%;
   } 
@@ -80,6 +104,7 @@ button { width: 100%;}
 
   padding: 6px 6px 6px 6px;
   background-color: rgb(10, 145, 180);
+  cursor: pointer;
 }
 
 .remove:hover{

@@ -31,14 +31,14 @@ Per ogni utente bisogna salvare:
 Per i ristoranti possiamo *NON* inserire lo storico ordini (?)
 
 ### Implementazione sicura
-La password salvata nel database e' hashed, e nei cookie viene salvato un identificativo ed un token generato casualmente. I due vengono criptati con questa chiave, dato che i cookie sono leggibili da tutti
+La password salvata nel database è hashed, e nei cookie viene salvato un identificativo ed un token generato casualmente. I due vengono criptati con questa chiave, dato che i cookie sono leggibili da tutti
 chiave: n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&
 
 ### Eliminazione degli utenti
 Ogni foreign key ha: ONUPDATE e ONDELETE impostato a CASCADE. Basta cambiare una riga in utenti che tutte le informazioni di quell'utente vengono eliminate. Allo stesso modo, se viene cambiato l'user_id, viene aggiornato automaticamente su tutte le tabelle. E' quiid possibile eliminare facilmente un utente, dato che basta eliminare la sua riga dalla tabella "utenti"
 
 ### Indirizzi all'interno del database
-Tutte le apostrofi sono state sostituite con &#39, secondo lo standard html. Questo e' fatto per evitare errori negli inserimenti all'interno del database, soprattutto per gli indirizzi
+Tutte le apostrofi sono state sostituite con &#39, secondo lo standard html. Questo è fatto per evitare errori negli inserimenti all'interno del database, soprattutto per gli indirizzi
 
 ## Dinamizzazione del sito
 Il sito deve essere vagamente dinamico. Bisogna fare una buona ricerca per trovare delle immagini da scaricare ed usare, e bisogna usare oppurtunamente i CSS per fare un minimo di animazioni decenti!. Poi vediamo come farlo
@@ -92,6 +92,7 @@ Contenuto:
 Ristoranti:
   - rest_id bigserial :arrow_right: primary key
   - nome varchar(250) :arrow_right: not null
+  - immagine char(50) :arrow_right: not null
 
 Menu:
   - rest_id bigint :arrow_right: not null (fk on rest_id in ristoranti)

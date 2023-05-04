@@ -19,45 +19,47 @@ function loadDynamic(){
 
       document.getElementById("nomedinamico").textContent = response["name"];
 
-      if(response["orders"] == "none") document.getElementById("orderdiv").remove();
-      else {
-        orders = response["orders"];
+      if(response["orders"] == "none") {
+        document.getElementById("orderdiv").remove();
+        return ;
+      }
 
-        let totalHeight = document.getElementById("orderdiv").offsetHeight - 2*document.querySelector(".updown_button").offsetHeight;
-        document.getElementById("dynamicorders").style.height = totalHeight + "px";
-        document.getElementById("currentorder").style.marginTop = (document.querySelector(".updown_button").offsetHeight - 0.2) + "px";
-        document.getElementById("currentorder").style.marginBottom = document.querySelector(".updown_button").offsetHeight + "px";
-        document.getElementById("currentorder").style.height = (totalHeight + 0.2) + "px";
+      orders = response["orders"];
 
-        for(let i = 0; i < Math.floor(orders.length / 5); i += 1){
-        pages[i] = `
-          <div class="leftorder_element" id = "page` + i + `-0" onclick="getOrder('page` + i + `-0', '` + orders[i*5][0] + `')">
-            <img class="little_image" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dsc0388-jpeg-1620296484.jpeg?crop=1.00xw:1.00xh;0,0&resize=640:*">
-            <div id="order_id1" class="leftorder_info"> Ordine: ` + orders[i*5][0] + `</div>
-            <div id="date_order1" class="leftorder_info"> ` + orders[i*5][1] + `</div>
-          </div>
-          <div class="leftorder_element" id = "page` + i + `-1" onclick="getOrder('page` + i + `-1', '` + orders[i*5 + 1][0] + `')">
-            <img class="little_image" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dsc0388-jpeg-1620296484.jpeg?crop=1.00xw:1.00xh;0,0&resize=640:*">
-            <div id="order_id1" class="leftorder_info"> Ordine: ` + orders[i*5 + 1][0] + `</div>
-            <div id="date_order1" class="leftorder_info"> ` + orders[i*5 + 1][1] + `</div>
-          </div>
-          <div class="leftorder_element" id = "page` + i + `-2" onclick="getOrder('page` + i + `-2', '` + orders[i*5 + 2][0] + `')">
-            <img class="little_image" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dsc0388-jpeg-1620296484.jpeg?crop=1.00xw:1.00xh;0,0&resize=640:*">
-            <div id="order_id1" class="leftorder_info"> Ordine: ` + orders[i*5 + 2][0] + `</div>
-            <div id="date_order1" class="leftorder_info"> ` + orders[i*5 + 2][1] + `</div>
-          </div>
-            <div class="leftorder_element" id = "page` + i + `-3" onclick="getOrder('page` + i + `-3', '` + orders[i*5 + 3][0] + `')">
-            <img class="little_image" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dsc0388-jpeg-1620296484.jpeg?crop=1.00xw:1.00xh;0,0&resize=640:*">
-            <div id="order_id1" class="leftorder_info"> Ordine: ` + orders[i*5 + 3][0] + `</div>
-          <div id="date_order1" class="leftorder_info"> ` + orders[i*5 + 3][1] + `</div>
-          </div>
-            <div class="leftorder_element" style="border-bottom-width: 3px" id = "page` + i + `-4" onclick="getOrder('page` + i + `-4', '` + orders[i*5 + 4][0] + `')">
-            <img class="little_image" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dsc0388-jpeg-1620296484.jpeg?crop=1.00xw:1.00xh;0,0&resize=640:*">
-            <div id="order_id1" class="leftorder_info"> Ordine: ` + orders[i*5 + 4][0] + `</div>
-            <div id="date_order1" class="leftorder_info"> ` + orders[i*5 + 4][1] + `</div>
-          </div>
-          `;
-        }
+      let totalHeight = document.getElementById("orderdiv").offsetHeight - 2*document.querySelector(".updown_button").offsetHeight;
+      document.getElementById("dynamicorders").style.height = totalHeight + "px";
+      document.getElementById("currentorder").style.marginTop = (document.querySelector(".updown_button").offsetHeight - 0.2) + "px";
+      document.getElementById("currentorder").style.marginBottom = document.querySelector(".updown_button").offsetHeight + "px";
+      document.getElementById("currentorder").style.height = (totalHeight + 0.2) + "px";
+
+      for(let i = 0; i < Math.floor(orders.length / 5); i += 1){
+      pages[i] = `
+        <div class="leftorder_element" id = "page` + i + `-0" onclick="getOrder('page` + i + `-0', '` + orders[i*5][0] + `')">
+          <img class="little_image" src="/images/` + orders[i*5][2] + `">
+          <div id="order_id1" class="leftorder_info"> Ordine: ` + orders[i*5][0] + `</div>
+          <div id="date_order1" class="leftorder_info"> ` + orders[i*5][1] + `</div>
+        </div>
+        <div class="leftorder_element" id = "page` + i + `-1" onclick="getOrder('page` + i + `-1', '` + orders[i*5 + 1][0] + `')">
+          <img class="little_image" src="/images/` + orders[i*5 + 1][2] + `">
+          <div id="order_id1" class="leftorder_info"> Ordine: ` + orders[i*5 + 1][0] + `</div>
+          <div id="date_order1" class="leftorder_info"> ` + orders[i*5 + 1][1] + `</div>
+        </div>
+        <div class="leftorder_element" id = "page` + i + `-2" onclick="getOrder('page` + i + `-2', '` + orders[i*5 + 2][0] + `')">
+          <img class="little_image" src="/images/` + orders[i*5 + 2][2] + `">
+          <div id="order_id1" class="leftorder_info"> Ordine: ` + orders[i*5 + 2][0] + `</div>
+          <div id="date_order1" class="leftorder_info"> ` + orders[i*5 + 2][1] + `</div>
+        </div>
+          <div class="leftorder_element" id = "page` + i + `-3" onclick="getOrder('page` + i + `-3', '` + orders[i*5 + 3][0] + `')">
+          <img class="little_image" src="/images/` + orders[i*5 + 3][2] + `">
+          <div id="order_id1" class="leftorder_info"> Ordine: ` + orders[i*5 + 3][0] + `</div>
+        <div id="date_order1" class="leftorder_info"> ` + orders[i*5 + 3][1] + `</div>
+        </div>
+          <div class="leftorder_element" style="border-bottom-width: 3px" id = "page` + i + `-4" onclick="getOrder('page` + i + `-4', '` + orders[i*5 + 4][0] + `')">
+          <img class="little_image" src="/images/` + orders[i*5 + 4][2] + `">
+          <div id="order_id1" class="leftorder_info"> Ordine: ` + orders[i*5 + 4][0] + `</div>
+          <div id="date_order1" class="leftorder_info"> ` + orders[i*5 + 4][1] + `</div>
+        </div>
+        `;
 
         last = pages.length;
         pages[last] = '';
@@ -70,7 +72,7 @@ function loadDynamic(){
             if(i == orders.length - 1) pages[last] += "style = \"border-bottom-width: 3px\"";
             
             pages[last] += `id="page` + page + `-` + i + `" onclick="getOrder('page` + page + `-` + i +`', '` + orders[i][0] + `')">
-              <img class="little_image" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dsc0388-jpeg-1620296484.jpeg?crop=1.00xw:1.00xh;0,0&resize=640:*">
+              <img class="little_image" src="/images/` + orders[i*5 + 2][2] + `">
               <div id="order_id1" class="leftorder_info"> Ordine: ` + orders[i][0] + `</div>
               <div id="date_order1" class="leftorder_info"> ` + orders[i][1] + `</div>
             </div>

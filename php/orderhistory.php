@@ -18,7 +18,7 @@
     if($result == null){ echo json_encode(array('success' => 1, 'usrfound' => 0)); die(); }
     pg_free_result($result);
   
-    $orders = "select order_id, data from ordini where user_id = '{$usrid}' order by data desc";
+    $orders = "select o.order_id, o.data, r.immagine from ordini as o join ristoranti as r on o.rest_id = r.rest_id where o.user_id = '{$usrid}' order by o.data desc";
     $result = pg_query($db, $orders) or die('Query failed:'.pg_last_error());
     $orders = pg_fetch_all($result, PGSQL_NUM);
     pg_free_result($result);
