@@ -92,7 +92,7 @@ Contenuto:
 Ristoranti:
   - rest_id bigserial :arrow_right: primary key
   - nome varchar(250) :arrow_right: not null
-  - immagine char(50) :arrow_right: not null
+  - immagine char(28) :arrow_right: not null
 
 Menu:
   - rest_id bigint :arrow_right: not null (fk on rest_id in ristoranti)
