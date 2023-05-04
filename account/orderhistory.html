@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/homepage.css">
+    <link rel="stylesheet" href="/logo/logostyle.css">
+    <link rel="stylesheet" href="/css/dropdown.css">
+    <link rel="stylesheet" href="/css/mybuttons.css">
+    <link rel="stylesheet" href="/css/orderhistory.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/orderhistory.js"> </script>
+
+    <script>
+      // creating global variable for this page
+      var pages = []; var currentPage = 0;
+
+      // ajax call to get name and default address
+      $(document).ready(loadDynamic());
+    </script>
+  </head>
+
+  <body onresize="resize()">
+    <header>
+      <!-- logo header -->
+      <img class="logo" src="/logo/logo.png" alt="logo" onclick="window.location.href = '/homepg.html'">
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle mydropdown" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <span id="nomedinamico"> </span>
+          <!-- img -->
+          <img height="28" width="24" src="https://cdn.jsdelivr.net/npm/remixicon@3.1.1/icons/User%20&%20Faces/user-3-line.svg">
+        </button>
+        <ul class="dropdown-menu dropdownbackground" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item dropdownitem" href="/account/account.html"> Account </a></li>
+          <li><a class="dropdown-item dropdownitem chosenlielement"> Ordini </a></li>
+          <li><a class="dropdown-item dropdownitem" href="/account/addresses.html"> Indirizzi di consegna </a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item dropdownitem" href="#" onclick="quitUser()"> Esci </a></li>
+        </ul>
+      </div>
+    </header>
+
+    <div style="text-align: center;"> Ordini </div>
+
+    <div id="noorders"> 
+      Lo storico è vuoto, non c'è nessun ordine da mostrare.
+    </div>
+    
+    <div id = "orderdiv" class="orders">
+      <div class="orderlist">
+        <div class="updown_button" id="upbt" onclick="moveup()">
+          <img style="height: 100%; width: 100%;" src="https://cdn.jsdelivr.net/npm/remixicon@3.1.1/icons/Arrows/arrow-up-double-line.svg">
+        </div> <!-- Top button -->
+        <div id="dynamicorders"> </div> <!-- Order History -->
+        <div class="updown_button" id="downbt" onclick="movedown()">
+          <img style="height: 100%; width: 100%;" src="https://cdn.jsdelivr.net/npm/remixicon@3.1.1/icons/Arrows/arrow-down-double-line.svg">
+        </div> <!-- Bottom button -->
+      </div>
+      <div id="currentorder" class="currentorder">
+        <div style="height: 50px;">
+          <div id = "nomerist" class = "ristname">  </div>
+          <div id = "idspan" style="float: right">  </div>
+        </div>
+        <div id="consegna" style="text-align: center;"> Consegnato il ../../.... alle ...:... </div>
+        <hr style="color: black; size: 5px;">
+        <div id="items">
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

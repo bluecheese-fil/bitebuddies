@@ -22,6 +22,7 @@ function load(){
     loginForm.style.minHeight = "200px";
   } else if(document.cookie.search("saveduser") != -1){
     // if the cookie is set, I don't need the user to submit any information
+    console.log("autologin");
 
     jsncookie = {"login":true}
     let cookies = document.cookie.split("; ");
@@ -109,11 +110,11 @@ function resetPassword(){
       success:function(response){
         if(response["success"] == "0"){
           console.log("Server error");
-          if(response["type"] == "email_not_found") alert("Non e' stata trovata la sua email. E' necessario registrarsi prima di poter accedere");
-          else if(response["type"] == "password_error") alert("La password scelta non e' valida. Deve contenere almeno 2 caratteri speciali, 2 minuscole, 2 maiuscole e 2 numeri");
+          if(response["type"] == "email_not_found") alert("Non è stata trovata la sua email. E' necessario registrarsi prima di poter accedere");
+          else if(response["type"] == "password_error") alert("La password scelta non è valida. Deve contenere almeno 2 caratteri speciali, 2 minuscole, 2 maiuscole e 2 numeri");
         } else {
           console.log("Server success");
-          alert("La password e' stata reimpostata correttamente");
+          alert("La password è stata reimpostata correttamente");
         }
         console.log("Local success");
       }

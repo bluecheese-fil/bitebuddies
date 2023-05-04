@@ -1,28 +1,9 @@
 /* I'm resizing the logo since it's too big */
 .logo {
-  width: 60px;
-  height: 60px;
-  min-width: 60px;
-  min-height: 60px;
-
-  margin-right: 5px;
-}
-
-.chosenlielement {
-  /* Adding a background color and radius */
-  background-color: rgb(10, 145, 180);
-  border-radius: 25px;
-
-  /* Removing the hover action */
-  pointer-events: none;
-
-  /*I will prevent people to select this text*/
-  -webkit-touch-callout: none;  /* iOS Safari */
-  -webkit-user-select: none;    /* Safari */
-  -khtml-user-select: none;     /* Konqueror HTML */
-  -moz-user-select: none;       /* Old versions of Firefox */
-  -ms-user-select: none;        /* Internet Explorer/Edge */
-  user-select: none;            /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  min-height: 80px;
 }
 
 input {

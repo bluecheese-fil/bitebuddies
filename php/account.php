@@ -7,21 +7,115 @@
   $hexinfo = $_POST["saveduser"];
   $info = hextocharCookie($hexinfo);
 
-  if(array_key_exists("changeToken", $_POST)) { changeToken($info, $iv, $_POST["temporary"]); }
+  $fd = fopen("php://stdout", 'w');
+  foreach ($_POST as $key=>$element) fwrite($fd, $key);
+  fclose($fd);
+
+  if(array_key_exists("changeToken", $_POST)) { changeToken($info, $iv, $temporary, $_POST["temporary"]); }
   else if(array_key_exists("dynamic", $_POST)) { getItems($info, $iv); }
+  else if(array_key_exists("changeemail", $_POST)) { changeEmail($info, $iv, $temporary, $_POST["email1"], $_POST["email2"]); }
+  else if(array_key_exists("changepassword", $_POST)) { changePassword($info, $iv, $_POST["temporary"], $_POST["password1"], $_POST["password2"]); }
+
+  function changeEmail($info, $iv, $temporary, $email1, $email2){
+    $email_exp = "/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/";
+    if($email1 == ""){ echo json_encode(array("success" => "1", "error" => "emailinvalid")); return ; }
+    else if($email1 != $email2){ echo json_encode(array("success" => "1", "error" => "notequal")); return ; }
+    else if(preg_replace($email_exp, "", $email2) != ""){ echo json_encode(array("success" => "1", "error" => "emailinvalid")); return ; }
+
+    $email1 = str_replace("'", "&#39", $email1);
+
+    $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
+    $email_exists = "select email from utenti where email = '{$email1}'";
+    $result = pg_query($db, $email_exists) or die('Query failed:'.pg_last_error());
+    if(pg_num_rows($result) != 0){ echo json_encode(array("success" => "1", "error" => "emailtaken")); return ; }
+    pg_free_result($result);
+
+    $cipher = "aes-256-cbc";
+    $delimiter = chr(007);
+    $items = preg_split("/{$delimiter}/", openssl_decrypt($info, $cipher, "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv));
+    
+    $upd_email = "
+    begin;
+      update utenti set email = '{$email1}' where user_id = '{$items[0]}';
+    commit;";
+    $result = pg_query($db, $upd_email) or die('Query failed:'.pg_last_error());
+    pg_free_result($result);
+    pg_close($db);
+
+    // encrypting the information
+    $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($cipher));
+    $ck = openssl_encrypt("{$items[0]}{$delimiter}{$email1}{$delimiter}{$items[2]}", "aes-256-cbc", "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv);
+    
+    if($temporary == "false"){ //saving the token since "remember me" has been selected
+      // Expires in 90 days
+      $ninetydays = time() + 3600*24*90;
+      setcookie("saveduser", $ck, $expires_or_options=$ninetydays, $path="/");
+      setcookie("iv", $iv, $expires_or_options=$ninetydays, $path="/");
+    } else {
+      // This cookie will expire after closing the session. This is used for user identification
+      setcookie("saveduser", $ck, $expires_or_options=0, $path="/");
+      setcookie("iv", $iv, $expires_or_options=0, $path="/");
+    }
+
+    echo json_encode(array("success" => "1", "type" => "email"));
+  }
+
+  function changePassword($info, $iv, $temporary, $password1, $password2){
+    // checking password validity
+    if($password1 == ""){ echo json_encode(array("success" => "1", "error" => "passwordinvalid")); return ; }
+    else if($password1 != $password2){ echo json_encode(array("success" => "1", "error" => "notequal")); return ; }
+    else {
+      if(strlen($password1) < 8) { echo json_encode(array("success" => "1", "error" => "passwordinvalid")); return ; }
+      else {
+        $ucase = 0; $lcase = 0; $special = 0; $num = 0;
+        for($i = 0; $i < strlen($password1); $i++){
+          $charcode = ord(substr($password1, $i, 1));
+
+          if(($charcode >= 33 && $charcode <= 47) || ($charcode >= 58 && $charcode <= 64) || ($charcode >= 91 && $charcode <= 96) || ($charcode >= 123 && $charcode <= 126)) $special++;
+          else if($charcode >= 97 && $charcode <= 122) $lcase++;
+          else if($charcode >= 65 && $charcode <= 90) $ucase++;
+          else if($charcode >= 48 && $charcode <= 57) $num++;
+        }
+
+        if($ucase < 2 || $lcase < 2 || $special < 2 || $num < 2) { echo json_encode(array("success" => "1", "error" => "passwordinvalid")); return ; }
+      }
+    }
+
+    $usrid = preg_split("/{$delimiter}/", openssl_decrypt($info, $cipher, "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv))[0];
+
+    // hashing the password, I also rehash it in case password verify doesn't work
+    $loopcounter = 0;
+    do {
+      if($loopcounter > 15) die(); // the password cannot be hashed
+    
+      $hashedpasswd = password_hash($password1, PASSWORD_DEFAULT);
+      $loopcounter++;
+    } while(!password_verify($password1, $hashedpasswd));
+
+    $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
+    $upd_token = "
+    begin;
+      update utenti set passwd = '{$hashedpasswd}' where user_id = '{$usrid}';
+    commit;";
+
+    $result = pg_query($db, $upd_token) or die('Query failed:'.pg_last_error());
+    pg_free_result($result);
+    pg_close($db);
+
+    changeToken($info, $iv, $temporary);
+  }
 
   function changeToken($info, $iv, $temporary){
     $delimiter = chr(007);
     $cipher = "aes-256-cbc";
     $items = preg_split("/{$delimiter}/", openssl_decrypt($info, $cipher, "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv));
 
-
     $token = randomToken();
 
     $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
     $upd_token = "
     begin;
-      update utenti set token = '{$token}' where user_id = {$items[0]};
+      update utenti set token = '{$token}' where user_id = '{$items[0]}';
     commit;";
 
     $result = pg_query($db, $upd_token) or die('Query failed:'.pg_last_error());
@@ -43,7 +137,7 @@
       setcookie("iv", $iv, $expires_or_options=0, $path="/");
     }
 
-    echo json_encode(array("result"=>"successful"));
+    echo json_encode(array("success" => "1", "type" => "password"));
   }
 
   function getItems($info, $iv){
