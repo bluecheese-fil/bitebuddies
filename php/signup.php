@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-
-  <?php
-    require "./cookie_helper.php";
-  ?>
-
+    <link rel="stylesheet" href="/css/homepage.css">
+    
+    <?php require "./cookie_helper.php"; ?>
   </head>
-  <body>
     <?php
       // getting all the arguments
       $nome = $_POST["nome"];
@@ -175,7 +172,7 @@
         </div>
       ";
 
-      header("refresh:3; url = /account/login.html");
+      header("refresh:2; url = /account/login.html");
       die()
     ?>
   </body>
