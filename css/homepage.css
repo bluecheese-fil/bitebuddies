@@ -4,27 +4,18 @@ header {
   position: relative;
   height: 140px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
-.grid-container {
-  position: absolute;
-  left: 88.5%;
-  top: 3%;
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  width: 150px;
-  height: 100px;
-  text-align: center;
-  border-style: solid;
-  border-radius: 20px;
-  background-color: rgba(197, 192, 192, 0.726);
+.logo {
+  width: 110px;
+  height: 110px;
+  cursor: pointer;
+  position: relative;
+  left: 5%;
+  top: -3%;
 }
-.grid-item {
-  font-size: 20px;
-  text-align: center;
-  line-height: 45px;
+button {
+  border: none;
 }
 #uno:hover {
   background-color: rgba(112, 111, 111, 0.726);
@@ -37,45 +28,37 @@ header {
 #login {
   width: 150px;
   position: absolute;
-  left: 68%;
+  left: 73%;
   top: 33%;
   background-color: rgba(197, 192, 192, 0.726);
   border-radius: 5px;
   font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  padding: 9px 25px;
 }
 #login:hover {
   background-color: rgba(112, 111, 111, 0.726);
+  cursor: pointer;
 }
 #registrati {
   position: absolute;
-  left: 81%;
+  left: 85%;
   top: 33%;
   background-color: rgba(197, 192, 192, 0.726);
   border-radius: 5px;
   font-size: 20px;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+  padding: 9px 25px;
 }
 #registrati:hover {
   background-color: rgba(112, 111, 111, 0.726);
-}
-#question {
-  position: absolute;
-  left: 94%;
-  background-color: unset;
-}
-.punto-int {
-  width: 50px;
-  height: 50px;
-}
-.punto-int:hover {
-  scale: 1.05;
+  cursor: pointer;
 }
 body{
   overflow-x:hidden;
-}
-.sfondo_iniziale {
-  filter: blur(5px);
-  position: relative;
-  right: 45px;
 }
 .testo-bite-buddies {
   position: absolute;
@@ -85,6 +68,11 @@ body{
 }
 .contenitore {
   position: relative;
+}
+.sfondo_iniziale {
+  position: relative;
+  filter: blur(5px);
+  right: 45px;
 }
 .sezione-text {
   position: absolute;
@@ -96,7 +84,6 @@ body{
   left: 50%;
   top: 38%;
   transform: translate(-50%, -50%);
-  z-index: 1;
 }
 #int-text {
   position: absolute;
@@ -105,7 +92,6 @@ body{
   transform: translate(-50%, -50%);
 }
 .titolo {
-  z-index: 2;
   position: absolute;
   left: 50%;
   top: 67%;
@@ -134,13 +120,6 @@ body{
   transform: translate(-50%, -0%);
   z-index: 2;
 }
-#phone-call {
-  position: absolute;
-  left: 30%;
-  top: 17%;
-  transform: translate(-50%, -0%);
-  z-index: 2;
-}
 #motorbike {
   position: absolute;
   left: 50%;
@@ -156,76 +135,33 @@ body{
   z-index: 2;
 }
 #bottone_basso {
+  position: absolute;
   left: 50%;
   top: 78%;
   transform: translate(-50%, -15%);
   background-color: unset;
-}
-.bottonebasso {
-  position: absolute;
-}
-li, a, button { 
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  color: #e9ecec;
-  text-decoration: none;
-}
-.nav_links{
-  list-style: none;
-  background-color: rgb(281, 90, 45);
-  border-radius: 200px;
-  height: 35px;
-  padding-left: 0px;
-}
-.nav_links li {
-  display: inline-block;
-  padding: 0px 20px;
-}
-
-.nav_links li a{
-  transition: all 0.3s ease 0s;
-}
-
-.nav_links li a:hover{
-  color: rgba(0, 136, 169, 1);
-}
-.login {
-  background-color: rgb(281, 90, 45);
-}
-.prova {
-  text-align: center;
+  filter: invert(100%);
 }
 .intestazione {
   color: black;
   text-align: center;
-}
-.bottone {
-  /*position: absolute;*/
-  background-color: rgba(197, 192, 192, 0.726);
-  padding: 0;
-}
-.bottone:hover {
-  background-color: rgba(112, 111, 111, 0.726);
+  font-weight: bold;
 }
 img {
+  border-radius: 0px 0px 10px 10px;
+}
+.ordina {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 10px;
-}
-.testo1 {
-  background-color: rgb(281, 90, 45);
+  line-height: 40px;
+  margin-top: 50px;
+  background-color: rgb(32, 32, 32);
+  width: 400px;
+  height: 40px;
   font-family: "Montserrat", sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   color: white;
-  border-radius: 200px;
   text-align: center;
-  margin: 30px;
-}
-.testo2 {
-  background-color: rgb(6, 131, 6);
-  font-family: "Montserrat", sans-serif;
-  font-weight: 400;
-  color: white;
-  border-radius: 200px;
-  text-align: center;
-  margin: 30px;
 }

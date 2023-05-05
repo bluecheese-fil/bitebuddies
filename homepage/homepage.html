@@ -1,113 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> BiteBuddies Homepage </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>BiteBuddies</title>
     <link rel="stylesheet" href="/logo/logostyle.css">
     <link rel="stylesheet" href="/css/homepage.css">
-    <link rel="stylesheet" href="/css/mybuttons.css">
-    <link rel="stylesheet" href="/css/signup.css">
     <link rel="stylesheet" href="/css/cucina.css">
     <link rel="stylesheet" href="/css/catena.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>    
+    <script src="./homepage.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>   
 
   </head>
   <body>
     <header class="header">
-      <img class="logo" src="/logo/logo.png" alt="logo">
+      <img class="logo" src="./immagini/logo.png" alt="logo">
 
       <h4 class="testo-bite-buddies">BiteBuddies</h4>
 
       <a href="/account/login.html"><button id="login">LOGIN</button></a>
-      <a href="/account/signup.html"><button id="registrati">REGISTRATI</button></a>
-      <button id="question">
-        <img src="./immagini/question.png" class="punto-int">
-      </button>
-      
+      <a href="/account/signup.html"><button id="registrati">REGISTRATI</button></a>      
     </header>
-
-    <script>
-      $(document).ready(function() {
-
-        $("#grid").hide();
-
-        var timer;
-        $("#question").hover(function() {
-          $("#grid").fadeIn();
-        }, function() {
-          timer=setTimeout(function() { $("#grid").fadeOut(); }, 1000);
-        });
-        $("#grid").hover(function() {
-          clearTimeout(timer);
-        }, function() {
-          $("#grid").fadeOut(300);
-        });
-
-        $(".table1:nth-child(7)").hide();
-        $(".table1:nth-child(8)").hide();
-        $(".table1:nth-child(9)").hide();
-        $(".table1:nth-child(10)").hide();
-
-        /*$(".table2:nth-child(7)").hide();
-        $(".table2:nth-child(8)").hide();
-        $(".table2:nth-child(9)").hide();*/
-
-        dx=0;
-        $("#bottone_dx").click(function() {
-          var cucina=$(".table1");
-          $(cucina[dx]).fadeOut();
-          for(var i=dx+1; i<4+dx; i++) {
-            $(cucina[i]).animate({left: "-=24%"}, 500);
-          }
-          $(cucina[4+dx]).delay(500).fadeIn();
-          dx+=1;
-        });
-        $("#bottone_sx").click(function() {
-          var cucina=$(".table1");
-          $(cucina[dx+3]).fadeOut();
-          for(var i=dx; i<3+dx; i++) {
-            $(cucina[i]).animate({left: "+=24%"}, 500);
-          }
-          dx-=1;
-          $(cucina[dx]).delay(500).fadeIn();
-        });
-
-        destro=0;
-        $("#bottone_dx2").click(function() {
-          var cucina2=$(".table2");
-          $(cucina2[destro]).fadeOut();
-          for(var i=destro+1; i<4+destro; i++) {
-            $(cucina2[i]).animate({left: "-=24%"}, 500);
-          }
-          $(cucina2[4+destro]).delay(500).fadeIn();
-          destro+=1;
-        });
-        $("#bottone_sx2").click(function() {
-          var cucina2=$(".table2");
-          $(cucina2[destro+3]).fadeOut();
-          for(var i=destro; i<3+destro; i++) {
-            $(cucina2[i]).animate({left: "+=24%"}, 500);
-          }
-          destro-=1;
-          $(cucina2[destro]).delay(500).fadeIn();
-        });
-
-        $("#bottone_basso").click(function() {
-          $('html, body').animate({scrollTop: 640}, 100);
-        });
-      });
-    </script>
 
     <div class="contenitore">
       <img src="./immagini/hamburger-copia4.jpg" width="110%" height="100%" class="sfondo_iniziale">
 
       <div id="phone">
         <img src="./immagini/phone.png" width="100px" height="100px">
-      </div>
-
-      <div id="phone-call">
-        <img src="./immagini/phone-call.png" width="40px" height="40px">
       </div>
 
       <div id="motorbike">
@@ -121,41 +39,28 @@
       <div class="sezione-text">
         <h3 class="titolo">CERCA RISTORANTE</h3>
         <div id="int-text">
-          <textarea cols="40" rows="1" name="cerca" class="area-text" autocomplete="on" style="resize: none;"></textarea>
+          <textarea cols="40" rows="1" name="cerca" class="area-text" id="cerca" autocomplete="on" style="resize: none;"></textarea>
         </div>
       </div>
 
-      <div class="grid-container" id="grid">
-        <div class="grid-item" id="uno">CONTATTI</div>
-        <div class="grid-item" id="due">ABOUT</div>
-      </div>
-
-      <button class="bottonebasso" id="bottone_basso">
+      <button id="bottone_basso">
         <img src="./immagini/downarrow.png" width="100px" height="100px">
       </button>
 
     </div>
-     
-    <h3 class="testo1">ORDINA A DOMICILIO O RITIRA IN NEGOZIO</h3>
+
+    <h3 class="ordina">ORDINA A DOMICILIO</h3>
       
-    <div class="container" id="cucina">
+    <div class="wrapper" id="cucina">
+      <h3 class="testo1">LE NOSTRE CUCINE</h3>
 
-      <button class="bottone" name="scorri" type="button" id="bottone_sx">
-        <img src="./immagini/freccia_sx.png" width="50px" height="50px">  
+      <button class="bottone" name="scorri" type="button" id="bottone_sx1">
+        <img src="./immagini/left-arrow.png" width="50px" height="50px">  
       </button>
-
-      <table width="250" height="170" cellpadding="0" class="table1" id="cucina_romana">
-        <tr>
-          <th class="intestazione">CUCINA ROMANA</th>
-        </tr>
-        <td>
-          <a href="cucina_romana.html"><img width="250px" height="170px" src="./immagini/cucina_romana.jpg"></a>
-        </td>
-      </table>
 
       <table width="250" height="170" cellpadding="0" class="table1" id="cucina_italiana">
         <tr>
-          <th class="intestazione">CUCINA ITALIANA</th>
+          <th class="intestazione">ITALIANO</th>
         </tr>
         <td>
           <a href="cucina_italiana.html"><img width="250px" height="170px" src="./immagini/cucina_italiana.jpeg"></a>
@@ -164,7 +69,7 @@
 
       <table width="250" height="170" cellpadding="0" class="table1" id="cucina_americana">
         <tr>
-          <th class="intestazione">CUCINA AMERICANA</th>
+          <th class="intestazione">AMERICANO</th>
         </tr>
         <td>
           <a href="cucina_americana.html"><img width="250px" height="170px" src="./immagini/cucina_americana.jpeg"></a>
@@ -173,20 +78,16 @@
 
       <table width="250" height="170" cellpadding="0" class="table1" id="cucina_cinese">
         <tr>
-          <th class="intestazione">CUCINA CINESE</th>
+          <th class="intestazione">CINESE</th>
          </tr>
         <td>
           <a href="cucina_cinese.html"><img width="250px" height="170px" src="./immagini/cucina_cinese.jpg"></a>
         </td>
       </table>
 
-      <button class="bottone" name="scorri" type="button" id="bottone_dx">
-        <img src="./immagini/freccia_dx.png" width="50px" height="50px">  
-      </button>
-
       <table width="250" height="170" cellpadding="0" class="table1" id="cucina_giapponese">
         <tr>
-          <th class="intestazione">CUCINA GIAPPONESE</th>
+          <th class="intestazione">GIAPPONESE</th>
          </tr>
         <td>
           <a href="cucina_giapponese.html"><img width="250px" height="170px" src="./immagini/cucina_giapponese.jpg"></a>
@@ -220,96 +121,86 @@
         </td>
       </table>
 
-    </div>
- 
-    <h3 class="testo2">LE NOSTRE CATENE</h3>
-
-    <div class="container" id="catena">
-
-      <button class="bottone" name="scorri" type="button" id="bottone_sx2">
-        <img src="./immagini/freccia_sx.png" width="50px" height="50px">  
+      <button class="bottone" name="scorri" type="button" id="bottone_dx1">
+        <img src="./immagini/right-arrow.png" width="50px" height="50px">  
       </button>
-
-      <table width="250" height="170" cellpadding="0" class="table2" id="mcdonalds">
-        <tr>
-          <th class="intestazione">MC DONALD'S</th>
-        </tr>
-        <td>
-          <a href="mcdonald's.html"><img width="250px" height="170px" src="./immagini/mcdonald's.jpg"></a>
-        </td>
-      </table>
-    
-      <div class="vertical-line" id="1"></div>
-
-      <table width="250" height="170" cellpadding="0" class="table2" id="kfc">
-        <tr>
-          <th class="intestazione">KFC</th>
-        </tr>
-        <td>
-          <a href="kfc.html"><img width="250px" height="170px" src="./immagini/kfc.jpg"></a>
-        </td>
-      </table>
-
-      <table width="250" height="170" cellpadding="0" class="table2" id="fiveguys">
-        <tr>
-          <th class="intestazione">FIVE GUYS</th>
-        </tr>
-        <td>
-          <a href="fiveguys.html"><img width="250px" height="170px" src="./immagini/fiveguys.jpg"></a>
-        </td>
-      </table>
-
-      <table width="250" height="170" cellpadding="0" class="table2" id="subway">
-        <tr>
-          <th class="intestazione">SUBWAY</th>
-        </tr>
-        <td>
-          <a href="subway.html"><img width="250px" height="170px" src="./immagini/subway.jpg"></a>
-        </td>
-      </table>
-
-      <table width="250" height="170" cellpadding="0" class="table2" id="alice_pizza">
-        <tr>
-          <th class="intestazione">ALICE PIZZA</th>
-        </tr>
-        <td>
-          <a href="alice_pizza.html"><img width="250px" height="170px" src="./immagini/alice_pizza.jpg"></a>
-        </td>
-      </table>
-
-      <table width="250" height="170" cellpadding="0" class="table2" id="montaditos">
-        <tr>
-          <th class="intestazione">100 MONTADITOS</th>
-        </tr>
-        <td>
-          <a href="100_montaditos.html"><img width="250px" height="170px" src="./immagini/100_montaditos.jpg"></a>
-        </td>
-      </table>
-
-      <table width="250" height="170" cellpadding="0" class="table2" id="taco_bell">
-        <tr>
-          <th class="intestazione">TACO BELL</th>
-        </tr>
-        <td>
-          <a href="taco_bell.html"><img width="250px" height="170px" src="./immagini/taco_bell.jpg"></a>
-        </td>
-      </table>
-
     </div>
 
-    <button class="bottone" name="scorri" type="button" id="bottone_dx2">
-      <img src="./immagini/freccia_dx.png" width="50px" height="50px">  
-    </button>
+    <div class="wrapper" id="catena">
+      <h3 class="testo2">LE NOSTRE CATENE</h3>
 
 
-    <br>
-    <br>
-    <nav>
-      <ul>
-        <li><a href="#"> About </a></li>
-        <li><a href="#"> Contact </a></li>
-      </ul>
-    </nav>
+        <button type="button" id="bottone_sx2">
+          <img src="./immagini/left-arrow.png" width="40px" height="40px">  
+        </button>
+
+        <table width="250" height="170" cellpadding="0" class="table2" id="mcdonalds">
+          <tr>
+            <th class="intestazione">MC DONALD'S</th>
+          </tr>
+          <td>
+            <a href="mcdonald's.html"><img width="250px" height="170px" src="./immagini/mcdonald's.jpg"></a>
+          </td>
+        </table>
+
+        <table width="250" height="170" cellpadding="0" class="table2" id="kfc">
+          <tr>
+            <th class="intestazione">KFC</th>
+          </tr>
+          <td>
+            <a href="kfc.html"><img width="250px" height="170px" src="./immagini/kfc.jpg"></a>
+          </td>
+        </table>
+
+        <table width="250" height="170" cellpadding="0" class="table2" id="fiveguys">
+          <tr>
+            <th class="intestazione">FIVE GUYS</th>
+          </tr>
+          <td>
+            <a href="fiveguys.html"><img width="250px" height="170px" src="./immagini/fiveguys.jpg"></a>
+          </td>
+        </table>
+
+        <table width="250" height="170" cellpadding="0" class="table2" id="subway">
+          <tr>
+            <th class="intestazione">SUBWAY</th>
+          </tr>
+          <td>
+            <a href="subway.html"><img width="250px" height="170px" src="./immagini/subway.jpg"></a>
+          </td>
+        </table>
+
+        <table width="250" height="170" cellpadding="0" class="table2" id="alice_pizza">
+          <tr>
+            <th class="intestazione">ALICE PIZZA</th>
+          </tr>
+          <td>
+            <a href="alice_pizza.html"><img width="250px" height="170px" src="./immagini/alice_pizza.jpg"></a>
+          </td>
+        </table>
+
+        <table width="250" height="170" cellpadding="0" class="table2" id="montaditos">
+          <tr>
+            <th class="intestazione">100 MONTADITOS</th>
+          </tr>
+          <td>
+            <a href="100_montaditos.html"><img width="250px" height="170px" src="./immagini/100_montaditos.jpg"></a>
+          </td>
+        </table>
+
+        <table width="250" height="170" cellpadding="0" class="table2" id="taco_bell">
+          <tr>
+            <th class="intestazione">TACO BELL</th>
+          </tr>
+          <td>
+            <a href="taco_bell.html"><img width="250px" height="170px" src="./immagini/taco_bell.jpg"></a>
+          </td>
+        </table>
+
+        <button type="button" id="bottone_dx2">
+          <img src="./immagini/right-arrow.png" width="40px" height="40px">  
+        </button>
+    </div>
+
   </body>
-
 </html>
