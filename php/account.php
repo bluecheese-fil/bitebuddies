@@ -7,14 +7,40 @@
   $hexinfo = $_POST["saveduser"];
   $info = hextocharCookie($hexinfo);
 
-  $fd = fopen("php://stdout", 'w');
-  foreach ($_POST as $key=>$element) fwrite($fd, $key);
-  fclose($fd);
-
   if(array_key_exists("changeToken", $_POST)) { changeToken($info, $iv, $temporary, $_POST["temporary"]); }
   else if(array_key_exists("dynamic", $_POST)) { getItems($info, $iv); }
   else if(array_key_exists("changeemail", $_POST)) { changeEmail($info, $iv, $temporary, $_POST["email1"], $_POST["email2"]); }
   else if(array_key_exists("changepassword", $_POST)) { changePassword($info, $iv, $_POST["temporary"], $_POST["password1"], $_POST["password2"]); }
+  else if(array_key_exists("deleteaccount" , $_POST)) { deleteAccount($info, $iv, $_POST["email"], $_POST["password"]); }
+
+  function deleteAccount($info, $iv, $email, $password){
+    $cipher = "aes-256-cbc"; $delimiter = chr(007);
+    $items = preg_split("/{$delimiter}/", openssl_decrypt($info, $cipher, "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv));
+
+    $usrid = $items[0]; $email = $items[1]; $token = $items[2];
+
+    // checking token validity:
+    $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
+    $validtoken = "select token from utenti where user_id = '{$usrid}'";
+    $result = pg_query($db, $validtoken) or die('Query failed:'.pg_last_error());
+    if(pg_fetch_array($result, null, PGSQL_NUM)[0] != $token) { echo json_encode(array("success" => "1", "account" => "undelited", "error" => "unverified")); die(); }
+    pg_free_result($result);
+
+    // checking retyped email and password validity
+    $emailpswd = "select email, passwd from utenti where user_id = '{$usrid}'";
+    $result = pg_query($db, $emailpswd) or die('Query failed:'.pg_last_error());
+    $emailpswd = pg_fetch_array($result, null, PGSQL_NUM);
+    if($emailpswd[0] != $email || !password_verify($password, $emailpswd[1])) { echo json_encode(array("success" => "1", "account" => "undelited", "error" => "email|password")); die(); }
+
+    // i can now delete every element of the user. I can delete on the "utenti" table, everything should just get deleted because of the "ON DELETE: CASCADE" handler on the database
+    $delete = "delete from utenti where user_id = '{$usrid}'";
+    $result = pg_query($db, $delete) or die('Query failed:'.pg_last_error());
+    pg_free_result($result);
+    pg_close($db);
+
+    // echo success
+    echo json_encode(array("success" => "1", "account" => "deleted"));
+  }
 
   function changeEmail($info, $iv, $temporary, $email1, $email2){
     $email_exp = "/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/";

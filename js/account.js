@@ -17,24 +17,24 @@ function getDinamic(){
     success: function(response){
       if(response["usrfound"] == 0) window.location.replace("/account/login.html");
 
-      document.getElementById("nomedinamico").textContent = response["name"];
-      document.getElementById("nomeemaildinamico").innerHTML = response["name"] + " <br> " + response["email"];
+      $("#nomedinamico").text(response["name"]);
+      $("#nomeemaildinamico").html(response["name"] + " <br> " + response["email"]);
     }
   });
 }
 
 function removeChange(event){
   let id = event.target.id;
-  let elem = document.getElementById("form_container");
+  let elem = $("#form_container");
 
   if(id == "firstinput" || id == "secondinput" || id == "changebutton" || id == "notequal") return false;
   
   if(!(id == "chemail" || id == "chpassword")) {
-    elem.style.opacity = "0";
-    elem.style.visibility = "hidden";
+    elem.css("opacity", "0");
+    elem.css("visibility", "hidden");
   } else {
-    elem.style.opacity = "1";
-    elem.style.visibility = "visible";
+    elem.css("opacity", "1");
+    elem.css("visibility", "visible");
   }
 }
 
@@ -55,49 +55,48 @@ function exitEveryWhere(){
     type: "POST",             //request type,
     dataType: 'JSON',
     data: (jsoncookie),
-    success: function(){ document.getElementById("remove").setAttribute("hidden", true); document.getElementById("chemail").innerHTML = "Cambia email <br>"; }
+    success: function(){ $("#remove").attr("hidden", true); $("#chemail").html("Cambia email <br>");}
   });
 }
 
 function change(id){
   if(id == "chemail"){
-    document.getElementById("firstinput").setAttribute('onblur', "checkEquality(\"email\")");
-    document.getElementById("firstinput").setAttribute('oninput', "checkEquality(\"email\")");
-    document.getElementById("secondinput").setAttribute('onblur', "checkEquality(\"email\")");
-    document.getElementById("secondinput").setAttribute('oninput', "checkEquality(\"email\")");
+    $("#firstinput").attr('onblur', "checkEquality(\"email\")");
+    $("#firstinput").attr('oninput', "checkEquality(\"email\")");
+    $("#secondinput").attr('onblur', "checkEquality(\"email\")");
+    $("#secondinput").attr('oninput', "checkEquality(\"email\")");
 
-    document.getElementById("changebutton").textContent = "Cambia email";
-    document.getElementById("changebutton").name = "email";
-    
+    $("#changebutton").text("Cambia email");
+    $("#changebutton").attr("name", "email");
   } else {
-    document.getElementById("firstinput").setAttribute('onblur', "checkEquality(\"password\")");
-    document.getElementById("firstinput").setAttribute('oninput', "checkEquality(\"password\")");
-    document.getElementById("secondinput").setAttribute('onblur', "checkEquality(\"password\")");
-    document.getElementById("secondinput").setAttribute('oninput', "checkEquality(\"password\")");
+    $("#firstinput").attr('onblur', "checkEquality(\"password\")");
+    $("#firstinput").attr('oninput', "checkEquality(\"password\")");
+    $("#secondinput").attr('onblur', "checkEquality(\"password\")");
+    $("#secondinput").attr('oninput', "checkEquality(\"password\")");
 
-    document.getElementById("changebutton").textContent = "Cambia password";
-    document.getElementById("changebutton").name = "password";
+    $("#changebutton").text("Cambia password");
+    $("#changebutton").attr("name", "password");
   }
 }
 
 function checkEquality(type){
-  document.getElementById("notequal").setAttribute('hidden', true);
-  document.getElementById("inputinvalido").setAttribute('hidden', true);
-  htmlElem = document.getElementById("firstinput");
+  $("#notequal").attr('hidden', true);
+  $("#inputinvalido").attr('hidden', true);
+  htmlElem = $("#firstinput");
 
   if(type == "email"){
     // I need to check it matches an email pattern
     const re = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
-    document.getElementById("inputinvalido").textContent = "Email non valida";
-    if(htmlElem.value == "" || !re.test(htmlElem.value)){ document.getElementById("inputinvalido").removeAttribute('hidden'); return false;}
+    $("#inputinvalido").text("Email non valida");
+    if(htmlElem.val() == "" || !re.test(htmlElem.val())){ $("#inputinvalido").removeAttr('hidden'); return false;}
   } else if(type == "password"){
     // I need to check it has at least the number of items required.
-    document.getElementById("inputinvalido").textContent = "Password non valida";
-    passwd = htmlElem.value;
+    $("#inputinvalido").text("Password non valida");
+    passwd = htmlElem.val();
 
     // if it's empty, passwd will have a len of 0
-    if(passwd.length == 0) { document.getElementById("inputinvalido").setAttribute('hidden', true); return false; }
-    else if(passwd.length < 8) { document.getElementById("inputinvalido").removeAttribute('hidden'); return false; }
+    if(passwd.length == 0) { $("#inputinvalido").attr('hidden', true); return false; }
+    else if(passwd.length < 8) { $("#inputinvalido").removeAttr('hidden'); return false; }
     else {
       uppercase = 0; lowercase = 0; special = 0; numbers = 0;
       for(let i = 0; i<passwd.length; i++){
@@ -108,19 +107,19 @@ function checkEquality(type){
         else if(charnumber >= 65 && charnumber <= 90) uppercase++;
         else if(charnumber >= 48 && charnumber <= 57) numbers++;
         else {
-          document.getElementById('charunsupported').innerHTML = ("'" + passwd[i] + "' non supportato");
-          document.getElementById('charunsupported').removeAttribute('hidden');
+          $('#charunsupported').html("'" + passwd[i] + "' non supportato");
+          $('#charunsupported').removeAttr('hidden');
           break;
         }
       }
 
-      if(uppercase >= 2 && lowercase >= 2 && special >= 2 && numbers >= 2){ document.getElementById("inputinvalido").setAttribute('hidden', true); return false; }
+      if(uppercase >= 2 && lowercase >= 2 && special >= 2 && numbers >= 2){ $("#inputinvalido").attr('hidden', true); return false; }
     }
   }
 
   // I can only check for the above requirements on one element. The other one must meet the same requiremenets anyway since they must be equal
-  if(document.getElementById("firstinput").value != document.getElementById("secondinput").value){
-    document.getElementById("notequal").removeAttribute('hidden');
+  if($("#firstinput").val() != $("#secondinput").val()){
+    $("#notequal").removeAttr('hidden');
     return false;
   } else return true;
 }
@@ -129,15 +128,15 @@ function askChange(name){
   if(!checkEquality("" + name)){ alert("Le informazioni fornite non corrispondono"); return ; }
 
   key = "change" + name;
-  jsoncookie = {}; jsoncookie[key] = "true"
+  jsoncookie = {}; jsoncookie[key] = "true";
   let cookies = document.cookie.split("; ");
   for(let i = 0; i<cookies.length; i++){
     let point = cookies[i].split("=");
     if(point[0] == "iv" || point[0] == "saveduser" || point[0] == "temporary") jsoncookie[point[0]] = point[1];
   }
   
-  jsoncookie[name + '1'] = document.getElementById("firstinput").value;
-  jsoncookie[name + '2'] = document.getElementById("secondinput").value;
+  jsoncookie[name + '1'] = $("$firstinput").val();
+  jsoncookie[name + '2'] = $("$secondinput").val();
 
   let confermed = confirm("Sei sicuro di voler cambiare " + name + "?");
   if(!confermed) return false;
@@ -150,25 +149,72 @@ function askChange(name){
     dataType: 'JSON',
     data: (jsoncookie),
     success: function(response){
-      console.log(response);
-
       if(response["error"] == "emailinvalid") {
-        document.getElementById("inputinvalido").textContent = "Email non valida";
-        document.getElementById("inputinvalido").removeAttribute('hidden');
+        $("#inputinvalido").text("Email non valida");
+        $("#inputinvalido").removeAttr('hidden');
       } else if(response["error"] == "passwordinvalid") {
-        document.getElementById("inputinvalido").textContent = "Password non valida";
-        document.getElementById("inputinvalido").removeAttribute('hidden');
+        $("#inputinvalido").text("Password non valida");
+        $("#inputinvalido").removeAttr('hidden');
       } 
-      else if(response["error"] == "notequal") document.getElementById("notequal").removeAttribute('hidden');
+      else if(response["error"] == "notequal") $("#notequal").removeAttr('hidden');
       else if(response["error"] == "emailtaken") alert("The email given has already been taken. Please try another one");
       
       if(response["type"] == "email"){
-        document.getElementById("nomeemaildinamico").innerHTML = document.getElementById("nomeemaildinamico").innerHTML.split(" <br> ")[0] + " <br> " + jsoncookie[name + '1'];
+        $("#nomeemaildinamico").html($("#nomeemaildinamico").html().split(" <br> ")[0] + " <br> " + jsoncookie[name + '1']);
         alert("Email cambiata con successo! Tutti i dispositivi sono stati scollegati");
       } else if(response["type"] == "password") alert("Password cambiata con successo! Tutti i dispositivi sono stati scollegati.");
 
-      document.getElementById("remove").setAttribute("hidden", true);
-      document.getElementById("chemail").innerHTML = "Cambia email <br>";
+      $("#remove").attr("hidden", true);
+      $("#chemail").html("Cambia email <br>");
+    }
+  });
+}
+
+function deleteAccount(){
+  let confermed = confirm("Sei sicuro di voler eliminare il tuo account?");
+  if(!confermed) return false;
+
+  let email = prompt("Per favore ripeti la tua email: ");
+  let password = prompt("Per favore, riscrivi la tua password: ");
+
+  jsoncookie = {deleteaccount : true};
+  let cookies = document.cookie.split("; ");
+  for(let i = 0; i<cookies.length; i++){
+    let point = cookies[i].split("=");
+    if(point[0] == "iv" || point[0] == "saveduser" || point[0] == "temporary") jsoncookie[point[0]] = point[1];
+  }
+  
+  jsoncookie["email"] = email;
+  jsoncookie["password"] = password;
+
+  // ajax call
+  $.ajax({
+    url:"/php/account.php",   //the page containing php script
+    type: "POST",             //request type,
+    dataType: 'JSON',
+    data: (jsoncookie),
+    success: function(response){
+      if(response["account"] == "deleted"){
+        // deleting cookies
+        document.cookie = "saveduser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "iv=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "temporary=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+        alert("Il tuo account e' stato eliminato con successo. Verrai ora reindirizzato alla homepage");
+        window.location.replace("/homepg.html");
+      } else if(response["account"] == "undelited"){
+        if(response["error"] == "email|password") alert("L'email o la password inserite non sono corrette. Le modifiche non sono state apportate");
+        else if(response["error"] == "unverified") {
+          alert("Errore nella conferma dell'identità. Per favore, rifaccia il login per accedere alle impostazioni del suo account");
+
+          // deleting cookies
+          document.cookie = "saveduser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          document.cookie = "iv=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          document.cookie = "temporary=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+          window.location.replace("/account/login.html");
+        }
+      }
     }
   });
 }

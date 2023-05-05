@@ -1,24 +1,24 @@
 function checkInd(){
-  document.getElementById("errorindirizzo").setAttribute("hidden", true);
-  document.getElementById("capinvalida").setAttribute("hidden", true);
+  $("#errorindirizzo").attr("hidden", true);
+  $("#capinvalida").attr("hidden", true);
 
   // if some is not empty, then it's not valid
   sum = 0;
-  if(document.getElementById("indirizzo").value != "") sum += 1;
-  if(document.getElementById("cap").value != "") sum += 1;
-  if(document.getElementById("citta").value != "") sum += 1;
+  if($("#indirizzo").val() != "") sum += 1;
+  if($("#cap").val() != "") sum += 1;
+  if($("#citta").val() != "") sum += 1;
 
   if(!(sum == 0 || sum == 3)) {
-    document.getElementById("errorindirizzo").removeAttribute("hidden");
+    $("#errorindirizzo").removeAttr("hidden");
     return false;
   }
 
   if(sum == 0) return true;
 
-  cap = document.getElementById("cap").value;
+  cap = $("#cap").val();
 
   if(cap.length != 5 || isNaN(cap)){
-    document.getElementById("capinvalida").removeAttribute("hidden");
+    $("#capinvalida").html().removeAttr("hidden");
     return false;
   }
 }
@@ -30,9 +30,9 @@ function verifyAddr(){
   // and the address is valid, if given
   if(!document.getElementById("errorindirizzo").hasAttribute("hidden")) isOk = false;
   if(!document.getElementById("capinvalida").hasAttribute("hidden")) isOk = false;
-  if(document.getElementById("indirizzo").value == "") isOk = false;
+  if($("#indirizzo").val() == "") isOk = false;
 
-  text = document.getElementById("indirizzo").value + ", " + document.getElementById("cap").value + ", " + document.getElementById("citta").value;
+  text = $("#indirizzo").val() + ", " + $("#cap").val() + ", " + $("#citta").val();
 
   if(text == ", , ") {
     alert("Non puoi aggiungere un indirizzo vuoto");
@@ -65,11 +65,11 @@ function verifyAddr(){
           <button class=\"deletebutton\" onclick=del_ind(${nextNumber})> Elimina </button>
         </div>\n`;
   
-        document.getElementById("indirizziDinamici").innerHTML += addressesHtml;
+        $("#indirizziDinamici").html() += addressesHtml;
 
-        document.getElementById("indirizzo").value = "";
-        document.getElementById("cap").value = "";
-        document.getElementById("citta").value = "";
+        $("#indirizzo").val() = "";
+        $("#cap").val() = "";
+        $("#citta").val() = "";
 
         console.log("Local sucess");
       }
@@ -98,9 +98,9 @@ function def_ind(ind_n) {
     data: (jsoncookie),
     success:function(){
       console.log("Server success");
-      def_address = document.getElementById("inddefualtdinamico").textContent;
+      def_address = $("#inddefualtdinamico").text();
       document.getElementById("indr" + ind_n).textContent = def_address;
-      document.getElementById("inddefualtdinamico").textContent = text;
+      $("#inddefualtdinamico").text(text);
       console.log("Local success");
     }
   });
@@ -153,8 +153,8 @@ function getDinamic() {
     success: function(response){
       if(response["usrfound"] == 0) window.location.replace("/account/login.html");
 
-      document.getElementById("nomedinamico").textContent = response["nome"];
-      document.getElementById("inddefualtdinamico").innerHTML = response["indefault"];
+      $("#nomedinamico").text(response["nome"]);
+      $("#inddefualtdinamico").html(response["indefault"]);
 
       addressesHtml = "";
       for(let i = 0; i < response["indirizzi"].length; i++){
@@ -165,7 +165,7 @@ function getDinamic() {
         </div>\n`;
 
       }
-      document.getElementById("indirizziDinamici").innerHTML = addressesHtml;
+      $("#indirizziDinamici").html(addressesHtml);
     }
   });
 }

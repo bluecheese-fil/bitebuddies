@@ -3,7 +3,7 @@
   <head>
 
   <?php
-    require "/php/cookie_helper";
+    require "./cookie_helper.php";
   ?>
 
   </head>

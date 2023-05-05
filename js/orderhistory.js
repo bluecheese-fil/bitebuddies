@@ -17,17 +17,12 @@ function loadDynamic(){
     success:function(response){
       if(response["usrfound"] == 0) window.location.replace("/account/login.html");
 
-      document.getElementById("nomedinamico").textContent = response["name"];
+      $("#nomedinamico").text(response["name"]);
 
-      if(response["orders"] == "none") {
-        document.getElementById("orderdiv").remove();
-        return ;
-      }
+      if(response["orders"] == "none") { $("#orderdiv").remove(); return ; }
 
       resize();
       orders = response["orders"];
-
-
 
       for(let i = 0; i < Math.floor(orders.length / 5); i += 1){
         console.log('i');
@@ -84,15 +79,15 @@ function loadDynamic(){
         for(let i = 0; i < 5 - orders.length % 5; i++) pages[last] += "<div class=\"empty_element\"> </div>";
       }
 
-      document.getElementById("noorders").remove();
-      document.getElementById("dynamicorders").innerHTML = pages[currentPage];
+      $("#noorders").remove();
+      $("#dynamicorders").html(pages[currentPage]);
       // by default it's not possible to go up on the history
-      document.getElementById("upbt").style.opacity = 0.3;
+      $("#upbt").css("opacity", "0.3");
 
       // I need to check if it's possible to go down (more than 5 orders)
-      if(orders.length < 5) document.getElementById("downbt").style.opacity = 0.3;
+      if(orders.length < 5) $("#downbt").css("opacity", "0.3");
 
-      document.getElementById("orderdiv").style.opacity = 1;
+      $("#orderdiv").css("opacity", "1");
 
       // After all of this, I can call the getOrder method for the first element
       getOrder("page0-0", orders[0][0]);
@@ -111,15 +106,15 @@ function resize(){
   btheight = document.querySelector(".updown_button").offsetHeight;
 
   console.log(height + ", " + btheight);
-  document.getElementById("dynamicorders").style.height = (height - 2*btheight) + "px";
-  document.getElementById("currentorder").style.marginTop = btheight + "px";
-  document.getElementById("currentorder").style.marginBottom = btheight + "px";
-  document.getElementById("currentorder").style.height = (height - 2*btheight) + "px";
+  $("#dynamicorders").css("height", (height - 2*btheight) + "px");
+  $("#currentorder").css("marginTop", btheight + "px");
+  $("#currentorder").css("marginBottom", btheight + "px");
+  $("#currentorder").css("height", (height - 2*btheight) + "px");
   console.log("resize done");
 }
 
 function getOrder(id, order_id){
-  if(("ID Ordine: " + order_id) == document.getElementById("idspan").textContent) return ;
+  if(("ID Ordine: " + order_id) == $("#idspan").text()) return ;
 
   for(let i = 0; i < document.getElementById("dynamicorders").childElementCount; i++){
     children = document.getElementById("dynamicorders").children[i];
@@ -127,7 +122,7 @@ function getOrder(id, order_id){
   }
 
   document.getElementById(id).style.cursor = "progress";
-  document.getElementById("currentorder").style.cursor = "progress";
+  $("#currentorder").css("cursor", "progress");
 
   let jsoncookie = {"getOrder" : "true"};
   jsoncookie["order_id"] = order_id;
@@ -138,43 +133,43 @@ function getOrder(id, order_id){
     dataType: "JSON",
     data: (jsoncookie),
     success:function(response){
-      document.getElementById("nomerist").innerHTML = response["name"];
-      document.getElementById("idspan").textContent = "ID Ordine: " + order_id;
-      document.getElementById("consegna").textContent = "Consegnato il " + response["data"] + " alle " + response["delivery"];
+      $("#nomerist").html(response["name"]);
+      $("#idspan").text("ID Ordine: " + order_id);
+      $("#consegna").text("Consegnato il " + response["data"] + " alle " + response["delivery"]);
 
       // Re-add the borderRightWidth to all the elements, I don't want to "remember" which one was
       let orders = document.getElementById("dynamicorders");
       for(let i = 0; i < orders.childElementCount; i++) orders.children[i].style.borderRightWidth = "3px";
-      document.getElementById("currentorder").style.cursor = "initial";
+      $("#currentorder").css("cursor", "initial");
       try {
-        document.getElementById(id).style.cursor = "initial";
-        document.getElementById(id).style.borderRightWidth = "0px";
-      } catch(TypeError) { console.log("Moved out of the way, I can just close this."); }
+        $("#" + id).css("cursor", "initial");
+        $("#" + id).css("borderRightWidth", "0px");
+      } catch(TypeError) { console.log("Moved out of the way, I can just skip this."); }
 
       items = response["items"];
       text = '<ul>\n';
       for(let i = 0; i < items.length; i++) text += "<li> " + items[i][0] + ", " + items[i][1] + ".</li>\n";
       text += "</ul>";
 
-      document.getElementById('items').innerHTML = text;
+      $('#items').html(text);
     }
   });
 }
 
 function moveup(){
-  if(document.getElementById("upbt").style.opacity == 0.3) return ;
+  if($("#upbt").css("opacity") == 0.3) return ;
 
-  document.getElementById("dynamicorders").innerHTML = pages[--currentPage];
-  if(currentPage == 0) document.getElementById("upbt").style.opacity = 0.3;
-  document.getElementById("downbt").style.opacity = 1;
+  $("#dynamicorders").html(pages[--currentPage]);
+  if(currentPage == 0) $("#upbt").css("opacity", 0.3);
+  $("#downbt").css("opacity", 1);
   document.getElementById("dynamicorders").children[0].onclick();
 }
 
 function movedown(){
-  if(document.getElementById("downbt").style.opacity == 0.3) return ;
+  if($("#downbt").css("opacity") == 0.3) return ;
 
-  document.getElementById("dynamicorders").innerHTML = pages[++currentPage];
-  if(currentPage == pages.length - 1) document.getElementById("downbt").style.opacity = 0.3;
-  document.getElementById("upbt").style.opacity = 1;
+  $("#dynamicorders").html(pages[++currentPage]);
+  if(currentPage == pages.length - 1) $("#downbt").css("opacity", 0.3);
+  $("#upbt").css("opacity", 1);
   document.getElementById("dynamicorders").children[0].onclick();
 }
