@@ -200,7 +200,7 @@ function deleteAccount(){
         document.cookie = "iv=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         document.cookie = "temporary=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
-        alert("Il tuo account e' stato eliminato con successo. Verrai ora reindirizzato alla homepage");
+        alert("Il tuo account è stato eliminato con successo. Verrai ora reindirizzato alla homepage");
         window.location.replace("/homepg.html");
       } else if(response["account"] == "undelited"){
         if(response["error"] == "email|password") alert("L'email o la password inserite non sono corrette. Le modifiche non sono state apportate");
