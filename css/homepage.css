@@ -1,5 +1,175 @@
 @import "/css/base.css";
 
+header {
+  position: relative;
+  height: 140px;
+  display: flex;
+  align-items: center;
+}
+.logo {
+  width: 110px;
+  height: 110px;
+  cursor: pointer;
+  position: relative;
+  left: 5%;
+  top: -3%;
+}
+button {
+  border: none;
+}
+#uno:hover {
+  background-color: rgba(112, 111, 111, 0.726);
+  border-radius: 15px 15px 0px 0px;
+}
+#due:hover {
+  background-color: rgba(112, 111, 111, 0.726);
+  border-radius: 0px 0px 15px 15px;
+}
+#login {
+  width: 150px;
+  position: absolute;
+  left: 73%;
+  top: 33%;
+  background-color: rgba(197, 192, 192, 0.726);
+  border-radius: 5px;
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  padding: 9px 25px;
+}
+#login:hover {
+  background-color: rgba(112, 111, 111, 0.726);
+  cursor: pointer;
+}
+#registrati {
+  position: absolute;
+  left: 85%;
+  top: 33%;
+  background-color: rgba(197, 192, 192, 0.726);
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+  padding: 9px 25px;
+}
+#registrati:hover {
+  background-color: rgba(112, 111, 111, 0.726);
+  cursor: pointer;
+}
+body{
+  overflow-x:hidden;
+}
+.testo-bite-buddies {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.contenitore {
+  position: relative;
+}
+.sfondo_iniziale {
+  position: relative;
+  filter: blur(5px);
+  right: 45px;
+}
+.sezione-text {
+  position: absolute;
+  width: 800px;
+  height: 320px;
+  background-color: white;
+  border-radius: 20px;
+  filter: opacity(0.5);
+  left: 50%;
+  top: 38%;
+  transform: translate(-50%, -50%);
+}
+#int-text {
+  position: absolute;
+  left: 50%;
+  top: 83%;
+  transform: translate(-50%, -50%);
+}
+.titolo {
+  position: absolute;
+  left: 50%;
+  top: 67%;
+  transform: translate(-50%, -50%);
+  color: black;
+}
+.area-text {
+  background-color: white;
+  height: 40px;
+  width: 550px;
+  line-height: 35px;
+  border-radius: 10px;
+  text-align: left;
+  font-size: 16px;
+  padding-left: 15px;
+  border-bottom: solid 2px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  overflow-y: hidden;
+}
+#phone {
+  position: absolute;
+  left: 30%;
+  top: 10%;
+  transform: translate(-50%, -0%);
+  z-index: 2;
+}
+#motorbike {
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  transform: translate(-50%, -0%);
+  z-index: 2;
+}
+#foodbox {
+  position: absolute;
+  left: 70%;
+  top: 10%;
+  transform: translate(-50%, -0%);
+  z-index: 2;
+}
+#bottone_basso {
+  position: absolute;
+  left: 50%;
+  top: 78%;
+  transform: translate(-50%, -15%);
+  background-color: unset;
+  filter: invert(100%);
+}
+.intestazione {
+  color: black;
+  text-align: center;
+  font-weight: bold;
+}
+img {
+  border-radius: 0px 0px 10px 10px;
+}
+.ordina {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  line-height: 40px;
+  margin-top: 50px;
+  background-color: rgb(32, 32, 32);
+  width: 400px;
+  height: 40px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  color: white;
+  text-align: center;
+}
+
+/* OLD
+
+@import "/css/base.css";
+
 li, a, button, div {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
@@ -31,3 +201,5 @@ header {
 .nav_links li a:hover{
   color: rgba(0, 136, 169, 1);
 }
+
+*/

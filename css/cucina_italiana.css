@@ -1,0 +1,52 @@
+@import "/css/base.css";
+
+.grid-container {
+    position: relative;
+    left: 2%;
+    top: 10%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    width: 700px;
+    height: 200px;
+    text-align: center;
+    border-style: solid;
+    border-radius: 20px;
+    background-color: rgba(197, 192, 192, 0.726);
+  }
+  .grid-item1 {
+    width: 250px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 45px;
+  }
+  .grid-item2 {
+    width: 450px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 45px;
+  }
+  .testo {
+    line-height: 0px;
+  }
+  img {
+    border-radius: 15px 0px 0px 15px;
+  }
+  .ordina-bottone {
+    position: relative;
+    top: -20%;
+    left: 38%;
+    width: 90px;
+    height: 40px;
+    border-radius: 10px 10px 10px 10px;
+    font-size: 20px;
+  }
+  .indirizzo {
+    position: relative;
+    left: -20%;
+  }
+  .categoria {
+    position: relative;
+    left: -24%;
+    top: -10%;
+  }

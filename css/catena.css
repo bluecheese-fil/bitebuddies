@@ -1,0 +1,90 @@
+.wrapper#catena {
+  position: relative;
+  background-color: rgba(197, 192, 192, 0.500);
+  width: 100%;
+  height: 240px;
+  margin-top: 50px;
+}
+.testo2 {
+  position: absolute;
+  left: 50%;
+  top: -6.8%;
+  width: 400px;
+  border-radius: 10px 10px 0px 0px;
+  transform: translate(-50%, -50%);
+  background-color: rgb(32, 32, 32);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  color: white;
+  text-align: center;
+  /*background-color: rgba(197, 192, 192, 0.500);*/
+}
+  .table2 {
+    background-color: rgba(197, 192, 192, 0.726);
+    border-radius: 10px;
+    box-shadow: 8px 8px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+  }
+  .table2:hover {
+    transition-duration: 0.5s;
+    background-color: rgba(112, 111, 111, 0.726);
+  }
+  #bottone_sx2 {
+    position: absolute;
+    top: 92.5%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    background-color: unset;
+    z-index: 2;
+  }
+  #bottone_dx2 {
+    position: absolute;
+    top: 92.5%;
+    left: 52.5%;
+    transform: translate(-50%, -50%);
+    background-color: unset;
+    z-index: 2;
+  }
+  #mcdonalds {
+    position: absolute;
+    top: 45%;
+    left: 0.5%;
+    transform: translate(0%, -50%);
+
+  }
+  #kfc {
+    position: absolute;
+    top: 45%;
+    left: 20.5%;
+    transform: translate(0%, -50%);
+  }
+  #fiveguys {
+    position: absolute;
+    top: 45%;
+    left: 40.5%;
+    transform: translate(0%, -50%);
+  }
+  #subway {
+    position: absolute;
+    top: 45%;
+    left: 60.5%;
+    transform: translate(0%, -50%);
+  }
+  #alice_pizza {
+    position: absolute;
+    top: 45%;
+    left: 80.5%;
+    transform: translate(0%, -50%);
+  }
+  #montaditos {
+    position: absolute;
+    top: 45%;
+    left: 100.5%;
+    transform: translate(0%, -50%);
+  }
+  #taco_bell {
+    position: absolute;
+    top: 45%;
+    left: 120.5%;
+    transform: translate(0%, -50%);
+  }

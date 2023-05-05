@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MrPasta</title>
+    <link rel="stylesheet" href="/css/MrPasta.css">
+    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var conta1=0;
+            $("#plus1").click(function(){
+                conta1++;
+                $("#contatore1").val(conta1);
+            });
+            $("#minus1").click(function(){
+                conta1--;
+                $("#contatore1").val(conta1);
+            });
+
+            var conta2=0;
+            $("#plus2").click(function(){
+                conta2++;
+                $("#contatore2").val(conta2);
+            });
+            $("#minus2").click(function(){
+                conta2--;
+                $("#contatore2").val(conta2);
+            });
+
+            var conta3=0;
+            $("#plus3").click(function(){
+                conta3++;
+                $("#contatore3").val(conta3);
+            });
+            $("#minus3").click(function(){
+                conta3--;
+                $("#contatore3").val(conta3);
+            });
+
+            var conta4=0;
+            $("#plus4").click(function(){
+                conta4++;
+                $("#contatore4").val(conta4);
+            });
+            $("#minus4").click(function(){
+                conta4--;
+                $("#contatore4").val(conta4);
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+
+        
+    <div class="ristorante">
+        <div class="header">
+            <h3 class="titolo">MrPasta</h3>
+            <img src="./immagini/fivestars.png" width="120px" height="120px" class="fivestars">
+        </div>
+        <img src="./immagini/pasta.jpg" width="100%" height="60%" class="pasta">
+        <h3 class="categoria_ristorante">Pasta - Italiano</h3>
+        <h4 class="indirizzo">Indirizzo: Via Vittorio Veneto, 1, RM, 00187</h4>
+        <h4 class="consegna">Consegna: 2 euro</h4>
+        <h4 class="telefono">Telefono: +39 3248244144</h4>
+    </div>
+
+    <div class="menù">
+        <form action="/destinazione" method="post">
+            <div class="carbonara">
+                Pasta alla carbonara 
+                <button id="minus1">
+                    <img src="./immagini/minus.png" width="10px" height="10px">   
+                </button>
+                <input type="text" value="0" min="0" size="2px" id="contatore1">            
+                <button id="plus1">
+                    <img src="./immagini/plus.png" width="10px" height="10px">
+                </button>
+            </div>
+
+            <br>
+
+            Pasta all'amatriciana 
+            <button id="minus2">
+                <img src="./immagini/minus.png" width="10px" height="10px">   
+            </button>
+            <input type="text" value="0" min="0" size="2px" id="contatore2">            
+            <button id="plus2">
+                <img src="./immagini/plus.png" width="10px" height="10px">
+            </button>
+
+            <br>
+
+            Pasta al sugo
+            <button id="minus3">
+                <img src="./immagini/minus.png" width="10px" height="10px">   
+            </button>
+            <input type="text" value="0" min="0" size="2px" id="contatore3">            
+            <button id="plus3">
+                <img src="./immagini/plus.png" width="10px" height="10px">
+            </button>
+
+            <br>
+
+            Pasta al pesto
+            <button id="minus4">
+                <img src="./immagini/minus.png" width="10px" height="10px">   
+            </button>
+            <input type="text" value="0" min="0" size="2px" id="contatore4">            
+            <button id="plus4">
+                <img src="./immagini/plus.png" width="10px" height="10px">
+            </button>
+        
+
+            <button type="submit" class="conferma">Conferma l'ordine</button>
+        </form>
+    </div>
+    
+</body>
+</html>

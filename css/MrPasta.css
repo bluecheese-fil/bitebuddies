@@ -1,0 +1,108 @@
+.ristorante {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    border-radius: 20px;
+    border: solid 2px;
+    left: 0%;
+    top: 20%;
+}
+.header {
+    position: relative;
+    width: 500px;
+    height: 50px;
+}
+.titolo {
+    position: absolute;
+    top: 13%;
+    left: 50%;
+    border: solid 2px;
+    padding: 5px 5px 5px 5px;
+    border-radius: 5px;
+    transform: translate(-50%, -50%);
+    color: black;
+}
+.fivestars {
+    position: absolute;
+    left: 80%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.pasta {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-top: solid 2px;
+    border-bottom: solid 2px;
+}
+.categoria_ristorante {
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    transform: translate(-50%, -50%);
+}
+.indirizzo {
+    position: absolute;
+    left: 2%;
+    top: 75%;
+}
+.consegna {
+    position: absolute;
+    left: 2%;
+    top: 82.5%;
+}
+.telefono {
+    position: absolute;
+    left: 2%;
+    top: 90%;
+}
+.menù {
+    width: 600px;
+    height: 600px;
+    position: relative;
+}
+.carbonara {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+}
+#plus1 {
+    width: 20px;
+    height: 20px;
+}
+#minus1 {
+    width: 20px;
+    height: 20px;
+}
+#plus2 {
+    width: 20px;
+    height: 20px;
+}
+#minus2 {
+    width: 20px;
+    height: 20px;
+}
+#plus3 {
+    width: 20px;
+    height: 20px;
+}
+#minus3 {
+    width: 20px;
+    height: 20px;
+}
+#plus4 {
+    width: 20px;
+    height: 20px;
+}
+#minus4 {
+    width: 20px;
+    height: 20px;
+}
+.conferma {
+    position: absolute;
+    left: 43%;
+    top: 100%;
+    width: 200px;
+    height: 50px;
+}
