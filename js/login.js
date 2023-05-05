@@ -39,7 +39,7 @@ function load(){
       success:function(response){
         console.log("Server success");
         if(response["error"] == "passwd_error" || response["error"] == "info_error") window.location.replace("/account/login.html?error=passwd_error");
-        else if(response["success"] == 1) window.location.replace("/homepg.html");
+        else if(response["success"] == 1) window.location.replace("/homepage.html");
         console.log("Local success");
       }
     });
@@ -69,7 +69,7 @@ function customSubmit(){
     success:function(response){
       console.log("Server success");
       if(response["error"] == "passwd_error" || response["error"] == "info_error") window.location.replace("/account/login.html?error=passwd_error");
-      else if(response["success"] == '1') window.location.replace("/homepg.html");
+      else if(response["success"] == '1') window.location.replace("/homepage.html");
       console.log("Local success");
     }
   });

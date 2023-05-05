@@ -17,7 +17,7 @@ function getDinamic(){
     success: function(response){
       if(response["usrfound"] == 0) window.location.replace("/account/login.html");
 
-      $("#nomedinamico").text(response["name"]);
+      $("#nomedinamico").text("Ciao " + response["name"]);
       $("#nomeemaildinamico").html(response["name"] + " <br> " + response["email"]);
     }
   });
@@ -201,7 +201,7 @@ function deleteAccount(){
         document.cookie = "temporary=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
         alert("Il tuo account è stato eliminato con successo. Verrai ora reindirizzato alla homepage");
-        window.location.replace("/homepg.html");
+        window.location.replace("/homepage.html");
       } else if(response["account"] == "undelited"){
         if(response["error"] == "email|password") alert("L'email o la password inserite non sono corrette. Le modifiche non sono state apportate");
         else if(response["error"] == "unverified") {

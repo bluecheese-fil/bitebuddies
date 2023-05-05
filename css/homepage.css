@@ -1,11 +1,10 @@
 @import "/css/base.css";
 
-header {
-  position: relative;
-  height: 140px;
-  display: flex;
-  align-items: center;
-}
+.darkera { color: rgb(0, 45, 60) }
+
+body { background-color: white; overflow-x:hidden; }
+
+/*
 .logo {
   width: 110px;
   height: 110px;
@@ -13,18 +12,20 @@ header {
   position: relative;
   left: 5%;
   top: -3%;
-}
-button {
-  border: none;
-}
+}*/
+
+button { border: none }
+
 #uno:hover {
   background-color: rgba(112, 111, 111, 0.726);
   border-radius: 15px 15px 0px 0px;
 }
+
 #due:hover {
   background-color: rgba(112, 111, 111, 0.726);
   border-radius: 0px 0px 15px 15px;
 }
+
 #login {
   width: 150px;
   position: absolute;
@@ -38,10 +39,12 @@ button {
   font-size: 20px;
   padding: 9px 25px;
 }
+
 #login:hover {
   background-color: rgba(112, 111, 111, 0.726);
   cursor: pointer;
 }
+
 #registrati {
   position: absolute;
   left: 85%;
@@ -53,22 +56,16 @@ button {
   font-family: "Montserrat", sans-serif;
   padding: 9px 25px;
 }
+
 #registrati:hover {
   background-color: rgba(112, 111, 111, 0.726);
   cursor: pointer;
 }
-body{
-  overflow-x:hidden;
-}
-.testo-bite-buddies {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
+
 .contenitore {
   position: relative;
 }
+
 .sfondo_iniziale {
   position: relative;
   filter: blur(5px);
@@ -147,9 +144,9 @@ body{
   text-align: center;
   font-weight: bold;
 }
-img {
-  border-radius: 0px 0px 10px 10px;
-}
+
+img { border-radius: 0px 0px 10px 10px; }
+
 .ordina {
   position: relative;
   left: 50%;
@@ -165,41 +162,3 @@ img {
   color: white;
   text-align: center;
 }
-
-/* OLD
-
-@import "/css/base.css";
-
-li, a, button, div {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  color: #e9ecec;
-  text-decoration: none;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30px 10%;
-}
-
-.nav_links{
-  list-style: none;
-}
-
-.nav_links li {
-  display: inline-block;
-  padding: 0px 20px;
-}
-
-.nav_links li a{
-  transition: all 0.3s ease 0s;
-}
-
-.nav_links li a:hover{
-  color: rgba(0, 136, 169, 1);
-}
-
-*/

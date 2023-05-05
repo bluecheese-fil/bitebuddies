@@ -17,7 +17,7 @@ function loadDynamic(){
     success:function(response){
       if(response["usrfound"] == 0) window.location.replace("/account/login.html");
 
-      $("#nomedinamico").text(response["name"]);
+      $("#nomedinamico").text("Ciao " + response["name"]);
 
       if(response["orders"] == "none") { $("#orderdiv").remove(); return ; }
 

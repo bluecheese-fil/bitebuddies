@@ -8,9 +8,7 @@ button, span, div, form{
   text-decoration: none;
 }
 
-button:hover{
-  transition: 0.4s;
-}
+button:hover { transition: 0.4s; }
 
 p, a {
   font-family: "Montserrat", sans-serif;

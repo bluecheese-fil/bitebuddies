@@ -41,7 +41,7 @@ Ogni foreign key ha: ONUPDATE e ONDELETE impostato a CASCADE. Basta cambiare una
 Tutte le apostrofi sono state sostituite con &#39, secondo lo standard html. Questo è fatto per evitare errori negli inserimenti all'interno del database, soprattutto per gli indirizzi
 
 ## Dinamizzazione del sito
-Il sito deve essere vagamente dinamico. Bisogna fare una buona ricerca per trovare delle immagini da scaricare ed usare, e bisogna usare oppurtunamente i CSS per fare un minimo di animazioni decenti!. Poi vediamo come farlo
+Il sito deve essere vagamente dinamico. Bisogna fare una buona ricerca per trovare delle images/static da scaricare ed usare, e bisogna usare oppurtunamente i CSS per fare un minimo di animazioni decenti!. Poi vediamo come farlo
 Si può pensare di fare un sito che scorre verso il basso(Fra)
 
 # Database

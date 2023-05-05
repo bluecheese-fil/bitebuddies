@@ -153,7 +153,7 @@ function getDinamic() {
     success: function(response){
       if(response["usrfound"] == 0) window.location.replace("/account/login.html");
 
-      $("#nomedinamico").text(response["nome"]);
+      $("#nomedinamico").text("Ciao " + response["nome"]);
       $("#inddefualtdinamico").html(response["indefault"]);
 
       addressesHtml = "";
