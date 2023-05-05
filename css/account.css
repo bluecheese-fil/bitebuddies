@@ -1,0 +1,126 @@
+html, body { height: 100%; min-width: 300px;}
+
+input {
+  width: 100%;
+  height: 25px;
+
+  text-align: left;
+  
+  margin-bottom: 5px;
+  padding-left: 8px;
+  border-radius: 10px;
+}
+
+/* Changing defualt MyButtons and Logo */
+button { width: 100%;}
+.logo {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  min-height: 80px;
+}
+
+.leftdiv {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+
+  margin-top: 5vh;
+  transition: ease 20ms;
+}
+
+.rightdiv {
+  display: inline-flex;
+  justify-content: center;
+}
+
+@media only screen and (min-width: 1241px){
+  .leftdiv {
+    float: left;
+    width: 35%;
+    margin-left: 10%;
+  }
+
+  .rightdiv {
+    float: right;
+    width: 45%;
+    margin-top: 5vh;
+    margin-right: 10%;
+  }
+}
+
+@media only screen and (min-width: 750px) and (max-width: 1240px){
+  .leftdiv { float: left; width: 60%; }
+
+  .rightdiv {
+    float: right;
+    width: 40%;
+    margin-top: 5vh;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .leftdiv {
+    width: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .rightdiv {
+    margin-top: 2vh;
+    width: 100%;
+  } 
+}
+
+.innerdiv {
+  text-align: center;
+  width: 50%;
+}
+
+.clickable { cursor: pointer; }
+.clickable:hover{ color:rgb(10, 145, 180); }
+
+.remove {
+  width: fit-content;
+  
+  display: inline-flex;
+  align-content: center;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  padding: 6px 6px 6px 6px;
+  background-color: rgb(10, 145, 180);
+  cursor: pointer;
+}
+
+.remove:hover{
+  color: black;
+  background-color: white;
+}
+
+.verticalform {
+  margin: auto;
+  width: 50%;
+}
+
+.formstyle {
+  opacity: 0;
+  visibility: hidden;
+  min-width: 130px;
+  margin-top: 3vh;
+}
+
+.errore { color: red; font-size: small; padding-bottom: 5px;}
+
+.bottomdiv {
+  position: fixed;
+  bottom: 0; left: 0;
+
+  display: inline-flex; justify-content: center;
+  
+  width: 100%;
+  margin: 20px 0px 50px 0px;
+}
+
+.bottomdiv:hover { cursor: pointer; color: red; }

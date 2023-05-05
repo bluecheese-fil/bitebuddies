@@ -1,0 +1,188 @@
+/* I'm resizing the logo since it's too big */
+.logo {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  min-height: 80px;
+}
+
+input {
+  width: 100%;
+  height: 25px;
+  text-align: left;
+  
+  margin-bottom: 5px;
+  padding-left: 8px;
+
+  border-radius: 10px;
+}
+
+.verticalform {
+  margin: auto;
+  width: 50%;
+}
+
+.verticaladdresses {
+  float: left;
+  display: table-cell;
+  vertical-align: middle;
+
+  width: 45%;
+  height: 40px;
+  margin-top: 15px;
+  margin-left: 4%;
+}
+
+/* Custom version of "My Buttons"*/
+button {
+  width: 100%;
+  height: 40px;
+  padding: 9px 25px;
+
+  background-color: rgba(0, 136, 169, 1);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+button:hover {
+  transition-delay: 0.1s;
+  transition-duration: 0.4s;
+  background-color: rgba(0, 136, 169, 0.8);
+}
+
+.littlebutton {
+  width: 47%;
+  height: 40px;
+  padding: 9px 25px;
+
+  background-color: rgba(0, 136, 169, 1);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.deletebutton {
+  width: 29%;
+  height: 40px;
+  padding: 9px 25px;
+
+  background-color: rgba(0, 136, 169, 1);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.verticalbuttons {
+  float: right;
+  text-align: right;
+
+  width: 50%;
+  height: 45px;
+  margin-top: 15px;
+}
+
+.errore { color: red; font-size: small; padding-bottom: 5px;}
+.formstyle { padding-top: 10vh; min-width: 130px;}
+
+/* I'm forcing a base resolution of 302px */
+@media only screen and (max-width: 302px){
+  html { width: 302px; }
+}
+
+@media only screen and (max-width: 415px){
+  .formbt {height: 60px; min-width: 165px;}
+}
+
+@media only screen and (max-width: 500px){
+ /* Mobiles */
+ .leftline{ width: 45%; float: left; text-align: center;}
+ .rightline { width: 45%; float: right; text-align: center;}
+ .littleinput { width: 85%; }
+ button { width: 100% }
+}
+
+@media only screen and (max-width: 750px){
+  .verticaladdresses { float: left; width: 34%; height: 90px; margin-top: 5px; margin-left: 1%;}
+  .verticalbuttons { width: 65%; margin-top: 5px; height: 90px; }
+  .littlebutton { width: 85%; margin: 2px 0px 2px 0px;}
+  .deletebutton { width: 85%; margin: 2px 0px 2px 0px;}
+}
+
+/*
+  In between there are some tables that will have a user interface between desktop and mobile
+*/
+
+@media only screen and (min-width: 750px){
+  .verticaladdresses { line-height: 40px; }
+}
+
+
+@media only screen and (min-width: 1010px) and (max-width: 1300px){
+  /* For Desktop: */
+  .verticaladdrcontainer {
+    float: left;
+
+    width: 60%;
+    margin: 0% 5% 0% 5%;
+    padding-top: 12vh;
+  }
+
+  .verticalform {
+    float: right;
+
+    width: 25%;
+    height: 10vh;
+    margin-right: 3%;
+    padding-top: 12vh;
+  }
+
+  .verticaladdresses {
+    width: 65%;
+    height: 85px;
+    line-height: 85px; /* same as height! */
+
+    margin-left: 5%;
+  }
+
+  .verticalbuttons { width: 30%;  height: 85px;}
+  .littlebutton { width: 100%; height: 40px; margin-bottom: 2px;}
+  .deletebutton { width: 100%; height: 40px; margin-top: 3px;}
+
+
+  /* Form elements */
+  input { max-width: 330px; }
+  .formbt { width: 99%; max-width: 340px; }
+  .formstyle { padding-left: 4vw; }
+  /* Adding width of span to prevent CAP/City and their input being on the same line */
+  .itemtext { padding-right: 150px;}
+
+  /* On desktop the logo can be bigger */
+  /* I'm resizing the logo since it's too big */
+  .logo {
+    width: 120px;
+    height: 120px;
+    min-width: 100px;
+    min-height: 100px;
+  }
+}
+
+@media only screen and (min-width: 1300px) {
+  /* For big desktops some items don't need to be resized! */
+  .verticaladdrcontainer {
+    float: left;
+
+    width: 60%;
+    margin: 0% 5% 0% 5%;
+    padding-top: 12vh;
+  }
+
+  .verticalform {
+    float: right;
+
+    width: 25%;
+    height: 10vh;
+    margin-right: 3%;
+    padding-top: 12vh;
+  }
+}
