@@ -28,7 +28,7 @@ input {
   vertical-align: middle;
 
   width: 45%;
-  height: 40px;
+  height: 45px;
   margin-top: 15px;
   margin-left: 4%;
 }
@@ -83,7 +83,13 @@ button:hover {
 }
 
 .errore { color: red; font-size: small; padding-bottom: 5px;}
-.formstyle { padding-top: 10vh; min-width: 130px;}
+.formstyle { min-width: 130px;}
+
+.addrdiv {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
 
 /* I'm forcing a base resolution of 302px */
 @media only screen and (max-width: 302px){
@@ -114,9 +120,8 @@ button:hover {
 */
 
 @media only screen and (min-width: 750px){
-  .verticaladdresses { line-height: 40px; }
+  .verticaladdresses { line-height: 45px; }
 }
-
 
 @media only screen and (min-width: 1010px) and (max-width: 1300px){
   /* For Desktop: */
@@ -134,7 +139,6 @@ button:hover {
     width: 25%;
     height: 10vh;
     margin-right: 3%;
-    padding-top: 12vh;
   }
 
   .verticaladdresses {
@@ -153,7 +157,7 @@ button:hover {
   /* Form elements */
   input { max-width: 330px; }
   .formbt { width: 99%; max-width: 340px; }
-  .formstyle { padding-left: 4vw; }
+  .formstyle { padding-left: 4vw; padding-top: 12vh;}
   /* Adding width of span to prevent CAP/City and their input being on the same line */
   .itemtext { padding-right: 150px;}
 
@@ -183,6 +187,7 @@ button:hover {
     width: 25%;
     height: 10vh;
     margin-right: 3%;
-    padding-top: 12vh;
   }
+
+  .formstyle { padding-top: 12vh; }
 }

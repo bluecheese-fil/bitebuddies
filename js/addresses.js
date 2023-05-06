@@ -18,7 +18,7 @@ function checkInd(){
   cap = $("#cap").val();
 
   if(cap.length != 5 || isNaN(cap)){
-    $("#capinvalida").html().removeAttr("hidden");
+    $("#capinvalida").removeAttr("hidden");
     return false;
   }
 }
@@ -32,14 +32,16 @@ function verifyAddr(){
   if(!document.getElementById("capinvalida").hasAttribute("hidden")) isOk = false;
   if($("#indirizzo").val() == "") isOk = false;
 
-  text = $("#indirizzo").val() + ", " + $("#cap").val() + ", " + $("#citta").val();
+  indr = $("#indirizzo").val();
+  cap = $("#cap").val();
+  city = $("#citta").val();
 
-  if(text == ", , ") {
+  if(indr == "" && cap == "" && city == "") {
     alert("Non puoi aggiungere un indirizzo vuoto");
     return false;
   }
 
-  let jsoncookie = {"addadr" : text};
+  let jsoncookie = {"addadr" : "true", "addr" : indr, "cap" : cap, "city" : city};
 
   let cookies = document.cookie.split("; ");
   for(let i = 0; i<cookies.length; i++){
@@ -50,26 +52,36 @@ function verifyAddr(){
   // If it's "ok" (client side), I can submit the form and pass it to the server
   if(isOk){
     $.ajax({
-      url:"/php/address.php",   //the page containing php script
+      url:"/php/addresses.php",   //the page containing php script
       type: "POST",                   //request type,
       dataType: 'JSON',
       data: (jsoncookie),
-      success:function(){
+      success:function(response){
+        if(response["error"] == 1) {
+          console.log("Server error");
+          if(response["address"] == "incomplete") $("#errorindirizzo").removeAttr("hidden");
+          else if(response["cap"] == "incomplete") $("#capinvalida").removeAttr("hidden");
+          else if(response["exists"] == "true") alert("Non è possibile inserire più volte lo stesso indirizzo.")
+          console.log("Local sucess")
+          return ;
+        }
+        
         console.log("Server success");
-        nextNumber = document.getElementById("indirizziDinamici").childElementCount / 2;
-        // this is already "+1"
+        nextNumber = document.getElementById("indirizziDinamici").childElementCount; // this is already "+1"
 
-        addressesHtml = `<div class=\"verticaladdresses\" id = \"indr${nextNumber}\">${text}</div>
+        addressesHtml = `
+        <div id="totalindr${nextNumber}" class="addrdiv">
+        <div class=\"verticaladdresses\" id = \"indr${nextNumber}\">${response["finaladdr"]}</div>
         <div class=\"verticalbuttons\" id=\"btnindr${nextNumber}\">
           <button class=\"littlebutton\" onclick=def_ind(${nextNumber})> Rendi default </button>
           <button class=\"deletebutton\" onclick=del_ind(${nextNumber})> Elimina </button>
         </div>\n`;
-  
-        $("#indirizziDinamici").html() += addressesHtml;
+        
+        document.getElementById("indirizziDinamici").innerHTML += addressesHtml;
+        $("#indirizzo").val(""); $("#cap").val(""); $("#citta").val("");
 
-        $("#indirizzo").val() = "";
-        $("#cap").val() = "";
-        $("#citta").val() = "";
+        if(nextNumber > 0) $(`#totalindr${nextNumber - 1}`).css("margin-bottom", 0);
+        $(`#totalindr${nextNumber}`).css("margin-bottom", 50);
 
         console.log("Local sucess");
       }
@@ -92,7 +104,7 @@ function def_ind(ind_n) {
   console.log(jsoncookie);
 
   $.ajax({
-    url:"/php/address.php",   //the page containing php script
+    url:"/php/addresses.php",   //the page containing php script
     type: "POST",             //request type,
     dataType: 'JSON',
     data: (jsoncookie),
@@ -121,14 +133,15 @@ function del_ind(ind_n){
   }
 
   $.ajax({
-    url:"/php/address.php",   //the page containing php script
+    url:"/php/addresses.php",   //the page containing php script
     type: "POST",                   //request type,
     dataType: 'JSON',
     data: (jsoncookie),
     success:function(){
       console.log("Server success");
-      document.getElementById("indr" + ind_n).remove();
-      document.getElementById("btnindr" + ind_n).remove();
+      $("#totalindr" + ind_n).remove();
+
+      if(ind_n > 0) $(`#totalindr${ind_n - 1}`).css("margin-bottom", 50);
       console.log("Local success");
     }
   });
@@ -146,7 +159,7 @@ function getDinamic() {
   if(!jsoncookie.hasOwnProperty("saveduser") || !jsoncookie.hasOwnProperty("iv")) window.location.replace("/account/login.html");
 
   $.ajax({
-    url: "/php/address.php",
+    url: "/php/addresses.php",
     type: "POST",
     dataType: "JSON",
     data: (jsoncookie),
@@ -158,14 +171,19 @@ function getDinamic() {
 
       addressesHtml = "";
       for(let i = 0; i < response["indirizzi"].length; i++){
-        addressesHtml += `<div class=\"verticaladdresses\" id = \"indr${i}\">${response["indirizzi"][i]}</div>
-        <div class=\"verticalbuttons\" id=\"btnindr${i}\">
-          <button class=\"littlebutton\" onclick=def_ind(${i})> Rendi default </button>
-          <button class=\"deletebutton\" onclick=del_ind(${i})> Elimina </button>
+        addressesHtml += `
+        <div id="totalindr${i}" class="addrdiv">
+          <div class=\"verticaladdresses\" id = \"indr${i}\">${response["indirizzi"][i]}</div>
+          <div class=\"verticalbuttons\" id=\"btnindr${i}\">
+            <button class=\"littlebutton\" onclick=def_ind(${i})> Rendi default </button>
+            <button class=\"deletebutton\" onclick=del_ind(${i})> Elimina </button>
+          </div>
         </div>\n`;
 
       }
+
       $("#indirizziDinamici").html(addressesHtml);
+      $(`#totalindr${response["indirizzi"].length - 1}`).css("margin-bottom", 50);
     }
   });
 }

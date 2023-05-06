@@ -19,12 +19,12 @@
     <script src="/js/generalFunctions.js"> </script>
     <script src="/js/addresses.js"> </script>
 
-    <!-- This will prevent any resubmission in case of a refresh or back button -->
     <script>
-    if (window.history.replaceState) { window.history.replaceState( null, null, window.location.href ); }
+      //This will prevent any resubmission in case of a refresh or back button
+      if (window.history.replaceState) { window.history.replaceState( null, null, window.location.href ); }
 
-    // ajax call to get name and default address
-    $(document).ready(getDinamic());
+      // ajax call to get name and default address
+      $(document).ready(getDinamic());
     </script>
   </head>
   <body>

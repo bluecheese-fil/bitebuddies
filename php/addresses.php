@@ -14,7 +14,7 @@
   $usrid = preg_split("/{$delimiter}/", openssl_decrypt($info, $cipher, "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv))[0];
 
   if(array_key_exists("mkdef", $_POST)) { makedefault($usrid, $_POST["mkdef"]); }
-  else if(array_key_exists("addadr", $_POST)) add_address($usrid, $_POST["addadr"]);
+  else if(array_key_exists("addadr", $_POST)) add_address($usrid, $_POST["addr"], $_POST["cap"], $_POST["city"]);
   else if(array_key_exists("del", $_POST)){ delete_address($usrid, $_POST["del"]); }
   else if(array_key_exists("dynamic", $_POST)){ return_info($usrid);}
 
@@ -91,16 +91,35 @@
     echo json_encode(array('success' => 1));
   }
 
-  function add_address($usrid, $address) {
+  function add_address($usrid, $address, $cap, $city) {
+    // checking if address is correct (if some parts are given, all must be given)
+    if($address == "" || $cap == "" || $city == ""){
+      echo json_encode(array("success" => 1, "error" => 1, "address" => "incomplete"));
+      die();
+    }
+    
+    if(strlen($cap) != 5 || !is_numeric($cap)){
+      echo json_encode(array("success" => 1, "error" => 1, "cap" => "incomplete"));
+      die();
+    }
+
+    $address = $address.", ".$cap.", ".$city;
+
     $address = str_replace("'", "&#39", $address);
     $ins_query = "insert into indirizzi(user_id, indirizzo, def_indirizzo) values('{$usrid}', '{$address}', false);";
 
     $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
     // I need to call the querie to add the address
-    $result = pg_query($db, $ins_query) or die('Query failed:'.pg_last_error());
+    $result = pg_query($db, $ins_query);
+    // The address must already exists
+    if($result == false) {
+      echo json_encode(array("success" => 1, "error" => 1, "exists" => "true"));
+      die();
+    } 
+    
     pg_free_result($result);
     pg_close($db);
 
-    echo json_encode(array('success' => 1));
+    echo json_encode(array('success' => 1, "finaladdr" => $address));
   }
 ?>
