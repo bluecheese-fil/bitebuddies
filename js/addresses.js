@@ -73,7 +73,7 @@ function verifyAddr(){
         <div id="totalindr${nextNumber}" class="addrdiv">
         <div class=\"verticaladdresses\" id = \"indr${nextNumber}\">${response["finaladdr"]}</div>
         <div class=\"verticalbuttons\" id=\"btnindr${nextNumber}\">
-          <button class=\"littlebutton\" onclick=def_ind(${nextNumber})> Rendi default </button>
+          <button class=\"littlebutton\" id=\"defbt_id${nextNumber}\" onclick=def_ind(${nextNumber})> Rendi default </button>
           <button class=\"deletebutton\" onclick=del_ind(${nextNumber})> Elimina </button>
         </div>\n`;
         
@@ -92,6 +92,8 @@ function verifyAddr(){
 }
 
 function def_ind(ind_n) {
+  for(i = 0; i < document.getElementById("indirizziDinamici").childElementCount; i++) $(`#defbt_id${i}`).prop('disabled', true);
+
   text = document.getElementById("indr" + ind_n).textContent;
 
   let jsoncookie = {"mkdef" : text};
@@ -101,7 +103,6 @@ function def_ind(ind_n) {
     let point = cookies[i].split("=");
     if(point[0] == "iv" || point[0] == "saveduser") jsoncookie[point[0]] = point[1];
   }
-  console.log(jsoncookie);
 
   $.ajax({
     url:"/php/addresses.php",   //the page containing php script
@@ -113,6 +114,8 @@ function def_ind(ind_n) {
       def_address = $("#inddefualtdinamico").text();
       document.getElementById("indr" + ind_n).textContent = def_address;
       $("#inddefualtdinamico").text(text);
+
+      for(i = 0; i < document.getElementById("indirizziDinamici").childElementCount; i++) $(`#defbt_id${i}`).prop('disabled', false);
       console.log("Local success");
     }
   });
@@ -175,7 +178,7 @@ function getDinamic() {
         <div id="totalindr${i}" class="addrdiv">
           <div class=\"verticaladdresses\" id = \"indr${i}\">${response["indirizzi"][i]}</div>
           <div class=\"verticalbuttons\" id=\"btnindr${i}\">
-            <button class=\"littlebutton\" onclick=def_ind(${i})> Rendi default </button>
+            <button class=\"littlebutton\" id=\"defbt_id${i}\" onclick=def_ind(${i})> Rendi default </button>
             <button class=\"deletebutton\" onclick=del_ind(${i})> Elimina </button>
           </div>
         </div>\n`;
