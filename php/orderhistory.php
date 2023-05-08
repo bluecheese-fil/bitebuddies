@@ -1,14 +1,17 @@
 <?php
   require "./cookie_helper.php";
+  
+  $info = hextocharCookie($_POST["saveduser"]);
+  $iv = hextocharCookie($_POST["iv"]);
+  
+  // checking that iv is correct
+  if(strlen($iv) != 16) { echo json_encode(array('success' => 1, 'usrfound' => 0)); die(); }
 
-  if(array_key_exists("getNameNOrders", $_POST)) { getNameNOrders($_POST["saveduser"], $_POST["iv"]); }
+  if(array_key_exists("getNameNOrders", $_POST)) { getNameNOrders($info, $iv); }
   else if(array_key_exists("getOrder", $_POST)) { getOrder($_POST["order_id"]); }
 
-  function getNameNOrders($hexinfo, $hexiv){
-    $info = hextocharCookie($hexinfo);
-    $iv = hextocharCookie($hexiv);
-    $delimiter = chr(007);
-    $cipher = "aes-256-cbc";
+  function getNameNOrders($info, $iv){
+    $delimiter = chr(007); $cipher = "aes-256-cbc";
 
     $usrid = preg_split("/{$delimiter}/", openssl_decrypt($info, $cipher, "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv))[0];
 

@@ -43,7 +43,7 @@
             <li><a class="dropdown-item dropdownitem" href="/account/orderhistory.html"> Ordini </a></li>
             <li><a class="dropdown-item dropdownitem chosenlielement"> Indirizzi di consegna </a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item dropdownitem" href="#" onclick="quitUser()"> Esci </a></li>
+            <li><a class="dropdown-item dropdownitem" href="#" onclick="quitUser('/homepage.html')"> Esci </a></li>
           </ul>
         </div>
       </header>
@@ -63,8 +63,8 @@
           <div class="rightline"> <span class="itemtext"> Citta: </span> <input class="littleinput" type="text" name="citta" id="citta" onblur="checkInd()" oninput="checkInd()"> </div>
           <div class="errore" id="errorindirizzo" hidden> Indirizzo non completo </div>
           <div class="errore" id="capinvalida" hidden> Cap non corretto </div>
-          <button class="formbt" type="button" onclick="verifyAddr()"> Aggiungi Indirizzo </button>
-          <input type="text" name="addadr" id="addadr" value="add" hidden>
+          <button class="formbt" type="button" onclick="verifyAddr(updateAddresses)"> Aggiungi Indirizzo </button>
+          <input type="text" name="addadr" id="addadr" value="add" hidden> <!-- This is used to allow autofill -->
         </div>
       </div>
   </body>

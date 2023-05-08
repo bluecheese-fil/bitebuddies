@@ -25,7 +25,7 @@ function checkInd(){
 
 
 // This function is a portion of the function defined in js/signup.js
-function verifyAddr(){
+function verifyAddr(callback){
   isOk = true;
   // and the address is valid, if given
   if(!document.getElementById("errorindirizzo").hasAttribute("hidden")) isOk = false;
@@ -67,28 +67,31 @@ function verifyAddr(){
         }
         
         console.log("Server success");
-        nextNumber = document.getElementById("indirizziDinamici").childElementCount; // this is already "+1"
-
-        addressesHtml = `
-        <div id="totalindr${nextNumber}" class="addrdiv">
-        <div class=\"verticaladdresses\" id = \"indr${nextNumber}\">${response["finaladdr"]}</div>
-        <div class=\"verticalbuttons\" id=\"btnindr${nextNumber}\">
-          <button class=\"littlebutton\" id=\"defbt_id${nextNumber}\" onclick=def_ind(${nextNumber})> Rendi default </button>
-          <button class=\"deletebutton\" onclick=del_ind(${nextNumber})> Elimina </button>
-        </div>\n`;
-        
-        document.getElementById("indirizziDinamici").innerHTML += addressesHtml;
-        $("#indirizzo").val(""); $("#cap").val(""); $("#citta").val("");
-
-        if(nextNumber > 0) $(`#totalindr${nextNumber - 1}`).css("margin-bottom", 0);
-        $(`#totalindr${nextNumber}`).css("margin-bottom", 50);
-
+        callback(response["finaladdr"]);
         console.log("Local sucess");
       }
     });
   }
 
   return isOk;
+}
+
+function updateAddresses(address){
+  nextNumber = document.getElementById("indirizziDinamici").childElementCount; // this is already "+1"
+
+  addressesHtml = `
+  <div id="totalindr${nextNumber}" class="addrdiv">
+  <div class=\"verticaladdresses\" id = \"indr${nextNumber}\">${address}</div>
+  <div class=\"verticalbuttons\" id=\"btnindr${nextNumber}\">
+    <button class=\"littlebutton\" id=\"defbt_id${nextNumber}\" onclick=def_ind(${nextNumber})> Rendi default </button>
+    <button class=\"deletebutton\" onclick=del_ind(${nextNumber})> Elimina </button>
+  </div>\n`;
+  
+  document.getElementById("indirizziDinamici").innerHTML += addressesHtml;
+  $("#indirizzo").val(""); $("#cap").val(""); $("#citta").val("");
+
+  if(nextNumber > 0) $(`#totalindr${nextNumber - 1}`).css("margin-bottom", 0);
+  $(`#totalindr${nextNumber}`).css("margin-bottom", 50);
 }
 
 function def_ind(ind_n) {
@@ -142,9 +145,12 @@ function del_ind(ind_n){
     data: (jsoncookie),
     success:function(){
       console.log("Server success");
-      $("#totalindr" + ind_n).remove();
 
-      if(ind_n > 0) $(`#totalindr${ind_n - 1}`).css("margin-bottom", 50);
+      if(document.getElementById("indirizziDinamici").childElementCount > 1 && "totalindr" + ind_n == document.getElementById("indirizziDinamici").children[document.getElementById("indirizziDinamici").childElementCount - 1].id)
+        $(`#${document.getElementById("indirizziDinamici").children[document.getElementById("indirizziDinamici").childElementCount - 2].id}`).css("margin-bottom", 50);
+
+      $("#totalindr" + ind_n).remove();
+      
       console.log("Local success");
     }
   });

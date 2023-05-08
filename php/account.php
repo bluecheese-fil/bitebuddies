@@ -7,6 +7,9 @@
   $hexinfo = $_POST["saveduser"];
   $info = hextocharCookie($hexinfo);
 
+  // checking that iv is correct
+  if(strlen($iv) != 16) { echo json_encode(array('success' => 1, 'usrfound' => 0)); die(); }
+
   if(array_key_exists("changeToken", $_POST)) { changeToken($info, $iv, $temporary, $_POST["temporary"]); }
   else if(array_key_exists("dynamic", $_POST)) { getItems($info, $iv); }
   else if(array_key_exists("changeemail", $_POST)) { changeEmail($info, $iv, $temporary, $_POST["email1"], $_POST["email2"]); }

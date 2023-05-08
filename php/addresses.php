@@ -11,6 +11,9 @@
   $iv = hextocharCookie($hexiv);
   $info = hextocharCookie($hexinfo);
 
+  // checking that iv is correct
+  if(strlen($iv) != 16) { echo json_encode(array('success' => 1, 'usrfound' => 0)); die(); }
+
   $usrid = preg_split("/{$delimiter}/", openssl_decrypt($info, $cipher, "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv))[0];
 
   if(array_key_exists("mkdef", $_POST)) { makedefault($usrid, $_POST["mkdef"]); }
