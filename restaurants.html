@@ -176,7 +176,7 @@
 
     <script>
       $(document).ready(function(){
-        if(window.screen.availWidth <= 770) { // small screens
+        if(window.innerWidth <= 770) { // small screens
           $("#iconmover").attr("name", "up");
           $("#iconmover").attr("src", "https://cdn.jsdelivr.net/npm/remixicon@3.1.1/icons/Arrows/skip-down-line.svg");
         } else { // big screen
@@ -240,9 +240,40 @@
       });
 
       function changeClock(id){
-        console.log(document.getElementById(id).value);
-        
-        //alert("L'orario di consegna non e' stato impostato correttamente. E' stato spostato automaticamente al primo orario disponibile");
+        current_clock = $("#" + id).val();
+        //open_clock = document.getElementById("apertura");
+        //close_clock = document.getElementById("chiusura");
+
+        openhour = 10;
+        openminute = 30;
+
+        closehour = 20;
+        closeminute = 45;
+
+        currenthour = parseInt(current_clock.substring(0, 2));
+        currentminute = parseInt(current_clock.substring(3, 5));
+
+        newhour = currenthour.toString(); newminute = currentminute.toString();
+        if(currenthour < openhour){
+          alert("L'orario di consegna non e' stato impostato correttamente. E' stato spostato automaticamente al primo orario disponibile");
+          newhour = openhour.toString(); newminute = openminute.toString();
+        } else if(currenthour > closehour) {
+          alert("L'orario di consegna non e' stato impostato correttamente. E' stato spostato automaticamente al primo orario disponibile");
+          newhour = closehour.toString(); newminute = closeminute.toString();
+        } else if(currenthour == openhour && currentminute < openminute){
+          alert("L'orario di consegna non e' stato impostato correttamente. E' stato spostato automaticamente al primo orario disponibile");
+          newminute = openminute.toString();
+        } else if(currenthour == closehour && currentminute > closeminute){
+          alert("L'orario di consegna non e' stato impostato correttamente. E' stato spostato automaticamente al primo orario disponibile");
+          newminute = closeminute.toString();
+        } else {
+          closestMinute = Math.round(currentminute/5);
+          if(closestMinute == 12){ currenthour += 1; closestMinute = 0;} // moving the hour by one forward in time
+          newminute = (closestMinute*5).toString(); /* Making the minutes a multiple of 15 */
+        }
+
+        $("#" + id).val(newhour.padStart(2, '0') + ":" + newminute.padStart(2, '0'));
+        console.log(newhour + '-' + newminute);
       }
 
       function clicked(name){
@@ -369,7 +400,7 @@
           
           <div class="datetime">
             <span> Scegli una data  ed un orario </span>
-            <div> <input type="date" id="date" style="text-align: center;"> <input type="time" id="time" onblur="changeClock(this.id)" style="text-align: center;"> </div>
+            <div> <input type="date" id="date" style="text-align: center;"> <input type="time" step="300" id="time" onblur="changeClock(this.id)" style="text-align: center;"> </div>
           </div>
 
           <div class="address">
