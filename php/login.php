@@ -58,6 +58,11 @@
   }
 
   function login($email, $password, $remember, $iv, $info, $expiry){
+    if($email == "" || $password == ""){
+      echo json_encode(array('error' => 'info_error'));
+      die();
+    }
+    
     $cipher = "aes-256-cbc";
     $delimiter = chr(007); // bell (licence to kill)
     

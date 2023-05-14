@@ -5,12 +5,12 @@ function accountCreation(){
   sessionStorage.setItem("signuppasswd", passwd);
 }
 
-function load(){
+function load(error = false){
   url = new URL(window.location.href);
   errorparameter = url.searchParams.get('error');
 
   // If php throws an error, then 
-  if(errorparameter != null){
+  if(error || errorparameter != null){
     // this will happen only if the login button has been pressed at least once! I can reuse the email
     document.getElementById("email").value = sessionStorage.getItem("savedemail");
     localStorage.removeItem("saveduser");
@@ -61,6 +61,8 @@ function customSubmit(){
   jsncookie["email"] = document.getElementById("email").value;
   jsncookie["password"] = document.getElementById("password").value;
   jsncookie["remember"] = document.getElementById("saveaccount").checked;
+
+  if(jsncookie["email"] == "" || jsncookie["password"] == "") { load(error = true); return ; }
 
   $.ajax({
     url: "/php/login.php",   //the page containing php script
