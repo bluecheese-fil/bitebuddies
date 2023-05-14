@@ -19,6 +19,10 @@ function isLogged() {
         $("#name").text("Ciao " + response["name"]);
         $("#personallogin").removeAttr("hidden"); $("#fastredirect").remove();
       }
+    },
+    error: function(){ 
+      console.log("Server error");
+      alert("A causa di un errore del server, al momento non è possibile accedere al proprio account o fare ordini. Ci scusiamo per il disagio");
     }
   });
 }

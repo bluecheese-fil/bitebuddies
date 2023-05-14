@@ -1,12 +1,15 @@
 <?php
   require "./cookie_helper.php";
+  
+  $info = hextocharCookie($_POST["saveduser"]);
+  $iv = hextocharCookie($_POST["iv"]);
+  
+  // checking that iv is correct
+  if(strlen($iv) != 16) { echo json_encode(array('success' => 1, 'usrfound' => 0)); die(); }
 
-  if(array_key_exists("placeOrder", $_POST)) { placeOrder($_POST["saveduser"], $_POST["iv"], $_POST["restid"], $_POST["addr"], $_POST["delivery"], $_POST["items"]); }
+  if(array_key_exists("placeOrder", $_POST)) { placeOrder($info, $iv, $_POST["restid"], $_POST["addr"], $_POST["delivery"], $_POST["items"]); }
 
-  function placeOrder($hexinfo, $hexiv, $restid, $addr, $date, $delivery, $items){
-    $info = hextocharCookie($hexinfo);
-    $iv = hextocharCookie($hexiv);
-
+  function placeOrder($info, $iv, $restid, $addr, $date, $delivery, $items){
     $delimiter = chr(007);
     $cipher = "aes-256-cbc";
     $usrid = preg_split("/{$delimiter}/", openssl_decrypt($info, $cipher, "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv))[0];

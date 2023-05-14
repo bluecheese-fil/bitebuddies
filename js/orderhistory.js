@@ -91,7 +91,8 @@ function loadDynamic(){
 
       // After all of this, I can call the getOrder method for the first element
       getOrder("page0-0", orders[0][0]);
-    }
+    },
+    error: function(){ window.location.replace("/500.html"); }
   });
 }
 
@@ -152,7 +153,8 @@ function getOrder(id, order_id){
       text += "</ul>";
 
       $('#items').html(text);
-    }
+    },
+    error: function(){ window.location.replace("/500.html"); }
   });
 }
 
