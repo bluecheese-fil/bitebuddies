@@ -41,7 +41,8 @@ function load(){
         if(response["error"] == "passwd_error" || response["error"] == "info_error") window.location.replace("/account/login.html?error=passwd_error");
         else if(response["success"] == 1) window.location.replace("/homepage.html");
         console.log("Local success");
-      }
+      },
+      error: function(){ window.location.replace("/500.html"); }
     });
   }
 }
@@ -71,7 +72,8 @@ function customSubmit(){
       if(response["error"] == "passwd_error" || response["error"] == "info_error") window.location.replace("/account/login.html?error=passwd_error");
       else if(response["success"] == '1') window.location.replace("/homepage.html");
       console.log("Local success");
-    }
+    },
+    error: function(){ window.location.replace("/500.html"); }
   });
 }
 
@@ -117,7 +119,8 @@ function resetPassword(){
           alert("La password è stata reimpostata correttamente");
         }
         console.log("Local success");
-      }
+      },
+      error: function(){ window.location.replace("/500.html"); }
     });
   }
 }

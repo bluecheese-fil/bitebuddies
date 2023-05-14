@@ -69,7 +69,8 @@ function verifyAddr(callback){
         console.log("Server success");
         callback(response["finaladdr"]);
         console.log("Local sucess");
-      }
+      },
+      error: function(){ window.location.replace("/500.html"); }
     });
   }
 
@@ -120,7 +121,8 @@ function def_ind(ind_n) {
 
       for(i = 0; i < document.getElementById("indirizziDinamici").childElementCount; i++) $(`#defbt_id${i}`).prop('disabled', false);
       console.log("Local success");
-    }
+    },
+    error: function(){ window.location.replace("/500.html"); }
   });
 }
 
@@ -152,7 +154,8 @@ function del_ind(ind_n){
       $("#totalindr" + ind_n).remove();
       
       console.log("Local success");
-    }
+    },
+    error: function(){ window.location.replace("/500.html"); }
   });
 }
 
@@ -193,6 +196,7 @@ function getDinamic() {
 
       $("#indirizziDinamici").html(addressesHtml);
       $(`#totalindr${response["indirizzi"].length - 1}`).css("margin-bottom", 50);
-    }
+    },
+    error: function(){ window.location.replace("/500.html"); }
   });
 }

@@ -19,7 +19,8 @@ function getDinamic(){
 
       $("#nomedinamico").text("Ciao " + response["name"]);
       $("#nomeemaildinamico").html(response["name"] + " <br> " + response["email"]);
-    }
+    },
+    error: function(){ window.location.replace("/500.html"); }
   });
 }
 
@@ -55,7 +56,8 @@ function exitEveryWhere(){
     type: "POST",             //request type,
     dataType: 'JSON',
     data: (jsoncookie),
-    success: function(){ $("#remove").attr("hidden", true); $("#chemail").html("Cambia email <br>");}
+    success: function(){ $("#remove").attr("hidden", true); $("#chemail").html("Cambia email <br>");},
+    error: function(){ window.location.replace("/500.html"); }
   });
 }
 
@@ -166,7 +168,8 @@ function askChange(name){
 
       $("#remove").attr("hidden", true);
       $("#chemail").html("Cambia email <br>");
-    }
+    },
+    error: function(){ window.location.replace("/500.html"); }
   });
 }
 
@@ -215,6 +218,7 @@ function deleteAccount(){
           window.location.replace("/account/login.html");
         }
       }
-    }
+    },
+    error: function(){ window.location.replace("/500.html"); }
   });
 }
