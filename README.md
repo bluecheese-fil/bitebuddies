@@ -35,7 +35,7 @@ La password salvata nel database è hashed, e nei cookie viene salvato un identi
 chiave: n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&
 
 ### Eliminazione degli utenti
-Ogni foreign key ha: ONUPDATE e ONDELETE impostato a CASCADE. Basta cambiare una riga in utenti che tutte le informazioni di quell'utente vengono eliminate. Allo stesso modo, se viene cambiato l'user_id, viene aggiornato automaticamente su tutte le tabelle. E' quiid possibile eliminare facilmente un utente, dato che basta eliminare la sua riga dalla tabella "utenti"
+Ogni foreign key ha: ONUPDATE e ONDELETE impostato a CASCADE. Basta cambiare una riga in utenti che tutte le informazioni di quell'utente vengono eliminate. Allo stesso modo, se viene cambiato l'user_id, viene aggiornato automaticamente su tutte le tabelle. È quindi possibile eliminare facilmente un utente, dato che basta eliminare la sua riga dalla tabella "utenti"
 
 ### Indirizzi all'interno del database
 Tutte le apostrofi sono state sostituite con &#39, secondo lo standard html. Questo è fatto per evitare errori negli inserimenti all'interno del database, soprattutto per gli indirizzi
@@ -50,7 +50,6 @@ Per accedere al database si possono usare questa combinazione di utente e passwo
 - password    bites1!
 
 
-Nome database: BiteBuddies
 ## Definizioni delle tabelle:
 Utenti:
   - user_id bigserial :arrow_right: primarykey
@@ -66,14 +65,14 @@ Persone:
 Indirizzi:
   - user_id bigint :arrow_right: not null (fk on user_id in persone)
   - indirizzo varchar(200) :arrow_right: not null
-  - def_indirizzo boolean :arrow_right: not null (Indica l'indirizzo primario, ci può essere solo uno con true)
+  - def_indirizzo boolean :arrow_right: not null (Indica l'indirizzo primario, ci puo' essere solo uno con true)
 
   - (user_id, indirizzo) :arrow_right: primarykey (non si possono inserire piu' indirizzi per la stessa persona)
 
 Telefoni:
   - user_id bigint :arrow_right: not null (fk on user_id in persone)
   - telefono varchar(15) :arrow_right: not null
-  - def_telefono boolean :arrow_right: not null (Indica il telefono primario, ci può essere solo uno con true)
+  - def_telefono boolean :arrow_right: not null (Indica il telefono primario, ci puo' essere solo uno con true)
 
   - (user_id, telefono) :arrow_right: primarykey (non si possono inserire piu' telefoni per la stessa persona)
 
@@ -94,19 +93,24 @@ Ristoranti:
   - rest_id bigserial :arrow_right: primary key
   - nome varchar(250) :arrow_right: not null
   - immagine char(28) :arrow_right: not null
-  - orapertura char(5) :arrow_right: not null [10:30]
-  - orchiusura char(5) :arrow_right: not null [22:45]
-  - indirizzo varchar(200) :arrow_right: not null
+  - categoria varchar(50) :arrow_right: not null
+  - descrizione varchar(50) :arrow_right: not null
+  - orapertura char(5) :arrow_right: not null
+  - orachiusura char(5) :arrow_right: not null
+  - indirizzo varchar(50) :arrow_right: not null
+  - costo_consegna bigint :arrow_right: not null
+  - voto char(3) :arrow_right: not null
+  - prezzo varchar(3) :arrow_right: not null
 
 Menu:
   - rest_id bigint :arrow_right: not null (fk on rest_id in ristoranti)
-  - oggetto varchar(50) :arrow_right: not null
-  - categoria smallint :arrow_right: not null
+  - oggetto char(50) :arrow_right: not null
+  - vategoria char(50) :arrow_right: not null
   - prezzo smallint :arrow_right: not null
-  - ingrediente1 varchar(50)
-  - ingrediente2 varchar(50)
-  - ingrediente3 varchar(50)
-  
+  - ingrediente1 varchar(50) :arrow_right: not null
+  - ingrediente2 char(50) :arrow_right: not null
+  - ingrediente3 char(50) :arrow_right: not null
+  - rest_name char(50) :arrow_right: not null
 
 Login di account dato di default:
 email:  checcoz@zalon.org

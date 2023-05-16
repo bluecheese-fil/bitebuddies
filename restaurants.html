@@ -219,7 +219,7 @@
             if(response["usrfound"] == 0) {
               quitUser();
 
-              choice = confirm("E' presente un errore nell'utente memorizzato. Vuole rifare il login?");
+              choice = confirm("È presente un errore nell'utente memorizzato. Vuole rifare il login?");
               if(choice) window.location.replace("/account/login.html");
               
               $("#rightpanel").css("cursor", "default");
@@ -255,16 +255,16 @@
 
         newhour = currenthour.toString(); newminute = currentminute.toString();
         if(currenthour < openhour){
-          alert("L'orario di consegna non e' stato impostato correttamente. E' stato spostato automaticamente al primo orario disponibile");
+          alert("L'orario di consegna non è stato impostato correttamente. È stato spostato automaticamente al primo orario disponibile");
           newhour = openhour.toString(); newminute = openminute.toString();
         } else if(currenthour > closehour) {
-          alert("L'orario di consegna non e' stato impostato correttamente. E' stato spostato automaticamente al primo orario disponibile");
+          alert("L'orario di consegna non è stato impostato correttamente. È stato spostato automaticamente al primo orario disponibile");
           newhour = closehour.toString(); newminute = closeminute.toString();
         } else if(currenthour == openhour && currentminute < openminute){
-          alert("L'orario di consegna non e' stato impostato correttamente. E' stato spostato automaticamente al primo orario disponibile");
+          alert("L'orario di consegna non è stato impostato correttamente. È stato spostato automaticamente al primo orario disponibile");
           newminute = openminute.toString();
         } else if(currenthour == closehour && currentminute > closeminute){
-          alert("L'orario di consegna non e' stato impostato correttamente. E' stato spostato automaticamente al primo orario disponibile");
+          alert("L'orario di consegna non è stato impostato correttamente. È stato spostato automaticamente al primo orario disponibile");
           newminute = closeminute.toString();
         } else {
           closestMinute = Math.round(currentminute/5);
