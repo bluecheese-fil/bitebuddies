@@ -1,7 +1,7 @@
 function loadContenuto(file) {
     let jsoncookie={"loadContenuto" : "true"};
     $.ajax({
-        url: "../php/cucina.php",
+        url: "/php/cucina.php",
         type: "POST",
         dataType: "JSON",
         data: (jsoncookie),
@@ -41,12 +41,12 @@ function loadContenuto(file) {
                 }
                 var ristorante= `
                 <div class="descrizione" id="${response[i]["nome"]}">
-                    <img src="../images/static/${response[i]["immagine"]}.jpg" width="252.6px" height="154.6px" id="cucina_it">
+                    <img src="/images/static/${response[i]["immagine"]}.jpg" width="252.6px" height="154.6px" id="cucina_it">
                     <h2 class="testo" id="primo">${response[i]["nome"]}</h2>
-                    <img src="../images/static/piatti.png" class="mangiare"><h6 class="caratteristiche">${response[i]["descrizione"]}</h6>
-                    <img src="../images/static/posizione.png" class="posizione"><h6 class="indirizzo">${response[i]["indirizzo"]}</h6>
-                    <img src="../images/static/consegna.png" class="consegna"><h6 class="costo">Consegna: ${response[i]["costo_consegna"]}€</h6>
-                    <img src="../images/static/star.png" class="voto"><h6 class="stella">${response[i]["voto"]}</h6>
+                    <img src="/images/static/piatti.png" class="mangiare"><h6 class="caratteristiche">${response[i]["descrizione"]}</h6>
+                    <img src="/images/static/posizione.png" class="posizione"><h6 class="indirizzo">${response[i]["indirizzo"]}</h6>
+                    <img src="/images/static/consegna.png" class="consegna"><h6 class="costo">Consegna: ${response[i]["costo_consegna"]}€</h6>
+                    <img src="/images/static/star.png" class="voto"><h6 class="stella">${response[i]["voto"]}</h6>
                     <div class="grid-container" id=${tipo}>
                     <div class="grid-item">
                         <div id=${colore}></div>
@@ -60,7 +60,7 @@ function loadContenuto(file) {
             $(".descrizione").click(function() {
                 var id=$(this).attr("id").split(" ");
                 console.log(id);
-                window.location.href="../ristoranti/"+id+".html";
+                window.location.href="/ristoranti/"+id+".html";
             });
             
         }
@@ -70,14 +70,14 @@ function loadContenuto(file) {
 function cambiaCategoria(file) {
     let jsoncookie={"cambiaCategoria" : "true"};
     $.ajax({
-        url: "../php/cucina.php",
+        url: "/php/cucina.php",
         type: "POST",
         dataType: "JSON",
         data: (jsoncookie),
         success:function(response) {
             console.log(response);
             var categoria;
-            var immagine=`<img src="../images/static/next.png" width="30px" height="30px" class="next" id="destra"></img>`;
+            var immagine=`<img src="/images/static/next.png" width="30px" height="30px" class="next" id="destra"></img>`;
             for(var i=0; i<response.length; i++) {
                 if(response[i]["categoria"]==file) continue;
                 else {

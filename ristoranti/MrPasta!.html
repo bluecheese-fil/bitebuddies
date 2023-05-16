@@ -1,45 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MrPasta</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"> </script> 
-    <link rel="stylesheet" href="/css/ristorante.css">
-    <script src="../js/funzioni_ristoranti.js"></script>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script>
-        $(document).ready(function() {            
-            loadRistorante();
-            loadFood();
-            change();
-            loadQuantita();
-        });
-    </script>
-</head>
-<body>
+        <title>Mr.Pasta</title>
 
-    <div class="cont">
+        <link rel="stylesheet" href="/css/ristorante.css">
 
-        <a href="../homepage.html"><img src="../logo/logo.png" class="logo"></a>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"> </script> 
+        <script src="/js/funzioni_ristoranti.js"></script>
 
-        <div class="sidebar">
-          <ul></ul>
-        </div>        
+        <script>
+            $(document).ready(function() {
+                loadRistorante();
+                loadFood();
+                change();
+                loadQuantita();
+            });
+        </script>
+    </head>
+    <body>
+        <div class="cont">
+            <a href="/homepage.html"> <img src="/logo/logo.png" class="logo"> </a>
 
-        <div class="content">
-
-            <h2 class="title"></h2>
-            
-            <div class="info"></div>
-
-            <div class="pagamento">
-                <h4 id="nota">Nota</h4>
-                <h4 id="contanti">si accettano solo pagamenti in contanti</h4>
+            <div class="sidebar">
+              <ul></ul>
             </div>
 
-        </div>
-    </div> 
-</body>
+            <div class="content">
+                <h2 class="title"></h2>
+                <div class="info"></div>
+                <div class="pagamento">
+                    <h4 id="nota">Nota</h4>
+                    <h4 id="contanti">si accettano solo pagamenti in contanti</h4>
+                </div>
+            </div>
+        </div> 
+    </body>
 </html>

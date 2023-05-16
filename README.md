@@ -105,12 +105,11 @@ Ristoranti:
 Menu:
   - rest_id bigint :arrow_right: not null (fk on rest_id in ristoranti)
   - oggetto char(50) :arrow_right: not null
-  - vategoria char(50) :arrow_right: not null
+  - categoria char(50) :arrow_right: not null
   - prezzo smallint :arrow_right: not null
-  - ingrediente1 varchar(50) :arrow_right: not null
-  - ingrediente2 char(50) :arrow_right: not null
-  - ingrediente3 char(50) :arrow_right: not null
-  - rest_name char(50) :arrow_right: not null
+  - ingrediente1 varchar(50)
+  - ingrediente2 varchar(50)
+  - ingrediente3 varchar(50)
 
 Login di account dato di default:
 email:  checcoz@zalon.org

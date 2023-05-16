@@ -25,8 +25,10 @@
       $(document).ready(function() {
         isLogged();
         loadHomepage();
+
         tutteCucine();
         tuttiRistoranti();
+        
         $("#bottone_basso").click(scroll);
         $('#cerca').on('keydown', cerca);
         $(".area-text").click(function() {
@@ -91,14 +93,6 @@
     <div class="contenitore">
       <img src="/images/static/hamburger-copia4.jpg" width="110%" height="100%" class="sfondo_iniziale">
 
-      <!--<div id="phone">
-        <img src="/images/static/phone.png" width="100px" height="100px">
-      </div>-->
-
-      <!--<div id="motorbike">
-        <img src="/images/static/motorbike.png" width="100px" height="100px">
-      </div>-->
-
       <div id="foodbox">
         <img src="/images/static/foodbox.png" width="100px" height="100px">
       </div>
@@ -107,15 +101,12 @@
       <div class="sezione-text">
         <div id="int-text">
           <input class="area-text" id="cerca" type="text" list="selezione" spellcheck="false">
-          <!--<textarea cols="40" rows="1" name="cerca" class="area-text" id="cerca" autocomplete="on" style="resize: none;"></textarea>-->
         </div>
         <datalist id="selezione"></datalist>
       </div>
 
       <button id="bottone_basso"> <img src="/images/static/down-arrow.png" width="70px" height="70px"> </button>
     </div>
-
-    <!--<h3 class="ordina">ORDINA A DOMICILIO</h3>-->
       
     <div class="wrapper" id="cucina">
       <h3 class="testo1">ORDINA A DOMICILIO</h3>
@@ -131,7 +122,7 @@
           <th class="intestazione">ITALIANO</th>
         </tr>
         <td>
-          <a href="categorie/Italiano.html"><img class="immagine" width="100px" height="100px" src="../images/static/spaghetti.png"></a>
+          <a href="/categorie/Italiano.html"><img class="immagine" width="100px" height="100px" src="/images/static/spaghetti.png"></a>
         </td>
       </table>
 
@@ -140,7 +131,7 @@
           <th class="intestazione">AMERICANO</th>
         </tr>
         <td>
-          <a href="../categorie/Americano.html"><img class="immagine" width="100px" height="100px" src="/images/static/american_food.png"></a>
+          <a href="/categorie/Americano.html"><img class="immagine" width="100px" height="100px" src="/images/static/american_food.png"></a>
         </td>
       </table>
 
@@ -149,7 +140,7 @@
           <th class="intestazione">CINESE</th>
          </tr>
         <td>
-          <a href="../categorie/Cinese.html"><img class="immagine" width="100px" height="100px" src="/images/static/chinese_food.png"></a>
+          <a href="/categorie/Cinese.html"><img class="immagine" width="100px" height="100px" src="/images/static/chinese_food.png"></a>
         </td>
       </table>
 
@@ -158,7 +149,7 @@
           <th class="intestazione">GIAPPONESE</th>
          </tr>
         <td>
-          <a href="../categorie/Giapponese.html"><img class="immagine" width="100px" height="100px" src="/images/static/japanese_food.png"></a>
+          <a href="/categorie/Giapponese.html"><img class="immagine" width="100px" height="100px" src="/images/static/japanese_food.png"></a>
         </td>
       </table>
 
@@ -167,7 +158,7 @@
           <th class="intestazione">PIZZA</th>
         </tr>
         <td>
-          <a href="../categorie/Pizza.html"><img class="immagine" width="100px" height="100px" src="/images/static/pizza_food.png"></a>
+          <a href="/categorie/Pizza.html"><img class="immagine" width="100px" height="100px" src="/images/static/pizza_food.png"></a>
         </td>
       </table>
 
@@ -176,7 +167,7 @@
           <th class="intestazione">KEBAB</th>
         </tr>
         <td>
-          <a href="../categorie/Kebab.html"><img class="immagine" width="100px" height="100px" src="/images/static/kebab_food.png"></a>
+          <a href="/categorie/Kebab.html"><img class="immagine" width="100px" height="100px" src="/images/static/kebab_food.png"></a>
         </td>
       </table>
 
@@ -185,14 +176,12 @@
           <th class="intestazione">COLAZIONE</th>
         </tr>
         <td>
-          <a href="../categorie/Colazione.html"><img class="immagine" width="100px" height="100px" src="/images/static/breakfast.png"></a>
+          <a href="/categorie/Colazione.html"><img class="immagine" width="100px" height="100px" src="/images/static/breakfast.png"></a>
         </td>
       </table>
 
       <div class="bottone" id="dx">
-        <button name="scorri" type="button" id="bottone_dx1">
-          <img src="/images/static/freccia_sinistra.png" width="30px" height="30px">  
-        </button>
+        <button name="scorri" type="button" id="bottone_dx1"> <img src="/images/static/freccia_sinistra.png" width="30px" height="30px"> </button>
       </div>
     </div>
 
@@ -218,85 +207,9 @@
           <li><h4 class="domanda_next">Chi siamo?</h4><h4 class="risposta_next">Filippo e Francesco</h4></li>
           <li><h4 class="domanda_next_next">Contatti:</h4><h4 class="risposta_next_next">+39 325 825 5192</h4></li>
         </ul>
-        <a href="../homepage.html"><img class="logo" id="logo_finale" src="/logo/logo.png" alt="logo"></a>
+        <a href="/homepage.html"><img class="logo" id="logo_finale" src="/logo/logo.png" alt="logo"></a>
       </div>
     </div>
 
   </body>
 </html>
-
-    <!--<div class="wrapper" id="catena">
-      <h3 class="testo2">LE NOSTRE CATENE</h3>
-
-
-        <button type="button" id="bottone_sx2">
-          <img src="/images/static/left-arrow.png" width="40px" height="40px">  
-        </button>
-
-        <table width="250" height="170" cellpadding="0" class="table2" id="mcdonalds">
-          <tr>
-            <th class="intestazione">MC DONALD'S</th>
-          </tr>
-          <td>
-            <a href="mcdonald's.html"><img width="250px" height="170px" src="/images/static/mcdonald's.jpg"></a>
-          </td>
-        </table>
-
-        <table width="250" height="170" cellpadding="0" class="table2" id="kfc">
-          <tr>
-            <th class="intestazione">KFC</th>
-          </tr>
-          <td>
-            <a href="kfc.html"><img width="250px" height="170px" src="/images/static/kfc.jpg"></a>
-          </td>
-        </table>
-
-        <table width="250" height="170" cellpadding="0" class="table2" id="fiveguys">
-          <tr>
-            <th class="intestazione">FIVE GUYS</th>
-          </tr>
-          <td>
-            <a href="fiveguys.html"><img width="250px" height="170px" src="/images/static/fiveguys.jpg"></a>
-          </td>
-        </table>
-
-        <table width="250" height="170" cellpadding="0" class="table2" id="subway">
-          <tr>
-            <th class="intestazione">SUBWAY</th>
-          </tr>
-          <td>
-            <a href="subway.html"><img width="250px" height="170px" src="/images/static/subway.jpg"></a>
-          </td>
-        </table>
-
-        <table width="250" height="170" cellpadding="0" class="table2" id="alice_pizza">
-          <tr>
-            <th class="intestazione">ALICE PIZZA</th>
-          </tr>
-          <td>
-            <a href="alice_pizza.html"><img width="250px" height="170px" src="/images/static/alice_pizza.jpg"></a>
-          </td>
-        </table>
-
-        <table width="250" height="170" cellpadding="0" class="table2" id="montaditos">
-          <tr>
-            <th class="intestazione">100 MONTADITOS</th>
-          </tr>
-          <td>
-            <a href="100_montaditos.html"><img width="250px" height="170px" src="/images/static/100_montaditos.jpg"></a>
-          </td>
-        </table>
-
-        <table width="250" height="170" cellpadding="0" class="table2" id="taco_bell">
-          <tr>
-            <th class="intestazione">TACO BELL</th>
-          </tr>
-          <td>
-            <a href="taco_bell.html"><img width="250px" height="170px" src="/images/static/taco_bell.jpg"></a>
-          </td>
-        </table>
-
-        <button type="button" id="bottone_dx2">
-          <img src="/images/static/right-arrow.png" width="40px" height="40px">  
-        </button>
-    </div>-->

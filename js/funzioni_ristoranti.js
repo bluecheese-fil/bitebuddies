@@ -1,7 +1,7 @@
 function loadFood() {
     let jsoncookie = {"menu" : "true"};
     $.ajax({
-        url: "../php/menu.php",
+        url: "/php/menu.php",
         type: "POST",
         dataType: "JSON",
         data: (jsoncookie),
@@ -111,7 +111,7 @@ function loadFood() {
 function loadQuantita() {
     let jsoncookie = {"loadQuantita" : "true"};
     $.ajax({
-        url: "../php/menu.php",
+        url: "/php/menu.php",
         type: "POST",
         dataType: "JSON",
         data: (jsoncookie),
@@ -129,7 +129,7 @@ function loadQuantita() {
 function loadRistorante() {
     let jsoncookie = {"ristoranti" : "true"};
     $.ajax({
-        url: "../php/menu.php",
+        url: "/php/menu.php",
         type: "POST",
         dataType: "JSON",
         data: (jsoncookie),
@@ -141,9 +141,9 @@ function loadRistorante() {
             var info=`
             <h4 class="categoria">${response[0]["categoria"]}</h4>
             <h4 class="descrizione">${response[0]["descrizione"]}</h4>
-            <h4 class="indirizzo"><img src="../images/static/posizione.png" width="20px" height="20px" class="posizione">${response[0]["indirizzo"]}</h4>
-            <h4 class="consegna"><img src="../images/static/consegna.png" width="20px" height="20px" class="img-consegna">Consegna: ${response[0]["costo_consegna"]}€</h4>
-            <img src="../images/static/star.png" class="voto"><h4 class="stella">${response[0]["voto"]}</h4>
+            <h4 class="indirizzo"><img src="/images/static/posizione.png" width="20px" height="20px" class="posizione">${response[0]["indirizzo"]}</h4>
+            <h4 class="consegna"><img src="/images/static/consegna.png" width="20px" height="20px" class="img-consegna">Consegna: ${response[0]["costo_consegna"]}€</h4>
+            <img src="/images/static/star.png" class="voto"><h4 class="stella">${response[0]["voto"]}</h4>
             <div class="grid-container" id="medio">
                 <div class="grid-item">
                   <div id="giallo"></div>
@@ -158,7 +158,7 @@ function loadRistorante() {
 function change() {
     let jsoncookie = {"change" : "true"};
     $.ajax({
-        url: "../php/menu.php",
+        url: "/php/menu.php",
         type: "POST",
         dataType: "JSON",
         data: (jsoncookie),
