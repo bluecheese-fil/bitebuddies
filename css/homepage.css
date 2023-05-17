@@ -2,16 +2,6 @@
 
 body { background-color: white; overflow-x:hidden; }
 
-/*
-.logo {
-  width: 110px;
-  height: 110px;
-  cursor: pointer;
-  position: relative;
-  left: 5%;
-  top: -3%;
-}*/
-
 button { border: none }
 
 #uno:hover {
@@ -34,11 +24,16 @@ button { border: none }
 }
 .inizio {
   position: relative;
-  left: -35%;
+  left: -36.5%;
   top: 5%;
   font-family: "Bitcheese", sans-serif;
   font-size: 25px;
   display: inline-block;
+}
+#logo_homepage {
+  position: absolute;
+  left: 0%;
+  top: 5%;
 }
 @font-face {
   font-family: 'Macaroni';
@@ -157,20 +152,6 @@ header {
   overflow-y: hidden;
   z-index: 2;
 }
-#phone {
-  position: absolute;
-  left: 30%;
-  top: 10%;
-  transform: translate(-50%, -0%);
-  z-index: 2;
-}
-#motorbike {
-  position: absolute;
-  left: 50%;
-  top: 10%;
-  transform: translate(-50%, -0%);
-  z-index: 2;
-}
 #foodbox {
   position: absolute;
   left: 50%;
@@ -195,21 +176,6 @@ header {
 
 img { border-radius: 0px 0px 10px 10px; }
 
-.ordina {
-  position: relative;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 5px;
-  line-height: 40px;
-  margin-top: 50px;
-  background-color: rgb(0, 45, 60);
-  width: 400px;
-  height: 40px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  color: white;
-  text-align: center;
-}
 .fine {
   position: absolute;
   left: 0%;

@@ -6,12 +6,13 @@ function loadContenuto(file) {
         dataType: "JSON",
         data: (jsoncookie),
         success:function(response) {
-            var categ=`<h4 class="titolo-categoria">${file[0]}</h4>`;
+            console.log(response);
+            var categ=`<h4 class="titolo-categoria">${file}</h4>`;
             $(".item-categoria").append(categ);
             var conta=0, primo=0, ultimo=0;
             for(var i=0; i<response.length; i++) {
                 console.log(response[i]["categoria"]);
-                if(response[i]["categoria"]==file[0] && conta==0) {
+                if(response[i]["categoria"]==file && conta==0) {
                     conta++;
                     primo=i;
                 }
@@ -19,10 +20,13 @@ function loadContenuto(file) {
                     ultimo=i+1;
                     break;
                 }
-                else if(i!=0 && response[i]["categoria"]!=file[0] && response[i-1]["categoria"]==file[0]) {
+                else if(i!=0 && response[i]["categoria"]!=file && response[i-1]["categoria"]==file) {
                     ultimo=i;
                     break;
                 }
+            }
+            if(primo==response.length-1) {
+                ultimo=primo+1;
             }
             for(var i=primo; i<ultimo; i++) {
                 switch (response[i]["prezzo"]) {
@@ -41,7 +45,7 @@ function loadContenuto(file) {
                 }
                 var ristorante= `
                 <div class="descrizione" id="${response[i]["nome"]}">
-                    <img src="/images/static/${response[i]["immagine"]}.jpg" width="252.6px" height="154.6px" id="cucina_it">
+                    <img src="/images/ristoranti/${response[i]["immagine"]}.jpg" width="252.6px" height="154.6px" id="cucina_it">
                     <h2 class="testo" id="primo">${response[i]["nome"]}</h2>
                     <img src="/images/static/piatti.png" class="mangiare"><h6 class="caratteristiche">${response[i]["descrizione"]}</h6>
                     <img src="/images/static/posizione.png" class="posizione"><h6 class="indirizzo">${response[i]["indirizzo"]}</h6>
@@ -58,7 +62,7 @@ function loadContenuto(file) {
                 $(".scatola").append(ristorante);
             }
             $(".descrizione").click(function() {
-                var id=$(this).attr("id").split(" ");
+                var id=$(this).attr("id");
                 console.log(id);
                 window.location.href="/ristoranti/"+id+".html";
             });

@@ -25,14 +25,12 @@ function loadFood() {
             }
             var index=0;
             for(var j=0; j<array.length; j++) {
-                var categoria=response[index]["categoria"].split(" ");
-                var rest_name=response[index]["rest_name"].split(" ");
-                var elencoContainer = $("<div>").addClass("elenco").attr("id", categoria[0]+rest_name[0]);
-                li=`<li class="menù" id="${categoria[0]}">${categoria[0]}</li>`;
+                var categoria=response[index]["categoria"];
+                var elencoContainer = $("<div>").addClass("elenco").attr("id", categoria);
+                li=`<li class="menù" id="${categoria}">${categoria}</li>`;
                 $(".sidebar ul").append(li);
                 var ii=0;
                 for(var i=index; i<index+array[j]; i++) {
-                    var oggetto=(response[i]["oggetto"]).split(" ");
                     html = `
                     <div class="id${ii}_elem">
                         <h2 class="cibo">${response[i]["oggetto"]}</h2>
@@ -116,11 +114,11 @@ function loadQuantita() {
         dataType: "JSON",
         data: (jsoncookie),
         success:function(response) {
-            nome="mrpasta";
             $(".carrello").click(function() {
-                var id=$(this).attr("name").split(" ");
-                $("#box_"+id[0]).hide();
-                $("#"+id[0]+"_mrpasta").fadeIn();
+                var id=$(this).attr("name");
+                console.log(id);
+                $("#box_"+id).hide();
+                $("#"+id).fadeIn();
             });
         }
     });
@@ -136,7 +134,7 @@ function loadRistorante() {
         success:function(response) {
             var nome=response[0]["nome"];
             $(".title").append(nome);
-            var img=`<img src="/images/static/${response[0]["immagine"]}.jpg" class="foto" width="352.6px" height="264.6px"></img>`;
+            var img=`<img src="/images/ristoranti/${response[0]["immagine"]}.jpg" class="foto" width="352.6px" height="264.6px"></img>`;
             $(".content").append(img);
             var info=`
             <h4 class="categoria">${response[0]["categoria"]}</h4>
@@ -163,15 +161,15 @@ function change() {
         dataType: "JSON",
         data: (jsoncookie),
         success:function(response) {
-            var id0=response[0]["categoria"].split(" ");
-            var name=response[0]["rest_name"].split(" ");
-            $("#"+id0[0]).css('background-color', 'rgba(197, 192, 192, 0.726)');
+            var id0=response[0]["categoria"];
+            $("#"+id0).css('background-color', 'rgba(197, 192, 192, 0.726)');
             $(".menù").click(function() {
-                var id=$(this).attr("id").split(" ");
-                $("#"+id0[0]).css('background-color', 'unset');
-                $("#"+id[0]).css('background-color', 'rgba(197, 192, 192, 0.726)');
-                $("#"+id0[0]+name[0]).hide();
-                $("#"+id[0]+name[0]).fadeIn();
+                var id=$(this).attr("id");
+                console.log(id);
+                $("#"+id0).css('background-color', 'unset');
+                $("#"+id).css('background-color', 'rgba(197, 192, 192, 0.726)');
+                $(".elenco#"+id0).hide();
+                $(".elenco#"+id).fadeIn();
                 id0=id;                
             });
         }

@@ -1,108 +1,424 @@
-.ristorante {
-    position: relative;
-    width: 500px;
-    height: 500px;
-    border-radius: 20px;
-    border: solid 2px;
-    left: 0%;
-    top: 20%;
-}
-.header {
-    position: relative;
-    width: 500px;
-    height: 50px;
-}
-.titolo {
+.contatore {
     position: absolute;
-    top: 13%;
-    left: 50%;
-    border: solid 2px;
-    padding: 5px 5px 5px 5px;
+    left: 16.75%;
+    top: 53%;
+    width: 130px;
+    height: 60px;
+    background-color: unset;
     border-radius: 5px;
-    transform: translate(-50%, -50%);
+  }
+  .minus {
+    position: relative;
+    left: 5%;
+    top: 15%;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: rgb(252, 103, 4);
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .minus:hover {
+    background-color: rgb(211, 89, 7);
+  }
+  .meno {
+    position: relative;
+    left: 0%;
+    top: 3%;
+    filter: invert(100%);
+  }
+  .porzioni {
+    position: relative;
+    left: 3%;
+    top: 12%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: 20px;
+    border: none;
+    background-color: unset;
     color: black;
-}
-.fivestars {
+  }
+  .plus {
+    position: relative;
+    left: 0%;
+    top: 15%;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: rgb(252, 103, 4);
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .plus:hover {
+    background-color: rgb(211, 89, 7);
+  }
+  .più {
+    position: relative;
+    left: 0%;
+    top: 3%;
+    filter: invert(100%);
+  }
+  .cont {
+    display: flex;
+    margin-left: 20px;
+    margin-top: 20px;
+    align-items: flex-start;
+  }
+  .logo {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-top: 10px;
+  }
+  .content {
+    position: relative;
+    left: -6%;
+    width: 700px;
+    height: 300px;
+  }
+  .foto {
     position: absolute;
-    left: 80%;
+    left: 50%;
+    top: -1%;
+    border-radius: 10px;
+  }
+  .info {
+    position: absolute;
+    left: 50%;
+    top: 105%;
+    margin-top: 5px;
+    width: 352.6px;
+    height: 185px;
+    background-color: unset;
+    border: solid 1px;
+    border-color: rgba(197, 192, 192, 0.726);
+    border-radius: 5px;
+    box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  .title {
+    position: absolute;
+    left: 75.3%;
+    top: 85%;
+    width: 352.6px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 5px;
+    background-color: unset;
+    border: solid 1px;
+    border-color: rgba(197, 192, 192, 0.726);
+    border-radius: 5px;
+    box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transform: translate(-50%, 0%);
+    font-family: "Montserrat", sans-serif;
+    z-index: 2;
+  }
+  .categoria {
+    position: relative;
+    left: 91%;
+    top: 1%;
+    transform: translate(-50%, -50%);
+    font-family: "Montserrat", sans-serif;
+  }
+  .descrizione {
+    position: relative;
+    left: 43%;
+    top: -10%;
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+  }
+  .indirizzo {
+    position: absolute;
+    margin-left: 40px;
+    top: 31%;
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+  }
+  .posizione {
+    position: absolute;
+    left: -18%;
+    top: -15%;
+  }
+  .consegna {
+    position: absolute;
+    margin-left: 42px;
+    top: 51%;
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+  }
+  .img-consegna {
+    position: absolute;
+    left: -28%;
+    top: -5%;
+  }
+  .voto {
+    position: relative;
+    top: 27%;
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+  }
+  .stella {
+    position: relative;
+    margin-left: 45px;
+    top: 4%;
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+  }
+  .grid-container#medio {
+    position: absolute;
+    left: 75%;
+    top: 1%;
+    width: 80px;
+    height: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: unset;
+  }
+  .grid-item#euro {
+    width: 40px;
+    height: 40px;
+    padding: 0px;
+    text-align: left;
+    color: black;
+    line-height: 40px;
+  }
+  #giallo {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 50px;
+    background-color: yellow;
+    left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-}
-.pasta {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-top: solid 2px;
-    border-bottom: solid 2px;
-}
-.categoria_ristorante {
-    position: absolute;
-    left: 50%;
-    top: 70%;
-    transform: translate(-50%, -50%);
-}
-.indirizzo {
-    position: absolute;
-    left: 2%;
-    top: 75%;
-}
-.consegna {
-    position: absolute;
-    left: 2%;
-    top: 82.5%;
-}
-.telefono {
-    position: absolute;
-    left: 2%;
-    top: 90%;
-}
-.menù {
-    width: 600px;
-    height: 600px;
+  }
+  .pagamento {
     position: relative;
-}
-.carbonara {
+    width: 352.6px;
+    height: 60px;
+    background-color: rgba(197, 192, 192, 0.500);
+    text-align: center;
+    line-height: 30px;
+    left: 50%;
+    top: 165%;
+    border-color: rgba(197, 192, 192, 0.726);
+    border-radius: 5px;
+    box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+  }
+  #nota {
+    position: relative;
+    top: 8%;
+    text-decoration: underline;
+  }
+  #contanti {
+    position: relative;
+    top: -40%;
+  }
+  .sidebar {
+    position: relative;
+    width: 110px;
+    left: -7.7%;
+    margin-top: 140px;
+  }
+  .sidebar ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0;
+  }  
+  .sidebar li {
+    padding: 10px;
+    margin-bottom: 5px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+  }
+  .elenco {
     position: absolute;
-    left: 0%;
+    width: 300px;
+    height: 600px;
+    left: 12%;
+    top: 2.5%;
+    background-color: unset;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 1;
+  }
+  .elenco::-webkit-scrollbar {
+    width: 10px;
+    position: absolute;
+    left: 50%;
+  }
+  .elenco::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 5px;
+  }
+  .elenco::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
+  .id0_elem {
+    position: absolute;
+    width: 270px;
+    height: 125px;
+    margin-top: 5px;
+    margin-left: 4.5px;
+    background-color: unset;
+    border: solid 1px;
+    border-color: rgba(197, 192, 192, 0.726);
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+  }
+  .id1_elem {
+    position: absolute;
+    width: 270px;
+    height: 125px;
+    top: 23%;
+    margin-top: 20px;
+    margin-left: 4.5px;
+    background-color: unset;
+    border: solid 1px;
+    border-color: rgba(197, 192, 192, 0.726);
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  .id2_elem {
+    position: absolute;
+    width: 270px;
+    height: 125px;
+    top: 46%;
+    margin-top: 35px;
+    margin-left: 4.5px;
+    background-color: unset;
+    border: solid 1px;
+    border-color: rgba(197, 192, 192, 0.726);
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  .id3_elem {
+    position: absolute;
+    width: 270px;
+    height: 125px;
+    top: 69%;
+    margin-top: 50px;
+    margin-left: 4.5px;
+    background-color: unset;
+    border: solid 1px;
+    border-color: rgba(197, 192, 192, 0.726);
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  .id4_elem {
+    position: absolute;
+    top: 120%;
+    width: 270px;
+    height: 125px;
+    top: 92%;
+    margin-top: 65px;
+    margin-left: 4.5px;
+    background-color: unset;
+    border: solid 1px;
+    border-color: rgba(197, 192, 192, 0.726);
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  .cibo {
+    position: relative;
+    text-align: center;
+    width: 267px;
+    left: 1%;
+    margin: 0;
+    background-color: unset;
+    color: black;
+    border-radius: 5px;
+    font-family: "Montserrat", sans-serif;
+    padding-top: 5px;
+  }
+  .ingredienti {
+    position: relative;
+    left: 1%;
+    width: 275px;
+    margin-top: 7.5px;
+    text-align: center;
+    font-size: 13px;
+    background-color: unset;
+    border-radius: 5px;
+    height: 30px;
+    line-height: 30px;
+  }
+  .costo {
+    position: absolute;
+    left: 80%;
     top: 0%;
-}
-#plus1 {
-    width: 20px;
-    height: 20px;
-}
-#minus1 {
-    width: 20px;
-    height: 20px;
-}
-#plus2 {
-    width: 20px;
-    height: 20px;
-}
-#minus2 {
-    width: 20px;
-    height: 20px;
-}
-#plus3 {
-    width: 20px;
-    height: 20px;
-}
-#minus3 {
-    width: 20px;
-    height: 20px;
-}
-#plus4 {
-    width: 20px;
-    height: 20px;
-}
-#minus4 {
-    width: 20px;
-    height: 20px;
-}
-.conferma {
+    background-color: unset;
+    color: black;
+    width: 50px;
+    border-radius: 5px;
+    height: 28px;
+    margin-top: 7px;
+  }
+  .prezzo_box {
     position: absolute;
-    left: 43%;
-    top: 100%;
-    width: 200px;
-    height: 50px;
-}
+    left: 20%;
+    top: -65%;
+    font-size: 20px;
+    line-height: 28px;
+  }
+  .prezzo_box#corto {
+    position: absolute;
+    left: 25%;
+    top: -65%;
+  }
+  .carrello {
+    position: absolute;
+    left: 19%;
+    top: 60%;
+    width: 175px;
+    height: 40px;
+    background-color: rgb(0, 45, 60);
+    text-align: left;
+    border-radius: 5px;
+    border: none;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .carrello:hover {
+    background-color: rgb(1, 29, 39);
+  }
+  .aggiungi {
+    position: relative;
+    top: -15%;
+    margin-left: 3px;
+    display: inline-block;
+    color: white;
+  }
+  .cart {
+    position: relative;
+    top: 10%;
+    display: inline-block;
+    filter: invert(100%);
+  }
+  .spesa {
+    position: absolute;
+    left: 107.5%;
+    top: 15%;
+    height: 40px;
+    background-color: rgb(252, 103, 4);
+    border: none;
+    border-radius: 5px;
+  }
+  .spesa:hover {
+    cursor: pointer;
+    background-color: rgb(211, 89, 7);
+  }
+  .popup {
+    position: relative;
+    left: -8%;
+    top: 2%;
+    filter: invert(100%);
+  }
+  

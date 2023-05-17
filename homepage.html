@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/logo/logostyle.css">
     <link rel="stylesheet" href="/css/homepage.css">
     <link rel="stylesheet" href="/css/cucina.css">
-    <link rel="stylesheet" href="/css/catena.css">
 
     <!-- Dropdown css -->
     <link rel="stylesheet" href="/css/dropdown.css">
@@ -25,32 +24,12 @@
       $(document).ready(function() {
         isLogged();
         loadHomepage();
-
         tutteCucine();
         tuttiRistoranti();
-        
         $("#bottone_basso").click(scroll);
         $('#cerca').on('keydown', cerca);
         $(".area-text").click(function() {
-          var lettere=[];
-          var textarea=document.getElementById('cerca');
-          textarea.addEventListener('input', function(event) {
-            var inputEvent=event.inputType;
-            var inputValue=event.target.value;
-            if (inputEvent=='insertText' && inputValue.length > 0) {
-              var character=inputValue.charAt(inputValue.length - 1);
-              lettere.push(character);
-              console.log(lettere);
-              getSuggerimenti(lettere);
-            }
-          });
-          textarea.addEventListener('keydown', function(event) {
-            if (event.key==="Backspace") {
-              var carattereCancellato = textarea.value.charAt(textarea.selectionStart - 1);
-              lettere.splice(lettere.length-1);
-              getSuggerimenti(lettere);
-            }
-          });
+          cercaRistorante();
         });
       });
     </script>
@@ -58,7 +37,7 @@
   </head>
   <body>
     <header class="header">
-      <a href="/homepage.html"><img class="logo" src="/logo/logo.png" alt="logo"></a>
+      <a href="/homepage.html"><img class="logo" id="logo_homepage" src="/logo/logo.png" alt="logo"></a>
 
       <h5 class="inizio">Cerca il tuo ristorante!</h5>
 
@@ -117,71 +96,73 @@
         </button>
       </div>
 
-      <table width="250" height="170" cellpadding="0" class="table1" id="cucina_italiana">
+      <a href="/categorie/Italiano.html"><table width="250" height="170" cellpadding="0" class="table1" id="cucina_italiana">
         <tr>
           <th class="intestazione">ITALIANO</th>
         </tr>
         <td>
-          <a href="/categorie/Italiano.html"><img class="immagine" width="100px" height="100px" src="/images/static/spaghetti.png"></a>
+          <img class="immagine" width="100px" height="100px" src="/images/static/spaghetti.png">
         </td>
-      </table>
+      </table></a>
 
-      <table width="250" height="170" cellpadding="0" class="table1" id="cucina_americana">
+      <a href="/categorie/Americano.html"><table width="250" height="170" cellpadding="0" class="table1" id="cucina_americana">
         <tr>
           <th class="intestazione">AMERICANO</th>
         </tr>
         <td>
-          <a href="/categorie/Americano.html"><img class="immagine" width="100px" height="100px" src="/images/static/american_food.png"></a>
+          <img class="immagine" width="100px" height="100px" src="/images/static/american_food.png">
         </td>
-      </table>
+      </table></a>
 
-      <table width="250" height="170" cellpadding="0" class="table1" id="cucina_cinese">
+      <a href="/categorie/Cinese.html"><table width="250" height="170" cellpadding="0" class="table1" id="cucina_cinese">
         <tr>
           <th class="intestazione">CINESE</th>
          </tr>
         <td>
-          <a href="/categorie/Cinese.html"><img class="immagine" width="100px" height="100px" src="/images/static/chinese_food.png"></a>
+          <img class="immagine" width="100px" height="100px" src="/images/static/chinese_food.png">
         </td>
-      </table>
+      </table></a>
 
-      <table width="250" height="170" cellpadding="0" class="table1" id="cucina_giapponese">
+      <a href="/categorie/Giapponese.html"><table width="250" height="170" cellpadding="0" class="table1" id="cucina_giapponese">
         <tr>
           <th class="intestazione">GIAPPONESE</th>
          </tr>
         <td>
-          <a href="/categorie/Giapponese.html"><img class="immagine" width="100px" height="100px" src="/images/static/japanese_food.png"></a>
+          <img class="immagine" width="100px" height="100px" src="/images/static/japanese_food.png">
         </td>
-      </table>
+      </table></a>
 
-      <table width="250" height="170" cellpadding="0" class="table1" id="pizza">
+      <a href="/categorie/Pizza.html"><table width="250" height="170" cellpadding="0" class="table1" id="pizza">
         <tr>
           <th class="intestazione">PIZZA</th>
         </tr>
         <td>
-          <a href="/categorie/Pizza.html"><img class="immagine" width="100px" height="100px" src="/images/static/pizza_food.png"></a>
+          <img class="immagine" width="100px" height="100px" src="/images/static/pizza_food.png">
         </td>
-      </table>
+      </table></a>
 
-      <table width="250" height="170" cellpadding="0" class="table1" id="kebab">
+      <a href="/categorie/Kebab.html"><table width="250" height="170" cellpadding="0" class="table1" id="kebab">
         <tr>
           <th class="intestazione">KEBAB</th>
         </tr>
         <td>
-          <a href="/categorie/Kebab.html"><img class="immagine" width="100px" height="100px" src="/images/static/kebab_food.png"></a>
+          <img class="immagine" width="100px" height="100px" src="/images/static/kebab_food.png">
         </td>
-      </table>
+      </table></a>
 
-      <table width="250" height="170" cellpadding="0" class="table1" id="vegano">
+      <a href="/categorie/Colazione.html"><table width="250" height="170" cellpadding="0" class="table1" id="vegano">
         <tr>
           <th class="intestazione">COLAZIONE</th>
         </tr>
         <td>
-          <a href="/categorie/Colazione.html"><img class="immagine" width="100px" height="100px" src="/images/static/breakfast.png"></a>
+          <img class="immagine" width="100px" height="100px" src="/images/static/breakfast.png">
         </td>
-      </table>
+      </table></a>
 
       <div class="bottone" id="dx">
-        <button name="scorri" type="button" id="bottone_dx1"> <img src="/images/static/freccia_sinistra.png" width="30px" height="30px"> </button>
+        <button name="scorri" type="button" id="bottone_dx1">
+          <img src="/images/static/freccia_sinistra.png" width="30px" height="30px">  
+        </button>
       </div>
     </div>
 
