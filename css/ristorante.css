@@ -59,12 +59,7 @@
     top: 3%;
     filter: invert(100%);
   }
-  .cont {
-    display: flex;
-    margin-left: 20px;
-    margin-top: 20px;
-    align-items: flex-start;
-  }
+
   .logo {
     position: relative;
     width: 100px;

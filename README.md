@@ -98,14 +98,14 @@ Ristoranti:
   - orapertura char(5) :arrow_right: not null
   - orachiusura char(5) :arrow_right: not null
   - indirizzo varchar(50) :arrow_right: not null
-  - costo_consegna bigint :arrow_right: not null
-  - voto char(3) :arrow_right: not null
+  - costo_consegna smallint
+  - voto char(3)
   - prezzo varchar(3) :arrow_right: not null
 
 Menu:
   - rest_id bigint :arrow_right: not null (fk on rest_id in ristoranti)
   - oggetto char(50) :arrow_right: not null
-  - categoria char(50) :arrow_right: not null
+  - categoria varchar(50) :arrow_right: not null
   - prezzo smallint :arrow_right: not null
   - ingrediente1 varchar(50)
   - ingrediente2 varchar(50)

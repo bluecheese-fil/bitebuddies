@@ -124,35 +124,6 @@ function loadQuantita() {
     });
 }
 
-function loadRistorante() {
-    let jsoncookie = {"ristoranti" : "true"};
-    $.ajax({
-        url: "/php/menu.php",
-        type: "POST",
-        dataType: "JSON",
-        data: (jsoncookie),
-        success:function(response) {
-            var nome=response[0]["nome"];
-            $(".title").append(nome);
-            var img=`<img src="/images/ristoranti/${response[0]["immagine"]}.jpg" class="foto" width="352.6px" height="264.6px"></img>`;
-            $(".content").append(img);
-            var info=`
-            <h4 class="categoria">${response[0]["categoria"]}</h4>
-            <h4 class="descrizione">${response[0]["descrizione"]}</h4>
-            <h4 class="indirizzo"><img src="/images/static/posizione.png" width="20px" height="20px" class="posizione">${response[0]["indirizzo"]}</h4>
-            <h4 class="consegna"><img src="/images/static/consegna.png" width="20px" height="20px" class="img-consegna">Consegna: ${response[0]["costo_consegna"]}€</h4>
-            <img src="/images/static/star.png" class="voto"><h4 class="stella">${response[0]["voto"]}</h4>
-            <div class="grid-container" id="medio">
-                <div class="grid-item">
-                  <div id="giallo"></div>
-                </div>
-                <div class="grid-item" id="euro">${response[0]["prezzo"]}</div>
-            </div>`;
-            $(".info").append(info);
-        }
-    });
-}
-
 function change() {
     let jsoncookie = {"change" : "true"};
     $.ajax({

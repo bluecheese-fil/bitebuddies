@@ -1,0 +1,157 @@
+html, body { height: 100%; margin: 0px; overflow: hidden;}
+p {margin: 0px;}
+
+.row {
+  margin: 0px;
+  flex-direction: row;
+  justify-content: center;
+}
+
+div, li {color: black;}
+
+.mover {
+  position: relative;
+  width: 45px;
+  cursor: pointer;
+  filter: invert(1);
+}
+
+.datetime { margin: 30px 0px 30px 0px; }
+.errore { color: red; font-size: small; }
+.cartitems { overflow-y: auto; height: 40%; max-height: 40%;}
+
+.restname {
+  text-align: center;
+  font-family: 'Bitcheese', 'Montserrat', sans-serif;
+}
+
+/* Smallscreen */
+@media only screen and (max-width: 770px) {
+  html, body { max-height: 100%; }
+
+  .cartdiv {
+    position: absolute;
+    visibility: hidden;
+    bottom: -600px;
+    left: 0px;
+  
+    width: 100%;
+    min-width: 450px;
+    height: 600px;
+  
+    cursor: wait;
+    background-color: lightblue;
+  }
+
+  .flexcentered {
+    position: relative;
+    top: -40px;
+
+    display: flex;
+    justify-content: center;
+
+    margin: 5px 0px 10px 0px;
+  }
+
+  .cartflexcontainer {
+    position: relative;
+    top: -40px;
+
+    width: 100%;
+  }
+
+  .cartinfo {
+    float: left;
+    width: 65%;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cartitems {
+    float: right;
+    
+    overflow-y: scroll;
+    width: 35%;
+  }
+
+  .addaddress {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+
+    height: 225px;
+
+    flex-direction: column;
+    margin-top: 20px
+  }
+
+  .address { text-align: center; }
+  .orderfrom {width: 100%; text-align: center;}
+
+  select {width: 290px; text-align: center;}
+}
+
+/* Big screens */
+@media only screen and (min-width: 771px){
+  html, body { max-width: 100%; }
+
+  .cartdiv {
+    visibility: hidden;
+    position: relative;
+    right: -350px;
+    top: 0px;
+  
+    float: right;
+    width: 350px;
+    min-width: 350px;
+    height: 100%;
+  
+    cursor: wait;
+    background-color: lightblue;
+  }
+
+  .flexcentered {
+    position: relative;
+    top: -40px;
+
+    display: flex;
+    justify-content: center;
+
+    margin: 20px 0px 20px 0px;
+  }
+
+  .cartflexcontainer {
+    position: relative;
+    top: -40px;
+
+    width: 100%;
+  }
+
+  .addaddress {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+
+    height: 225px;
+
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px
+  }
+
+  .cartitems {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    height: fit-content;
+    margin-top: 20px;
+  }
+
+  .address { text-align: center; }
+  .orderfrom {width: 100%; text-align: center;}
+  .cartinfo { display: flex; flex-direction: column; align-items: center;}
+}
