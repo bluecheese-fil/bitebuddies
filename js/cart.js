@@ -1,19 +1,12 @@
 function loadCart(){
+  $("#rightpanel").css('visibility', 'visible');
   if(window.outerWidth <= 770) { // small screens
-    $("#iconmover").attr("name", "up");
-    $("#iconmover").attr("src", "https://cdn.jsdelivr.net/npm/remixicon@3.3.0/icons/Arrows/skip-down-line.svg");
+    $("#iconmover").remove();
   } else { // big screen
     $("#iconmover").attr("name", "left");
     $("#iconmover").attr("src", "https://cdn.jsdelivr.net/npm/remixicon@3.3.0/icons/Arrows/skip-right-line.svg");
-  }
-
-  $("#rightpanel").css('visibility', 'visible');
-  if($("#rightpanel").css("float") == "right") {
     $("#rightpanel").animate({'right':'0px'}); $("#iconmover").animate({'right':'45px',});
-  } else {
-    /*$("#rightpanel").animate({'bottom': `-260px` });*/ $("#iconmover").animate({'bottom':'45px',});
   }
-
 
   today = new Date();
   max = new Date(today); max.setDate(max.getDate() + 7);
@@ -51,8 +44,8 @@ function loadCart(){
 
       $("#nomedinamico").text(response["nome"]);
 
-      text = `<option selected> ${response["indefault"]} </option>\n`;
-      for(let i = 0; i < response["indirizzi"].length; i++) text += `<option> ${response["indirizzi"][i]} </option>\n`;
+      text = `<option value="${response["indefault"]}" selected> ${response["indefault"]} </option>\n`;
+      for(let i = 0; i < response["indirizzi"].length; i++) text += `<option value="${response["indirizzi"][i]}"> ${response["indirizzi"][i]} </option>\n`;
 
       $("#address").html(text);
       $("#login").attr("hidden", "true");
@@ -72,8 +65,6 @@ function resizeCart(duration = 0){
     cartHeight = $("#rightpanel").height() - $(".cartinfo").offset()["top"] - $(".cartinfo").height() - $(".paymentinfo").height() - $(".costgrid").height() - 110; //110 pixels between restaurant name, margins, hr and some spacing for padding
     $("#chosenitems").animate({"max-height":cartHeight + "px"}, duration);
   }
-
-  console.log($("#chosenitems").css("max-height"));
 }
 
 function checkClock(id){
@@ -127,21 +118,13 @@ function clicked(name){
   if(name == "left") {
     elem.attr("name", "right");
     $("#rightpanel").animate({'right':'-350px'});
-    $("#restaurant").animate({'left':'270px'});
+    $("#restaurant").animate({'width' : `${Number.parseFloat($("#restaurant").css("width")) + 350}px`});
     elem.attr("src", "https://cdn.jsdelivr.net/npm/remixicon@3.3.0/icons/Arrows/skip-left-line.svg");
   } else if(name == "right") {
     elem.attr("name", "left");
+    $("#restaurant").animate({'width' : `${Number.parseFloat($("#restaurant").css("width")) - 350}px`});
     $("#rightpanel").animate({'right': '0%'});
-    $("#restaurant").animate({'left': '0px'});
     elem.attr("src", "https://cdn.jsdelivr.net/npm/remixicon@3.3.0/icons/Arrows/skip-right-line.svg");
-  } else if(name == "up") {
-    elem.attr("name", "down");
-    $("#rightpanel").animate({'bottom':'-650px'});
-    $("#iconmover").attr("src", "https://cdn.jsdelivr.net/npm/remixicon@3.3.0/icons/Arrows/skip-up-line.svg");
-  } else { // if name == "down"
-    elem.attr("name", "up");
-    $("#rightpanel").animate({'bottom':'-260px'});
-    $("#iconmover").attr("src", "https://cdn.jsdelivr.net/npm/remixicon@3.3.0/icons/Arrows/skip-down-line.svg");
   }
 
   if($("#addaddress").css("opacity") == "1"){
@@ -390,6 +373,11 @@ function loadFood(id){
       htmlDolci = '';
       htmlPrimi = '';
       htmlSecondi = '';
+      htmlSandwich = '';
+      htmlPizze = '';
+      htmlColazione = '';
+      htmlKebab = '';
+      htmlFrutta = '';
 
       for (index = 0; index < response["menu"].length; index++) {
         instance = response["menu"][index];
@@ -409,9 +397,9 @@ function loadFood(id){
                 </div>
                 <div>`;
           
-            if(instance["ingrediente1"] != null) htmlAntipasti += `<a id="ing1" class="ingredient"> ${instance["ingrediente1"]} </a>`;
-            if(instance["ingrediente2"] != null) htmlAntipasti += `<a id="ing1" class="ingredient"> · ${instance["ingrediente2"]} </a>`;
-            if(instance["ingrediente2"] != null) htmlAntipasti += `<a id="ing1" class="ingredient"> · ${instance["ingrediente3"]} </a>`;
+            if(instance["ingrediente1"] != null) htmlAntipasti += `<a class="ingredient"> ${instance["ingrediente1"]} </a>`;
+            if(instance["ingrediente2"] != null) htmlAntipasti += `<a class="ingredient"> · ${instance["ingrediente2"]} </a>`;
+            if(instance["ingrediente3"] != null) htmlAntipasti += `<a class="ingredient"> · ${instance["ingrediente3"]} </a>`;
 
             htmlAntipasti += `</div>
               <button onclick="addToCart(${id}, '${instance["oggetto"]}', ${instance["prezzo"]})"> Aggiungi al carrello  <img src="/images/static/carrello.png" width="25px" height="25px"> </button>
@@ -433,9 +421,9 @@ function loadFood(id){
                 </div>
                 <div>`;
           
-            if(instance["ingrediente1"] != null) htmlBibite += `<a id="ing1" class="ingredient"> ${instance["ingrediente1"]} </a>`;
-            if(instance["ingrediente2"] != null) htmlBibite += `<a id="ing1" class="ingredient"> · ${instance["ingrediente2"]} </a>`;
-            if(instance["ingrediente2"] != null) htmlBibite += `<a id="ing1" class="ingredient"> · ${instance["ingrediente3"]} </a>`;
+            if(instance["ingrediente1"] != null) htmlBibite += `<a class="ingredient"> ${instance["ingrediente1"]} </a>`;
+            if(instance["ingrediente2"] != null) htmlBibite += `<a class="ingredient"> · ${instance["ingrediente2"]} </a>`;
+            if(instance["ingrediente3"] != null) htmlBibite += `<a class="ingredient"> · ${instance["ingrediente3"]} </a>`;
 
             htmlBibite += `</div>
               <button onclick="addToCart(${id}, '${instance["oggetto"]}', ${instance["prezzo"]})"> Aggiungi al carrello  <img src="/images/static/carrello.png" width="25px" height="25px"> </button>
@@ -458,9 +446,9 @@ function loadFood(id){
                 </div>
                 <div>`;
           
-            if(instance["ingrediente1"] != null) htmlDolci += `<a id="ing1" class="ingredient"> ${instance["ingrediente1"]} </a>`;
-            if(instance["ingrediente2"] != null) htmlDolci += `<a id="ing1" class="ingredient"> · ${instance["ingrediente2"]} </a>`;
-            if(instance["ingrediente2"] != null) htmlDolci += `<a id="ing1" class="ingredient"> · ${instance["ingrediente3"]} </a>`;
+            if(instance["ingrediente1"] != null) htmlDolci += `<a class="ingredient"> ${instance["ingrediente1"]} </a>`;
+            if(instance["ingrediente2"] != null) htmlDolci += `<a class="ingredient"> · ${instance["ingrediente2"]} </a>`;
+            if(instance["ingrediente3"] != null) htmlDolci += `<a class="ingredient"> · ${instance["ingrediente3"]} </a>`;
 
             htmlDolci += `</div>
               <button onclick="addToCart(${id}, '${instance["oggetto"]}', ${instance["prezzo"]})"> Aggiungi al carrello  <img src="/images/static/carrello.png" width="25px" height="25px"> </button>
@@ -483,9 +471,9 @@ function loadFood(id){
                 </div>
                 <div>`;
           
-            if(instance["ingrediente1"] != null) htmlPrimi += `<a id="ing1" class="ingredient"> ${instance["ingrediente1"]} </a>`;
-            if(instance["ingrediente2"] != null) htmlPrimi += `<a id="ing1" class="ingredient"> · ${instance["ingrediente2"]} </a>`;
-            if(instance["ingrediente2"] != null) htmlPrimi += `<a id="ing1" class="ingredient"> · ${instance["ingrediente3"]} </a>`;
+            if(instance["ingrediente1"] != null) htmlPrimi += `<a class="ingredient"> ${instance["ingrediente1"]} </a>`;
+            if(instance["ingrediente2"] != null) htmlPrimi += `<a class="ingredient"> · ${instance["ingrediente2"]} </a>`;
+            if(instance["ingrediente3"] != null) htmlPrimi += `<a class="ingredient"> · ${instance["ingrediente3"]} </a>`;
 
             htmlPrimi += `</div>
               <button onclick="addToCart(${id}, '${instance["oggetto"]}', ${instance["prezzo"]})"> Aggiungi al carrello  <img src="/images/static/carrello.png" width="25px" height="25px"> </button>
@@ -508,9 +496,9 @@ function loadFood(id){
                 </div>
                 <div>`;
           
-            if(instance["ingrediente1"] != null) htmlSecondi += `<a id="ing1" class="ingredient"> ${instance["ingrediente1"]} </a>`;
-            if(instance["ingrediente2"] != null) htmlSecondi += `<a id="ing1" class="ingredient"> · ${instance["ingrediente2"]} </a>`;
-            if(instance["ingrediente2"] != null) htmlSecondi += `<a id="ing1" class="ingredient"> · ${instance["ingrediente3"]} </a>`;
+            if(instance["ingrediente1"] != null) htmlSecondi += `<a class="ingredient"> ${instance["ingrediente1"]} </a>`;
+            if(instance["ingrediente2"] != null) htmlSecondi += `<a class="ingredient"> · ${instance["ingrediente2"]} </a>`;
+            if(instance["ingrediente3"] != null) htmlSecondi += `<a class="ingredient"> · ${instance["ingrediente3"]} </a>`;
 
             htmlSecondi += `</div>
               <button onclick="addToCart(${id}, '${instance["oggetto"]}', ${instance["prezzo"]})"> Aggiungi al carrello  <img src="/images/static/carrello.png" width="25px" height="25px"> </button>
@@ -518,6 +506,130 @@ function loadFood(id){
           </div>
           `;
 
+        } else if(instance["categoria"] == "Sandwich"){
+          if(htmlSandwich.length == 0) htmlSandwich += `
+            <div class='sectionbreak'> Sandwich </div>
+            <div id="menuitems" class="menuitems">
+            `;
+
+            htmlSandwich += `
+            <div name="${instance["oggetto"]}" style="width: fit-content;">
+              <div class="menuitem">
+                <div class="pricedname">
+                  <a id="name" class="menuname"> ${instance["oggetto"]} </a>
+                  <a id="price" class="price"> ${instance["prezzo"]}€ </a>
+                </div>
+                <div>`;
+          
+            if(instance["ingrediente1"] != null) htmlSandwich += `<a class="ingredient"> ${instance["ingrediente1"]} </a>`;
+            if(instance["ingrediente2"] != null) htmlSandwich += `<a class="ingredient"> · ${instance["ingrediente2"]} </a>`;
+            if(instance["ingrediente3"] != null) htmlSandwich += `<a class="ingredient"> · ${instance["ingrediente3"]} </a>`;
+
+            htmlSandwich += `</div>
+              <button onclick="addToCart(${id}, '${instance["oggetto"]}', ${instance["prezzo"]})"> Aggiungi al carrello  <img src="/images/static/carrello.png" width="25px" height="25px"> </button>
+            </div>
+          </div>
+          `;
+
+        } else if(instance["categoria"] == "Pizze"){
+          if(htmlPizze.length == 0) htmlPizze += `
+            <div class='sectionbreak'> Pizze </div>
+            <div id="menuitems" class="menuitems">
+            `;
+
+            htmlPizze += `
+            <div name="${instance["oggetto"]}" style="width: fit-content;">
+              <div class="menuitem">
+                <div class="pricedname">
+                  <a id="name" class="menuname"> ${instance["oggetto"]} </a>
+                  <a id="price" class="price"> ${instance["prezzo"]}€ </a>
+                </div>
+                <div>`;
+          
+            if(instance["ingrediente1"] != null) htmlPizze += `<a class="ingredient"> ${instance["ingrediente1"]} </a>`;
+            if(instance["ingrediente2"] != null) htmlPizze += `<a class="ingredient"> · ${instance["ingrediente2"]} </a>`;
+            if(instance["ingrediente3"] != null) htmlPizze += `<a class="ingredient"> · ${instance["ingrediente3"]} </a>`;
+
+            htmlPizze += `</div>
+              <button onclick="addToCart(${id}, '${instance["oggetto"]}', ${instance["prezzo"]})"> Aggiungi al carrello  <img src="/images/static/carrello.png" width="25px" height="25px"> </button>
+            </div>
+          </div>
+          `;
+
+        } else if(instance["categoria"] == "Colazione"){
+          if(htmlColazione.length == 0) htmlColazione += `
+            <div class='sectionbreak'> Colazione </div>
+            <div id="menuitems" class="menuitems">
+            `;
+
+            htmlColazione += `
+            <div name="${instance["oggetto"]}" style="width: fit-content;">
+              <div class="menuitem">
+                <div class="pricedname">
+                  <a id="name" class="menuname"> ${instance["oggetto"]} </a>
+                  <a id="price" class="price"> ${instance["prezzo"]}€ </a>
+                </div>
+                <div>`;
+          
+            if(instance["ingrediente1"] != null) htmlColazione += `<a class="ingredient"> ${instance["ingrediente1"]} </a>`;
+            if(instance["ingrediente2"] != null) htmlColazione += `<a class="ingredient"> · ${instance["ingrediente2"]} </a>`;
+            if(instance["ingrediente3"] != null) htmlColazione += `<a class="ingredient"> · ${instance["ingrediente3"]} </a>`;
+
+            htmlColazione += `</div>
+              <button onclick="addToCart(${id}, '${instance["oggetto"]}', ${instance["prezzo"]})"> Aggiungi al carrello  <img src="/images/static/carrello.png" width="25px" height="25px"> </button>
+            </div>
+          </div>
+          `;
+
+        } else if(instance["categoria"] == "Kebab"){
+          if(htmlKebab.length == 0) htmlKebab += `
+            <div class='sectionbreak'> Kebab </div>
+            <div id="menuitems" class="menuitems">
+            `;
+
+            htmlKebab += `
+            <div name="${instance["oggetto"]}" style="width: fit-content;">
+              <div class="menuitem">
+                <div class="pricedname">
+                  <a id="name" class="menuname"> ${instance["oggetto"]} </a>
+                  <a id="price" class="price"> ${instance["prezzo"]}€ </a>
+                </div>
+                <div>`;
+          
+            if(instance["ingrediente1"] != null) htmlKebab += `<a class="ingredient"> ${instance["ingrediente1"]} </a>`;
+            if(instance["ingrediente2"] != null) htmlKebab += `<a class="ingredient"> · ${instance["ingrediente2"]} </a>`;
+            if(instance["ingrediente3"] != null) htmlKebab += `<a class="ingredient"> · ${instance["ingrediente3"]} </a>`;
+
+            htmlKebab += `</div>
+              <button onclick="addToCart(${id}, '${instance["oggetto"]}', ${instance["prezzo"]})"> Aggiungi al carrello  <img src="/images/static/carrello.png" width="25px" height="25px"> </button>
+            </div>
+          </div>
+          `;
+
+        } else if(instance["categoria"] == "Frutta"){
+          if(htmlFrutta.length == 0) htmlFrutta += `
+            <div class='sectionbreak'> Frutta </div>
+            <div id="menuitems" class="menuitems">
+            `;
+
+            htmlFrutta += `
+            <div name="${instance["oggetto"]}" style="width: fit-content;">
+              <div class="menuitem">
+                <div class="pricedname">
+                  <a id="name" class="menuname"> ${instance["oggetto"]} </a>
+                  <a id="price" class="price"> ${instance["prezzo"]}€ </a>
+                </div>
+                <div>`;
+          
+            if(instance["ingrediente1"] != null) htmlFrutta += `<a class="ingredient"> ${instance["ingrediente1"]} </a>`;
+            if(instance["ingrediente2"] != null) htmlFrutta += `<a class="ingredient"> · ${instance["ingrediente2"]} </a>`;
+            if(instance["ingrediente3"] != null) htmlFrutta += `<a class="ingredient"> · ${instance["ingrediente3"]} </a>`;
+
+            htmlFrutta += `</div>
+              <button onclick="addToCart(${id}, '${instance["oggetto"]}', ${instance["prezzo"]})"> Aggiungi al carrello  <img src="/images/static/carrello.png" width="25px" height="25px"> </button>
+            </div>
+          </div>
+          `;
         }
       }
 
@@ -526,8 +638,13 @@ function loadFood(id){
       if(htmlDolci.length != 0) htmlDolci += '</div></div>';
       if(htmlPrimi.length != 0) htmlPrimi += '</div></div>';
       if(htmlSecondi.length != 0) htmlSecondi += '</div></div>';
+      if(htmlSandwich.length != 0) htmlSandwich += '</div></div>';
+      if(htmlPizze.length != 0) htmlPizze += '</div></div>';
+      if(htmlColazione.length != 0) htmlColazione += '</div></div>';
+      if(htmlKebab.length != 0) htmlKebab += '</div></div>';
+      if(htmlFrutta.length != 0) htmlFrutta += '</div></div>';
 
-      $("#menu").html(htmlAntipasti + htmlPrimi + htmlSecondi + htmlDolci + htmlBibite);
+      $("#menu").html(htmlColazione + htmlAntipasti + htmlSandwich + htmlPrimi + htmlPizze + htmlSecondi + htmlKebab + htmlDolci + htmlBibite + htmlFrutta);
     }
   });
 }
@@ -560,4 +677,78 @@ function takeaway(id){
 
     value = $("#"+id).attr("value", "false");
   }
+}
+
+function confirmOrder(){
+  ok = confirm("Vuoi confermare l'ordine?");
+  if(!ok) return ;
+
+  jsoncookie = {"placeOrder":"true"};
+  // I now need to answer the three following basic questions: who, when, where and what (and how much)
+  
+  // WHO (User side)
+  let cookies = document.cookie.split("; ");
+  for(let i = 0; i<cookies.length; i++){
+    let point = cookies[i].split("=");
+    if(point[0] == "iv" || point[0] == "saveduser") jsoncookie[point[0]] = point[1];
+  }
+
+  // WHO (Restaurant side)
+  url = new URL(window.location.href);
+  id = url.searchParams.get('id');
+  jsoncookie["restid"] = id;
+
+  if(Object.keys(jsoncookie).length != 4) { window.location.replace("/500.html"); return ; }
+
+  // WHEN
+  date = $("#date").val();
+  time = $("#time").val();
+
+  if(date == "" || time == "") {alert("Devi scegliere una data ed un orario prima di poter ordinare!"); return ;}
+  jsoncookie["date"] = date;
+  jsoncookie["time"] = time;
+
+  // WHAT
+  items = document.getElementById("chosenitems").children;
+  if(items.length == 0){ alert("Non e' possibile creare un ordine vuoto!"); return ;}
+
+  selecteditems = [];
+
+  for(i = 0; i < items.length; i++){
+    item = items[i].children[0].text.split(" : ");
+    itemname = item[0]; itemqt = item[1];
+
+    selecteditems.push([itemname, itemqt]);
+  }
+
+  jsoncookie["selecteditems"] = selecteditems;
+
+  // WHERE
+  if($("#takeaway").css("opacity") == 1) jsoncookie["where"] = "takeaway";
+  else jsoncookie["where"] = document.getElementById("address").value;
+
+  // HOW MUCH
+  jsoncookie["total"] = $("#total").text();
+  jsoncookie["subtotal"] = $("#subtotal").text();
+
+  $.ajax({
+    url: "/php/cucina.php",
+    type: "POST",
+    dataType: "JSON",
+    data: (jsoncookie),
+    success:function(response) {
+      if(response["error"] == 1) {
+        console.log("Server error");
+        alert("A causa di un errore, il suo ordine non e' stato processato correttamente...");
+        if(response["errortype"] = "unmatcheditems") alert("... In particolare sembra che alcuni prodotti nel suo ordine non siano venduti dal ristorante. La preghiamo di ricaricare la pagina, altrimenti contattare un amministratore del sito");
+        else if(response["errortype"] == "unmatchedprice") alert("... In particolare sembra che il prezzo visualizzato non corrisponda con il ristorante. La preghiamo di ricaricare la pagina, altrimenti contattare un amministratore del sito");
+        return ;
+      }
+      
+      console.log("Server success");
+      localStorage.removeItem("order");
+      alert("Ordine inserito con successo, verrai automaticamente reindirizzato allo storico degli ordini");
+      location.assign("/account/orderhistory.html");
+    }
+  });
 }

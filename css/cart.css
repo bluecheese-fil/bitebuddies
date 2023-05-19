@@ -1,5 +1,6 @@
-html, body { height: 100%; width: 100%; margin: 0px; overflow: clip; overflow: -moz-scrollbars-vertical;}
+html, body { height: 100%; width: 100%; margin: 0px;}
 p {margin: 0px;}
+h4 { text-align: center; }
 
 .row {
   margin: 0px;
@@ -16,7 +17,7 @@ div, li {color: black;}
   filter: invert(1);
 }
 
-.datetime { margin: 30px 0px 30px 0px; }
+.datetime { margin: 10px 0px 10px 0px; }
 .errore { color: red; font-size: small; }
 .cartitems { overflow-y: auto; }
 
@@ -44,7 +45,7 @@ h4 { margin: 0px 0px 0px 0px;}
   max-height: 350px;
 }
 
-.leftdiv { position: absolute; margin: 20px 0px 0px 20px; }
+.leftdiv { margin: 20px 0px 0px 20px; }
 
 .title {
   float: left;
@@ -247,35 +248,30 @@ a:hover{color: black; cursor: default; user-select: none;}
   html, body { max-height: 100%; }
 
   .cartdiv {
-    position: absolute;
     visibility: hidden;
-    bottom: -600px;
-    left: 0px;
   
     width: 100%;
     min-width: 600px;
-    height: 650px;
+    height: fit-content;
   
     cursor: wait;
     background-color: lightblue;
   }
 
-  .flexcentered {
-    position: relative;
-    top: -40px;
+  .leftdiv {
+    width: 100%;
+    min-width: 580px;
+    height: 65%;
+  }
 
+  .flexcentered {
     display: flex;
     justify-content: center;
 
-    margin: 5px 0px 10px 0px;
+    padding: 10px 0px 10px 0px;
   }
 
-  .cartflexcontainer {
-    position: relative;
-    top: -40px;
-
-    width: 100%;
-  }
+  .cartflexcontainer { width: 100%; }
 
   .cartinfo {
     float: left;
@@ -305,7 +301,7 @@ a:hover{color: black; cursor: default; user-select: none;}
     height: 225px;
 
     flex-direction: column;
-    margin-top: 20px
+    margin-top: 10px
   }
 
   .address { text-align: center; }
@@ -316,9 +312,10 @@ a:hover{color: black; cursor: default; user-select: none;}
   .paymentinfo {
     display: flex;
     justify-content: center;
+    margin-bottom: 10px;
     
     position: relative;
-    bottom: 30px;
+    bottom: 0px;
     
     color: darkred;
     width: 100%;
@@ -336,15 +333,14 @@ a:hover{color: black; cursor: default; user-select: none;}
     float: right;
   }
 
-  .leftdiv { width: 100%; min-width: 580px;}
   .info {float: left; width: 100%;}
 }
 
 /* Big screens */
 @media only screen and (min-width: 771px){
-  html, body { max-width: 100%; }
+  html, body { max-width: 100%; overflow: clip; overflow: -moz-scrollbars-vertical; }
 
-  .leftdiv{ float: left; }
+  .leftdiv{ float: left; position: absolute; }
 
   .cartdiv {
     visibility: hidden;
@@ -368,7 +364,7 @@ a:hover{color: black; cursor: default; user-select: none;}
     display: flex;
     justify-content: center;
 
-    margin: 20px 0px 20px 0px;
+    margin: 10px 0px 10px 0px;
   }
 
   .cartflexcontainer {

@@ -7,13 +7,14 @@
   // checking that iv is correct
   if(strlen($iv) != 16) { echo json_encode(array('success' => 1, 'usrfound' => 0)); die(); }
 
-  if(array_key_exists("placeOrder", $_POST)) { placeOrder($info, $iv, $_POST["restid"], $_POST["addr"], $_POST["delivery"], $_POST["items"]); }
+  if(array_key_exists("placeOrder", $_POST)) { placeOrder($info, $iv, $_POST["restid"], $_POST["where"], $_POST["date"], $_POST["time"], $_POST["selecteditems"], $_POST["total"], $_POST["subtotal"]); }
 
-  function placeOrder($info, $iv, $restid, $addr, $date, $delivery, $items){
+  function placeOrder($info, $iv, $restid, $where, $whendate, $whentime, $items, $total, $subtotal){
     $delimiter = chr(007);
     $cipher = "aes-256-cbc";
     $usrid = preg_split("/{$delimiter}/", openssl_decrypt($info, $cipher, "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv))[0];
 
+    /*
     $query = "
       begin;
         insert into ordini(user_id, rest_id, data, orario, indirizzo) values('{$usrid}', '{$restid}', '{$date}', '{$delivery}', '{$addr}');
@@ -49,6 +50,11 @@
     pg_free_result($result);
 
     pg_close($db);
+    
+    */
+
+    // responses -> error, successful
+    // types of errors ["errortype"]: unmatched items, unmatches price, 
 
     echo json_encode(array("result"=>"successful", "orderid" => $orderid));
   }
