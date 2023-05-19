@@ -14,6 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"> </script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"> </script>
+    <script src="/js/addresses.js"> </script>
     <script src="/js/cart.js"> </script>
 
     <script>
@@ -28,226 +29,6 @@
         loadFood(id);
       });
     </script>
-
-    <style>
-
-      h4 { margin: 0px 0px 0px 0px;}
-
-      .paymentinfo {
-        position: absolute;
-        bottom: 20px;
-        text-align: center;
-        color: darkred;
-      }
-
-      .pictureddiv { display: flex; align-items: center; }
-
-      .foto {
-        align-content: center;
-        border-radius: 10px;
-
-        height: 75%;
-        margin-top: 10px;
-      }
-
-      .info {
-        display: flex;
-        align-items: flex-start;
-
-        max-height: 350px;
-      }
-
-      .leftdiv {
-        float: left;
-        position: absolute;
-        margin: 20px 0px 0px 20px;
-      }
-
-      .title {
-        float: left;
-
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        flex-wrap: wrap;
-
-        height: 25%;
-        background-color: white;
-        box-shadow: 50px 50px 50px rgba(0, 0, 0, 0.2);
-
-        border-radius: 20px;
-        border-style: none;
-
-        font-family: 'Bitcheese', 'Montserrat', sans-serif;
-        font-size: x-large;
-        font-weight: 700;
-      }
-
-      .rightinfo {
-        float: right;
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-
-        width: 55%;
-        margin-left: 2%;
-
-        padding: 2% 0px 2% 0px;
-
-        background-color: white;
-        box-shadow: 50px 50px 50px rgba(0, 0, 0, 0.2);
-
-        border-radius: 20px;
-        border-style: none;
-      }
-
-      .leftinfo {
-        display: flex;
-        flex-direction: column;
-        
-        width: 40%;
-        max-height: 350px;
-      }
-
-      .circle {
-        border-radius: 20px;
-        height: 24px;
-        width: 24px;
-
-        margin-right: 4px;
-      }
-
-      .reviewvs {
-        width: 100%;
-        
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: center;
-        justify-content: space-around;
-      }
-
-      .voto {
-        width: 24px;
-        height: 24px;
-
-        margin-right: 4px;
-      }
-
-      .menuitem {
-        width: fit-content;
-        height: 111px;
-
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        align-items: center;
-        justify-content: space-between;
-
-        padding: 5px 10px 5px 10px;
-
-        background-color: white;
-
-        border-radius: 20px;
-        border-style: solid;
-        box-shadow: 5px 5px 5px rgba(0, 140, 185, 0.5);
-      }
-
-      .price {
-        font-family: 'Bitcheese', 'Montserrat', sans-serif;
-        color: black;
-      }
-
-      .pricedname {
-        display: flex;
-        justify-content: space-between;
-
-        width: 100%;
-      }
-
-      .ingredient {
-        font-family: 'Bitcheese', 'Montserrat', sans-serif;
-        font-size: small;
-
-        color: black;
-      }
-
-      .menuname {
-        font-family: 'Bitcheese', 'Montserrat', sans-serif;
-        font-size: large;
-
-        color: black;
-      }
-
-      a:hover{color: black; cursor: default; user-select: none;}
-
-      .menuitems {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-evenly;
-
-        margin-top: 20px;
-      }
-
-      .textchosen{
-        font-family: 'Bitcheese', 'Montserrat', sans-serif;
-        font-size: large;
-        color: black;
-      }
-
-      .cartchosen {
-        width: 80%;
-        
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .sectionbreak {
-        font-family: 'Bitcheese', 'Montserrat', sans-serif;
-        color: white;
-        margin-top: 20px;
-        text-align: center;
-
-        border-bottom: 1px solid white;
-        padding-bottom: 5px;
-      }
-
-      .consegnatakeaway {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        font-family: 'Montserrat', sans-serif;
-        height: 50px;
-        width: 80%;
-        margin-bottom: 10px;
-        
-        color:white;
-        background-color: rgb(0, 100, 0);
-        opacity: 0.4;
-
-        border-radius: 50px;
-        cursor: pointer;
-      }
-
-      .costgrid {
-        display: grid;
-        grid-template-columns: auto 30px 15px;
-        
-        margin-left: 50px;
-        margin-right: 50px;
-      }
-
-      /* Scrollbar settings */
-      /* width */  ::-webkit-scrollbar { width: 10px; max-height: 3px; height: 3px;}
-      /* Track */  ::-webkit-scrollbar-track { background: #f1f1f1; max-height: 3px; height: 3px;}
-      /* Handle */ ::-webkit-scrollbar-thumb { background: #888; max-height: 3px; height: 3px;}
-      /* Handle on hover */ ::-webkit-scrollbar-thumb:hover { background: #555;  max-height: 3px; height: 3px;}
-    </style>
   </head>
   <body>
 
@@ -262,7 +43,7 @@
         </div>
       </div>
 
-      <div id="menu" style="overflow-y: auto;">
+      <div id="menu" class="menu">
 
       </div>
     </div>
@@ -280,7 +61,7 @@
           <ul class="dropdown-menu dropdownbackground" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item dropdownitem" href="/account/account.html"> Account </a></li>
             <li><a class="dropdown-item dropdownitem" href="/account/orderhistory.html"> Ordini </a></li>
-            <li><a class="dropdown-item dropdownitem"> Indirizzi di consegna </a></li>
+            <li><a class="dropdown-item dropdownitem" href="/account/addresses.html"> Indirizzi di consegna </a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item dropdownitem" href="#" onclick="quitUser('/homepage.html')"> Esci </a></li>
           </ul>
@@ -320,19 +101,21 @@
           </div>
           <button style="margin-top: 20px"> Ordina ora! </button>
         </div>
-      </div>
-      
-      <div id="chosenrestaurant" class="restname">  </div>
-      <div id="chosenitems" class="cartitems">
-      </div>
 
-      <hr style="border: 2px dashed black; opacity: 1;">
-      <div class="costgrid">
-        <a> Subtotal: </a> <a id="subtotal" style="text-align: end;">0</a> <a> € </a>
-        <a id="delivery1"> Consegna: </a> <a id="delivery2" style="text-align: end;">0</a> <a id="delivery3"> € </a>
-        <a> Totale: </a> <a id="total" style="text-align: end;">0</a> <a> € </a>
-      </div>
 
+        <div class="horizontalcontainer">
+          <div id="chosenrestaurant" class="restname">  </div>
+          <div id="chosenitems" class="cartitems"> </div>
+  
+          <hr class="separator">
+          <div class="costgrid">
+            <a> Subtotale: </a> <a id="subtotal" style="text-align: end;">0</a> <a> € </a>
+            <a id="delivery1"> Consegna: </a> <a id="delivery2" style="text-align: end;">0</a> <a id="delivery3"> € </a>
+            <a> Totale: </a> <a id="total" style="text-align: end;">0</a> <a> € </a>
+          </div>
+  
+        </div>
+      </div>
       <div class="paymentinfo"> Nota: Si accettano solo pagamenti in contanti </div>
 
       <div style="width: 100%; text-align: center;" id="login"> 

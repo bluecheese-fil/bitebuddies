@@ -1,5 +1,5 @@
 function loadCart(){
-  if(window.innerWidth <= 770) { // small screens
+  if(window.outerWidth <= 770) { // small screens
     $("#iconmover").attr("name", "up");
     $("#iconmover").attr("src", "https://cdn.jsdelivr.net/npm/remixicon@3.3.0/icons/Arrows/skip-down-line.svg");
   } else { // big screen
@@ -11,7 +11,7 @@ function loadCart(){
   if($("#rightpanel").css("float") == "right") {
     $("#rightpanel").animate({'right':'0px'}); $("#iconmover").animate({'right':'45px',});
   } else {
-    $("#rightpanel").animate({'bottom':'-275px'}); $("#iconmover").animate({'bottom':'45px',});
+    $("#rightpanel").animate({'bottom':'-260px'}); $("#iconmover").animate({'bottom':'45px',});
   }
 
 
@@ -123,11 +123,11 @@ function clicked(name){
     elem.attr("src", "https://cdn.jsdelivr.net/npm/remixicon@3.3.0/icons/Arrows/skip-right-line.svg");
   } else if(name == "up") {
     elem.attr("name", "down");
-    $("#rightpanel").animate({'bottom':'-600px'});
+    $("#rightpanel").animate({'bottom':'-650px'});
     $("#iconmover").attr("src", "https://cdn.jsdelivr.net/npm/remixicon@3.3.0/icons/Arrows/skip-up-line.svg");
   } else { // if name == "down"
     elem.attr("name", "up");
-    $("#rightpanel").animate({'bottom':'-275px'});
+    $("#rightpanel").animate({'bottom':'-260px'});
     $("#iconmover").attr("src", "https://cdn.jsdelivr.net/npm/remixicon@3.3.0/icons/Arrows/skip-down-line.svg");
   }
 
@@ -155,7 +155,7 @@ function switchaddr(name){
 
     $("#addaddress").animate({"opacity":"0"});
     // I need to check wheter to move "down" the element
-    if($("#rightpanel").css("float") != "right") $("#rightpanel").animate({'bottom':'-275px'});
+    if($("#rightpanel").css("float") != "right") $("#rightpanel").animate({'bottom':'-260px'});
     $("#addaddress").css("visibility", "hidden");
     $("#addaddress").css("display", "none");
 
@@ -319,8 +319,8 @@ function resizeMenu(){
 }
 
 function loadRestaurant(id){
-  $("#restaurant").css("width", `${window.innerWidth - 450}px`);
-  
+  if(window.outerWidth > 770) /* big screens */ $("#restaurant").css("width", `${window.innerWidth - 450}px`);
+
   let jsoncookie = {"ristoranti" : "true"};
   jsoncookie["id"] = id;
   

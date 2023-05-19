@@ -5,6 +5,8 @@
   border-radius: 50px;
   transition: all 0.3 ease 0s;
   font-weight: 500;
+
+  cursor: pointer;
 }
 
 .mydropdown:hover {
@@ -22,11 +24,15 @@
   color: white;
   transition: 0.4s;
   font-weight: 500;
+
+  cursor: pointer;
 }
 
 .dropdownitem:hover{
   background-color: rgba(5, 50, 55);
   color: white;
+
+  cursor: pointer;
 }
 
 .dropdown:hover>.dropdown-menu {
@@ -45,6 +51,7 @@
 
   /* Removing the hover action */
   pointer-events: none;
+  cursor: default;
 
   /*I will prevent people to select this text*/
   -webkit-touch-callout: none;  /* iOS Safari */
