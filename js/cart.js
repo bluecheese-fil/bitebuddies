@@ -11,7 +11,7 @@ function loadCart(){
   if($("#rightpanel").css("float") == "right") {
     $("#rightpanel").animate({'right':'0px'}); $("#iconmover").animate({'right':'45px',});
   } else {
-    $("#rightpanel").animate({'bottom':'-260px'}); $("#iconmover").animate({'bottom':'45px',});
+    /*$("#rightpanel").animate({'bottom': `-260px` });*/ $("#iconmover").animate({'bottom':'45px',});
   }
 
 
@@ -58,8 +58,22 @@ function loadCart(){
       $("#login").attr("hidden", "true");
       $("#order").removeAttr("hidden"); $("#account").removeAttr("hidden");
       $("#rightpanel").css("cursor", "default");
+
+      resizeCart();
     }
   });
+}
+
+function resizeCart(duration = 0){
+  // calculating cart size
+  if(window.outerWidth <= 770) { // small screens
+    $("#chosenitems").animate({"max-height":($(".cartinfo").height() - 110) + "px"}, duration);
+  } else { // big screen
+    cartHeight = $("#rightpanel").height() - $(".cartinfo").offset()["top"] - $(".cartinfo").height() - $(".paymentinfo").height() - $(".costgrid").height() - 110; //110 pixels between restaurant name, margins, hr and some spacing for padding
+    $("#chosenitems").animate({"max-height":cartHeight + "px"}, duration);
+  }
+
+  console.log($("#chosenitems").css("max-height"));
 }
 
 function checkClock(id){
@@ -74,7 +88,6 @@ function checkClock(id){
   
   today = new Date();
   if($("#date").val() != "" && $("#date").val() == `${today.getFullYear()}-${(today.getMonth() + 1 + "").padStart(2, '0')}-${(today.getDate() + "").padStart(2, '0')}`){
-    console.log(today.getHours());
     if(currenthour < today.getHours() || (currenthour == today.getHours() && currentminute < today.getMinutes())){
       alert("Non puoi impostare una consegna nel passato!");
 
@@ -183,6 +196,9 @@ function switchaddr(name){
   
     $("#indirizzo").val(""); $("#cap").val(""); $("#citta").val("");
   }
+
+  // after chaning the size of something, I need to resize the cart too
+  resizeCart(400);
 }
   
 function customCallback(address){
@@ -298,12 +314,6 @@ function updatecart(){
   delivery = Number.parseFloat($("#delivery2").text());
   if($("#takeaway").css("opacity") != 0.4) delivery = 0;
   else delivery = Number.parseFloat($("#delivery2").text());
-
-  console.log(delivery);
-  console.log($("#takeaway").css("opacity"));
-  console.log($("#takeaway").css("opacity") == 1);
-  console.log(Number.parseFloat($("#delivery2").text()));
-  
 
   $("#total").text( delivery + Number.parseFloat($("#subtotal").text()));
 }

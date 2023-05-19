@@ -24,9 +24,9 @@
         id = url.searchParams.get('id');
         if(id == null) window.location.replace("/homepage.html");
 
-        loadCart();
         loadRestaurant(id);
         loadFood(id);
+        loadCart();
       });
     </script>
   </head>
