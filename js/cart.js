@@ -435,8 +435,8 @@ function loadFood(id){
             <div name="${instance["oggetto"]}" style="width: fit-content;">
               <div class="menuitem">
                 <div class="pricedname">
-                  <a id="name" class="menuname"> ${instance["oggetto"]} </a>
-                  <a id="price" class="price"> ${instance["prezzo"]}€ </a>
+                  <a id="name" class="menuname">${instance["oggetto"]}</a>
+                  <a id="price" class="price">${instance["prezzo"]}€</a>
                 </div>
                 <div>`;
           
@@ -484,8 +484,8 @@ function loadFood(id){
             <div name="${instance["oggetto"]}" style="width: fit-content;">
               <div class="menuitem">
                 <div class="pricedname">
-                  <a id="name" class="menuname"> ${instance["oggetto"]} </a>
-                  <a id="price" class="price"> ${instance["prezzo"]}€ </a>
+                  <a id="name" class="menuname">${instance["oggetto"]}</a>
+                  <a id="price" class="price">${instance["prezzo"]}€</a>
                 </div>
                 <div>`;
           
@@ -509,8 +509,8 @@ function loadFood(id){
             <div name="${instance["oggetto"]}" style="width: fit-content;">
               <div class="menuitem">
                 <div class="pricedname">
-                  <a id="name" class="menuname"> ${instance["oggetto"]} </a>
-                  <a id="price" class="price"> ${instance["prezzo"]}€ </a>
+                  <a id="name" class="menuname">${instance["oggetto"]}</a>
+                  <a id="price" class="price">${instance["prezzo"]}€</a>
                 </div>
                 <div>`;
           
@@ -534,8 +534,8 @@ function loadFood(id){
             <div name="${instance["oggetto"]}" style="width: fit-content;">
               <div class="menuitem">
                 <div class="pricedname">
-                  <a id="name" class="menuname"> ${instance["oggetto"]} </a>
-                  <a id="price" class="price"> ${instance["prezzo"]}€ </a>
+                  <a id="name" class="menuname">${instance["oggetto"]}</a>
+                  <a id="price" class="price">${instance["prezzo"]}€</a>
                 </div>
                 <div>`;
           
@@ -559,8 +559,8 @@ function loadFood(id){
             <div name="${instance["oggetto"]}" style="width: fit-content;">
               <div class="menuitem">
                 <div class="pricedname">
-                  <a id="name" class="menuname"> ${instance["oggetto"]} </a>
-                  <a id="price" class="price"> ${instance["prezzo"]}€ </a>
+                  <a id="name" class="menuname">${instance["oggetto"]}</a>
+                  <a id="price" class="price">${instance["prezzo"]}€</a>
                 </div>
                 <div>`;
           
@@ -584,8 +584,8 @@ function loadFood(id){
             <div name="${instance["oggetto"]}" style="width: fit-content;">
               <div class="menuitem">
                 <div class="pricedname">
-                  <a id="name" class="menuname"> ${instance["oggetto"]} </a>
-                  <a id="price" class="price"> ${instance["prezzo"]}€ </a>
+                  <a id="name" class="menuname">${instance["oggetto"]}</a>
+                  <a id="price" class="price">${instance["prezzo"]}€</a>
                 </div>
                 <div>`;
           
@@ -609,8 +609,8 @@ function loadFood(id){
             <div name="${instance["oggetto"]}" style="width: fit-content;">
               <div class="menuitem">
                 <div class="pricedname">
-                  <a id="name" class="menuname"> ${instance["oggetto"]} </a>
-                  <a id="price" class="price"> ${instance["prezzo"]}€ </a>
+                  <a id="name" class="menuname">${instance["oggetto"]}</a>
+                  <a id="price" class="price">${instance["prezzo"]}€</a>
                 </div>
                 <div>`;
           
@@ -634,8 +634,8 @@ function loadFood(id){
             <div name="${instance["oggetto"]}" style="width: fit-content;">
               <div class="menuitem">
                 <div class="pricedname">
-                  <a id="name" class="menuname"> ${instance["oggetto"]} </a>
-                  <a id="price" class="price"> ${instance["prezzo"]}€ </a>
+                  <a id="name" class="menuname">${instance["oggetto"]}</a>
+                  <a id="price" class="price">${instance["prezzo"]}€</a>
                 </div>
                 <div>`;
           
@@ -659,8 +659,8 @@ function loadFood(id){
             <div name="${instance["oggetto"]}" style="width: fit-content;">
               <div class="menuitem">
                 <div class="pricedname">
-                  <a id="name" class="menuname"> ${instance["oggetto"]} </a>
-                  <a id="price" class="price"> ${instance["prezzo"]}€ </a>
+                  <a id="name" class="menuname">${instance["oggetto"]}</a>
+                  <a id="price" class="price">${instance["prezzo"]}€</a>
                 </div>
                 <div>`;
           
@@ -776,21 +776,27 @@ function confirmOrder(){
   $.ajax({
     url: "/php/order.php",
     type: "POST",
-    dataType: "JSON",
     data: (jsoncookie),
     success:function(response) {
-      if(response["error"] == 1) {
-        console.log("Server error");
-        alert("A causa di un errore, il suo ordine non e' stato processato correttamente...");
-        if(response["errortype"] = "unmatcheditems") alert("... In particolare sembra che alcuni prodotti nel suo ordine non siano venduti dal ristorante. La preghiamo di ricaricare la pagina, altrimenti contattare un amministratore del sito");
-        else if(response["errortype"] == "unmatchedprice") alert("... In particolare sembra che il prezzo visualizzato non corrisponda con il ristorante. La preghiamo di ricaricare la pagina, altrimenti contattare un amministratore del sito");
-        return ;
-      }
-      
       console.log("Server success");
       localStorage.removeItem("order");
+      console.log("Local success");
       alert("Ordine inserito con successo, verrai automaticamente reindirizzato allo storico degli ordini");
       location.assign("/account/orderhistory.html");
+    },
+    error:function(response){
+      console.log("Server error");
+      
+      if(response["usrfound"] == "0") {
+        alert("Non e' possibile fare un ordine senza aver fatto il login!");
+        console.log("Local success");
+        return;
+      }
+
+      alert("A causa di un errore, il suo ordine non e' stato processato correttamente...");
+      if(response["errortype"] = "unmatcheditems") alert("... In particolare sembra che alcuni prodotti nel suo ordine non siano venduti dal ristorante. La preghiamo di ricaricare la pagina, altrimenti contattare un amministratore del sito");
+      else if(response["errortype"] == "unmatchedprice") alert("... In particolare sembra che il prezzo visualizzato non corrisponda con il ristorante. La preghiamo di ricaricare la pagina, altrimenti contattare un amministratore del sito");
+      console.log("Local success");
     }
   });
 }
