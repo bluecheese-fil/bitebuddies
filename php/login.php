@@ -30,14 +30,15 @@
     $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
     $email_exists = "select user_id from utenti where email = '{$email}'";
     $result = pg_query($db, $email_exists) or die('Query failed:'.pg_last_error());
-    $usrid = pg_fetch_array($result, null, PGSQL_NUM); //array with indexes a number
-
-    if($usrid == false){
+    $usrid = pg_fetch_row($result, null, PGSQL_NUM); //array with indexes a number
+    pg_free_result($result);
+    pg_close($db);
+    
+    if(!$usrid){
       echo json_encode(array('success' => '0', 'type' => 'email_not_found'));
       die();
     } else $usrid = $usrid[0];
-    pg_free_result($result);
-    pg_close($db);
+    
 
     // I can now update the password and change token
     $token = randomToken();

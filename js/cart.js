@@ -67,6 +67,25 @@ function resizeCart(duration = 0){
   }
 }
 
+function lowerboundClock(){
+  lowerbound = '';
+
+  today = new Date();
+  if($("#date").val() != "" && $("#date").val() == `${today.getFullYear()}-${(today.getMonth() + 1 + "").padStart(2, '0')}-${(today.getDate() + "").padStart(2, '0')}`){
+    if(currenthour < today.getHours() || (currenthour == today.getHours() && currentminute < today.getMinutes())){
+      toAlert = "Non puoi impostare una consegna nel passato!";
+
+      closestMinute = Math.ceil(today.getMinutes()/5);
+      if(closestMinute == 12){ currenthour += 1; closestMinute = 0;} // moving the hour by one forward in time
+      newminute = (closestMinute*5).toString(); /* Making the minutes a multiple of 5 */
+      
+      lowerbound = (today.getHours() + '').padStart(2, '0') + ':' + newminute.padStart(2, '0')
+    }
+  }
+
+  return lowerbound;
+}
+
 function checkClock(id){
   current_clock = $("#" + id).val();
   clock_info = document.getElementById("orario").innerText.split(" - ");
@@ -76,41 +95,65 @@ function checkClock(id){
   
   currenthour = Number.parseInt(current_clock);
   currentminute = Number.parseInt(current_clock.substring(3));
-  
-  today = new Date();
-  if($("#date").val() != "" && $("#date").val() == `${today.getFullYear()}-${(today.getMonth() + 1 + "").padStart(2, '0')}-${(today.getDate() + "").padStart(2, '0')}`){
-    if(currenthour < today.getHours() || (currenthour == today.getHours() && currentminute < today.getMinutes())){
-      alert("Non puoi impostare una consegna nel passato!");
 
-      closestMinute = Math.ceil(today.getMinutes()/5);
-      if(closestMinute == 12){ currenthour += 1; closestMinute = 0;} // moving the hour by one forward in time
-      newminute = (closestMinute*5).toString(); /* Making the minutes a multiple of 5 */
-      
-      $("#" + id).val((today.getHours() + '').padStart(2, '0') + ':' + newminute.padStart(2, '0'));
-      return ;
-    }
-  }
+  lowerbound = lowerboundClock();
+  lowerhour = Number.parseInt(lowerbound); lowerminue = Number.parseInt(lowerbound.substring(3));
 
   newhour = currenthour.toString(); newminute = currentminute.toString();
+
+  // This checks if the clock was set before the opening hour or the current real time hour
+  changed = false;
   if(currenthour < openhour){
-    alert("L'orario di consegna non è stato impostato correttamente. È stato spostato automaticamente al primo orario disponibile");
-    newhour = openhour.toString(); newminute = openminute.toString();
-  } else if(currenthour > closehour) {
-    alert("L'orario di consegna non è stato impostato correttamente. È stato spostato automaticamente al primo orario disponibile");
-    newhour = closehour.toString(); newminute = closeminute.toString();
-  } else if(currenthour == openhour && currentminute < openminute){
-    alert("L'orario di consegna non è stato impostato correttamente. È stato spostato automaticamente al primo orario disponibile");
+    if(lowerhour > openhour) newhour = lowerhour.toString();
+    else newhour = openhour.toString();
     newminute = openminute.toString();
-  } else if(currenthour == closehour && currentminute > closeminute){
-    alert("L'orario di consegna non è stato impostato correttamente. È stato spostato automaticamente al primo orario disponibile");
-    newminute = closeminute.toString();
-  } else {
-    closestMinute = Math.round(currentminute/5);
-    if(closestMinute == 12){ currenthour += 1; closestMinute = 0;} // moving the hour by one forward in time
-    newminute = (closestMinute*5).toString(); /* Making the minutes a multiple of 5 */
+
+    changed = true;
+
+  } else if(currenthour == openhour && currentminute < openminute) {
+    if(lowerminue > openminute) newminute = lowerminue.toString();
+    else newminute = openminute.toString();
+
+    changed = true;
   }
 
+  // This checks if the clock was set after the closing hour or before the current real time hour
+  if(currenthour > closehour || (currenthour == closehour && currentminute > closeminute)) {
+
+    // I have to select the first hour on the next day
+    if(lowerbound > closehour) {
+      tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
+      $("#date").val(tomorrow.getFullYear());
+
+      newhour = openhour.toString(); newminute = openminute.toString();
+      alert("La data e l'orario sono stati cambiati in accordo con gli orari di apertura del ristorante");
+
+      $("#orario").animate({"color":"red"}, 500);
+      $("#time").animate({"color":"red"}, 500);
+      $("#date").animate({"color":"red"}, 500);
+      $("#orario").animate({"color":"black"}, 500);
+      $("#time").animate({"color":"black"}, 500);
+      $("#date").animate({"color":"black"}, 500);
+
+    } else { newhour = closehour.toString(); newminute = closeminute.toString(); }
+
+    changed = true;
+  }
+
+  // This now makes the minutes a multiple of 5
+  closestMinute = Math.round(newminute/5);
+  if(closestMinute == 12){ newhour += 1; newminute = 0;} // moving the hour by one forward in time
+  newminute = (closestMinute*5).toString(); /* Making the minutes a multiple of 5 */
+
   $("#" + id).val(newhour.padStart(2, '0') + ":" + newminute.padStart(2, '0'));
+
+  if(changed) {
+    alert("Attenzione! L'orario e' stato cambiato in accordo con gli orari di apertura del ristorante");
+    $("#orario").animate({"color":"red"}, 500);
+    $("#time").animate({"color":"red"}, 500);
+    $("#orario").animate({"color":"black"}, 500);
+    $("#time").animate({"color":"black"}, 500);
+  }
 }
 
 function clicked(name){
@@ -315,7 +358,7 @@ function loadRestaurant(id){
   if(window.outerWidth > 770) /* big screens */ $("#restaurant").css("width", `${window.innerWidth - 450}px`);
 
   let jsoncookie = {"ristoranti" : "true"};
-  jsoncookie["id"] = id;
+  jsoncookie["restid"] = id;
   
   $.ajax({
     url: "/php/menu.php",
@@ -359,7 +402,7 @@ function loadRestaurant(id){
 
 function loadFood(id){
   let jsoncookie = {"menu" : "true"};
-  jsoncookie["id"] = id;
+  jsoncookie["restid"] = id;
   
   $.ajax({
     url: "/php/menu.php",
@@ -729,10 +772,9 @@ function confirmOrder(){
 
   // HOW MUCH
   jsoncookie["total"] = $("#total").text();
-  jsoncookie["subtotal"] = $("#subtotal").text();
 
   $.ajax({
-    url: "/php/cucina.php",
+    url: "/php/order.php",
     type: "POST",
     dataType: "JSON",
     data: (jsoncookie),

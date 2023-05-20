@@ -1,5 +1,16 @@
 @import "/css/base.css";
 
+body {
+  background-color: unset;
+}
+.inizio {
+  position: relative;
+  left: -32.5%;
+}
+#logo_homepage {
+  position: absolute;
+  left: 3.5%;
+}
 img#cucina_it {
   position: relative;
   left: -76%;
@@ -28,9 +39,7 @@ img#cucina_it {
   left: -0.5%;
   top: -170%;
   width: 350px;
-  /*margin-top: 60px;*/
   text-align: center;
-  /*background-color: rgb(252, 103, 4);*/
   background-color: rgb(0, 45, 60);
   border-color: rgba(197, 192, 192, 0.726);
   border-top: none;
@@ -59,6 +68,9 @@ img#cucina_it {
   background-color: rgba(197, 192, 192, 0.500);
 }
 .scatola {
+  position: absolute;
+  left: 25%;
+  top: 22.5%;
   width: 650px;
   height: 430px;
   overflow-y: scroll;
@@ -137,12 +149,12 @@ img#cucina_it {
 }
 .tipo {
   position: relative;
-  width: 140px;
+  width: 200px;
   height: 40px;
   left: 0.5%;
+  margin-top: 20px;
   background-color: rgb(0, 45, 60);
   border-radius: 5px;
-  margin-bottom: 10px;
 }
 .tipo:hover {
   background-color: rgb(1, 29, 39);
@@ -161,14 +173,14 @@ img#cucina_it {
 }
 .item-categoria {
   text-align: center;
-  width: 140px;
+  width: 200px;
 }
 .titolo-categoria {
   position: absolute;
   display: inline-block;
   left: 0%;
   line-height: 40px;
-  width: 140px;
+  width: 200px;
   height: 40px;
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
@@ -245,13 +257,13 @@ img#cucina_it {
 }
 
 .sezioni {
-  position: absolute;
-  left: 14%;
+  position: relative;
+  left: 0.5%;
   top: 22.4%;
-  width: 1150px;
-  height: 40px;
-  overflow: hidden;
-  display: inline-block;
+  width: 200px;
+  height: 600px;
+  /*overflow: hidden;
+  /*display: inline-block;*/
 }
 .sezioni-item {
   position: relative;
@@ -260,9 +272,10 @@ img#cucina_it {
   border: solid 1px;
   border-color: rgba(112, 111, 111, 0.726);
   color: black;
-  width: 140px;
+  width: 200px;
   height: 40px;
   margin-right: 5px;
+  margin-top: 22px;
   display: inline-block;
   text-align: center;
   font-family: "Montserrat", sans-serif;

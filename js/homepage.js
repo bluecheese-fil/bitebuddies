@@ -146,7 +146,7 @@ function tuttiRistoranti() {
       success:function(response) {
         console.log(response);
         for(var i=0; i<response.length; i++) {
-          var link=`<a href="ristoranti/${response[i]['nome']}.html"><li>${response[i]['nome']}</li></a>`;
+          var link=`<a href="ristoranti.html?id=${response[i]['rest_id']}"><li>${response[i]['nome']}</li></a>`;
           $("#finale_rist").append(link);
         }
         if(response.length>7) {
@@ -199,11 +199,21 @@ function cerca(event) {
   if(event.keyCode === 13 && !event.shiftKey) {
     event.preventDefault();
     var name = $(this).val();
+    let jsoncookie={"loadContenuto" : "true"};
     $.ajax({
-      url: "/ristoranti/" + name + ".html",
-      type: "HEAD",
-      success: function() {
-        window.open("/ristoranti/" + name + ".html", "_blank");
+      url: "/php/cucina.php",
+      type: "POST",
+      dataType: "JSON",
+      data: (jsoncookie),
+      success: function(response) {
+        var id="";
+        for(var i=0; i<response.length; i++) {
+          if(response[i]['nome']==name) {
+            id=response[i]['rest_id'];
+            break;
+          }
+        }
+        window.open("/ristoranti.html?id="+id, "_blank");
       },
       error: function() {
         var input=document.getElementById("cerca");
@@ -221,6 +231,28 @@ function cerca(event) {
       }
     });
   }
+}
+
+function cercaRistorante() {
+  var lettere=[];
+  var textarea=document.getElementById('cerca');
+  textarea.addEventListener('input', function(event) {
+    var inputEvent=event.inputType;
+    var inputValue=event.target.value;
+    if (inputEvent=='insertText' && inputValue.length > 0) {
+      var character=inputValue.charAt(inputValue.length - 1);
+      lettere.push(character);
+      console.log(lettere);
+      getSuggerimenti(lettere);
+    }
+  });
+  textarea.addEventListener('keydown', function(event) {
+    if (event.key==="Backspace") {
+      var carattereCancellato = textarea.value.charAt(textarea.selectionStart - 1);
+      lettere.splice(lettere.length-1);
+      getSuggerimenti(lettere);
+    }
+  });
 }
 
 function scroll() {

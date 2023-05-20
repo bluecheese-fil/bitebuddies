@@ -82,7 +82,8 @@ Ordini:
   - rest_id bigint :arrow_right: not null (fk on rest_id in ristoranti)
   - data date :arrow_right: not null
   - orario time :arrow_right: not null
-  - indirizzo varchar(200) :arrow_right: not null, (fk con user_id in indirizzi)
+  - indirizzo varchar(200) :arrow_right: not null
+  - prezzo smallint :arrow_right: not null
 
 Contenuto:
   - order_id bigint :arrow_right: not null (fk on Ordini)

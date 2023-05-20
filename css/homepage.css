@@ -1,4 +1,5 @@
 .darkera { color: rgb(0, 45, 60) }
+html, body { height: 100%; width: 100%; margin: 0px;}
 
 body { background-color: white; overflow-x:hidden; }
 
@@ -24,11 +25,11 @@ button { border: none }
 }
 .inizio {
   position: relative;
-  left: -36.5%;
-  top: 5%;
+  left: -28.5%;
+  top: 1%;
   font-family: "Bitcheese", sans-serif;
   font-size: 25px;
-  display: inline-block;
+
 }
 #logo_homepage {
   position: absolute;
@@ -101,14 +102,15 @@ header {
   cursor: pointer;
 }
 
+/*
 .contenitore {
   position: relative;
-}
+}*/
 
 .sfondo_iniziale {
-  position: relative;
+  /*position: relative;*/
   filter: blur(5px);
-  right: 45px;
+  /*right: 45px;*/
 }
 .sezione-text {
   position: absolute;
@@ -305,32 +307,91 @@ ul#finale_rist li:hover, ul#finale_cuc li:hover {
 }
 
 @media only screen and (min-width: 1400px) {
-  .contenitore {
-    width: 75%;
+  header {
+    left: -2.5%;
+    width: 2100px;
+    height: 250px;
   }
-}
-@media only screen and (min-width: 1200px) and (max-width: 1399px) {
   .contenitore {
+    /*left: 0%;*/
     width: 100%;
+    height: 700px;
   }
-}
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .contenitore {
-    width: 125%;
+  .sfondo_iniziale {
+    width: 100%;
+    height: 850px;
   }
-}
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .contenitore {
-    width: 150%;
+  .inizio {
+    font-size: 40px;
+    top: 0%;
+    left: -30%;
   }
-}
-@media only screen and (min-width: 576px) and (max-width: 767px) {
-  .contenitore {
-    width: 215%;
+  .testo-bite-buddies {
+    font-size: 90px;
+    top: 50%;
+    left: 50%;
   }
-}
-@media only screen and (max-width: 577px) {
-  .contenitore {
-    width: 240%;
+  #login {
+    width: 300px;
+    height: 100px;
+    font-size: 40px;
+    line-height: 100px;
+    left: 70%;
+    top: 30%;
+  }
+  #registrati {
+    width: 300px;
+    height: 100px;
+    font-size: 40px;
+    line-height: 100px;
+    left: 83%;
+    top: 30%;
+  }
+  .sezione-text {
+    width: 1000px;
+    height: 300px;
+  }
+  #bottone_basso {
+    position: absolute;
+    left: 50%;
+    top: 85%;
+  }
+  .area-text {
+    width: 850px;
+    height: 80px;
+    font-size: 30px;
+  }
+  .titolo {
+    font-size: 50px;
+  }
+  .fine {
+    width: 1900px;
+    height: 410px;
+  }
+  .fine_cucina {
+    position: absolute;
+    top: 5%;
+    left: 7%;
+  }
+  .fine_ristoranti {
+    position: absolute;
+    top: 5%;
+    left: 40.5%;
+  }
+  .fine_informazioni {
+    position: absolute;
+    top: 5%;
+    left: 68%;
+  }
+  .fine_titolo {
+    width: 500px;
+    font-size: 50px;
+  }
+  .fine_titolo#about {
+    position: absolute;
+    left: 85%;
+  }
+  #finale_cuc li, #finale_rist li {
+    font-size: 20px;
   }
 }

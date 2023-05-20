@@ -26,7 +26,8 @@
 
       $usridexists = "select user_id from utenti where user_id = '{$usrid}'";
       $result = pg_query($db, $usridexists) or die('Query failed:'.pg_last_error());
-      if($result == null){
+      if(!$result){
+        pg_close($db);
         echo json_encode(array('success' => 1, 'usrfound' => 0));
         die();
       }
