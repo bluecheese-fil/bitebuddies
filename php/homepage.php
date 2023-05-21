@@ -25,15 +25,18 @@
 
   $usridexists = "select user_id from utenti where user_id = '{$usrid}'";
   $result = pg_query($db, $usridexists) or die('Query failed:'.pg_last_error());
-  if($result == null){
+  
+  if(!$result){
+    pg_close($db);
     echo json_encode(array('success' => 1, 'usrfound' => 0));
     die();
   }
+  
   pg_free_result($result);
 
   $name = "select nome from persone where user_id = '{$usrid}'";
   $result = pg_query($db, $name) or die('Query failed:'.pg_last_error());
-  $name = pg_fetch_array($result, null, PGSQL_NUM)[0]; //array with indexes a number
+  $name = pg_fetch_row($result, null, PGSQL_NUM)[0]; //array with indexes a number
   pg_free_result($result);
   pg_close($db);
 

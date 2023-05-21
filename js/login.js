@@ -114,7 +114,7 @@ function resetPassword(){
       success:function(response){
         if(response["success"] == "0"){
           console.log("Server error");
-          if(response["type"] == "email_not_found") alert("Non è stata trovata la sua email. E' necessario registrarsi prima di poter accedere");
+          if(response["type"] == "email_not_found") alert("Non è stata trovata la sua email. È necessario registrarsi prima di poter accedere");
           else if(response["type"] == "password_error") alert("La password scelta non è valida. Deve contenere almeno 2 caratteri speciali, 2 minuscole, 2 maiuscole e 2 numeri");
         } else {
           console.log("Server success");

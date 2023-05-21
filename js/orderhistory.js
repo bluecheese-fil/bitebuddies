@@ -28,27 +28,27 @@ function loadDynamic(){
         console.log('i');
         pages[i] = `
           <div class="leftorder_element" id = "page` + i + `-0" onclick="getOrder('page` + i + `-0', '` + orders[i*5][0] + `')">
-            <img class="little_image" src="/images/` + orders[i*5][2] + `">
+            <img class="little_image" src="/images/ristoranti/` + orders[i*5][2] + `.jpg">
             <div id="order_id1" class="leftorder_info"> Ordine: ` + orders[i*5][0] + `</div>
             <div id="date_order1" class="leftorder_info"> ` + orders[i*5][1] + `</div>
           </div>
           <div class="leftorder_element" id = "page` + i + `-1" onclick="getOrder('page` + i + `-1', '` + orders[i*5 + 1][0] + `')">
-            <img class="little_image" src="/images/` + orders[i*5 + 1][2] + `">
+            <img class="little_image" src="/images/ristoranti/` + orders[i*5 + 1][2] + `.jpg">
             <div id="order_id1" class="leftorder_info"> Ordine: ` + orders[i*5 + 1][0] + `</div>
             <div id="date_order1" class="leftorder_info"> ` + orders[i*5 + 1][1] + `</div>
           </div>
           <div class="leftorder_element" id = "page` + i + `-2" onclick="getOrder('page` + i + `-2', '` + orders[i*5 + 2][0] + `')">
-            <img class="little_image" src="/images/` + orders[i*5 + 2][2] + `">
+            <img class="little_image" src="/images/ristoranti/` + orders[i*5 + 2][2] + `.jpg">
             <div id="order_id1" class="leftorder_info"> Ordine: ` + orders[i*5 + 2][0] + `</div>
             <div id="date_order1" class="leftorder_info"> ` + orders[i*5 + 2][1] + `</div>
           </div>
             <div class="leftorder_element" id = "page` + i + `-3" onclick="getOrder('page` + i + `-3', '` + orders[i*5 + 3][0] + `')">
-            <img class="little_image" src="/images/` + orders[i*5 + 3][2] + `">
+            <img class="little_image" src="/images/ristoranti/` + orders[i*5 + 3][2] + `.jpg">
             <div id="order_id1" class="leftorder_info"> Ordine: ` + orders[i*5 + 3][0] + `</div>
           <div id="date_order1" class="leftorder_info"> ` + orders[i*5 + 3][1] + `</div>
           </div>
             <div class="leftorder_element" style="border-bottom-width: 3px" id = "page` + i + `-4" onclick="getOrder('page` + i + `-4', '` + orders[i*5 + 4][0] + `')">
-            <img class="little_image" src="/images/` + orders[i*5 + 4][2] + `">
+            <img class="little_image" src="/images/ristoranti/` + orders[i*5 + 4][2] + `.jpg">
             <div id="order_id1" class="leftorder_info"> Ordine: ` + orders[i*5 + 4][0] + `</div>
             <div id="date_order1" class="leftorder_info"> ` + orders[i*5 + 4][1] + `</div>
           </div>
@@ -66,7 +66,7 @@ function loadDynamic(){
           if(i == orders.length - 1) pages[last] += "style = \"border-bottom-width: 3px\"";
 
           pages[last] += `id="page` + page + `-` + i + `" onclick="getOrder('page` + page + `-` + i +`', '` + orders[i][0] + `')">
-            <img class="little_image" src="/images/` + orders[i][2] + `">
+            <img class="little_image" src="/images/ristoranti/` + orders[i][2] + `.jpg">
             <div id="order_id1" class="leftorder_info"> Ordine: ` + orders[i][0] + `</div>
             <div id="date_order1" class="leftorder_info"> ` + orders[i][1] + `</div>
           </div>
@@ -102,16 +102,17 @@ function loadDynamic(){
  * creating global variable and saving the sizes there, which is basically istantaneous */
 
 let height = 0, btheight = 0;
+
 function resize(){
   height = document.getElementById("orderdiv").offsetHeight;
   btheight = document.querySelector(".updown_button").offsetHeight;
 
-  console.log(height + ", " + btheight);
   $("#dynamicorders").css("height", (height - 2*btheight) + "px");
   $("#currentorder").css("marginTop", btheight + "px");
   $("#currentorder").css("marginBottom", btheight + "px");
   $("#currentorder").css("height", (height - 2*btheight) + "px");
-  console.log("resize done");
+
+  $("#items").css("height", `${$("#currentorder").height() - $("#toprow").height() - $("#consegna").height() - 30}px`); // Removing 20 of uncounted margin
 }
 
 function getOrder(id, order_id){
@@ -128,15 +129,22 @@ function getOrder(id, order_id){
   let jsoncookie = {"getOrder" : "true"};
   jsoncookie["order_id"] = order_id;
 
+  let cookies = document.cookie.split("; ");
+  for(let i = 0; i<cookies.length; i++){
+    let point = cookies[i].split("=");
+    if(point[0] == "iv" || point[0] == "saveduser") jsoncookie[point[0]] = point[1];
+  }
+
   $.ajax({
     url: "/php/orderhistory.php",
     type: "POST",
     dataType: "JSON",
+    async:false,
     data: (jsoncookie),
     success:function(response){
       $("#nomerist").html(response["name"]);
       $("#idspan").text("ID Ordine: " + order_id);
-      $("#consegna").text("Consegnato il " + response["data"] + " alle " + response["delivery"]);
+      $("#consegna").text("Ordinato il " + response["data"] + " alle " + response["delivery"] + " in " + response["address"]);
 
       // Re-add the borderRightWidth to all the elements, I don't want to "remember" which one was
       let orders = document.getElementById("dynamicorders");
@@ -153,6 +161,10 @@ function getOrder(id, order_id){
       text += "</ul>";
 
       $('#items').html(text);
+      $("#price").text("Totale: " + response["price"] + "€");
+
+      // resizing element
+      resize();
     },
     error: function(){ window.location.replace("/500.html"); }
   });

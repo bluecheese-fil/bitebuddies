@@ -45,7 +45,7 @@
         - Date and time of the delivery
     */
 
-    $orderinfo = "select rest_id, data, orario from ordini where order_id = '{$orderid}'";
+    $orderinfo = "select rest_id, data, orario, indirizzo, prezzo from ordini where order_id = '{$orderid}'";
     $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
     $result = pg_query($db, $orderinfo) or die('Query failed:'.pg_last_error());
     $orderinfo = pg_fetch_array($result, null, PGSQL_NUM);
@@ -70,6 +70,6 @@
     pg_close($db);
 
     // I can now send all of this information back to the user
-    echo json_encode(array("result" => "successful", "name" => $restname, "data" => $data, "delivery" => $time, "items" => $items));
+    echo json_encode(array("result" => "successful", "name" => $restname, "data" => $data, "delivery" => $time, "items" => $items, "price" => $orderinfo[4], "address" => $orderinfo[3]));
   }
 ?>

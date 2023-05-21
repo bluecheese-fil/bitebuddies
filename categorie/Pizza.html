@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/homepage.css">
+
+    <link rel="stylesheet" href="/css/categorie_cucina.css">
+    <link rel="stylesheet" href="/logo/logostyle.css">
+    <link rel="stylesheet" href="/css/mybuttons.css">
+    <link rel="stylesheet" href="/css/signup.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script src="/js/funzioni_cucina.js"></script>
+
+</head>
+<body>
+
+  <script>
+    $(document).ready(function() {
+      var fileName = window.location.pathname.split('/').pop();
+      var file=fileName.split(".");
+      loadContenuto(file[0]);
+      cambiaCategoria(file[0]);
+
+      var buttonPressed = false;
+      $(".item-categoria").click(function() {
+        buttonPressed = !buttonPressed;
+        if(buttonPressed) $(".sezioni").fadeIn();
+        else $(".sezioni").fadeOut();
+      });
+    });
+  </script>
+
+<header class="header">
+  <a href="/homepage.html"><img class="logo" id="logo_homepage" src="/logo/logo.png" alt="logo"></a>
+
+  <h5 class="inizio">Cerca il tuo ristorante!</h5>
+
+  <h4 class="testo-bite-buddies">BiteBuddies</h4>
+
+  <!-- Login & Signup -->
+  <div id = "personallogin" class = "dropdown" hidden>
+    <button class="btn btn-secondary dropdown-toggle mydropdown" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      <span id = "name"> </span>
+      <img height="28" width="24" src="https://cdn.jsdelivr.net/npm/remixicon@3.3.0/icons/User%20&%20Faces/user-3-line.svg">
+    </button>
+    
+    <ul class="dropdown-menu dropdownbackground" aria-labelledby="dropdownMenuButton1">
+      <li><a class="dropdown-item dropdownitem" href="/account/account.html"> Account </a></li>
+      <li><a class="dropdown-item dropdownitem" href="/account/orderhistory.html"> Ordini </a></li>
+      <li><a class="dropdown-item dropdownitem" href="/account/addresses.html"> Indirizzi di consegna </a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item dropdownitem" href="#" onclick="quitUser()"> Esci </a></li>
+    </ul>
+  </div>
+
+  <nav id="fastredirect">
+    <div class="bottoni">
+      <ul class="nav_links">
+        <a href="/account/login.html"><li id="login">LOGIN</li></a> 
+        <a href="/account/signup.html"><li id="registrati">SIGN UP</li></a>
+      </ul>
+    </div>
+  </nav>   
+</header>
+
+  <div class="tipo">
+    <div class="item-categoria"></div>    
+  </div>
+  <div class="sezioni"></div>
+
+  <div class="scatola"></div>
+
+</body>
+</html>

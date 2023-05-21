@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>MrPasta</title>
+    
+    <link rel="stylesheet" href="/css/ristorante.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"> </script> 
+    <script src="/js/funzioni_ristoranti.js"> </script>
+
+    <script>
+        $(document).ready(function() {
+            loadFood();
+            change();
+            loadQuantita();
+        });
+    </script>
+</head>
+<body>
+    <div class="cont">
+
+        <a href="/homepage.html"><img src="/logo/logo.png" class="logo"></a>
+
+        <div class="sidebar">
+          <ul></ul>
+        </div>        
+
+        <div class="content">
+
+            <h2 class="title"></h2>
+            
+            <div class="info"></div>
+
+            <div class="pagamento">
+                <h4 id="nota">Nota</h4>
+                <h4 id="contanti">si accettano solo pagamenti in contanti</h4>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

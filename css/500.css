@@ -1,2 +1,3 @@
-.redirect { color: red; }
 body { margin: 20px 20px 20px 20px; text-align: center;}
+div, a { font-family: 'Bitcheese', 'Montserrat', sans-serif; font-size: larger;}
+.redirect { color: red; }

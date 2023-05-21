@@ -139,16 +139,17 @@
       $insert_transaction = "
       begin;
       insert into utenti(email, passwd, token) values('{$email1}', '{$hashedpasswd}', '{$token}');
-      insert into persone(nome, cognome) values('{$nome}', '{$cognome}');
       do
       $$
       declare
         usrid int;
       begin
-        select user_id into usrid from utenti where  email='{$email1}';
+        select user_id into usrid from utenti where email='{$email1}';
         if not found then
           raise exception 'no row found';
-        else";
+        else
+          insert into persone(user_id, nome, cognome) values(usrid, '{$nome}', '{$cognome}');
+        ";
       
       if($indirizzo != ""){
         $insert_transaction = $insert_transaction."\t\tinsert into indirizzi(user_id, indirizzo, def_indirizzo) values(usrid, '{$indirizzo}', true);";
