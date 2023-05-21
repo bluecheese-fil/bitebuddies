@@ -2,7 +2,7 @@
 Progetto per l'esame "Linguaggi e tecnologie per il web"
 
 ## Componenti necessari per la creazione della registrazione
-Bisogna aggiungere una sezione per far fare la registrazione agli utenti ed ai ristoranti.
+Bisogna aggiungere una sezione per far fare la registrazione agli utenti.
 Per gli utenti abbiamo bisogno:
   - Nome
   - Cognome
@@ -11,38 +11,23 @@ Per gli utenti abbiamo bisogno:
   - Indirizzo fisico e telefono
   - Orario di consegna (Fra)
 
-Per i ristoranti:
-  - Nome titolare
-  - Cognome titolare
-  - Nome ristorante
-  - Indirizzo fisico
-  - Menu
-  - Costo Menu(Fra)
-  - Costo consegna
-  - Numero di telefono ed indirizzo email
-  - Password (restrizioni sulle password?)
-  - Quanti ordini possono accettare ad "slot orario"
-
 ### Dopo la registrazione:
 Per ogni utente bisogna salvare:
   1. Uno storico ordini
-  2. I documenti e le informazioni inserite
-
-Per i ristoranti possiamo *NON* inserire lo storico ordini (?)
+  2. Informazioni inserite
+  3. Mail e password salvate e criptate
+  4. Token per ricordarsi dell'accesso di un utente e per disconnettere gli altri dispositivi
 
 ### Implementazione sicura
 La password salvata nel database è hashed, e nei cookie viene salvato un identificativo ed un token generato casualmente. I due vengono criptati con questa chiave, dato che i cookie sono leggibili da tutti
+
 chiave: n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&
 
 ### Eliminazione degli utenti
 Ogni foreign key ha: ONUPDATE e ONDELETE impostato a CASCADE. Basta cambiare una riga in utenti che tutte le informazioni di quell'utente vengono eliminate. Allo stesso modo, se viene cambiato l'user_id, viene aggiornato automaticamente su tutte le tabelle. È quindi possibile eliminare facilmente un utente, dato che basta eliminare la sua riga dalla tabella "utenti"
 
 ### Indirizzi all'interno del database
-Tutte le apostrofi sono state sostituite con &#39, secondo lo standard html. Questo è fatto per evitare errori negli inserimenti all'interno del database, soprattutto per gli indirizzi
-
-## Dinamizzazione del sito
-Il sito deve essere vagamente dinamico. Bisogna fare una buona ricerca per trovare delle images/static da scaricare ed usare, e bisogna usare oppurtunamente i CSS per fare un minimo di animazioni decenti!. Poi vediamo come farlo
-Si può pensare di fare un sito che scorre verso il basso(Fra)
+Tutte gli apostrofi all'interno degli indirizzi sono state sostituiti con &#39, secondo lo standard html. Questo è fatto per evitare errori negli inserimenti all'interno del database. Quando si vuole inserire quel particolare record all'interno di un tag html, quel codice viene automaticamente sostituito con un'apostrofo dal browser
 
 # Database
 Per accedere al database si possono usare questa combinazione di utente e password:
@@ -111,7 +96,3 @@ Menu:
   - ingrediente1 varchar(50)
   - ingrediente2 varchar(50)
   - ingrediente3 varchar(50)
-
-Login di account dato di default:
-email:  checcoz@zalon.org
-passwd: as123!@#ASD
