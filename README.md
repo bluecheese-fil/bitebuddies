@@ -96,3 +96,6 @@ Menu:
   - ingrediente1 varchar(50)
   - ingrediente2 varchar(50)
   - ingrediente3 varchar(50)
+
+# Immagini dei ristoranti:
+Per questo sito non è stato pensato che un ristorante potesse registrarsi, ma è stata lasciata aperta l'opzione nel caso in cui si volesse aggiungere questa funzionalitá nel futuro. Per questo motivo le immagini hanno un nome randomico di esattamente 28 caratteri. Questo permette al ristoratore di caricare la propria immagine, che verrá salvata con un nome casuale generato dal server, rendendola quindi unica.

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
   <head>
     <link rel="stylesheet" href="/css/homepage.css">
     

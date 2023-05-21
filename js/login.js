@@ -13,7 +13,9 @@ function load(error = false){
   if(error || errorparameter != null){
     // this will happen only if the login button has been pressed at least once! I can reuse the email
     document.getElementById("email").value = sessionStorage.getItem("savedemail");
-    localStorage.removeItem("saveduser");
+
+    // THIS REQUIRES generalFunctions to be included in login.html!!
+    quitUser();
     
     const loginForm = document.querySelector('.loginform');
     document.getElementById("error").removeAttribute('hidden');

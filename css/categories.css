@@ -1,0 +1,206 @@
+html, body { background-color: unset; min-width: 768px; height: 100%; max-height: 100%;}
+header { height: 20%; }
+h6, div { color: black; text-align: center; }
+
+.logo {margin-right: 15px;}
+
+.nav_links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.textfont { font-family: 'Bitcheese', 'Montserrat', sans-serif; }
+
+.coloredcircle {
+  display: block;
+
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
+}
+
+.centeredinfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.restname {
+  display: block;
+  width: 100%;
+  height: fit-content;
+  padding-top: 10px; padding-bottom: 10px;
+  
+  text-align: center;
+
+  font-family: 'Bitcheese', 'Montserrat', sans-serif;
+  
+  background-color: rgb(0, 45, 60);
+  color: white;
+  
+  border-radius: 2px;
+  box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.littleimg {width: 30px; height: 30px;}
+
+.restkind {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  vertical-align: middle;
+
+  border-style: none;
+  border-radius: 20px;
+
+  background-color: rgb(0, 45, 60);
+  color: white;
+
+  user-select: none;
+  -webkit-touch-callout: none;  /* iOS Safari */
+  -webkit-user-select: none;    /* Safari */
+  -khtml-user-select: none;     /* Konqueror HTML */
+  -moz-user-select: none;       /* Old versions of Firefox */
+  -ms-user-select: none;        /* Internet Explorer/Edge */
+  user-select: none;            /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+.restkind:hover {
+  cursor: pointer;
+  transition: 0.5s;
+  background-color: rgb(0, 30, 40);
+}
+
+.selectedcategory { background-color: rgba(0, 30, 40, 0.6); cursor: default; }
+.selectedcategory:hover { background-color: rgba(0, 30, 40, 0.6); }
+
+.restholder { overflow-y: auto; }
+.restholder::-webkit-scrollbar { margin: 0px; cursor: pointer; }
+.restholder::-webkit-scrollbar-thumb { background-color: #888; border-radius: 5px; }
+.restholder::-webkit-scrollbar-track { background-color: #f1f1f1; }
+
+
+.restaurant {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  width: 100%;
+  cursor: pointer;
+
+  transition: 0.6s;
+}
+
+.restaurant:hover { background-color: rgba(197, 192, 192, 0.500); }
+
+/* This two should be considered togheter. The flex property has been moved to that element to overrun the one loaded from /css/base.css */
+.nav_links li {display: flex;}
+.buttons {
+  align-items: center;
+  justify-content: center;
+
+  height: 50%;
+  width: 45%;
+
+  color: white;
+  background-color: rgb(143,139,139);
+
+  font-family: 'Montserrat', sans-serif;
+  
+  cursor: pointer;
+  user-select: none;
+  -webkit-touch-callout: none;  /* iOS Safari */
+  -webkit-user-select: none;    /* Safari */
+  -khtml-user-select: none;     /* Konqueror HTML */
+  -moz-user-select: none;       /* Old versions of Firefox */
+  -ms-user-select: none;        /* Internet Explorer/Edge */
+  user-select: none;            /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+
+  border-radius: 20px;
+  border-style: none;
+}
+
+/* Media queries */
+@media only screen and (min-width: 1500px){
+  
+  .kindcontainer {
+    float: left;
+    width: 20%;
+    margin-right: 2.5%;
+    height: 80%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+  }
+
+  .restholder {
+    float: right;
+  
+    display: grid;
+    grid-template-columns: auto auto;
+    align-content: space-between;
+    
+    width: 75%;
+    margin-left: 2.5%;
+    height: 80%;
+  }
+
+  .restkind {
+    height: 7%;
+    width: 75%;
+  }
+}
+
+@media only screen and (max-width: 1499px){
+
+  .kindcontainer {
+    width: 100%;
+    height: 15%;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+  }
+
+
+  .restholder {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-content: space-between;
+    
+    width: 100%;
+    height: 85%;
+  }
+
+  .restkind {
+    height: 30%;
+    width: 20%;
+    min-width: fit-content;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
+
+/* This two are only used for font size change */
+@media only screen and (min-width: 1100px){
+  .textfont {  font-size: xxx-large; }
+  .buttons { font-size: large; }
+  .restkind { font-size: x-large; }
+  .restname { font-size: x-large; }
+}
+
+@media only screen and (max-width: 1099px){
+  .textfont {  font-size: x-large;}
+  .buttons { font-size: medium; }
+  .restkind { font-size: large; }
+  .restname { font-size: larger; }
+}

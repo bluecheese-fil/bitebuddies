@@ -254,7 +254,7 @@ function addToCart(ristid, name, price){
   if(order == null) order = {"restaurant" : ristid, "restname" : $("#title").text()};
 
   if(order != undefined && order["restaurant"] != ristid) {
-    ok = confirm("Hai gia' il carrello salvato per un altro ristorante, vuoi eliminarlo?");
+    ok = confirm("Hai giá il carrello salvato per un altro ristorante, vuoi eliminarlo?");
     if(!ok) return ;
     order = {"restaurant" : ristid, "restname" : $("#title").text()};
   }
