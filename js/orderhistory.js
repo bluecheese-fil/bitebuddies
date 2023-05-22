@@ -85,7 +85,7 @@ function loadDynamic(){
       $("#upbt").css("opacity", "0.3");
 
       // I need to check if it's possible to go down (more than 5 orders)
-      if(orders.length < 5) $("#downbt").css("opacity", "0.3");
+      if(orders.length <= 5) $("#downbt").css("opacity", "0.3");
 
       $("#orderdiv").css("opacity", "1");
 
