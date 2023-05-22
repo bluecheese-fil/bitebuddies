@@ -68,7 +68,7 @@ h6, div { color: black; text-align: center; }
   user-select: none;            /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
-.kindicons { width: 17.5%; height: 50%; }
+.kindicons { height: 4vmin; width: 4vmin; }
 
 .restkind:hover {
   cursor: pointer;
