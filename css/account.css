@@ -1,4 +1,4 @@
-html, body { height: 100%; min-width: 300px;}
+html, body { height: 100%; min-width: 450px; min-height: 510px;}
 
 input {
   width: 100%;
@@ -75,7 +75,7 @@ button { width: 100%;}
 
 .innerdiv {
   text-align: center;
-  width: 50%;
+  width: fit-content;
 }
 
 .clickable { cursor: pointer; }
@@ -114,8 +114,8 @@ button { width: 100%;}
 .errore { color: red; font-size: small; padding-bottom: 5px;}
 
 .bottomdiv {
-  position: fixed;
-  bottom: 0; left: 0;
+  position: relative;
+  bottom: 0;
 
   display: inline-flex; justify-content: center;
   
@@ -123,4 +123,4 @@ button { width: 100%;}
   margin: 20px 0px 50px 0px;
 }
 
-.bottomdiv:hover { cursor: pointer; color: red; }
+.deletetext:hover { cursor: pointer; color: red; }

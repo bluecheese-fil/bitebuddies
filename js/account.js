@@ -137,8 +137,8 @@ function askChange(name){
     if(point[0] == "iv" || point[0] == "saveduser" || point[0] == "temporary") jsoncookie[point[0]] = point[1];
   }
   
-  jsoncookie[name + '1'] = $("$firstinput").val();
-  jsoncookie[name + '2'] = $("$secondinput").val();
+  jsoncookie[name + '1'] = $("#firstinput").val();
+  jsoncookie[name + '2'] = $("#secondinput").val();
 
   let confermed = confirm("Sei sicuro di voler cambiare " + name + "?");
   if(!confermed) return false;

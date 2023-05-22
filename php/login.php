@@ -59,7 +59,7 @@
   }
 
   function login($email, $password, $remember, $iv, $info, $expiry){
-    if($email == "" || $password == ""){
+    if((!isset($email) || !isset($password)) && (!isset($iv) || !isset($info))){
       echo json_encode(array('error' => 'info_error'));
       die();
     }
@@ -67,7 +67,7 @@
     $cipher = "aes-256-cbc";
     $delimiter = chr(007); // bell (licence to kill)
     
-    if($email == "" || $password == ""){ // I am giving priority to the set email and password
+    if(!isset($email) || !isset($password)){ // I am giving priority to the set email and password
       $info = hextocharCookie($info);
       $iv = hextocharCookie($iv);
       $items = preg_split("/{$delimiter}/", openssl_decrypt($info, $cipher, "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv));
@@ -88,7 +88,7 @@
     pg_free_result($result);
     pg_close($db);
 
-    if(!($email == "" || $password == "")){
+    if(isset($email) && isset($password)){
       // If either email or password are set, I prioritize the login throught those
       if(!password_verify($password, $line[2])){ // they don't match
         // deleting cookie
@@ -121,7 +121,7 @@
         die();
       }
     } else {
-      if(!$user_id == $line[0] || !$token == $line[1]){
+      if($user_id != $line[0] || $token != $line[1]){
         // deleting cookie
         deleteLoginCookie();
 
