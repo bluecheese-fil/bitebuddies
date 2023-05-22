@@ -22,9 +22,10 @@
       // ajax call to get name and default address
       $(document).ready(function() {
         isLogged();
-        loadHomepage();
-        tutteCucine();
-        tuttiRistoranti();
+
+        // Dynamic elements
+        loadHomepage(); tutteCucine(); loadRests();
+
         $("#bottone_basso").click(scroll);
         $('#cerca').on('keydown', cerca);
         $(".area-text").click(function() {
@@ -69,7 +70,7 @@
     </header>
 
     <div class="contenitore">
-      <img src="/images/static/hamburger-copia4.jpg" class="sfondo_iniziale">
+      <img src="/images/static/sfondohamburger.jpg" class="sfondo_iniziale">
     
       <div class="scat">
         <img src="/images/static/foodbox.png" id="foodbox">
@@ -80,7 +81,7 @@
           </div>
           <datalist id="selezione"></datalist>
         </div>
-        <button id="bottone_basso"> <img src="/images/static/down-arrow.png" width="100px" height="100px"> </button>
+        <button id="bottone_basso" style="display: none;"> <img src="/images/static/down-arrow.png" width="100px" height="100px"> </button>
       </div>
     </div>
       
@@ -157,7 +158,7 @@
           </td>
         </table></a>
 
-        <a href="/categorie/Colazione.html" class="categoria"><table cellpadding="0" class="table1" id="vegano">
+        <a href="/categorie/Colazione.html" class="categoria"><table cellpadding="0" class="table1" id="colazione">
           <tr>
             <th class="intestazione">COLAZIONE</th>
           </tr>

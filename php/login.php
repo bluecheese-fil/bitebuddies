@@ -92,9 +92,7 @@
       // If either email or password are set, I prioritize the login throught those
       if(!password_verify($password, $line[2])){ // they don't match
         // deleting cookie
-        setcookie("iv", "", time() - 3600, $path="/");
-        setcookie("saveduser", "", time() - 3600, $path="/");
-        setcookie("temporary", "", time() - 3600, $path="/");
+        deleteLoginCookie();
 
         echo json_encode(array('error' => 'passwd_error'));
         die();
@@ -125,9 +123,7 @@
     } else {
       if(!$user_id == $line[0] || !$token == $line[1]){
         // deleting cookie
-        setcookie("iv", "", time() - 3600, $path="/");
-        setcookie("saveduser", "", time() - 3600, $path="/");
-        setcookie("temporary", "", time() - 3600, $path="/");
+        deleteLoginCookie();
 
         echo json_encode(array('error' => 'info_error'));
         die();
@@ -139,7 +135,7 @@
           // I am setting the cookie so that each backslash is saved as such in javascript
           setcookie("saveduser", $info, $expires_or_options=$ninetydays, $path="/");
           setcookie("iv", $iv, $expires_or_options=$ninetydays, $path="/");
-          setcookie("temporary", "false", $expires_or_options=0, $path="/");
+          setcookie("temporary", "false", $expires_or_options=0, $path="/"); // Used to check if user checked "Remember me"
         }
 
         echo json_encode(array('success' => '1'));

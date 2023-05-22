@@ -1,3 +1,7 @@
+.darkera { color: rgb(0, 45, 60) }
+html, body { height: 100%; width: 100%; margin: 0px; min-width: 624px;}
+body { background-color: white; overflow-x:hidden; }
+
 .categoria {
   width: 20%;
   margin-right: 1%;
@@ -19,250 +23,244 @@ header {
   align-items: center;
   justify-content: space-around;
   padding: 20px;
+  margin-top: 5px;
 }
 
 @media only screen and (min-width: 1300px) {
-.darkera { color: rgb(0, 45, 60) }
-html, body { height: 100%; width: 100%; margin: 0px;}
+  button { border: none }
+  header { height: 22%; }
 
-body { background-color: white; overflow-x:hidden; }
-button { border: none }
-header { height: 22%; }
+  .iniziale {
+    display: flex;
+    align-items: center;
+  }
 
-.iniziale {
-  display: flex;
-  align-items: center;
-}
-.testo-bite-buddies {
-  font-family: "Bitcheese", 'Montserrat', sans-serif;
-  font-size: 100px;
-}
-.inizio {
-  font-family: "Bitcheese", 'Montserrat', sans-serif;
-  font-size: 25px;
-  color: black;
-}
-.scat {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  transform: translate(0%, -130%);
-  width: 100%;
-  height: 70%;
-}
-#login {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(197, 192, 192, 0.726);
-  border-radius: 5px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  font-size: 30px;
-  text-align: center;
-  line-height: 80px;
-  color: black;
-}
-#login:hover {
-  background-color: rgba(160, 159, 159, 0.726);
-  cursor: pointer;
-}
-#registrati {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(197, 192, 192, 0.726);
-  border-radius: 5px;
-  font-size: 30px;
-  font-weight: 500;
-  font-family: "Montserrat", sans-serif;
-  text-align: center;
-  line-height: 80px;
-  color: black;
-}
-.immagine {
-  position: relative;
-  left: 50%;
-  transform: translate(-50%, 0%);
-  width: 130px;
-  height: 130px;
-}
-#registrati:hover {
-  background-color: rgba(160, 159, 159, 0.726);
-  cursor: pointer;
-}
-#foodbox {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 40px;
-}
-.contenitore {
-  width: 100%;
-  height: 80%;
-}
-.sfondo_iniziale {
-  filter: blur(5px);
-  width: 100%;
-  height: 100%;
-}
-.sezione-text {
-  width: 40%;
-  display: flex;
-  height: 40%;
-  background-color: white;
-  border-radius: 20px;
-  filter: opacity(0.5);
-  text-align: center;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-.titolo {
-  font-style: italic;
-  color: black;
-  z-index: 1;
-  margin-top: 30px;
-}
-.area-text {
-  background-color: white;
-  height: 40px;
-  width: 80%;
-  line-height: 35px;
-  border-radius: 10px;
-  text-align: left;
-  font-size: 16px;
-  padding-left: 15px;
-  border-bottom: solid 2px;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  overflow-y: hidden;
-  margin-bottom: 20px;
-  z-index: 2;
-}
-#bottone_basso {
-  background-color: unset;
-  filter: invert(100%);
-  margin-top: 50px;
-}
-.intestazione {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  background-color: rgb(0, 45, 60);
-}
+  .testo-bite-buddies {
+    font-family: "Bitcheese", 'Montserrat', sans-serif;
+    font-size: 100px;
+  }
 
-img { border-radius: 0px 0px 10px 10px; }
+  .inizio {
+    font-family: "Bitcheese", 'Montserrat', sans-serif;
+    font-size: 25px;
+    color: black;
+  }
+  .scat {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    transform: translate(0%, -130%);
+    width: 100%;
+    height: 70%;
+  }
 
-.fine {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 55%;
-  background-color: rgb(0, 45, 60);
-}
-.fine_cucina {
-  display: flex;
-  width: 33%;
-  height: 85%;
-  flex-direction: column;
-  text-align: center;
-  margin-top: 30px;
-  align-items: center;
-}
-.fine_ristoranti {
-  display: flex;
-  flex-direction: column;
-  width: 33%;
-  height: 85%;
-  text-align: center;
-  margin-top: 30px;
-  align-items: center;
-}
-.fine_informazioni {
-  display: flex;
-  flex-direction: column;
-  width: 33%;
-  height: 75%;
-  text-align: center;
-  margin-top: 30px;
-}
-.fine_titolo {
-  font-family: "Bitcheese", sans-serif;
-  font-size: 30px;
-}
-.domanda {
-  font-family: "Bitcheese", sans-serif;
-  font-size: 20px;
-  margin-right: 20px;
-}
-.risposta {
-  font-style: italic;
-  font-size: 20px;
-}
-.domanda_next {
-  font-family: "Bitcheese", sans-serif;
-  font-size: 20px;
-  margin-top: 10px;
-  margin-right: 20px;
-}
-.risposta_next {
-  font-style: italic;
-  font-size: 20px;
-  margin-top: 10px;
-}
-.domanda_next_next {
-  font-family: "Bitcheese", sans-serif;
-  font-size: 20px;
-  margin-top: 10px;
-}
-.risposta_next_next {
-  font-style: italic;
-  font-size: 20px;
-  margin-top: 10px;
-}
-ul#finale_rist, ul#finale_cuc {
-  width: 100%;
-  list-style: none;
-  text-align: center;
-  overflow-y: scroll;
-  scrollbar-width: 100px;
-  margin-top: 14px;
-}
-ul#finale_info {
-  list-style: none;
-  width: 100%;
-  height: 45%;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-}
-ul#finale_cuc::-webkit-scrollbar, ul#finale_rist::-webkit-scrollbar {
-  display: none;
-}
-ul#finale_rist li, ul#finale_cuc li {
-  font-family: 'Montserrat', sans-serif;
-  font-style: italic;
-  margin-top: -5px;
-}
-ul#finale_rist li:hover, ul#finale_cuc li:hover {
-  cursor: pointer;
-  color: rgba(187, 185, 185, 0.726);
-}
-.down_arrow {
-  width: 20px;
-  height: 20px;
-  filter: invert(100%);
-  margin-left: 30px;
-}
+  #login {
+    height: 100%;
+    background-color: rgba(197, 192, 192, 0.726);
+    border-radius: 5px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 30px;
+    text-align: center;
+    line-height: 80px;
+    color: black;
+    cursor: pointer;
+  }
+
+  #login:hover { background-color: rgba(160, 159, 159, 0.726); }
+
+  #registrati {
+    height: 100%;
+    background-color: rgba(197, 192, 192, 0.726);
+    border-radius: 5px;
+    font-size: 30px;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    line-height: 80px;
+    color: black;
+  }
+
+  .immagine {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 130px;
+    height: 130px;
+  }
+  #registrati:hover {
+    background-color: rgba(160, 159, 159, 0.726);
+    cursor: pointer;
+  }
+  #foodbox {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 40px;
+  }
+  .contenitore {
+    width: 100%;
+    height: 80%;
+  }
+  .sfondo_iniziale {
+    filter: blur(5px);
+    width: 100%;
+    height: 100%;
+  }
+  .sezione-text {
+    width: 40%;
+    display: flex;
+    height: 40%;
+    background-color: white;
+    border-radius: 20px;
+    filter: opacity(0.5);
+    text-align: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  .titolo {
+    font-style: italic;
+    color: black;
+    z-index: 1;
+    margin-top: 30px;
+  }
+  .area-text {
+    background-color: white;
+    height: 40px;
+    width: 80%;
+    line-height: 35px;
+    border-radius: 10px;
+    text-align: left;
+    font-size: 16px;
+    padding-left: 15px;
+    border-bottom: solid 2px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    overflow-y: hidden;
+    margin-bottom: 20px;
+    z-index: 2;
+  }
+  #bottone_basso {
+    background-color: unset;
+    filter: invert(100%);
+    margin-top: 50px;
+  }
+  .intestazione {
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    background-color: rgb(0, 45, 60);
+  }
+
+  img { border-radius: 0px 0px 10px 10px; }
+
+  .fine {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 55%;
+    background-color: rgb(0, 45, 60);
+  }
+  .fine_cucina {
+    display: flex;
+    width: 33%;
+    height: 85%;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 30px;
+    align-items: center;
+  }
+  .fine_ristoranti {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+    height: 85%;
+    text-align: center;
+    margin-top: 30px;
+    align-items: center;
+  }
+  .fine_informazioni {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+    height: 75%;
+    text-align: center;
+    margin-top: 30px;
+  }
+  .fine_titolo {
+    font-family: "Bitcheese", sans-serif;
+    font-size: 30px;
+  }
+  .domanda {
+    font-family: "Bitcheese", sans-serif;
+    font-size: 20px;
+    margin-right: 20px;
+  }
+  .risposta {
+    font-style: italic;
+    font-size: 20px;
+  }
+  .domanda_next {
+    font-family: "Bitcheese", sans-serif;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-right: 20px;
+  }
+  .risposta_next {
+    font-style: italic;
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  .domanda_next_next {
+    font-family: "Bitcheese", sans-serif;
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  .risposta_next_next {
+    font-style: italic;
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  ul#finale_rist, ul#finale_cuc {
+    width: 100%;
+    list-style: none;
+    text-align: center;
+    overflow-y: scroll;
+    scrollbar-width: 100px;
+    margin-top: 14px;
+  }
+  ul#finale_info {
+    list-style: none;
+    width: 100%;
+    height: 45%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  ul#finale_cuc::-webkit-scrollbar, ul#finale_rist::-webkit-scrollbar {
+    display: none;
+  }
+  ul#finale_rist li, ul#finale_cuc li {
+    font-family: 'Montserrat', sans-serif;
+    font-style: italic;
+    margin-top: -5px;
+  }
+  ul#finale_rist li:hover, ul#finale_cuc li:hover {
+    cursor: pointer;
+    color: rgba(187, 185, 185, 0.726);
+  }
+  .down_arrow {
+    width: 20px;
+    height: 20px;
+    filter: invert(100%);
+    margin-left: 30px;
+  }
 }
 
 
 
 @media only screen and (max-width: 1299px) {
-  .darkera { color: rgb(0, 45, 60) }
-  html, body { height: 100%; width: 100%; margin: 0px;}
-  
-  body { background-color: white; overflow-x:hidden; }
-  
   button { border: none }
   
   .iniziale {
@@ -290,34 +288,34 @@ ul#finale_rist li:hover, ul#finale_cuc li:hover {
     width: 100%;
     height: 70%;
   }
+
   #login {
-    width: 100%;
     height: 100%;
     background-color: rgba(197, 192, 192, 0.726);
     border-radius: 5px;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
-    font-size: 10px;
+    font-size: 25px;
     text-align: center;
     line-height: 80px;
     color: black;
-  }
-  #login:hover {
-    background-color: rgba(160, 159, 159, 0.726);
     cursor: pointer;
   }
+
+  #login:hover { background-color: rgba(160, 159, 159, 0.726); }
+
   #registrati {
-    width: 100%;
     height: 100%;
     background-color: rgba(197, 192, 192, 0.726);
     border-radius: 5px;
-    font-size: 10px;
+    font-size: 25px;
     font-weight: 500;
     font-family: "Montserrat", sans-serif;
     text-align: center;
     line-height: 80px;
     color: black;
   }
+
   .immagine {
     position: relative;
     left: 50%;
@@ -346,7 +344,7 @@ ul#finale_rist li:hover, ul#finale_cuc li:hover {
   .sezione-text {
     width: 40%;
     display: flex;
-    height: 40%;
+    height: 50%;
     background-color: white;
     border-radius: 20px;
     filter: opacity(0.5);

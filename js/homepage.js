@@ -74,7 +74,6 @@ function tutteCucine() {
       dataType: "JSON",
       data: (jsoncookie),
       success:function(response) {
-        console.log(response);
         for(var i=0; i<response.length; i++) {
           var link=`<a href="categorie/${response[i]['categoria']}.html"><li>${response[i]['categoria']}</li></a>`;
           $("#finale_cuc").append(link);
@@ -87,7 +86,7 @@ function tutteCucine() {
   });
 }
 
-function tuttiRistoranti() {
+function loadRests() {
   let jsoncookie={"tuttiRistoranti" : "true"};
   $.ajax({
       url: "/php/cucina.php",
@@ -95,16 +94,23 @@ function tuttiRistoranti() {
       dataType: "JSON",
       data: (jsoncookie),
       success:function(response) {
-        console.log(response);
-        for(var i=0; i<response.length; i++) {
-          var link=`<a href="ristoranti.html?id=${response[i]['rest_id']}"><li>${response[i]['nome']}</li></a>`;
+        if(response["success"] == "0"){ window.location.replace("/500.html"); return ; } // this return should be useless, it works as a guard clause
+
+        console.log("Server success");
+        restaurants = response["rests"];
+        for(i = 0; i < restaurants.length; i++){
+          var link=`<a href="ristoranti.html?id=${restaurants[i]['rest_id']}"><li>${restaurants[i]['nome']}</li></a>`;
           $("#finale_rist").append(link);
         }
-        if(response.length>7) {
+
+        if(restaurants.length > 7) {
           var scorri=`<img class="down_arrow" src="/images/static/down-arrow.png">`;
           $(".freccia_sotto#rist").append(scorri);
         }
-      }
+
+        console.log("Local success");
+      },
+      error:function(){  window.location.replace("/500.html"); }
   });
 }
 
@@ -114,8 +120,6 @@ function tenda(array) {
     if(!aggiunti.includes(array[i])) {
       var opzione=`<option value="${array[i]}">`;
       $("#selezione").append(opzione);
-      var datalist = document.getElementById('selezione');
-      datalist.style.display='block';
       aggiunti.push(array[i]);
     }
   }
@@ -139,7 +143,6 @@ function getSuggerimenti(lettere) {
               }
               if(verificato==1 && !array.includes(ristorante)) array.push(ristorante);
             }
-            console.log(array);
             tenda(array);
           }
         }
@@ -149,37 +152,27 @@ function getSuggerimenti(lettere) {
 function cerca(event) {
   if(event.keyCode === 13 && !event.shiftKey) {
     event.preventDefault();
-    var name = $(this).val();
-    let jsoncookie={"loadContenuto" : "true"};
+    let jsoncookie={"cerca" : "true", nome:$(this).val()};
     $.ajax({
       url: "/php/cucina.php",
       type: "POST",
       dataType: "JSON",
       data: (jsoncookie),
       success: function(response) {
-        var id="";
-        for(var i=0; i<response.length; i++) {
-          if(response[i]['nome']==name) {
-            id=response[i]['rest_id'];
-            break;
-          }
+
+        if(response["found"] == "true") window.location.assign("/ristoranti.html?id="+response["rest_id"]);
+        else {
+          var input = document.getElementById("cerca");
+          var existingText=input.value;
+          var newText=existingText+"   Questo ristorante non esiste...";
+          input.value=newText;
+          $("#cerca").click(function() { input.value=""; });
+          input.addEventListener('keydown', function(event) {
+            if(event.key==="Backspace") { input.value=""; }
+          });
         }
-        window.open("/ristoranti.html?id="+id, "_blank");
       },
-      error: function() {
-        var input=document.getElementById("cerca");
-        var existingText=input.value;
-        var newText=existingText+"   Questo ristorante non esiste...";
-        input.value=newText;
-        $("#cerca").click(function() {
-          input.value="";
-        });
-        input.addEventListener('keydown', function(event) {
-          if(event.key==="Backspace") {
-            input.value="";
-          }
-        });
-      }
+      error: function() { window.location.replace("/500.html"); }
     });
   }
 }

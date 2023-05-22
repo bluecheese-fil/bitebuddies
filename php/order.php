@@ -5,8 +5,8 @@
   $info = hextocharCookie($_POST["saveduser"]);
   $iv = hextocharCookie($_POST["iv"]);
   
-  // checking that iv is correct
-  if(strlen($iv) != 16) die(json_encode(array('success' => 1, 'usrfound' => 0)));
+  // checking that iv is correct and that token matches with server
+  if(strlen($iv) != openssl_cipher_iv_length("aes-256-cbc") || !verifyToken($info, $iv)) { deleteLoginCookie(); die(json_encode(array('success' => 1, 'usrfound' => 0))); }
 
   if(array_key_exists("placeOrder", $_POST)) { placeOrder($info, $iv, $_POST["restid"], $_POST["where"], $_POST["date"], $_POST["time"], $_POST["selecteditems"], $_POST["total"]); }
 

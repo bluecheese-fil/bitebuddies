@@ -47,7 +47,7 @@ h6, div { color: black; text-align: center; }
 
 .restkind {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 
   text-align: center;
@@ -67,6 +67,8 @@ h6, div { color: black; text-align: center; }
   -ms-user-select: none;        /* Internet Explorer/Edge */
   user-select: none;            /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
+
+.kindicons { width: 17.5%; height: 50%; }
 
 .restkind:hover {
   cursor: pointer;

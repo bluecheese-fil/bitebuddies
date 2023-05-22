@@ -123,7 +123,7 @@
       do {
         if($loopcounter > 15) die(); // the password cannot be hashed
 
-        $hashedpasswd = password_hash($password1, PASSWORD_DEFAULT);
+        $hashedpasswd = password_hash($password1, PASSWORD_DEFAULT); // There may be a mistake, double checking the hash is correct
         $loopcounter++;
       } while(!password_verify($password1, $hashedpasswd));
 

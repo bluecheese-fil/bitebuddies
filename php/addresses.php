@@ -11,8 +11,8 @@
   $iv = hextocharCookie($hexiv);
   $info = hextocharCookie($hexinfo);
 
-  // checking that iv is correct
-  if(strlen($iv) != 16) { echo json_encode(array('success' => 1, 'usrfound' => 0)); die(); }
+  // checking that iv is correct and that token matches with server
+  if(strlen($iv) != openssl_cipher_iv_length("aes-256-cbc") || !verifyToken($info, $iv)) { deleteLoginCookie(); die(json_encode(array('success' => 1, 'usrfound' => 0))); }
 
   $usrid = preg_split("/{$delimiter}/", openssl_decrypt($info, $cipher, "n5Qh8ST#v#95G!KM4qSQ33^4W%Zy#&", $options=0, $iv))[0];
 

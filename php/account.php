@@ -7,8 +7,8 @@
   $hexinfo = $_POST["saveduser"];
   $info = hextocharCookie($hexinfo);
 
-  // checking that iv is correct
-  if(strlen($iv) != 16) { echo json_encode(array('success' => 1, 'usrfound' => 0)); die(); }
+  // checking that iv is correct and that token matches with server
+  if(strlen($iv) != openssl_cipher_iv_length("aes-256-cbc") || !verifyToken($info, $iv)) { deleteLoginCookie(); die(json_encode(array('success' => 1, 'usrfound' => 0))); }
 
   if(array_key_exists("changeToken", $_POST)) { changeToken($info, $iv, $temporary, $_POST["temporary"]); }
   else if(array_key_exists("dynamic", $_POST)) { getItems($info, $iv); }
