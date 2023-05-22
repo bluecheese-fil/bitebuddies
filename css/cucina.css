@@ -1,114 +1,140 @@
-.wrapper#cucina {
-  position: relative;
-  background-color: unset;
-  width: 1350px;
-  height: 220px;
-  left: -2%;
-  margin-top: 50px;
+.elem {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
 }
-.testo1 {
-  position: absolute;
-  left: 50%;
-  top: -6.8%;
-  width: 400px;
-  transform: translate(-50%, -50%);
-  background-color: unset;
-  border: solid 1px;
-  border-color: rgba(197, 192, 192, 0.726);
-  border-radius: 5px;
-  box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.2);
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  color: black;
-  text-align: center;
-  height: 35px;
+
+@media only screen and (min-width: 1300px) {
+  .wrapper#cucina {
+    background-color: unset;
+    width: 100%;
+    height: 325px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    overflow-x: hidden;
+  }
+
+  .elem {height: 50px; }
+
+  .box {
+    display: flex;
+    flex-direction: row;
+    width: 140%;
+    height: 250px;
+  }
+  .testo1 {
+    width: 500px;
+    background-color: unset;
+    border: solid 1px;
+    border-color: rgba(197, 192, 192, 0.726);
+    border-radius: 5px;
+    box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.2);
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    color: black;
+    text-align: center;
+    height: 35px;
+    margin-bottom: 15px;
+  }
+  .table1 {
+    background-color: unset;
+    border-radius: 5px;
+    box-shadow: 8px 8px 5px rgba(0, 0, 0, 0.3);
+    margin-left: 5px;
+    width: 100%;
+    height: 100%;
+  }
+  .table1:hover {
+    cursor: pointer;
+  }
+  .bottone#sx, .bottone#dx {
+    width: 40px;
+    height: 35px;
+    background-color: unset;
+    border-radius: 5px;
+  }
+  .bottone#dx {
+    margin-left: 12px;
+  }
+  .bottone#sx:hover, .bottone#dx:hover {
+    background-color: rgba(211, 208, 208, 0.726);
+  }
+  #bottone_sx1, #bottone_dx1 {
+    background-color: unset;
+    z-index: 2;
+  }
+  #bottone_dx1 {
+    transform: rotate(180deg);
+  }
 }
-.table1 {
-  background-color: unset;
-  border-radius: 5px;
-  box-shadow: 8px 8px 5px rgba(0, 0, 0, 0.3);
-}
-.table1:hover {
-  cursor: pointer;
-}
-.bottone#sx {
-  position: relative;
-  width: 40px;
-  height: 35px;
-  background-color: unset;
-  left: 31.5%;
-  top: -15%;
-  border-radius: 5px;
-}
-.bottone#sx:hover, .bottone#dx:hover {
-  background-color: rgba(211, 208, 208, 0.726);
-}
-.bottone#dx {
-  position: relative;
-  width: 40px;
-  height: 35px;
-  background-color: unset;
-  left: 65.4%;
-  top: -30.5%;
-  border-radius: 5px;
-}
-#bottone_sx1 {
-  position: relative;
-  top: 47%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: unset;
-  z-index: 2;
-}
-#bottone_dx1 {
-  position: relative;
-  top: 0%;
-  left: 0%;
-  line-height: 35px;
-  transform: translate(-50%, -50%);
-  background-color: unset;
-  z-index: 2;
-  transform: rotate(180deg);
-}
-#cucina_italiana {
-  position: absolute;
-  top: 50%;
-  left: 0.5%;
-  transform: translate(0%, -50%);
-}
-#cucina_americana {
-  position: absolute;
-  top: 50%;
-  left: 20.5%;
-  transform: translate(0%, -50%);
-}
-#cucina_cinese {
-  position: absolute;
-  top: 50%;
-  left: 40.5%;
-  transform: translate(0%, -50%);
-}
-#cucina_giapponese {
-  position: absolute;
-  top: 50%;
-  left: 60.5%;
-  transform: translate(0%, -50%);
-}
-#pizza {
-  position: absolute;
-  top: 50%;
-  left: 80.5%;
-  transform: translate(0%, -50%);
-}
-#kebab {
-  position: absolute;
-  top: 50%;
-  left: 100.5%;
-  transform: translate(0%, -50%);
-}
-#vegano {
-  position: absolute;
-  top: 50%;
-  left: 120.5%;
-  transform: translate(0%, -50%);
+
+@media only screen and (max-width: 1299px) {
+  .wrapper#cucina {
+    background-color: unset;
+    width: 100%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    margin-left: 0px;
+    overflow-x: hidden;
+  }
+
+  .elem { height: 70px; }
+  
+  .box {
+    display: flex;
+    flex-direction: row;
+    width: 140%;
+    height: 250px;
+  }
+  .testo1 {
+    width: 400px;
+    background-color: unset;
+    border: solid 1px;
+    border-color: rgba(197, 192, 192, 0.726);
+    border-radius: 5px;
+    box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.2);
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    color: black;
+    text-align: center;
+    height: 35px;
+    margin-bottom: 15px;
+  }
+  .table1 {
+    background-color: unset;
+    border-radius: 5px;
+    box-shadow: 8px 8px 5px rgba(0, 0, 0, 0.3);
+    margin-left: 5px;
+    width: 100%;
+    height: 100%;
+  }
+  .table1:hover {
+    cursor: pointer;
+  }
+  .bottone#sx, .bottone#dx {
+    width: 40px;
+    height: 35px;
+    background-color: unset;
+    border-radius: 5px;
+  }
+  .bottone#dx {
+    margin-left: 12px;
+  }
+  .bottone#sx:hover, .bottone#dx:hover {
+    background-color: rgba(211, 208, 208, 0.726);
+  }
+  #bottone_sx1, #bottone_dx1 {
+    background-color: unset;
+    z-index: 2;
+  }
+  #bottone_dx1 {
+    transform: rotate(180deg);
+  }
 }

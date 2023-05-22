@@ -1,147 +1,129 @@
+.categoria {
+  width: 20%;
+  margin-right: 1%;
+  margin-left: 1%;
+
+  user-select: none;
+  -webkit-touch-callout: none;  /* iOS Safari */
+  -webkit-user-select: none;    /* Safari */
+  -khtml-user-select: none;     /* Konqueror HTML */
+  -moz-user-select: none;       /* Old versions of Firefox */
+  -ms-user-select: none;        /* Internet Explorer/Edge */
+  user-select: none;            /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */;
+}
+
+header {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+@media only screen and (min-width: 1300px) {
 .darkera { color: rgb(0, 45, 60) }
 html, body { height: 100%; width: 100%; margin: 0px;}
 
 body { background-color: white; overflow-x:hidden; }
-
 button { border: none }
+header { height: 22%; }
 
-#uno:hover {
-  background-color: rgba(112, 111, 111, 0.726);
-  border-radius: 15px 15px 0px 0px;
-}
-
-#due:hover {
-  background-color: rgba(112, 111, 111, 0.726);
-  border-radius: 0px 0px 15px 15px;
-}
-.testo-bite-buddies {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  font-family: "Bitcheese", sans-serif;
-  font-size: 50px;
-  display: inline-block;
-}
-.inizio {
-  position: relative;
-  left: -28.5%;
-  top: 1%;
-  font-family: "Bitcheese", sans-serif;
-  font-size: 25px;
-
-}
-#logo_homepage {
-  position: absolute;
-  left: 0%;
-  top: 5%;
-}
-@font-face {
-  font-family: 'Macaroni';
-  src: url('/fonts/Macaroni.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Bitcheese';
-  src: url('/fonts/Bitcheese.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Cream';
-  src: url('/fonts/Cream\ Cake.otf') format('truetype');
-}
-
-header {
-  position: relative;
-  height: 140px;
+.iniziale {
   display: flex;
   align-items: center;
 }
-#login {
-  width: 130px;
-  height: 50px;
-  position: absolute;
-  left: 76.5%;
-  top: 33%;
-  background-color: rgba(197, 192, 192, 0.726);
-  border-radius: 5px;
-  font-size: 20px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-  text-align: center;
-  line-height: 50px;
+.testo-bite-buddies {
+  font-family: "Bitcheese", 'Montserrat', sans-serif;
+  font-size: 100px;
+}
+.inizio {
+  font-family: "Bitcheese", 'Montserrat', sans-serif;
+  font-size: 25px;
   color: black;
 }
-
+.scat {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  transform: translate(0%, -130%);
+  width: 100%;
+  height: 70%;
+}
+#login {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(197, 192, 192, 0.726);
+  border-radius: 5px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 30px;
+  text-align: center;
+  line-height: 80px;
+  color: black;
+}
 #login:hover {
   background-color: rgba(160, 159, 159, 0.726);
   cursor: pointer;
 }
-
 #registrati {
-  position: absolute;
-  left: 88%;
-  top: 33%;
-  width: 130px;
-  height: 50px;
+  width: 100%;
+  height: 100%;
   background-color: rgba(197, 192, 192, 0.726);
   border-radius: 5px;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 500;
   font-family: "Montserrat", sans-serif;
   text-align: center;
-  line-height: 50px;
+  line-height: 80px;
   color: black;
 }
 .immagine {
   position: relative;
   left: 50%;
   transform: translate(-50%, 0%);
+  width: 130px;
+  height: 130px;
 }
 #registrati:hover {
   background-color: rgba(160, 159, 159, 0.726);
   cursor: pointer;
 }
-
-/*
+#foodbox {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 40px;
+}
 .contenitore {
-  position: relative;
-}*/
-
+  width: 100%;
+  height: 80%;
+}
 .sfondo_iniziale {
-  /*position: relative;*/
   filter: blur(5px);
-  /*right: 45px;*/
+  width: 100%;
+  height: 100%;
 }
 .sezione-text {
-  position: absolute;
-  width: 620px;
-  height: 140px;
+  width: 40%;
+  display: flex;
+  height: 40%;
   background-color: white;
   border-radius: 20px;
   filter: opacity(0.5);
-  left: 50%;
-  top: 51%;
-  transform: translate(-50%, -50%);
-}
-#int-text {
-  position: absolute;
-  left: 50%;
-  top: 70%;
-  transform: translate(-50%, -50%);
+  text-align: center;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 .titolo {
-  position: absolute;
-  left: 50%;
-  top: 45%;
-  transform: translate(-50%, -50%);
   font-style: italic;
   color: black;
   z-index: 1;
+  margin-top: 30px;
 }
 .area-text {
   background-color: white;
   height: 40px;
-  width: 550px;
+  width: 80%;
   line-height: 35px;
   border-radius: 10px;
   text-align: left;
@@ -152,22 +134,13 @@ header {
   border-left: none;
   border-right: none;
   overflow-y: hidden;
-  z-index: 2;
-}
-#foodbox {
-  position: absolute;
-  left: 50%;
-  top: 10%;
-  transform: translate(-50%, -0%);
+  margin-bottom: 20px;
   z-index: 2;
 }
 #bottone_basso {
-  position: absolute;
-  left: 50%;
-  top: 78%;
-  transform: translate(-50%, -15%);
   background-color: unset;
   filter: invert(100%);
+  margin-top: 50px;
 }
 .intestazione {
   color: white;
@@ -179,117 +152,96 @@ header {
 img { border-radius: 0px 0px 10px 10px; }
 
 .fine {
-  position: absolute;
-  left: 0%;
-  width: 1350px;
-  height: 365px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 55%;
   background-color: rgb(0, 45, 60);
 }
 .fine_cucina {
-  position: absolute;
-  left: -2.5%;
-  top: 5%;
-  width: 600px;
-  height: 340px;
+  display: flex;
+  width: 33%;
+  height: 85%;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 30px;
+  align-items: center;
 }
 .fine_ristoranti {
-  position: absolute;
-  left: 27.5%;
-  top: 5%;
-  width: 600px;
-  height: 340px;
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  height: 85%;
+  text-align: center;
+  margin-top: 30px;
+  align-items: center;
 }
 .fine_informazioni {
-  position: absolute;
-  left: 57%;
-  top: 5%;
-  width: 600px;
-  height: 340px;
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  height: 75%;
+  text-align: center;
+  margin-top: 30px;
 }
 .fine_titolo {
-  position: absolute;
-  left: 50%;
-  top: 5%;
-  transform: translate(-50%, 0%);
   font-family: "Bitcheese", sans-serif;
   font-size: 30px;
 }
 .domanda {
-  position: absolute;
-  left: 40%;
-  top: 23%;
-  transform: translate(-50%, 0%);
   font-family: "Bitcheese", sans-serif;
   font-size: 20px;
+  margin-right: 20px;
 }
 .risposta {
-  position: absolute;
-  left: 52%;
-  top: 23%;
   font-style: italic;
   font-size: 20px;
 }
 .domanda_next {
-  position: absolute;
-  left: 40%;
-  top: 23%;
-  transform: translate(-50%, 0%);
   font-family: "Bitcheese", sans-serif;
   font-size: 20px;
-  margin-top: 40px;
+  margin-top: 10px;
+  margin-right: 20px;
 }
 .risposta_next {
-  position: absolute;
-  left: 52%;
-  top: 23%;
   font-style: italic;
   font-size: 20px;
-  margin-top: 40px;
+  margin-top: 10px;
 }
 .domanda_next_next {
-  position: absolute;
-  left: 40%;
-  top: 23%;
-  transform: translate(-50%, 0%);
   font-family: "Bitcheese", sans-serif;
   font-size: 20px;
-  margin-top: 80px;
+  margin-top: 10px;
 }
 .risposta_next_next {
-  position: absolute;
-  left: 52%;
-  top: 23%;
   font-style: italic;
   font-size: 20px;
-  margin-top: 80px;
-}
-#logo_finale {
-  position: absolute;
-  left: 41%;
-  top: 61%;
+  margin-top: 10px;
 }
 ul#finale_rist, ul#finale_cuc {
-  position: absolute;
-  width: 220px;
-  height: 230px;
-  left: 50%;
-  top: 18%;
-  transform: translate(-55%, 0%);
+  width: 100%;
   list-style: none;
   text-align: center;
   overflow-y: scroll;
   scrollbar-width: 100px;
+  margin-top: 14px;
 }
 ul#finale_info {
   list-style: none;
+  width: 100%;
+  height: 45%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
 }
 ul#finale_cuc::-webkit-scrollbar, ul#finale_rist::-webkit-scrollbar {
   display: none;
 }
 ul#finale_rist li, ul#finale_cuc li {
-  padding-top: 8px;
   font-family: 'Montserrat', sans-serif;
   font-style: italic;
+  margin-top: -5px;
 }
 ul#finale_rist li:hover, ul#finale_cuc li:hover {
   cursor: pointer;
@@ -299,99 +251,248 @@ ul#finale_rist li:hover, ul#finale_cuc li:hover {
   width: 20px;
   height: 20px;
   filter: invert(100%);
+  margin-left: 30px;
 }
-.freccia_sotto {
-  position: absolute;
-  left: 48.5%;
-  top: 88%;
 }
 
-@media only screen and (min-width: 1400px) {
-  header {
-    left: -2.5%;
-    width: 2100px;
-    height: 250px;
+
+
+@media only screen and (max-width: 1299px) {
+  .darkera { color: rgb(0, 45, 60) }
+  html, body { height: 100%; width: 100%; margin: 0px;}
+  
+  body { background-color: white; overflow-x:hidden; }
+  
+  button { border: none }
+  
+  .iniziale {
+    display: flex;
+    align-items: center;
   }
-  .contenitore {
-    /*left: 0%;*/
-    width: 100%;
-    height: 700px;
-  }
-  .sfondo_iniziale {
-    width: 100%;
-    height: 850px;
-  }
-  .inizio {
-    font-size: 40px;
-    top: 0%;
-    left: -30%;
+  #logo_homepage {
+    width: fit-content;
+    height: fit-content;
   }
   .testo-bite-buddies {
-    font-size: 90px;
-    top: 50%;
-    left: 50%;
+    font-family: "Bitcheese", sans-serif;
+    font-size: 70px;
+  }
+  .inizio {
+    font-family: "Bitcheese", sans-serif;
+    font-size: 15px;
+    color: black;
+  }
+  .scat {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    transform: translate(0%, -110%);
+    width: 100%;
+    height: 70%;
   }
   #login {
-    width: 300px;
-    height: 100px;
-    font-size: 40px;
-    line-height: 100px;
-    left: 70%;
-    top: 30%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(197, 192, 192, 0.726);
+    border-radius: 5px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    text-align: center;
+    line-height: 80px;
+    color: black;
+  }
+  #login:hover {
+    background-color: rgba(160, 159, 159, 0.726);
+    cursor: pointer;
   }
   #registrati {
-    width: 300px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(197, 192, 192, 0.726);
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    line-height: 80px;
+    color: black;
+  }
+  .immagine {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 100px;
     height: 100px;
-    font-size: 40px;
-    line-height: 100px;
-    left: 83%;
-    top: 30%;
+  }
+  #registrati:hover {
+    background-color: rgba(160, 159, 159, 0.726);
+    cursor: pointer;
+  }
+  #foodbox {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+  }
+  .contenitore {
+    width: 100%;
+    height: 40%;
+  }
+  .sfondo_iniziale {
+    filter: blur(5px);
+    width: 100%;
+    height: 100%;
   }
   .sezione-text {
-    width: 1000px;
-    height: 300px;
-  }
-  #bottone_basso {
-    position: absolute;
-    left: 50%;
-    top: 85%;
-  }
-  .area-text {
-    width: 850px;
-    height: 80px;
-    font-size: 30px;
+    width: 40%;
+    display: flex;
+    height: 40%;
+    background-color: white;
+    border-radius: 20px;
+    filter: opacity(0.5);
+    text-align: center;
+    flex-direction: column;
+    justify-content: space-evenly;
   }
   .titolo {
-    font-size: 50px;
+    font-style: italic;
+    color: black;
+    z-index: 1;
+    margin-top: 30px;
   }
+  .area-text {
+    background-color: white;
+    height: 40px;
+    width: 80%;
+    line-height: 35px;
+    border-radius: 10px;
+    text-align: left;
+    font-size: 16px;
+    padding-left: 15px;
+    border-bottom: solid 2px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    overflow-y: hidden;
+    margin-bottom: 20px;
+    z-index: 2;
+  }
+  #bottone_basso {
+    display: none;
+  }
+  .intestazione {
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    background-color: rgb(0, 45, 60);
+  }
+  
+  img { border-radius: 0px 0px 10px 10px; }
+  
   .fine {
-    width: 1900px;
-    height: 410px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    background-color: rgb(0, 45, 60);
+    align-items: center;
   }
   .fine_cucina {
-    position: absolute;
-    top: 5%;
-    left: 7%;
+    display: flex;
+    width: 50%;
+    height: 85%;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    align-items: center;
   }
   .fine_ristoranti {
-    position: absolute;
-    top: 5%;
-    left: 40.5%;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 85%;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    align-items: center;
   }
   .fine_informazioni {
-    position: absolute;
-    top: 5%;
-    left: 68%;
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    height: 75%;
+    text-align: center;
+    margin-top: 20px;
   }
   .fine_titolo {
-    width: 500px;
-    font-size: 50px;
+    font-family: "Bitcheese", sans-serif;
+    font-size: 40px;
   }
-  .fine_titolo#about {
-    position: absolute;
-    left: 85%;
+  .domanda {
+    font-family: "Bitcheese", sans-serif;
+    margin-right: 20px;
+    font-size: 40px;
   }
-  #finale_cuc li, #finale_rist li {
-    font-size: 20px;
+  .risposta {
+    font-style: italic;
+    font-size: 30px;
+  }
+  .domanda_next {
+    font-family: "Bitcheese", sans-serif;
+    margin-right: 20px;
+    font-size: 40px;
+    margin-top: 10px;
+  }
+  .risposta_next {
+    font-style: italic;
+    font-size: 30px;
+    margin-top: 10px;
+  }
+  .domanda_next_next {
+    font-family: "Bitcheese", sans-serif;
+    font-size: 40px;
+    margin-top: 10px;
+  }
+  .risposta_next_next {
+    font-style: italic;
+    font-size: 30px;
+    margin-top: 10px;
+  }
+  ul#finale_rist, ul#finale_cuc {
+    width: 100%;
+    list-style: none;
+    text-align: center;
+    overflow-y: scroll;
+    scrollbar-width: 100px;
+    margin-top: 14px;
+  }
+  ul#finale_info {
+    list-style: none;
+    width: 100%;
+    height: 45%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  ul#finale_cuc::-webkit-scrollbar, ul#finale_rist::-webkit-scrollbar {
+    display: none;
+  }
+  ul#finale_rist li, ul#finale_cuc li {
+    font-family: 'Montserrat', sans-serif;
+    font-style: italic;
+    margin-top: -5px;
+    font-size: 30px;
+  }
+  ul#finale_rist li:hover, ul#finale_cuc li:hover {
+    cursor: pointer;
+    color: rgba(187, 185, 185, 0.726);
+  }
+  .down_arrow {
+    width: 20px;
+    height: 20px;
+    filter: invert(100%);
+    margin-left: 30px;
   }
 }

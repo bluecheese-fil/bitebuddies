@@ -17,7 +17,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/generalFunctions.js"> </script>
     <script src="/js/homepage.js"></script>
-    <script src="/js/categories.js"></script>
 
     <script>
       // ajax call to get name and default address
@@ -37,10 +36,10 @@
   </head>
   <body>
     <header class="header">
-      <a href="/homepage.html"><img class="logo" id="logo_homepage" src="/logo/logo.png" alt="logo"></a>
-
-      <h5 class="inizio">Cerca il tuo ristorante!</h5>
-
+      <div class="iniziale">
+        <a href="/homepage.html"><img class="logo" id="logo_homepage" src="/logo/logo.png" alt="logo"></a>
+      </div>
+      
       <h4 class="testo-bite-buddies">BiteBuddies</h4>
 
       <!-- Login & Signup -->
@@ -55,7 +54,7 @@
           <li><a class="dropdown-item dropdownitem" href="/account/orderhistory.html"> Ordini </a></li>
           <li><a class="dropdown-item dropdownitem" href="/account/addresses.html"> Indirizzi di consegna </a></li>
           <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item dropdownitem" href="#" onclick="quitUser()"> Esci </a></li>
+          <li><a class="dropdown-item dropdownitem" onclick="quitUser('/homepage.html')"> Esci </a></li>
         </ul>
       </div>
 
@@ -70,99 +69,102 @@
     </header>
 
     <div class="contenitore">
-      <img src="/images/static/hamburger-copia4.jpg" width="110%" height="100%" class="sfondo_iniziale">
-
-      <div id="foodbox">
-        <img src="/images/static/foodbox.png" width="100px" height="100px">
-      </div>
-
-      <h3 class="titolo">CERCA RISTORANTE</h3>
-      <div class="sezione-text">
-        <div id="int-text">
-          <input class="area-text" id="cerca" type="text" list="selezione" spellcheck="false">
+      <img src="/images/static/hamburger-copia4.jpg" class="sfondo_iniziale">
+    
+      <div class="scat">
+        <img src="/images/static/foodbox.png" id="foodbox">
+        <div class="sezione-text">
+          <h3 class="titolo">CERCA RISTORANTE</h3>
+          <div id="int-text">
+            <input class="area-text" id="cerca" type="text" list="selezione" spellcheck="false">
+          </div>
+          <datalist id="selezione"></datalist>
         </div>
-        <datalist id="selezione"></datalist>
+        <button id="bottone_basso"> <img src="/images/static/down-arrow.png" width="100px" height="100px"> </button>
       </div>
-
-      <button id="bottone_basso"> <img src="/images/static/down-arrow.png" width="70px" height="70px"> </button>
     </div>
       
     <div class="wrapper" id="cucina">
-      <h3 class="testo1">ORDINA A DOMICILIO</h3>
-
-      <div class="bottone" id="sx">
-        <button name="scorri" type="button" id="bottone_sx1">
-          <img src="/images/static/freccia_sinistra.png" width="30px" height="30px">  
-        </button>
+      <div class="elem">
+        <div class="bottone" id="sx">
+          <button name="scorri" type="button" id="bottone_sx1">
+            <img src="/images/static/freccia_sinistra.png" width="30px" height="30px">  
+          </button>
+        </div>
+        <div class="sposta">
+          <h3 class="testo1">ORDINA A DOMICILIO</h3>
+        </div>
+        <div class="bottone" id="dx">
+          <button name="scorri" type="button" id="bottone_dx1">
+            <img src="/images/static/freccia_sinistra.png" width="30px" height="30px">  
+          </button>
+        </div>
       </div>
 
-      <a href="/categorie/Italiano.html"><table width="250" height="170" cellpadding="0" class="table1" id="cucina_italiana">
-        <tr>
-          <th class="intestazione">ITALIANO</th>
-        </tr>
-        <td>
-          <img class="immagine" width="100px" height="100px" src="/images/static/spaghetti.png">
-        </td>
-      </table></a>
+      <div class="box">
 
-      <a href="/categorie/Americano.html"><table width="250" height="170" cellpadding="0" class="table1" id="cucina_americana">
-        <tr>
-          <th class="intestazione">AMERICANO</th>
-        </tr>
-        <td>
-          <img class="immagine" width="100px" height="100px" src="/images/static/american_food.png">
-        </td>
-      </table></a>
+        <a href="/categorie/Italiano.html" class="categoria"><table cellpadding="0" class="table1" id="cucina_italiana">
+          <tr>
+            <th class="intestazione">ITALIANO</th>
+          </tr>
+          <td>
+            <img class="immagine" src="/images/static/spaghetti.png">
+          </td>
+        </table></a>
 
-      <a href="/categorie/Cinese.html"><table width="250" height="170" cellpadding="0" class="table1" id="cucina_cinese">
-        <tr>
-          <th class="intestazione">CINESE</th>
-         </tr>
-        <td>
-          <img class="immagine" width="100px" height="100px" src="/images/static/chinese_food.png">
-        </td>
-      </table></a>
+        <a href="/categorie/Americano.html" class="categoria"><table cellpadding="0" class="table1" id="cucina_americana">
+          <tr>
+            <th class="intestazione">AMERICANO</th>
+          </tr>
+          <td>
+            <img class="immagine" src="/images/static/american_food.png">
+          </td>
+        </table></a>
 
-      <a href="/categorie/Giapponese.html"><table width="250" height="170" cellpadding="0" class="table1" id="cucina_giapponese">
-        <tr>
-          <th class="intestazione">GIAPPONESE</th>
-         </tr>
-        <td>
-          <img class="immagine" width="100px" height="100px" src="/images/static/japanese_food.png">
-        </td>
-      </table></a>
+        <a href="/categorie/Cinese.html" class="categoria"><table cellpadding="0" class="table1" id="cucina_cinese">
+          <tr>
+            <th class="intestazione">CINESE</th>
+          </tr>
+          <td>
+            <img class="immagine" src="/images/static/chinese_food.png">
+          </td>
+        </table></a>
 
-      <a href="/categorie/Pizza.html"><table width="250" height="170" cellpadding="0" class="table1" id="pizza">
-        <tr>
-          <th class="intestazione">PIZZA</th>
-        </tr>
-        <td>
-          <img class="immagine" width="100px" height="100px" src="/images/static/pizza_food.png">
-        </td>
-      </table></a>
+        <a href="/categorie/Giapponese.html" class="categoria"><table cellpadding="0" class="table1" id="cucina_giapponese">
+          <tr>
+            <th class="intestazione">GIAPPONESE</th>
+          </tr>
+          <td>
+            <img class="immagine" src="/images/static/japanese_food.png">
+          </td>
+        </table></a>
 
-      <a href="/categorie/Kebab.html"><table width="250" height="170" cellpadding="0" class="table1" id="kebab">
-        <tr>
-          <th class="intestazione">KEBAB</th>
-        </tr>
-        <td>
-          <img class="immagine" width="100px" height="100px" src="/images/static/kebab_food.png">
-        </td>
-      </table></a>
+        <a href="/categorie/Pizza.html" class="categoria"><table cellpadding="0" class="table1" id="pizza">
+          <tr>
+            <th class="intestazione">PIZZA</th>
+          </tr>
+          <td>
+            <img class="immagine" src="/images/static/pizza_food.png">
+          </td>
+        </table></a>
 
-      <a href="/categorie/Colazione.html"><table width="250" height="170" cellpadding="0" class="table1" id="vegano">
-        <tr>
-          <th class="intestazione">COLAZIONE</th>
-        </tr>
-        <td>
-          <img class="immagine" width="100px" height="100px" src="/images/static/breakfast.png">
-        </td>
-      </table></a>
+        <a href="/categorie/Kebab.html" class="categoria"><table cellpadding="0" class="table1" id="kebab">
+          <tr>
+            <th class="intestazione">KEBAB</th>
+          </tr>
+          <td>
+            <img class="immagine" src="/images/static/kebab_food.png">
+          </td>
+        </table></a>
 
-      <div class="bottone" id="dx">
-        <button name="scorri" type="button" id="bottone_dx1">
-          <img src="/images/static/freccia_sinistra.png" width="30px" height="30px">  
-        </button>
+        <a href="/categorie/Colazione.html" class="categoria"><table cellpadding="0" class="table1" id="vegano">
+          <tr>
+            <th class="intestazione">COLAZIONE</th>
+          </tr>
+          <td>
+            <img class="immagine" src="/images/static/breakfast.png">
+          </td>
+        </table></a>
       </div>
     </div>
 
@@ -171,7 +173,7 @@
         <h4 class="fine_titolo">Tutte le nostre cucine</h4>
         <ul id="finale_cuc">
         </ul>
-        <div class="freccia_sotto" id="cuc"></div>
+        <div class="freccia_sotto" id="rist"></div>
       </div>
 
       <div class="fine_ristoranti">
@@ -184,11 +186,11 @@
       <div class="fine_informazioni">
         <h4 class="fine_titolo">About</h4>
         <ul id="finale_info">
-          <li><h4 class="domanda">Dove siamo?</h4><h4 class="risposta">Roma</h4></li>
-          <li><h4 class="domanda_next">Chi siamo?</h4><h4 class="risposta_next">Filippo e Francesco</h4></li>
-          <li><h4 class="domanda_next_next">Contatti:</h4><h4 class="risposta_next_next">+39 325 825 5192</h4></li>
+          <li style="display: flex; flex-direction: row;"><h4 class="domanda">Dove siamo?</h4><h4 class="risposta">Roma</h4></li>
+          <li style="display: flex; flex-direction: row;"><h4 class="domanda_next">Chi siamo?</h4><h4 class="risposta_next">Filippo e Francesco</h4></li>
+          <li style="display: flex; flex-direction: row;"><h4 style="margin-right: 20px;" class="domanda_next_next">Contatti:</h4><h4 class="risposta_next_next">+39 324 824 4144</h4></li>
+          <a href="/homepage.html"><img class="logo" id="logo_finale" src="/logo/logo.png" alt="logo"></a>
         </ul>
-        <a href="/homepage.html"><img class="logo" id="logo_finale" src="/logo/logo.png" alt="logo"></a>
       </div>
     </div>
 
