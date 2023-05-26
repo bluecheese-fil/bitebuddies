@@ -2,14 +2,12 @@
 Progetto per l'esame "Linguaggi e tecnologie per il web"
 
 ## Componenti necessari per la creazione della registrazione
-Bisogna aggiungere una sezione per far fare la registrazione agli utenti.
-Per gli utenti abbiamo bisogno:
+Elementi necessari per la registrazione di un utente:
   - Nome
   - Cognome
   - Indirizzo email
   - Password (restrizioni sulle password: 2 minuscole, 2 maiuscole, 2 numeri, 2 speciali)
   - Indirizzo fisico e telefono
-  - Orario di consegna (Fra)
 
 ### Dopo la registrazione:
 Per ogni utente bisogna salvare:
