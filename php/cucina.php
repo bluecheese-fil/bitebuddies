@@ -1,7 +1,6 @@
 <?php
   if(array_key_exists("loadContenuto", $_POST)) { loadContenuto($_POST['kind']); }
   else if(array_key_exists("cerca", $_POST)) { cerca($_POST["nome"]); }
-  else if(array_key_exists("cambiaCategoria", $_POST)) { cambiaCategoria(); }
   else if(array_key_exists("getSuggerimenti", $_POST)) { getSuggerimenti(); }
   else if(array_key_exists("tuttiRistoranti", $_POST)) { tuttiRistoranti(); }
   else if(array_key_exists("tutteCucine", $_POST)) { tutteCucine(); }
@@ -63,19 +62,6 @@
 
   function getSuggerimenti() {
     $validtoken="select nome from ristoranti";
-    $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
-    $result=pg_query($db, $validtoken) or die('Query failed:'.pg_last_error());
-    $data=array();
-    while($line=pg_fetch_array($result, null, PGSQL_ASSOC)) {
-      $data[]=$line;
-    }
-    pg_free_result($result);
-    pg_close($db);
-    echo json_encode($data);
-  }
-
-  function cambiaCategoria() {
-    $validtoken="select distinct categoria from ristoranti";
     $db = pg_connect("host=localhost port=5432 dbname=BiteBuddies user=bitebuddies password=bites1!") or die('Could not connect:'.pg_last_error());
     $result=pg_query($db, $validtoken) or die('Query failed:'.pg_last_error());
     $data=array();
