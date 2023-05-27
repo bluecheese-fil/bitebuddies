@@ -130,7 +130,7 @@ function askChange(name){
   if(!checkEquality("" + name)){ alert("Le informazioni fornite non corrispondono"); return ; }
 
   key = "change" + name;
-  jsoncookie = {}; jsoncookie[key] = "true";
+  jsoncookie = {key:"true"};
   let cookies = document.cookie.split("; ");
   for(let i = 0; i<cookies.length; i++){
     let point = cookies[i].split("=");
