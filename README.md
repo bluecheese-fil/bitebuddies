@@ -50,14 +50,14 @@ Indirizzi:
   - indirizzo varchar(200) :arrow_right: not null
   - def_indirizzo boolean :arrow_right: not null (Indica l'indirizzo primario, ci puo' essere solo uno con true)
 
-  - (user_id, indirizzo) :arrow_right: primarykey (non si possono inserire piu' indirizzi per la stessa persona)
+  - (user_id, indirizzo) :arrow_right: primarykey (non si possono inserire piu' indirizzi uguali per la stessa persona)
 
 Telefoni:
   - user_id bigint :arrow_right: not null (fk on user_id in persone)
   - telefono varchar(15) :arrow_right: not null
-  - def_telefono boolean :arrow_right: not null (Indica il telefono primario, ci puo' essere solo uno con true)
+  - def_telefono boolean :arrow_right: not null (Indica il telefono primario, ci puo' essere solo uno con valore "true")
 
-  - (user_id, telefono) :arrow_right: primarykey (non si possono inserire piu' telefoni per la stessa persona)
+  - (user_id, telefono) :arrow_right: primarykey (non si possono inserire piu' telefoni uguali per la stessa persona)
 
 Ordini:
   - order_id bigserial :arrow_right: primarykey
